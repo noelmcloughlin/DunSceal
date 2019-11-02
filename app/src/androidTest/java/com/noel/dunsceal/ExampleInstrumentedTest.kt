@@ -1,4 +1,4 @@
-package com.wit.dunsceal
+package com.noel.dunsceal
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4
@@ -19,6 +19,6 @@ class ExampleInstrumentedTest {
     fun useAppContext() {
         // Context of the app under test.
         val appContext = InstrumentationRegistry.getInstrumentation().targetContext
-        assertEquals("com.wit.dunsceal", appContext.packageName)
+        assertEquals("com.noel.dunsceal", appContext.packageName)
     }
 }

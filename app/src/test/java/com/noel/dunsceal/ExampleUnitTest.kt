@@ -1,4 +1,4 @@
-package com.wit.dunsceal
+package com.noel.dunsceal
 
 import org.junit.Test
 
