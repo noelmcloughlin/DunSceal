@@ -39,4 +39,7 @@
     <string name="change_dunsceal_image">Change dunsceal image</string>
     <string name="button_location">Set Location</string>
     <string name="title_activity_map">Map</string>
+    <string name="title_activity_dun_sceal_tab">DunScealTabActivity</string>
+    <string name="tab_text_1">Tab 1</string>
+    <string name="tab_text_2">Tab 2</string>
 </resources>

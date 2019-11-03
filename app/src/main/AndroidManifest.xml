@@ -11,7 +11,16 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name="org.noel.dunsceal.activities.SplashActivity">
+        <activity
+            android:name=".activities.DunScealTabActivity"
+            android:label="@string/title_activity_dun_sceal_tab"
+            android:parentActivityName=".activities.UsersListActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="org.noel.dunsceal.activities.UsersListActivity" />
+        </activity>
+        <activity android:name=".activities.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -19,17 +28,15 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="org.noel.dunsceal.activities.LoginActivity"
-            android:screenOrientation="portrait">
-        </activity>
+            android:name=".activities.LoginActivity"
+            android:screenOrientation="portrait"></activity>
         <activity
-            android:name="org.noel.dunsceal.activities.RegisterActivity"
+            android:name=".activities.RegisterActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="org.noel.dunsceal.activities.UsersListActivity"
+            android:name=".activities.UsersListActivity"
             android:screenOrientation="portrait" />
-
-        <activity android:name="org.noel.dunsceal.main.MainActivity" />
+        <activity android:name=".main.MainActivity" />
     </application>
 
 </manifest>

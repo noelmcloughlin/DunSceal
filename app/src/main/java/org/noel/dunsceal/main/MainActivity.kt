@@ -2,15 +2,8 @@ package org.noel.dunsceal.main
 
 import android.content.Intent
 import android.os.Bundle
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.navigation.findNavController
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.setupActionBarWithNavController
-import androidx.navigation.ui.setupWithNavController
 import org.noel.dunsceal.R
-import org.noel.dunsceal.activities.LoginActivity
-import org.noel.dunsceal.activities.UsersListActivity
 import kotlinx.android.synthetic.main.activity_login.*
 
 class MainActivity : AppCompatActivity() {
