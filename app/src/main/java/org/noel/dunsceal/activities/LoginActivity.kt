@@ -10,8 +10,6 @@ import androidx.core.widget.NestedScrollView
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import com.google.android.material.snackbar.Snackbar
-import org.noel.dunsceal.MainActivity
-
 import org.noel.dunsceal.R
 
 class LoginActivity : AppCompatActivity(), View.OnClickListener {
