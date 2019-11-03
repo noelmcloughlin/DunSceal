@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.noel.dunsceal">
+    package="org.noel.dunsceal">
 
     <application
         android:allowBackup="true"
@@ -11,7 +11,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".activities.SplashActivity">
+        <activity android:name="org.noel.dunsceal.activities.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -19,13 +19,17 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activities.RegisterActivity"
+            android:name="org.noel.dunsceal.activities.LoginActivity"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity
+            android:name="org.noel.dunsceal.activities.RegisterActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activities.UsersListActivity"
+            android:name="org.noel.dunsceal.activities.UsersListActivity"
             android:screenOrientation="portrait" />
-        
-        <activity android:name=".main.MainActivity" />
+
+        <activity android:name="org.noel.dunsceal.main.MainActivity" />
     </application>
 
 </manifest>
