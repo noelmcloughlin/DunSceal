@@ -10,6 +10,7 @@ import androidx.core.widget.NestedScrollView
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import com.google.android.material.snackbar.Snackbar
+import org.noel.dunsceal.MainActivity
 
 import org.noel.dunsceal.R
 
@@ -77,7 +78,6 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
         when (v.id) {
             R.id.appCompatButtonLogin -> verifyFromSQLite()
             R.id.textViewLinkRegister -> {
-                // Navigate to RegisterActivity
                 val intentRegister = Intent(
                     applicationContext,
                     RegisterActivity::class.java
@@ -118,16 +118,13 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
                 textInputEditTextEmail!!.text.toString().trim { it <= ' ' },
                 textInputEditTextPassword!!.text.toString().trim { it <= ' ' })
         ) {
-
-
             val accountsIntent =
-                Intent(activity, org.noel.dunsceal.activities.UsersListActivity::class.java)
+                Intent(activity, MainActivity::class.java)
             accountsIntent.putExtra(
                 "EMAIL",
                 textInputEditTextEmail!!.text.toString().trim { it <= ' ' })
             emptyInputEditText()
             startActivity(accountsIntent)
-
 
         } else {
 
