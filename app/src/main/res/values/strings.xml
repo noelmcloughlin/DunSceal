@@ -42,4 +42,7 @@
     <string name="title_activity_dun_sceal_tab">DunScealTabActivity</string>
     <string name="tab_text_1">Tab 1</string>
     <string name="tab_text_2">Tab 2</string>
+
+    <!-- fonts -->
+    <string name='font_medieval_sharp'>MedievalSharp</string>
 </resources>
