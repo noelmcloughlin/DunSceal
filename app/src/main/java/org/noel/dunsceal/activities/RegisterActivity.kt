@@ -154,6 +154,7 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener {
             ).show()
 
             val intentLogin = Intent(applicationContext, LoginActivity::class.java)
+            intentLogin.putExtra("MSG", R.string.success_message)
             startActivity(intentLogin)
             emptyInputEditText()
             setContentView(R.layout.activity_login)

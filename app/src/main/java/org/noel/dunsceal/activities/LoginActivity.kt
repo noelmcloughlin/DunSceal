@@ -16,7 +16,6 @@ import org.noel.dunsceal.R
 class LoginActivity : AppCompatActivity(), View.OnClickListener {
 
     private val activity = this@LoginActivity
-
     private lateinit var nestedScrollView: NestedScrollView
     private lateinit var textInputLayoutEmail: TextInputLayout
     private lateinit var textInputLayoutPassword: TextInputLayout
@@ -29,11 +28,8 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         setContentView(R.layout.activity_login)
         supportActionBar!!.hide()
-
-        // initializing views/listeners/objects
         initViews()
         initListeners()
         initObjects()
@@ -84,7 +80,7 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
                 // Navigate to RegisterActivity
                 val intentRegister = Intent(
                     applicationContext,
-                    org.noel.dunsceal.activities.RegisterActivity::class.java
+                    RegisterActivity::class.java
                 )
                 startActivity(intentRegister)
             }
@@ -99,24 +95,21 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
         if (!inputValidation!!.isInputEditTextFilled(
                 textInputEditTextEmail!!,
                 textInputLayoutEmail!!,
-                getString(R.string.error_message_email)
-            )
+                getString(R.string.error_message_email))
         ) {
             return
         }
         if (!inputValidation!!.isInputEditTextEmail(
                 textInputEditTextEmail!!,
                 textInputLayoutEmail!!,
-                getString(R.string.error_message_email)
-            )
+                getString(R.string.error_message_email))
         ) {
             return
         }
         if (!inputValidation!!.isInputEditTextFilled(
                 textInputEditTextPassword!!,
                 textInputLayoutPassword!!,
-                getString(R.string.error_message_email)
-            )
+                getString(R.string.error_message_email))
         ) {
             return
         }

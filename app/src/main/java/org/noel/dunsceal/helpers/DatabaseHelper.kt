@@ -12,12 +12,10 @@ import org.noel.dunsceal.model.DunScealUser
 class DatabaseHelper(context: Context) : SQLiteOpenHelper(context,
     DATABASE_NAME, null, DATABASE_VERSION) {
 
-    // create table sql query
     private val CREATE_USER_TABLE = ("CREATE TABLE " + TABLE_USER + "("
             + COLUMN_USER_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," + COLUMN_USER_NAME + " TEXT,"
             + COLUMN_USER_EMAIL + " TEXT," + COLUMN_USER_PASSWORD + " TEXT" + ")")
 
-    // drop table sql query
     private val DROP_USER_TABLE = "DROP TABLE IF EXISTS $TABLE_USER"
 
     override fun onCreate(db: SQLiteDatabase) {
@@ -26,13 +24,8 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context,
 
 
     override fun onUpgrade(db: SQLiteDatabase, oldVersion: Int, newVersion: Int) {
-
-        //Drop DunScealUser Table if exist
         db.execSQL(DROP_USER_TABLE)
-
-        // Create tables again
         onCreate(db)
-
     }
 
     /**
@@ -53,7 +46,6 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context,
         // sorting orders
         val sortOrder = "$COLUMN_USER_NAME ASC"
         val userList = ArrayList<DunScealUser>()
-
         val db = this.readableDatabase
 
         // query the user table
@@ -93,8 +85,6 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context,
         values.put(COLUMN_USER_NAME, user.name)
         values.put(COLUMN_USER_EMAIL, user.email)
         values.put(COLUMN_USER_PASSWORD, user.password)
-
-        // Inserting Row
         db.insert(TABLE_USER, null, values)
         db.close()
     }
@@ -144,14 +134,9 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context,
      */
     fun checkUser(email: String): Boolean {
 
-        // array of columns to fetch
         val columns = arrayOf(COLUMN_USER_ID)
         val db = this.readableDatabase
-
-        // selection criteria
         val selection = "$COLUMN_USER_EMAIL = ?"
-
-        // selection argument
         val selectionArgs = arrayOf(email)
 
         // query user table with condition
@@ -169,16 +154,10 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context,
                 null,   //filter by row groups
                 null)  //The sort order
 
-
         val cursorCount = cursor.count
         cursor.close()
         db.close()
-
-        if (cursorCount > 0) {
-            return true
-        }
-
-        return false
+        return (cursorCount > 0)
     }
 
     /**
@@ -190,15 +169,9 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context,
      */
     fun checkUser(email: String, password: String): Boolean {
 
-        // array of columns to fetch
         val columns = arrayOf(COLUMN_USER_ID)
-
         val db = this.readableDatabase
-
-        // selection criteria
         val selection = "$COLUMN_USER_EMAIL = ? AND $COLUMN_USER_PASSWORD = ?"
-
-        // selection arguments
         val selectionArgs = arrayOf(email, password)
 
         // query user table with conditions
@@ -219,12 +192,7 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context,
         val cursorCount = cursor.count
         cursor.close()
         db.close()
-
-        if (cursorCount > 0)
-            return true
-
-        return false
-
+        return (cursorCount > 0)
     }
 
     companion object {

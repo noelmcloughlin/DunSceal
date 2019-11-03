@@ -13,15 +13,14 @@ import org.noel.dunsceal.adapters.UsersRecyclerAdapter
 import org.noel.dunsceal.model.DunScealUser
 import org.noel.dunsceal.helpers.DatabaseHelper
 
-
 class UsersListActivity : AppCompatActivity() {
 
     private val activity = this@UsersListActivity
     private lateinit var textViewName: AppCompatTextView
     private lateinit var recyclerViewUsers: RecyclerView
     private lateinit var listUsers: MutableList<DunScealUser>
-    private lateinit var usersRecyclerAdapter: org.noel.dunsceal.adapters.UsersRecyclerAdapter
-    private lateinit var databaseHelper: org.noel.dunsceal.helpers.DatabaseHelper
+    private lateinit var usersRecyclerAdapter: UsersRecyclerAdapter
+    private lateinit var databaseHelper: DatabaseHelper
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,7 +28,6 @@ class UsersListActivity : AppCompatActivity() {
         supportActionBar!!.title = ""
         initViews()
         initObjects()
-
     }
 
     /**
@@ -45,14 +43,14 @@ class UsersListActivity : AppCompatActivity() {
      */
     private fun initObjects() {
         listUsers = ArrayList()
-        usersRecyclerAdapter = org.noel.dunsceal.adapters.UsersRecyclerAdapter(listUsers)
+        usersRecyclerAdapter = UsersRecyclerAdapter(listUsers)
 
         val mLayoutManager = LinearLayoutManager(applicationContext)
         recyclerViewUsers.layoutManager = mLayoutManager
         recyclerViewUsers.itemAnimator = DefaultItemAnimator()
         recyclerViewUsers.setHasFixedSize(true)
         recyclerViewUsers.adapter = usersRecyclerAdapter
-        databaseHelper = org.noel.dunsceal.helpers.DatabaseHelper(activity)
+        databaseHelper = DatabaseHelper(activity)
 
         val emailFromIntent = intent.getStringExtra("EMAIL")
         textViewName.text = emailFromIntent
