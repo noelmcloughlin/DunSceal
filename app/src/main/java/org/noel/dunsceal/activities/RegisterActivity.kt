@@ -9,10 +9,8 @@ import androidx.core.widget.NestedScrollView
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import org.noel.dunsceal.R
-import org.noel.dunsceal.helpers.InputValidation
-import org.noel.dunsceal.model.User
-import org.noel.dunsceal.helpers.DatabaseHelper
 import com.google.android.material.snackbar.Snackbar
+import org.noel.dunsceal.model.DunScealUser
 
 class RegisterActivity : AppCompatActivity(), View.OnClickListener {
 
@@ -133,7 +131,7 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener {
 
         if (!databaseHelper!!.checkUser(textInputEditTextEmail!!.text.toString().trim())) {
 
-            var user = User(name = textInputEditTextName!!.text.toString().trim(),
+            var user = DunScealUser(name = textInputEditTextName!!.text.toString().trim(),
                     email = textInputEditTextEmail!!.text.toString().trim(),
                     password = textInputEditTextPassword!!.text.toString().trim())
 

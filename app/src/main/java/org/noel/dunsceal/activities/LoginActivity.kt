@@ -12,8 +12,6 @@ import com.google.android.material.textfield.TextInputLayout
 import com.google.android.material.snackbar.Snackbar
 
 import org.noel.dunsceal.R
-import org.noel.dunsceal.helpers.InputValidation
-import org.noel.dunsceal.helpers.DatabaseHelper
 
 class LoginActivity : AppCompatActivity(), View.OnClickListener {
 
