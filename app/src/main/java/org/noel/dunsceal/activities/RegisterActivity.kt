@@ -11,7 +11,7 @@ import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import org.noel.dunsceal.R
 import com.google.android.material.snackbar.Snackbar
-import org.noel.dunsceal.model.DunScealUser
+import org.noel.dunsceal.model.DunUser
 
 class RegisterActivity : AppCompatActivity(), View.OnClickListener {
 
@@ -33,7 +33,7 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_register)
+        setContentView(R.layout.user_register_activity)
         supportActionBar!!.hide()
         initViews()
         initListeners()
@@ -137,7 +137,7 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener {
 
         if (!databaseHelper!!.checkUser(textInputEditTextEmail!!.text.toString().trim())) {
 
-            var user = DunScealUser(
+            var user = DunUser(
                 name = textInputEditTextName!!.text.toString().trim(),
                 email = textInputEditTextEmail!!.text.toString().trim(),
                 password = textInputEditTextPassword!!.text.toString().trim()
@@ -157,7 +157,7 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener {
             intentLogin.putExtra("MSG", R.string.success_message)
             startActivity(intentLogin)
             emptyInputEditText()
-            setContentView(R.layout.activity_login)
+            setContentView(R.layout.user_login_activity)
         } else {
             // Snack Bar to show error message that record already exists
             Snackbar.make(

@@ -14,7 +14,7 @@ import org.noel.dunsceal.model.PageViewModel
 /**
  * A placeholder fragment containing a simple view.
  */
-class PlaceholderFragment : Fragment() {
+class DunFragment : Fragment() {
 
     private lateinit var pageViewModel: PageViewModel
 
@@ -49,8 +49,8 @@ class PlaceholderFragment : Fragment() {
          * number.
          */
         @JvmStatic
-        fun newInstance(sectionNumber: Int): PlaceholderFragment {
-            return PlaceholderFragment().apply {
+        fun newInstance(sectionNumber: Int): DunFragment {
+            return DunFragment().apply {
                 arguments = Bundle().apply {
                     putInt(ARG_SECTION_NUMBER, sectionNumber)
                 }

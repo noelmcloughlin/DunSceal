@@ -6,14 +6,14 @@ import android.view.ViewGroup
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.recyclerview.widget.RecyclerView
 import org.noel.dunsceal.R
-import org.noel.dunsceal.model.DunScealUser
+import org.noel.dunsceal.model.DunUser
 
-class UsersRecyclerAdapter(private val listUsers: List<DunScealUser>) : RecyclerView.Adapter<org.noel.dunsceal.adapters.UsersRecyclerAdapter.UserViewHolder>() {
+class UsersRecyclerAdapter(private val listUsers: List<DunUser>) : RecyclerView.Adapter<org.noel.dunsceal.adapters.UsersRecyclerAdapter.UserViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): org.noel.dunsceal.adapters.UsersRecyclerAdapter.UserViewHolder {
         // inflating recycler item view
         val itemView = LayoutInflater.from(parent.context)
-                .inflate(R.layout.item_user_recycler, parent, false)
+                .inflate(R.layout.user_item_recycler, parent, false)
 
         return UserViewHolder(itemView)
     }

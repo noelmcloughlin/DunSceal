@@ -10,16 +10,16 @@ import java.util.*
 
 val JSON_FILE = "dunsceals.json"
 val gsonBuilder = GsonBuilder().setPrettyPrinting().create()
-val listType = object : TypeToken<ArrayList<DunScealModel>>() {}.type
+val listType = object : TypeToken<ArrayList<DunModel>>() {}.type
 
 fun generateRandomId(): Long {
     return Random().nextLong()
 }
 
-class DunScealJsonStore : org.noel.dunsceal.model.DunScealStore, AnkoLogger {
+class DunJsonStore : DunStore, AnkoLogger {
 
     val context: Context
-    var dunsceals = mutableListOf<DunScealModel>()
+    var dunsceals = mutableListOf<DunModel>()
 
     constructor (context: Context) {
         this.context = context
@@ -28,24 +28,24 @@ class DunScealJsonStore : org.noel.dunsceal.model.DunScealStore, AnkoLogger {
         }
     }
 
-    override fun findAll(): MutableList<DunScealModel> {
+    override fun findAll(): MutableList<DunModel> {
         return dunsceals
     }
 
-    override fun create(dunsceal: DunScealModel) {
+    override fun create(dunsceal: DunModel) {
         dunsceal.id = generateRandomId()
         dunsceals.add(dunsceal)
         serialize()
     }
 
 
-    override fun update(dunsceal: DunScealModel) {
+    override fun update(dunsceal: DunModel) {
         // todo
     }
 
-    override fun delete(dunsceal: DunScealModel) {
+    /**override fun delete(dunsceal: DunModel) {
         // todo
-    }
+    } */
 
     private fun serialize() {
         val jsonString = gsonBuilder.toJson(dunsceals, listType)

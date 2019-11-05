@@ -22,7 +22,7 @@ class SplashActivity : AppCompatActivity() {
             overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
             // Close this activity
             finish()
-        }, 8000)
+        }, 4000)
     }
 
     private fun makeFullScreen() {

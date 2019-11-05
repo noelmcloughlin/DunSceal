@@ -4,6 +4,7 @@
     package="org.noel.dunsceal">
 
     <application
+        android:name=".main.DunScealApp"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -11,13 +12,11 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-
+        <activity android:name=".activities.DunReport"/>
         <activity
             android:name=".activities.MainActivity"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar">
-        </activity>
-
+            android:theme="@style/AppTheme.AppBarOverlay" />
         <activity android:name=".activities.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -27,12 +26,18 @@
         </activity>
         <activity
             android:name=".activities.LoginActivity"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activities.RegisterActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".activities.UsersListActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.DunListActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.DunActivity"
             android:screenOrientation="portrait" />
     </application>
 

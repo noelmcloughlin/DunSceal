@@ -1,62 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/constraintLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.TutorialFragment">
+    tools:context=".fragments.DunFragment">
 
     <TextView
-        android:id="@+id/tutorialName"
+        android:id="@+id/section_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="12dp"
-        android:textColor="@android:color/black"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        tools:text="RxKotlin" />
+        android:layout_marginStart="@dimen/activity_horizontal_margin"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:layout_marginEnd="@dimen/activity_horizontal_margin"
+        android:layout_marginBottom="@dimen/activity_vertical_margin"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/constraintLayout"
+        tools:layout_constraintLeft_creator="1"
+        tools:layout_constraintTop_creator="1" />
 
-    <TextView
-        android:id="@+id/tutorialDesc"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/tutorialName"
-        android:layout_centerHorizontal="true"
-        android:layout_margin="10dp"
-        android:layout_marginTop="4dp"
-        android:layout_marginBottom="15dp"
-        android:textColor="@android:color/black"
-        android:textSize="15sp"
-        tools:text="RxKotlin is a reactive extensions." />
-
-    <TextView
-        android:id="@+id/errorMessage"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/tutorialDesc"
-        android:layout_centerHorizontal="true"
-        android:layout_margin="10dp"
-        android:layout_marginTop="4dp"
-        android:layout_marginBottom="15dp"
-        android:textColor="@android:color/holo_red_light"
-        android:textSize="15sp"
-        android:visibility="gone"
-        tools:text="Image failed loading" />
-
-    <ProgressBar
-        android:id="@+id/progressBar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:visibility="gone" />
-
-    <ImageView
-        android:id="@+id/snowFilterImage"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/progressBar"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="140dp"
-        tools:src="@mipmap/ic_launcher" />
-
-</RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import org.noel.dunsceal.R
 import org.noel.dunsceal.adapters.UsersRecyclerAdapter
-import org.noel.dunsceal.model.DunScealUser
+import org.noel.dunsceal.model.DunUser
 import org.noel.dunsceal.helpers.DatabaseHelper
 
 class UsersListActivity : AppCompatActivity() {
@@ -18,13 +18,13 @@ class UsersListActivity : AppCompatActivity() {
     private val activity = this@UsersListActivity
     private lateinit var textViewName: AppCompatTextView
     private lateinit var recyclerViewUsers: RecyclerView
-    private lateinit var listUsers: MutableList<DunScealUser>
+    private lateinit var listUsers: MutableList<DunUser>
     private lateinit var usersRecyclerAdapter: UsersRecyclerAdapter
     private lateinit var databaseHelper: DatabaseHelper
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_users_list)
+        setContentView(R.layout.user_list_activity)
         supportActionBar!!.title = ""
         initViews()
         initObjects()
@@ -62,13 +62,13 @@ class UsersListActivity : AppCompatActivity() {
     /**
      * This class is to fetch all user records from SQLite
      */
-    inner class GetDataFromSQLite : AsyncTask<Void, Void, List<DunScealUser>>() {
+    inner class GetDataFromSQLite : AsyncTask<Void, Void, List<DunUser>>() {
 
-        override fun doInBackground(vararg p0: Void?): List<DunScealUser> {
+        override fun doInBackground(vararg p0: Void?): List<DunUser> {
             return databaseHelper.getAllUser()
         }
 
-        override fun onPostExecute(result: List<DunScealUser>?) {
+        override fun onPostExecute(result: List<DunUser>?) {
             super.onPostExecute(result)
             listUsers.clear()
             listUsers.addAll(result!!)

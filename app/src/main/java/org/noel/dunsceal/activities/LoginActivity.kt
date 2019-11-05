@@ -27,7 +27,7 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_login)
+        setContentView(R.layout.user_login_activity)
         supportActionBar!!.hide()
         initViews()
         initListeners()
@@ -117,7 +117,7 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
                 textInputEditTextPassword!!.text.toString().trim { it <= ' ' })
         ) {
             val accountsIntent =
-                Intent(activity, MainActivity::class.java)
+                Intent(activity, DunListActivity::class.java)
             accountsIntent.putExtra(
                 "EMAIL",
                 textInputEditTextEmail!!.text.toString().trim { it <= ' ' })

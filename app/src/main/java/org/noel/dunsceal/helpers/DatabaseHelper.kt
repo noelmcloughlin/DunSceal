@@ -4,7 +4,7 @@ import android.content.ContentValues
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
-import org.noel.dunsceal.model.DunScealUser
+import org.noel.dunsceal.model.DunUser
 
 /**
  * Created by lalit on 9/12/2016.
@@ -33,7 +33,7 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context,
      *
      * @return list
      */
-    fun getAllUser(): List<DunScealUser> {
+    fun getAllUser(): List<DunUser> {
 
         // array of columns to fetch
         val columns = arrayOf(
@@ -45,7 +45,7 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context,
 
         // sorting orders
         val sortOrder = "$COLUMN_USER_NAME ASC"
-        val userList = ArrayList<DunScealUser>()
+        val userList = ArrayList<DunUser>()
         val db = this.readableDatabase
 
         // query the user table
@@ -59,7 +59,7 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context,
                 sortOrder)         //The sort order
         if (cursor.moveToFirst()) {
             do {
-                val user = DunScealUser(id = cursor.getString(cursor.getColumnIndex(COLUMN_USER_ID)).toInt(),
+                val user = DunUser(id = cursor.getString(cursor.getColumnIndex(COLUMN_USER_ID)).toInt(),
                         name = cursor.getString(cursor.getColumnIndex(COLUMN_USER_NAME)),
                         email = cursor.getString(cursor.getColumnIndex(COLUMN_USER_EMAIL)),
                         password = cursor.getString(cursor.getColumnIndex(COLUMN_USER_PASSWORD)))
@@ -78,7 +78,7 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context,
      *
      * @param user
      */
-    fun addUser(user: DunScealUser) {
+    fun addUser(user: DunUser) {
         val db = this.writableDatabase
 
         val values = ContentValues()
@@ -94,7 +94,7 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context,
      *
      * @param user
      */
-    fun updateUser(user: DunScealUser) {
+    fun updateUser(user: DunUser) {
         val db = this.writableDatabase
 
         val values = ContentValues()
@@ -114,7 +114,7 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context,
      *
      * @param user
      */
-    fun deleteUser(user: DunScealUser) {
+    fun deleteUser(user: DunUser) {
 
         val db = this.writableDatabase
         // delete user record by id
@@ -203,10 +203,10 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context,
         // Database Name
         private val DATABASE_NAME = "UserManager.db"
 
-        // DunScealUser table name
+        // DunUser table name
         private val TABLE_USER = "user"
 
-        // DunScealUser Table Columns names
+        // DunUser Table Columns names
         private val COLUMN_USER_ID = "user_id"
         private val COLUMN_USER_NAME = "user_name"
         private val COLUMN_USER_EMAIL = "user_email"
