@@ -1,4 +1,4 @@
-package org.noel.dunsceal.adapters
+package org.noel.dunsceal.adapters.auth
 
 import android.view.LayoutInflater
 import android.view.View
@@ -8,9 +8,9 @@ import androidx.recyclerview.widget.RecyclerView
 import org.noel.dunsceal.R
 import org.noel.dunsceal.model.DunUser
 
-class UsersRecyclerAdapter(private val listUsers: List<DunUser>) : RecyclerView.Adapter<org.noel.dunsceal.adapters.UsersRecyclerAdapter.UserViewHolder>() {
+class UsersRecyclerAdapter(private val listUsers: List<DunUser>) : RecyclerView.Adapter<UsersRecyclerAdapter.UserViewHolder>() {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): org.noel.dunsceal.adapters.UsersRecyclerAdapter.UserViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserViewHolder {
         // inflating recycler item view
         val itemView = LayoutInflater.from(parent.context)
                 .inflate(R.layout.user_item_recycler, parent, false)
@@ -18,7 +18,7 @@ class UsersRecyclerAdapter(private val listUsers: List<DunUser>) : RecyclerView.
         return UserViewHolder(itemView)
     }
 
-    override fun onBindViewHolder(holder: org.noel.dunsceal.adapters.UsersRecyclerAdapter.UserViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: UserViewHolder, position: Int) {
         holder.textViewName.text = listUsers[position].name
         holder.textViewEmail.text = listUsers[position].email
         holder.textViewPassword.text = listUsers[position].password

@@ -1,4 +1,4 @@
-package org.noel.dunsceal.adapters
+package org.noel.dunsceal.adapters.dun
 
 import android.content.Context
 import androidx.fragment.app.Fragment

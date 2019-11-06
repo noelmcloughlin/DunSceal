@@ -1,4 +1,4 @@
-package org.noel.dunsceal.helpers
+package org.noel.dunsceal.helpers.auth
 
 import android.content.ContentValues
 import android.content.Context
@@ -9,8 +9,10 @@ import org.noel.dunsceal.model.DunUser
 /**
  * Created by lalit on 9/12/2016.
  */
-class DatabaseHelper(context: Context) : SQLiteOpenHelper(context,
-    DATABASE_NAME, null, DATABASE_VERSION) {
+class UserDatabaseHelper(context: Context) : SQLiteOpenHelper(context,
+    DATABASE_NAME, null,
+    DATABASE_VERSION
+) {
 
     private val CREATE_USER_TABLE = ("CREATE TABLE " + TABLE_USER + "("
             + COLUMN_USER_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," + COLUMN_USER_NAME + " TEXT,"

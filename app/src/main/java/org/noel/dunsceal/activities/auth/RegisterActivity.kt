@@ -1,4 +1,4 @@
-package org.noel.dunsceal.activities
+package org.noel.dunsceal.activities.auth
 
 import android.content.Intent
 import android.os.Bundle
@@ -11,6 +11,8 @@ import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import org.noel.dunsceal.R
 import com.google.android.material.snackbar.Snackbar
+import org.noel.dunsceal.helpers.auth.UserDatabaseHelper
+import org.noel.dunsceal.helpers.auth.UserInputValidation
 import org.noel.dunsceal.model.DunUser
 
 class RegisterActivity : AppCompatActivity(), View.OnClickListener {
@@ -28,8 +30,8 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener {
     private lateinit var textInputEditTextConfirmPassword: TextInputEditText
     private lateinit var appCompatButtonRegister: AppCompatButton
     private lateinit var appCompatTextViewLoginLink: AppCompatTextView
-    private lateinit var inputValidation: org.noel.dunsceal.helpers.InputValidation
-    private lateinit var databaseHelper: org.noel.dunsceal.helpers.DatabaseHelper
+    private lateinit var userInputValidation: UserInputValidation
+    private lateinit var userDatabaseHelper: UserDatabaseHelper
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -76,8 +78,8 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener {
      * This method is to initialize objects to be used
      */
     private fun initObjects() {
-        inputValidation = org.noel.dunsceal.helpers.InputValidation(activity)
-        databaseHelper = org.noel.dunsceal.helpers.DatabaseHelper(activity)
+        userInputValidation = UserInputValidation(activity)
+        userDatabaseHelper = UserDatabaseHelper(activity)
     }
 
     /**
@@ -95,7 +97,7 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener {
      * This method is to validate the input text fields and post data to SQLite
      */
     private fun postDataToSQLite() {
-        if (!inputValidation!!.isInputEditTextFilled(
+        if (!userInputValidation!!.isInputEditTextFilled(
                 textInputEditTextName,
                 textInputLayoutName,
                 getString(R.string.error_message_name)
@@ -103,7 +105,7 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener {
         ) {
             return
         }
-        if (!inputValidation!!.isInputEditTextFilled(
+        if (!userInputValidation!!.isInputEditTextFilled(
                 textInputEditTextEmail,
                 textInputLayoutEmail,
                 getString(R.string.error_message_email)
@@ -111,7 +113,7 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener {
         ) {
             return
         }
-        if (!inputValidation!!.isInputEditTextEmail(
+        if (!userInputValidation!!.isInputEditTextEmail(
                 textInputEditTextEmail,
                 textInputLayoutEmail,
                 getString(R.string.error_message_email)
@@ -119,7 +121,7 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener {
         ) {
             return
         }
-        if (!inputValidation!!.isInputEditTextFilled(
+        if (!userInputValidation!!.isInputEditTextFilled(
                 textInputEditTextPassword,
                 textInputLayoutPassword,
                 getString(R.string.error_message_password)
@@ -127,7 +129,7 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener {
         ) {
             return
         }
-        if (!inputValidation!!.isInputEditTextMatches(
+        if (!userInputValidation!!.isInputEditTextMatches(
                 textInputEditTextPassword, textInputEditTextConfirmPassword,
                 textInputLayoutConfirmPassword, getString(R.string.error_password_match)
             )
@@ -135,7 +137,7 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener {
             return
         }
 
-        if (!databaseHelper!!.checkUser(textInputEditTextEmail!!.text.toString().trim())) {
+        if (!userDatabaseHelper!!.checkUser(textInputEditTextEmail!!.text.toString().trim())) {
 
             var user = DunUser(
                 name = textInputEditTextName!!.text.toString().trim(),
@@ -143,7 +145,7 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener {
                 password = textInputEditTextPassword!!.text.toString().trim()
             )
 
-            databaseHelper!!.addUser(user)
+            userDatabaseHelper!!.addUser(user)
 
 
             // Snack Bar to show success message that record saved successfully

@@ -1,4 +1,4 @@
-package org.noel.dunsceal.activities
+package org.noel.dunsceal.activities.auth
 
 import android.content.Intent
 import android.os.Bundle
@@ -11,6 +11,8 @@ import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import com.google.android.material.snackbar.Snackbar
 import org.noel.dunsceal.R
+import org.noel.dunsceal.helpers.auth.UserDatabaseHelper
+import org.noel.dunsceal.helpers.auth.UserInputValidation
 
 class LoginActivity : AppCompatActivity(), View.OnClickListener {
 
@@ -22,13 +24,14 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
     private lateinit var textInputEditTextPassword: TextInputEditText
     private lateinit var appCompatButtonLogin: AppCompatButton
     private lateinit var textViewLinkRegister: AppCompatTextView
-    private lateinit var inputValidation: org.noel.dunsceal.helpers.InputValidation
-    private lateinit var databaseHelper: org.noel.dunsceal.helpers.DatabaseHelper
+    private lateinit var userInputValidation: UserInputValidation
+    private lateinit var userDatabaseHelper: UserDatabaseHelper
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.user_login_activity)
-        supportActionBar!!.hide()
+        if (supportActionBar != null)
+            supportActionBar!!.hide()
         initViews()
         initListeners()
         initObjects()
@@ -63,8 +66,8 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
      * This method is to initialize objects to be used
      */
     private fun initObjects() {
-        databaseHelper = org.noel.dunsceal.helpers.DatabaseHelper(activity)
-        inputValidation = org.noel.dunsceal.helpers.InputValidation(activity)
+        userDatabaseHelper = UserDatabaseHelper(activity)
+        userInputValidation = UserInputValidation(activity)
     }
 
     /**
@@ -90,21 +93,21 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
      */
     private fun verifyFromSQLite() {
 
-        if (!inputValidation!!.isInputEditTextFilled(
+        if (!userInputValidation!!.isInputEditTextFilled(
                 textInputEditTextEmail!!,
                 textInputLayoutEmail!!,
                 getString(R.string.error_message_email))
         ) {
             return
         }
-        if (!inputValidation!!.isInputEditTextEmail(
+        if (!userInputValidation!!.isInputEditTextEmail(
                 textInputEditTextEmail!!,
                 textInputLayoutEmail!!,
                 getString(R.string.error_message_email))
         ) {
             return
         }
-        if (!inputValidation!!.isInputEditTextFilled(
+        if (!userInputValidation!!.isInputEditTextFilled(
                 textInputEditTextPassword!!,
                 textInputLayoutPassword!!,
                 getString(R.string.error_message_email))
@@ -112,12 +115,12 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
             return
         }
 
-        if (databaseHelper!!.checkUser(
+        if (userDatabaseHelper!!.checkUser(
                 textInputEditTextEmail!!.text.toString().trim { it <= ' ' },
                 textInputEditTextPassword!!.text.toString().trim { it <= ' ' })
         ) {
             val accountsIntent =
-                Intent(activity, DunListActivity::class.java)
+                Intent(activity, UsersListActivity::class.java)
             accountsIntent.putExtra(
                 "EMAIL",
                 textInputEditTextEmail!!.text.toString().trim { it <= ' ' })

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.DunReport"
+    tools:context=".activities.dun.DunReport"
     android:theme="@style/AppTheme">
 
     <androidx.recyclerview.widget.RecyclerView
@@ -20,7 +20,6 @@
         app:layout_constraintVertical_bias="0.573" />
 
     <TextView
-        android:id="@+id/reportTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/text_hello"

@@ -1,4 +1,4 @@
-package org.noel.dunsceal.activities
+package org.noel.dunsceal.activities.dun
 
 import android.app.Activity
 import android.content.Intent

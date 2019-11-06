@@ -26,7 +26,7 @@ class DunMemStore : DunStore, AnkoLogger {
     override fun update(dun: DunModel) {
         var foundDun: DunModel? = duns.find { p -> p.id == dun.id }
         if (foundDun != null) {
-            foundDun.title = dun.title
+            foundDun.name = dun.name
             foundDun.description = dun.description
             foundDun.image = dun.image
             logAll();

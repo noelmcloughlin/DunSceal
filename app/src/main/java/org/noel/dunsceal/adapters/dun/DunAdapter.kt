@@ -1,4 +1,4 @@
-package org.noel.dunsceal.adapters
+package org.noel.dunsceal.adapters.dun
 
 import android.view.LayoutInflater
 import android.view.View
@@ -37,7 +37,7 @@ class DunAdapter constructor(private var duns: List<DunModel>,
     class MainHolder constructor(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         fun bind(dun: DunModel, listener: DunListener) {
-            itemView.dunTitle.text = dun.title
+            itemView.dunTitle.text = dun.name
             itemView.description.text = dun.description
             itemView.imageIcon.setImageBitmap(readImageFromPath(itemView.context, dun.image))
             itemView.setOnClickListener { listener.onDunClick(dun) }

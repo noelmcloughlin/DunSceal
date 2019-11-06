@@ -9,7 +9,7 @@
     android:paddingTop="20dp"
     android:paddingRight="20dp"
     android:paddingBottom="20dp"
-    tools:context="org.noel.dunsceal.activities.LoginActivity">
+    tools:context="org.noel.dunsceal.activities.auth.LoginActivity">
 
     <LinearLayout
         android:layout_width="match_parent"

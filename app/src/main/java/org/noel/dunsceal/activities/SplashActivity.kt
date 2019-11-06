@@ -7,6 +7,7 @@ import android.os.Handler
 import android.view.Window
 import android.view.WindowManager
 import org.noel.dunsceal.R
+import org.noel.dunsceal.activities.auth.LoginActivity
 
 class SplashActivity : AppCompatActivity() {
 
@@ -14,7 +15,7 @@ class SplashActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         makeFullScreen()
         setContentView(R.layout.splash_activity)
-// Using a handler to delay loading the MainActivity
+// Using a handler to delay loading the DunMainActivity
         Handler().postDelayed({
             // Start activity
             startActivity(Intent(this, LoginActivity::class.java))
@@ -22,7 +23,7 @@ class SplashActivity : AppCompatActivity() {
             overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
             // Close this activity
             finish()
-        }, 4000)
+        }, 2000)
     }
 
     private fun makeFullScreen() {

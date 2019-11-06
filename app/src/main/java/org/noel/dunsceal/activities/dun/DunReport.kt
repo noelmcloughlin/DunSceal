@@ -1,4 +1,4 @@
-package org.noel.dunsceal.activities
+package org.noel.dunsceal.activities.dun
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

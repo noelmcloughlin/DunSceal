@@ -1,4 +1,4 @@
-package org.noel.dunsceal.activities
+package org.noel.dunsceal.activities.auth
 
 import android.os.AsyncTask
 import android.os.Bundle
@@ -9,9 +9,9 @@ import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import org.noel.dunsceal.R
-import org.noel.dunsceal.adapters.UsersRecyclerAdapter
+import org.noel.dunsceal.adapters.auth.UsersRecyclerAdapter
 import org.noel.dunsceal.model.DunUser
-import org.noel.dunsceal.helpers.DatabaseHelper
+import org.noel.dunsceal.helpers.auth.UserDatabaseHelper
 
 class UsersListActivity : AppCompatActivity() {
 
@@ -20,12 +20,13 @@ class UsersListActivity : AppCompatActivity() {
     private lateinit var recyclerViewUsers: RecyclerView
     private lateinit var listUsers: MutableList<DunUser>
     private lateinit var usersRecyclerAdapter: UsersRecyclerAdapter
-    private lateinit var databaseHelper: DatabaseHelper
+    private lateinit var userDatabaseHelper: UserDatabaseHelper
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.user_list_activity)
-        supportActionBar!!.title = ""
+        if (supportActionBar != null)
+            supportActionBar!!.title = ""
         initViews()
         initObjects()
     }
@@ -50,7 +51,7 @@ class UsersListActivity : AppCompatActivity() {
         recyclerViewUsers.itemAnimator = DefaultItemAnimator()
         recyclerViewUsers.setHasFixedSize(true)
         recyclerViewUsers.adapter = usersRecyclerAdapter
-        databaseHelper = DatabaseHelper(activity)
+        userDatabaseHelper = UserDatabaseHelper(activity)
 
         val emailFromIntent = intent.getStringExtra("EMAIL")
         textViewName.text = emailFromIntent
@@ -65,7 +66,7 @@ class UsersListActivity : AppCompatActivity() {
     inner class GetDataFromSQLite : AsyncTask<Void, Void, List<DunUser>>() {
 
         override fun doInBackground(vararg p0: Void?): List<DunUser> {
-            return databaseHelper.getAllUser()
+            return userDatabaseHelper.getAllUser()
         }
 
         override fun onPostExecute(result: List<DunUser>?) {

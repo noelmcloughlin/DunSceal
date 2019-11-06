@@ -1,4 +1,4 @@
-package org.noel.dunsceal.activities
+package org.noel.dunsceal.activities.dun
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -29,8 +29,10 @@ class DunActivity : AppCompatActivity(), AnkoLogger {
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     setContentView(R.layout.dun_activity)
-    toolbarAdd.title = title
-    setSupportActionBar(toolbarAdd)
+    if (toolbarAdd != null) {
+      toolbarAdd.title = title
+      setSupportActionBar(toolbarAdd)
+    }
     info("Dun Activity started..")
 
     app = application as DunScealApp
@@ -39,7 +41,7 @@ class DunActivity : AppCompatActivity(), AnkoLogger {
     if (intent.hasExtra("dun_edit")) {
       edit = true
       dun = intent.extras?.getParcelable<DunModel>("dun_edit")!!
-      dunTitle.setText(dun.title)
+      dunTitle.setText(dun.name)
       description.setText(dun.description)
       dunImage.setImageBitmap(readImageFromPath(this, dun.image))
       if (dun.image != null) {
@@ -48,10 +50,10 @@ class DunActivity : AppCompatActivity(), AnkoLogger {
       btnAdd.setText(R.string.save_dun)
     }
 
-    btnAdd.setOnClickListener() {
-      dun.title = dunTitle.text.toString()
+    btnAdd.setOnClickListener {
+      dun.name = dunTitle.text.toString()
       dun.description = description.text.toString()
-      if (dun.title.isEmpty()) {
+      if (dun.name.isEmpty()) {
         toast(R.string.enter_dun_title)
       } else {
         if (edit) {
@@ -61,7 +63,7 @@ class DunActivity : AppCompatActivity(), AnkoLogger {
         }
       }
       info("add Button Pressed: $dunTitle")
-      setResult(AppCompatActivity.RESULT_OK)
+      setResult(RESULT_OK)
       finish()
     }
 
@@ -106,4 +108,3 @@ class DunActivity : AppCompatActivity(), AnkoLogger {
     }
   }
 }
-

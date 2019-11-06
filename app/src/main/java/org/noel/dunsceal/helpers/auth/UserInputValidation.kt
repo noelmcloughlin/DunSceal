@@ -1,4 +1,4 @@
-package org.noel.dunsceal.helpers
+package org.noel.dunsceal.helpers.auth
 
 import android.app.Activity
 import android.content.Context
@@ -11,7 +11,7 @@ import com.google.android.material.textfield.TextInputLayout
 /**
  * Created by Lalit Vasan on 9/13/2016.
  */
-class InputValidation
+class UserInputValidation
 /**
  * constructor
  *

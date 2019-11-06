@@ -1,4 +1,4 @@
-package org.noel.dunsceal.activities
+package org.noel.dunsceal.activities.dun
 
 import android.content.Intent
 import android.os.Bundle
@@ -9,8 +9,8 @@ import kotlinx.android.synthetic.main.dun_list_activity.*
 import org.jetbrains.anko.intentFor
 import org.jetbrains.anko.startActivityForResult
 import org.noel.dunsceal.R
-import org.noel.dunsceal.adapters.DunAdapter
-import org.noel.dunsceal.adapters.DunListener
+import org.noel.dunsceal.adapters.dun.DunAdapter
+import org.noel.dunsceal.adapters.dun.DunListener
 import org.noel.dunsceal.main.DunScealApp
 import org.noel.dunsceal.model.DunModel
 
@@ -21,13 +21,17 @@ class DunListActivity : AppCompatActivity(), DunListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.dun_list_activity)
+
         app = application as DunScealApp
-        toolbar.title = title
-        setSupportActionBar(toolbar)
+        if (toolbar != null) {
+            toolbar.title = title
+            setSupportActionBar(toolbar)
+        }
 
         val layoutManager = LinearLayoutManager(this)
         recyclerView.layoutManager = layoutManager
-        recyclerView.adapter = DunAdapter(app.dunStore.findAll(), this)
+        recyclerView.adapter =
+            DunAdapter(app.dunStore.findAll(), this)
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {

@@ -35,7 +35,6 @@
         app:layout_constraintTop_toBottomOf="@+id/imageView3" />
 
     <ImageView
-        android:id="@+id/imageView"
         android:layout_width="511dp"
         android:layout_height="96dp"
         app:layout_constraintBottom_toTopOf="@+id/imageView3"

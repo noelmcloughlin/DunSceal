@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:theme="@style/AppTheme"
-    tools:context="org.noel.dunsceal.activities.DunActivity">
+    tools:context="org.noel.dunsceal.activities.dun.DunActivity">
 
     <RelativeLayout
         android:layout_width="match_parent"
