@@ -1,55 +1,20 @@
 <resources>
-    <string name="app_name">DunSceal</string>
-
-    <!-- Login/Signup activities -->
-    <string name="text_accounts">All Accounts</string>
-    <string name="hint_user_name">Name</string>
-    <string name="hint_user_email">Email</string>
-    <string name="hint_user_password">Password</string>
-    <string name="hint_confirm_password">Confirm Password</string>
-    <string name="text_login">Login</string>
-    <string name="text_register">Register</string>
-    <string name="error_message_name">Enter Full Name</string>
-    <string name="error_message_email">Enter Valid Email</string>
-    <string name="error_message_password">Enter Password</string>
-    <string name="success_message">Registration Successful</string>
-    <string name="text_not_member">No account yet? Create one</string>
-    <string name="error_email_exists">Email Already Exists</string>
-    <string name="error_password_match">Password Does Not Matches</string>
-    <string name="error_valid_email_password">Wrong Email or Password</string>
-    <string name="text_hello">Hello,</string>
-    <string name="text_title">dun</string>
-
-    <!-- dun -->
-    <string name="select_dunsceal_image">Select dunsceal image</string>
-
-    <!-- fonts -->
-
-    <!-- snowy -->
-    <string name="tab_text_1">Tab 1</string>
-    <string name="tab_text_2">Tab 2</string>
-    <string name="tab_text_3">Tab 3</string>
-    <string name="tab_text_4">Tab 4</string>
-
-    <!-- Generic -->
-    <string name="app_started">App Started</string>
-
-    <!-- donations -->
-
-    <string name="hint_dunTitle">Dun Title</string>
-    <string name="hint_dunDescription">Description </string>
-    <string name="button_addDun">Add Dun</string>
-    <string name="menu_addDun">Add</string>
-    <string name="menu_cancelDun">Cancel</string>
-    <string name="enter_dun_title"> Please enter a Dun Title </string>
-    <string name="save_dun"> Save Dun </string>
-    <string name="button_addImage"> Add Image </string>
-    <string name="change_dun_image">Change dun image</string>
-    <string name="button_location">Set Location</string>
-
-    <!-- dun2 -->
-    <string name="activity_sample_code">ViewPager2 Demos</string>
-    <string name="label_orientation">Orientation:</string>
-    <string name="label_jump_to">Jump to:</string>
-    <string name="label_jump">Jump</string>
+  <string name="app_name">DunSceal</string>
+  <string name="hint_dunTitle">Dun Title</string>
+  <string name="hint_dunDescription">Description </string>
+  <string name="button_addDun">Add Dun</string>
+  <string name="menu_addDun">Add</string>
+  <string name="menu_cancelDun">Cancel</string>
+  <string name="enter_dun_title"> Please enter a Dun Title </string>
+  <string name="save_dun"> Save Dun </string>
+  <string name="button_addImage"> Add Image </string>
+  <string name="select_dun_image">Select dun image</string>
+  <string name="change_dun_image">Change dun image</string>
+  <string name="button_location">Set Location</string>
+  <string name="title_activity_map">Map</string>
+  <string name="google_maps_key">AIzaSyBfzAxqao47IorVL4lIIySt1_cDQawLbTw</string>
+  <string name="TextView">TextView</string>
+  <string name="ImageView">ImageView</string>
+  <string name="CheckBox">CheckBox</string>
+  <string name="Completed">Completed</string>
 </resources>

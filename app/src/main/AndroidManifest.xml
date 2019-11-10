@@ -3,41 +3,38 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="org.noel.dunsceal">
 
-    <application
-        android:name=".main.DunScealApp"
-        android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
-        android:supportsRtl="true"
-        android:theme="@style/AppTheme"
-        tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".activities.dun.DunReport"/>
-        <activity
-            android:name="org.noel.dunsceal.activities.dun2.DunMainActivity"
-            android:label="@string/app_name"
-            android:theme="@style/AppTheme.AppBarOverlay" />
-        <activity android:name=".activities.SplashActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        <activity
-            android:name=".activities.auth.LoginActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".activities.auth.RegisterActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".activities.auth.UsersListActivity"
-            android:screenOrientation="portrait"/>
-        <activity
-            android:name=".activities.dun.DunListActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".activities.dun.DunActivity"
-            android:screenOrientation="portrait" />
-    </application>
+  <!--
+         The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
+         Google Maps Android API v2, but you must specify either coarse or fine
+         location permissions for the 'MyLocation' functionality.
+    -->
+  <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
+  <application
+    android:name="org.noel.dunsceal.main.MainApp"
+    android:allowBackup="true"
+    android:icon="@mipmap/ic_launcher"
+    android:label="@string/app_name"
+    android:roundIcon="@mipmap/ic_launcher_round"
+    android:supportsRtl="true"
+    android:theme="@style/AppTheme"
+      tools:ignore="GoogleAppIndexingWarning">
+
+    <meta-data
+      android:name="com.google.android.geo.API_KEY"
+      android:value="@string/google_maps_key" />
+
+    <activity android:name="org.noel.dunsceal.activities.DunActivity"/>
+    <activity android:name="org.noel.dunsceal.activities.DunListActivity">
+      <intent-filter>
+        <action android:name="android.intent.action.MAIN" />
+
+        <category android:name="android.intent.category.LAUNCHER" />
+      </intent-filter>
+    </activity>
+    <activity
+      android:name="org.noel.dunsceal.activities.MapActivity"
+      android:label="@string/title_activity_map" />
+  </application>
 
 </manifest>

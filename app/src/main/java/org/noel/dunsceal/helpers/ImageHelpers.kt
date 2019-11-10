@@ -11,37 +11,37 @@ import org.noel.dunsceal.R
 import java.io.IOException
 
 fun showImagePicker(parent: Activity, id: Int) {
-    val intent = Intent()
-    intent.type = "image/*"
-    intent.action = Intent.ACTION_OPEN_DOCUMENT
-    intent.addCategory(Intent.CATEGORY_OPENABLE)
-    val chooser = Intent.createChooser(intent, R.string.select_dunsceal_image.toString())
-    parent.startActivityForResult(chooser, id)
+  val intent = Intent()
+  intent.type = "image/*"
+  intent.action = Intent.ACTION_OPEN_DOCUMENT
+  intent.addCategory(Intent.CATEGORY_OPENABLE)
+  val chooser = Intent.createChooser(intent, R.string.select_dun_image.toString())
+  parent.startActivityForResult(chooser, id)
 }
 
 fun readImage(activity: Activity, resultCode: Int, data: Intent?): Bitmap? {
-    var bitmap: Bitmap? = null
-    if (resultCode == Activity.RESULT_OK && data != null && data.data != null) {
-        try {
-            bitmap = MediaStore.Images.Media.getBitmap(activity.contentResolver, data.data)
-        } catch (e: IOException) {
-            e.printStackTrace()
-        }
+  var bitmap: Bitmap? = null
+  if (resultCode == Activity.RESULT_OK && data != null && data.data != null) {
+    try {
+      bitmap = MediaStore.Images.Media.getBitmap(activity.contentResolver, data.data)
+    } catch (e: IOException) {
+      e.printStackTrace()
     }
-    return bitmap
+  }
+  return bitmap
 }
 
 fun readImageFromPath(context: Context, path: String): Bitmap? {
-    var bitmap: Bitmap? = null
-    val uri = Uri.parse(path)
-    if (uri != null) {
-        try {
-            val parcelFileDescriptor = context.getContentResolver().openFileDescriptor(uri, "r")
-            val fileDescriptor = parcelFileDescriptor?.getFileDescriptor()
-            bitmap = BitmapFactory.decodeFileDescriptor(fileDescriptor)
-            parcelFileDescriptor?.close()
-        } catch (e: Exception) {
-        }
+  var bitmap: Bitmap? = null
+  val uri = Uri.parse(path)
+  if (uri != null) {
+    try {
+      val parcelFileDescriptor = context.getContentResolver().openFileDescriptor(uri, "r")
+      val fileDescriptor = parcelFileDescriptor?.getFileDescriptor()
+      bitmap = BitmapFactory.decodeFileDescriptor(fileDescriptor)
+      parcelFileDescriptor?.close()
+    } catch (e: Exception) {
     }
-    return bitmap
+  }
+  return bitmap
 }

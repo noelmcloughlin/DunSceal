@@ -1,2 +1,2 @@
 include ':app'
-rootProject.name='DunSceal'
+rootProject.name='Placemark'
