@@ -42,7 +42,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import org.noel.dunsceal.R
 import org.noel.dunsceal.helpers.SnowFilter
-import kotlinx.android.synthetic.main.fragment_hero.*
+import kotlinx.android.synthetic.main.fragment_story.*
 import kotlinx.coroutines.*
 import org.noel.dunsceal.models.DunModel
 import org.noel.dunsceal.models.DunViewModel
@@ -103,7 +103,7 @@ class DunViewFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val tab = arguments?.getParcelable(DUN_KEY) as? DunModel
-        val view = inflater.inflate(R.layout.fragment_hero, container, false)
+        val view = inflater.inflate(R.layout.fragment_story, container, false)
         var textView: TextView = view.findViewById(R.id.tab_name)
         dunViewModel.name.observe(this, Observer<String> {
             textView.text = tab?.title

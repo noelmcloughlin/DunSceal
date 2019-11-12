@@ -5,7 +5,7 @@ import android.os.Bundle
 import android.view.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
-import kotlinx.android.synthetic.main.activity_dun_list.*
+import kotlinx.android.synthetic.main.activity_report.*
 import org.jetbrains.anko.intentFor
 import org.jetbrains.anko.startActivityForResult
 import org.noel.dunsceal.R
@@ -20,14 +20,14 @@ class DunListActivity : AppCompatActivity(), DunListener {
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
-    setContentView(R.layout.activity_dun_list)
+    setContentView(R.layout.activity_report)
     app = application as MainApp
     toolbar.title = title
     setSupportActionBar(toolbar)
 
     val layoutManager = LinearLayoutManager(this)
     recyclerView.layoutManager = layoutManager
-    val adapter = DunAdapter(this, app.duns.findAll())
+    val adapter = DunAdapter(this, app.duns.findAll(), this)
     recyclerView.adapter = adapter
     loadDuns()
 
@@ -41,7 +41,7 @@ class DunListActivity : AppCompatActivity(), DunListener {
   }
 
   private fun showDuns (duns: List<DunModel>) {
-    recyclerView.adapter = DunAdapter(this, duns)
+    recyclerView.adapter = DunAdapter(this, duns, this)
     recyclerView.adapter?.notifyDataSetChanged()
   }
 

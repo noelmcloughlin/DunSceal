@@ -5,7 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import kotlinx.android.synthetic.main.add_edit_dun.*
+import kotlinx.android.synthetic.main.activity_add_edit.*
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.info
 import org.jetbrains.anko.intentFor
@@ -27,7 +27,7 @@ class DunActivity : AppCompatActivity(), AnkoLogger {
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
-    setContentView(R.layout.add_edit_dun)
+    setContentView(R.layout.activity_add_edit)
     toolbarAdd.title = title
     setSupportActionBar(toolbarAdd)
     info("Dun Activity started..")

@@ -6,8 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
-import kotlinx.android.synthetic.main.item_dun.view.*
-import kotlinx.android.synthetic.main.item_dun.view.dunTitle
+import kotlinx.android.synthetic.main.card_item.view.*
+import kotlinx.android.synthetic.main.card_item.view.dunTitle
 import org.noel.dunsceal.R
 import org.noel.dunsceal.helpers.readImageFromPath
 import org.noel.dunsceal.models.DunModel
@@ -18,20 +18,21 @@ interface DunListener {
 
 class DunAdapter constructor(
     private var context: Context,
-    private var duns: List<DunModel>
+    private var duns: List<DunModel>,
+    private val listener: DunListener
 ) : RecyclerView.Adapter<DunAdapter.DunHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DunHolder {
         return DunHolder(
-            LayoutInflater.from(parent?.context).inflate(
-                R.layout.item_dun,
+            LayoutInflater.from(context).inflate(
+                R.layout.card_item,
                 parent,
                 false
             )
         )
     }
 
-    open fun showCheckboxState() {
+    fun showCheckboxState() {
         var data = ""
         for (j in this.duns.indices) {
             if (this.duns[j].isCompleted) {
@@ -43,9 +44,12 @@ class DunAdapter constructor(
 
     override fun onBindViewHolder(holder: DunHolder, position: Int) {
         val dun = duns[holder.adapterPosition]
-        holder.itemView.dunTitle.text = dun.title
+        holder.bind(dun, listener)
+
+        /** holder.itemView.dunTitle.text = dun.title
         holder.itemView.checkBox.isChecked = dun.isCompleted
-        holder.itemView.checkBox.tag = this.duns[position]
+        holder.itemView.checkBox.tag = this.duns[position] **/
+
         holder.itemView.checkBox.setOnClickListener {
             val duns1 = holder.itemView.checkBox.tag as DunModel
 
