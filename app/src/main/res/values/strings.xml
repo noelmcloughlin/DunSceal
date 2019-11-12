@@ -12,9 +12,31 @@
   <string name="change_dun_image">Change dun image</string>
   <string name="button_location">Set Location</string>
   <string name="title_activity_map">Map</string>
-  <string name="google_maps_key">AIzaSyBfzAxqao47IorVL4lIIySt1_cDQawLbTw</string>
   <string name="TextView">TextView</string>
   <string name="ImageView">ImageView</string>
   <string name="CheckBox">CheckBox</string>
   <string name="Completed">Completed</string>
+  <string name="date_picker">Date Picker</string>
+
+  <!-- Tabbed view pagers -->
+  <string name="tab1_title">Duns</string>
+  <string name="tab1_url">https://koenig-media.raywenderlich.com/uploads/2019/01/android_rw_flag_2.png</string>
+  <string name="tab1_desc">Android is a mobile operating system by Google. Development for android platform is even
+        more fun with Kotlin. We have an awesome lineup of Android DUNs that too based on Kotlin. Enjoy.. :]
+    </string>
+
+  <string name="tab2_title">Report</string>
+  <string name="tab2_url">https://koenig-media.raywenderlich.com/uploads/2019/01/RxSwift.png</string>
+  <string name="tab2_desc">The RxKotlin is an implementation of a Reactive Stream specification. Kotlin adds more
+        fun to reactive programming as it adds convenient extension functions to RxJava. Go ahead and have a look to our
+        Rx tabModel. :]
+    </string>
+
+  <string name="tab3_title">Account</string>
+  <string name="tab3_url">https://koenig-media.raywenderlich.com/uploads/2019/01/kitura.png</string>
+  <string name="tab3_desc">Kitura is a server-side Swift framework for building iOS backends and web applications.
+        This framework creates REST APIs that can be invoked from the iOS applications. We have Kitura tabModel too :]
+    </string>
+
+  <string name="error_message">Error while loading image.</string>
 </resources>

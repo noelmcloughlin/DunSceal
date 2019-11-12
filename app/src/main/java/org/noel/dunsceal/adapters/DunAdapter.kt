@@ -1,4 +1,4 @@
-package org.noel.dunsceal.activities
+package org.noel.dunsceal.adapters
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -6,9 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
-import kotlinx.android.synthetic.main.activity_dun.view.*
-import kotlinx.android.synthetic.main.item_duns.view.*
-import kotlinx.android.synthetic.main.item_duns.view.dunTitle
+import kotlinx.android.synthetic.main.item_dun.view.*
+import kotlinx.android.synthetic.main.item_dun.view.dunTitle
 import org.noel.dunsceal.R
 import org.noel.dunsceal.helpers.readImageFromPath
 import org.noel.dunsceal.models.DunModel
@@ -25,7 +24,7 @@ class DunAdapter constructor(
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DunHolder {
         return DunHolder(
             LayoutInflater.from(parent?.context).inflate(
-                R.layout.item_duns,
+                R.layout.item_dun,
                 parent,
                 false
             )

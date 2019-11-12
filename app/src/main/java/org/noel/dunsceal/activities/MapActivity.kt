@@ -22,7 +22,7 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerD
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
-    setContentView(R.layout.activity_map)
+    setContentView(R.layout.map_dun)
     location = intent.extras?.getParcelable<Location>("location")!!
     val mapFragment = supportFragmentManager
       .findFragmentById(R.id.map) as SupportMapFragment

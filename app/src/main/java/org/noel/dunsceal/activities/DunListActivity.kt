@@ -6,12 +6,11 @@ import android.view.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.activity_dun_list.*
-import kotlinx.android.synthetic.main.activity_dun_list.view.*
-import kotlinx.android.synthetic.main.item_duns.*
-import kotlinx.android.synthetic.main.item_duns.view.*
 import org.jetbrains.anko.intentFor
 import org.jetbrains.anko.startActivityForResult
 import org.noel.dunsceal.R
+import org.noel.dunsceal.adapters.DunAdapter
+import org.noel.dunsceal.adapters.DunListener
 import org.noel.dunsceal.main.MainApp
 import org.noel.dunsceal.models.DunModel
 
