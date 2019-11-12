@@ -73,20 +73,6 @@
             android:textSize="14sp" />
 
         <Button
-            android:id="@+id/datePicker"
-            style="@android:style/Widget.Material.DatePicker"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="8dp"
-            android:background="@color/colorAccent"
-            android:text="@string/date_picker"
-            android:textColor="@color/colorPrimary"
-            android:textSize="16sp" />
-
-        <Button
             android:id="@+id/chooseImage"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

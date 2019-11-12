@@ -16,11 +16,11 @@ interface DunListener {
     fun onDunClick(dun: DunModel)
 }
 
-class DunAdapter constructor(
+class DunRecycleViewAdapter constructor(
     private var context: Context,
     private var duns: List<DunModel>,
     private val listener: DunListener
-) : RecyclerView.Adapter<DunAdapter.DunHolder>() {
+) : RecyclerView.Adapter<DunRecycleViewAdapter.DunHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DunHolder {
         return DunHolder(
@@ -46,9 +46,9 @@ class DunAdapter constructor(
         val dun = duns[holder.adapterPosition]
         holder.bind(dun, listener)
 
-        /** holder.itemView.dunTitle.text = dun.title
+        holder.itemView.dunTitle.text = dun.title
         holder.itemView.checkBox.isChecked = dun.isCompleted
-        holder.itemView.checkBox.tag = this.duns[position] **/
+        holder.itemView.checkBox.tag = this.duns[position]
 
         holder.itemView.checkBox.setOnClickListener {
             val duns1 = holder.itemView.checkBox.tag as DunModel
