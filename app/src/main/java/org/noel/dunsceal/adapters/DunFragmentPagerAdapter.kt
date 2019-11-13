@@ -69,7 +69,7 @@ class DunFragmentPagerAdapter(
     fun showCheckboxState() {
         var data = ""
         for (j in this.duns.indices) {
-            if (this.duns[j].isCompleted) {
+            if (this.duns[j].isComplete) {
                 data = data + "\n" + this.duns[j].title
             }
         }
@@ -81,14 +81,14 @@ class DunFragmentPagerAdapter(
         holder.bind(dun, listener)
 
         holder.itemView.dunTitle.text = dun.title
-        holder.itemView.checkBox.isChecked = dun.isCompleted
+        holder.itemView.checkBox.isChecked = dun.isComplete
         holder.itemView.checkBox.tag = this.duns[position]
 
         holder.itemView.checkBox.setOnClickListener {
             val duns1 = holder.itemView.checkBox.tag as DunModel
 
-            duns1.isCompleted = holder.itemView.checkBox.isChecked
-            this.duns[position].isCompleted = holder.itemView.checkBox.isChecked
+            duns1.isComplete = holder.itemView.checkBox.isChecked
+            this.duns[position].isComplete = holder.itemView.checkBox.isChecked
             showCheckboxState()
         }
     }

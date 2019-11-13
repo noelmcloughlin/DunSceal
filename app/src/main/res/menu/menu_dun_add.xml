@@ -3,7 +3,8 @@
   xmlns:app="http://schemas.android.com/apk/res-auto">
 
   <item
-    android:id="@+id/item_cancel"
-    android:title="@string/menu_cancelDun"
-    app:showAsAction="always"/>
+    android:id="@+id/action_dun_add"
+    android:icon="@android:drawable/ic_menu_add"
+    android:title="@string/menu_addDun"
+    app:showAsAction="always" />
 </menu>

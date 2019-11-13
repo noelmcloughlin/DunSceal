@@ -28,7 +28,7 @@
  *  THE SOFTWARE.
  */
 
-package org.noel.dunsceal.activities
+package org.noel.dunsceal.activity
 
 import android.content.Intent
 import android.os.Bundle
@@ -36,31 +36,30 @@ import android.view.Menu
 import android.view.MenuItem
 import androidx.viewpager.widget.ViewPager
 import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayout.MODE_SCROLLABLE
 import kotlinx.android.synthetic.main.activity_tab.*
-import kotlinx.android.synthetic.main.activity_tab.view.*
 import org.jetbrains.anko.intentFor
+import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.startActivityForResult
 import org.noel.dunsceal.R
 import org.noel.dunsceal.adapters.DunFragmentPagerAdapter
 import org.noel.dunsceal.adapters.DunListener
-import org.noel.dunsceal.adapters.DunRecycleViewAdapter
-import org.noel.dunsceal.main.MainApp
+import org.noel.dunsceal.main.DunScealApp
 import org.noel.dunsceal.models.DunModel
+import java.util.*
 
 class DunTabActivity : AppCompatActivity(), DunListener {
 
-    lateinit var app: MainApp
+    lateinit var app: DunScealApp
     private var adapter: DunFragmentPagerAdapter? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_tab)
-        app = application as MainApp
+        app = application as DunScealApp
 
-        adapter = DunFragmentPagerAdapter(this, app.duns.findAll(), supportFragmentManager)
+        adapter = DunFragmentPagerAdapter(this, app.duns.findAll(), this, supportFragmentManager)
         val viewPager: ViewPager = findViewById(R.id.view_pager)
         viewPager.adapter = adapter
         loadDuns()
@@ -90,18 +89,23 @@ class DunTabActivity : AppCompatActivity(), DunListener {
     }
 
     private fun showDuns (duns: List<DunModel>) {
-        view_pager.adapter = DunFragmentPagerAdapter(this, duns, supportFragmentManager)
+        view_pager.adapter = DunFragmentPagerAdapter(this, duns, this, supportFragmentManager)
         view_pager.adapter?.notifyDataSetChanged()
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.menu_main, menu)
+        menuInflater.inflate(R.menu.menu_dun_add, menu)
+        menuInflater.inflate(R.menu.menu_dun_list, menu)
+        menuInflater.inflate(R.menu.menu_dun_users, menu)
         return super.onCreateOptionsMenu(menu)
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when (item?.itemId) {
-            R.id.item_add -> startActivityForResult<DunTabActivity>(0)
+            R.id.action_dun_add -> startActivityForResult<DunActivity>(0)
+            R.id.action_dun_list-> startActivity<DunListActivity>()
+            R.id.action_dun_users -> startActivity<DunUserActivity>()
+            else -> finish()
         }
         return super.onOptionsItemSelected(item)
     }
@@ -123,8 +127,9 @@ class DunTabActivity : AppCompatActivity(), DunListener {
                 getString(R.string.tab1_desc),
                 getString(R.string.tab1_title),
                 false,
-                "None",
+                Date(),
                 getString(R.string.tab1_url),
+                "",
                 0.0,
                 0.0,
                 0f
@@ -136,8 +141,9 @@ class DunTabActivity : AppCompatActivity(), DunListener {
                 getString(R.string.tab2_title),
                 getString(R.string.tab2_desc),
                 false,
-                "None",
+                Date(),
                 getString(R.string.tab2_url),
+                "",
                 0.0,
                 0.0,
                 0f
@@ -149,8 +155,9 @@ class DunTabActivity : AppCompatActivity(), DunListener {
                 getString(R.string.tab3_title),
                 getString(R.string.tab3_desc),
                 false,
-                "None",
+                Date(),
                 getString(R.string.tab3_url),
+                "",
                 0.0,
                 0.0,
                 0f

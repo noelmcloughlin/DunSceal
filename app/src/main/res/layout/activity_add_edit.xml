@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="org.noel.dunsceal.activities.DunActivity">
+    tools:context="org.noel.dunsceal.activity.DunActivity">
 
   <RelativeLayout
       android:id="@+id/relativeLayout"
@@ -74,14 +74,14 @@
 
         <Button
             android:id="@+id/chooseImage"
-            android:layout_width="match_parent"
+            android:layout_width="380dp"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
-            android:background="@color/colorAccent"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
+            android:background="@color/colorAccent"
             android:text="@string/button_addImage"
             android:textColor="@color/colorPrimary"
             android:textSize="16sp" />
@@ -94,16 +94,18 @@
 
         <Button
             android:id="@+id/dunLocation"
-            android:layout_width="match_parent"
+            android:layout_width="381dp"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
             android:background="@color/colorAccent"
+            android:baselineAligned="false"
             android:paddingTop="8dp"
             android:paddingBottom="8dp"
             android:stateListAnimator="@null"
             android:text="@string/button_location"
             android:textColor="@color/colorPrimary"
-            android:textSize="16sp" />
+            android:textSize="12sp"
+            app:layout_constraintStart_toEndOf="@id/chooseImage" />
 
         <Button
             android:id="@+id/btnAdd"
@@ -117,6 +119,8 @@
             android:text="@string/button_addDun"
             android:textColor="@color/colorPrimary"
             android:textSize="16sp" />
+
+        <include layout="@layout/content_date" />
       </LinearLayout>
     </ScrollView>
 

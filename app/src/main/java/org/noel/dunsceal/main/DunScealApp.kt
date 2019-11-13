@@ -7,7 +7,7 @@ import org.noel.dunsceal.R
 import org.noel.dunsceal.models.DunJSONStore
 import org.noel.dunsceal.models.DunStore
 
-class MainApp : Application(), AnkoLogger {
+class DunScealApp : Application(), AnkoLogger {
 
   lateinit var duns: DunStore
 

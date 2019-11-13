@@ -11,7 +11,7 @@
   <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
   <application
-    android:name="org.noel.dunsceal.main.MainApp"
+    android:name="org.noel.dunsceal.main.DunScealApp"
     android:allowBackup="true"
     android:icon="@mipmap/ic_launcher"
     android:label="@string/app_name"
@@ -24,17 +24,32 @@
       android:name="com.google.android.geo.API_KEY"
       android:value="@string/google_maps_key" />
 
-    <activity android:name="org.noel.dunsceal.activities.DunActivity"/>
-    <activity android:name="org.noel.dunsceal.activities.DunListActivity">
-      <intent-filter>
-        <action android:name="android.intent.action.MAIN" />
-
-        <category android:name="android.intent.category.LAUNCHER" />
-      </intent-filter>
+    <activity android:name="org.noel.dunsceal.activity.DunListActivity">
     </activity>
     <activity
-      android:name="org.noel.dunsceal.activities.MapActivity"
+      android:name="org.noel.dunsceal.activity.MapActivity"
       android:label="@string/title_activity_map" />
+      <activity
+          android:name=".activity.DunActivity"
+          android:windowSoftInputMode="adjustResize">
+      </activity>
+      <activity android:name=".activity.SplashActivity">
+          <intent-filter>
+              <action android:name="android.intent.action.MAIN" />
+              <category android:name="android.intent.category.LAUNCHER" />
+          </intent-filter>
+      </activity>
+      <activity
+          android:name=".activity.LoginActivity"
+          android:screenOrientation="portrait" />
+      <activity
+          android:name=".activity.RegisterActivity"
+          android:screenOrientation="portrait" />
+      <activity
+          android:name=".activity.DunUserActivity"
+          android:screenOrientation="portrait"/>
   </application>
+
+
 
 </manifest>

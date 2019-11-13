@@ -3,13 +3,15 @@ package org.noel.dunsceal.models
 import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize
 import org.noel.dunsceal.R
+import java.util.*
 
 @Parcelize
 data class DunModel(
     var id: Long = 0,
     var title: String = "",
     var description: String = "",
-    var isCompleted: Boolean = false,
+    var isComplete: Boolean = false,
+    var date: Date = Date(),
     var image: String = "",
     var url: String = "",
     var lat: Double = 0.0,

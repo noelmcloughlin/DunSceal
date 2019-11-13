@@ -1,8 +1,10 @@
-package org.noel.dunsceal.activities
+package org.noel.dunsceal.activity
 
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -11,6 +13,8 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
+import org.jetbrains.anko.startActivity
+import org.jetbrains.anko.startActivityForResult
 import org.noel.dunsceal.R
 import org.noel.dunsceal.models.Location
 
@@ -67,5 +71,22 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerD
     val loc = LatLng(location.lat, location.lng)
     marker.setSnippet("GPS : " + loc.toString())
     return false
+  }
+
+  override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+    menuInflater.inflate(R.menu.menu_dun_cancel, menu)
+    menuInflater.inflate(R.menu.menu_dun_list, menu)
+    menuInflater.inflate(R.menu.menu_dun_users, menu)
+    return super.onCreateOptionsMenu(menu)
+  }
+
+  override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+    when (item?.itemId) {
+      R.id.action_dun_add -> startActivityForResult<DunActivity>(0)
+      R.id.action_dun_list-> startActivity<DunListActivity>()
+      R.id.action_dun_users -> startActivity<DunUserActivity>()
+      else -> finish()
+    }
+    return super.onOptionsItemSelected(item)
   }
 }

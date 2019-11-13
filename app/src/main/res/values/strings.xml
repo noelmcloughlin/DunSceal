@@ -1,11 +1,12 @@
 <resources>
 
+  <string name="google_maps_key">AIzaSyBfzAxqao47IorVL4lIIySt1_cDQawLbTw</string>
 
   <string name="app_name">DunSceal</string>
   <string name="hint_dunTitle">Dun Title</string>
   <string name="hint_dunDescription">Description </string>
   <string name="button_addDun">Add Dun</string>
-  <string name="menu_addDun">Add</string>
+  <string name="menu_addDun">Add/Edit</string>
   <string name="menu_cancelDun">Cancel</string>
   <string name="enter_dun_title"> Please enter a Dun Title </string>
   <string name="save_dun"> Save Dun </string>
@@ -18,7 +19,6 @@
   <string name="ImageView">ImageView</string>
   <string name="CheckBox">CheckBox</string>
   <string name="Completed">Completed</string>
-  <string name="date_picker">Date Picker</string>
 
 
   <!-- Tabbed view pagers -->
@@ -42,4 +42,45 @@
     </string>
 
   <string name="error_message">Error while loading image.</string>
+
+  <!-- Login/Signup activities -->
+  <string name="text_accounts">All Accounts</string>
+  <string name="hint_user_name">Name</string>
+  <string name="hint_user_email">Email</string>
+  <string name="hint_user_password">Password</string>
+  <string name="hint_confirm_password">Confirm Password</string>
+  <string name="text_login">Login</string>
+  <string name="text_register">Register</string>
+  <string name="error_message_name">Enter Full Name</string>
+  <string name="error_message_email">Enter Valid Email</string>
+  <string name="error_message_password">Enter Password</string>
+  <string name="success_message">Registration Successful</string>
+  <string name="text_not_member">No account yet? Create one</string>
+  <string name="error_email_exists">Email Already Exists</string>
+  <string name="error_password_match">Password Does Not Matches</string>
+  <string name="error_valid_email_password">Wrong Email or Password</string>
+  <string name="text_hello">Hello,</string>
+  <string name="text_title">dun</string>
+
+  <!-- dun -->
+  <string name="select_dunsceal_image">Select dunsceal image</string>
+
+  <!-- Generic -->
+  <string name="app_started">App Started</string>
+
+  <!-- Date & Report Handling -->
+  <string name="action_user_list">Settings</string>
+  <string name="action_dun_list">Report</string>
+  <string name="completeButton">Complete</string>
+  <string name="date">Date</string>
+  <string name="total_visited_so_far">Total number of Duns visited</string>
+  <string name="totalSoFar">Total</string>
+  <string name="defaultComplete">0</string>
+  <string name="enter_date">Enter Date</string>
+
+  <string name="isVisited">Visited</string>
+  <string name="notVisited">Not visited</string>
+  <string name="date_picker">Date Picker</string>
+  <string name="default_date">"--/--/----"</string>
+
 </resources>
