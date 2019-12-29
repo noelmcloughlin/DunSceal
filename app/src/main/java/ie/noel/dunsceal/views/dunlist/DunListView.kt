@@ -8,8 +8,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import ie.noel.dunsceal.R
 import ie.noel.dunsceal.models.DunModel
 import ie.noel.dunsceal.views.BaseView
-import ie.noel.dunsceal.views.home.HomePresenter
 import kotlinx.android.synthetic.main.activity_dun_list.*
+import kotlinx.android.synthetic.main.appbar_fab.*
 
 class DunListView : BaseView(), DunListener {
 

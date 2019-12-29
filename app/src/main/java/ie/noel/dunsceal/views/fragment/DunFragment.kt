@@ -128,8 +128,10 @@ open class DunFragment(private var presenter: HomePresenter) : Fragment(), AnkoL
                     val dun = it.getValue<DunModel>(DunModel::class.java)
                     totalDone += dun!!.amount
                 }
-                progressBar.progress = totalDone
-                totalSoFar.text = java.lang.String.format("$ ${this@DunFragment.totalDone}")
+                if (progressBar != null)
+                    progressBar.progress = totalDone
+                if (totalSoFar != null)
+                    totalSoFar.text = java.lang.String.format("$ ${this@DunFragment.totalDone}")
             }
         }
         presenter.fetchData()

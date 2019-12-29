@@ -6,6 +6,8 @@
     android:layout_height="match_parent"
     tools:context="ie.noel.dunsceal.views.fragment.FragmentView">
 
+    <include layout="@layout/appbar_fab" />
+
     <Button
         android:id="@+id/fragmentTagButton"
         android:layout_width="match_parent"

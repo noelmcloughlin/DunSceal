@@ -8,7 +8,6 @@
     android:background="@color/colorBackground"
     tools:context="ie.noel.dunsceal.views.login.SplashView">
 
-
     <ImageView
         android:id="@+id/imageView3"
         android:layout_width="match_parent"

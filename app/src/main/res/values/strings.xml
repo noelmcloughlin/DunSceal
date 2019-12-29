@@ -7,7 +7,7 @@
   <string name="menu_cancelDun">Cancel</string>
   <string name="enter_dun_title"> Please enter a Dun Title </string>
   <string name="save_dun"> Save Dun </string>
-  <string name="button_addImage"> Add Image </string>
+  <string name="button_addImage"> Image </string>
   <string name="select_dun_image">Select dun image</string>
   <string name="change_dun_image">Change dun image</string>
   <string name="button_location">Set Location</string>
@@ -120,4 +120,18 @@
   <string name="textview">TextView</string>
 
   <!-- END Dun -->
+
+  <!-- Date & Report Handling -->
+  <string name="action_user_list">Settings</string>
+  <string name="action_dun_list">Report</string>
+  <string name="completeButton">Complete</string>
+  <string name="date">Date</string>
+  <string name="total_visited_so_far">Total number of Duns visited</string>
+  <string name="defaultComplete">0</string>
+  <string name="enter_date">Enter Date</string>
+
+  <string name="isVisited">Visited</string>
+  <string name="notVisited">Not visited</string>
+  <string name="date_picker">Date Picker</string>
+  <string name="default_date">"--/--/----"</string>
 </resources>

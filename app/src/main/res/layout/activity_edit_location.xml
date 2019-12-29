@@ -6,20 +6,7 @@
     android:layout_height="match_parent"
     tools:context="ie.noel.dunsceal.views.editlocation.EditLocationView">
 
-  <com.google.android.material.appbar.AppBarLayout
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:background="@color/colorAccent"
-      android:fitsSystemWindows="true"
-      app:elevation="0dip"
-      android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
-
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:titleTextColor="@color/colorPrimary" />
-  </com.google.android.material.appbar.AppBarLayout>
+  <include layout="@layout/appbar_fab" />
 
   <androidx.constraintlayout.widget.ConstraintLayout
       android:layout_width="match_parent"

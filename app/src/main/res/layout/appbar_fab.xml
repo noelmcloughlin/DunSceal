@@ -8,26 +8,30 @@
     tools:context=".views.home.HomeView">
 
     <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:theme="@style/AppTheme.AppBarOverlay">
+        android:background="@color/colorAccent"
+        android:fitsSystemWindows="true"
+        app:elevation="0dip"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
-            app:popupTheme="@style/AppTheme.PopupOverlay" />
+            android:layout_height="wrap_content"
+            app:titleTextColor="@color/colorPrimary" />
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <include layout="@layout/home_content" />
+    <include layout="@layout/content_home_frame" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
+        android:visibility="gone"
         android:layout_margin="@dimen/fab_margin"
         app:srcCompat="@android:drawable/ic_dialog_email" />
 

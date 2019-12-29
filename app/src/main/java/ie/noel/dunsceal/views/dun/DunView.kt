@@ -12,6 +12,7 @@ import ie.noel.dunsceal.R
 import ie.noel.dunsceal.models.Location
 import ie.noel.dunsceal.models.DunModel
 import ie.noel.dunsceal.views.BaseView
+import kotlinx.android.synthetic.main.appbar_fab.*
 
 class DunView : BaseView(), AnkoLogger {
 
@@ -21,7 +22,7 @@ class DunView : BaseView(), AnkoLogger {
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     setContentView(R.layout.activity_dun)
-    super.init(toolbarAdd, true)
+    super.init(toolbar, true)
 
     presenter = initPresenter (DunPresenter(this)) as DunPresenter
 

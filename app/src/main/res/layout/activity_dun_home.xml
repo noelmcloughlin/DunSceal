@@ -5,10 +5,7 @@
     android:layout_height="match_parent"
     tools:context=".views.map.DunMapView">
 
-    <include
-        layout="@layout/appbar"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+    <include layout="@layout/appbar_fab" />
 
     <include layout="@layout/content_dun_maps" />
 

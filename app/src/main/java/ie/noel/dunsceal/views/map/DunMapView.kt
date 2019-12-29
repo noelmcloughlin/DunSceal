@@ -8,6 +8,7 @@ import ie.noel.dunsceal.R
 import ie.noel.dunsceal.models.DunModel
 import ie.noel.dunsceal.views.BaseView
 import kotlinx.android.synthetic.main.activity_dun_map.*
+import kotlinx.android.synthetic.main.appbar_fab.*
 import kotlinx.android.synthetic.main.content_dun_maps.*
 
 class DunMapView : BaseView(), GoogleMap.OnMarkerClickListener {

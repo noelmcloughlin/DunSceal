@@ -21,7 +21,7 @@ import ie.noel.dunsceal.utils.Image.showImagePicker
 import ie.noel.dunsceal.views.BaseView
 import ie.noel.dunsceal.views.login.LoginView
 import jp.wasabeef.picasso.transformations.CropCircleTransformation
-import kotlinx.android.synthetic.main.appbar.*
+import kotlinx.android.synthetic.main.appbar_fab.*
 import kotlinx.android.synthetic.main.home.*
 import kotlinx.android.synthetic.main.nav_header_home.view.*
 import org.jetbrains.anko.startActivity
@@ -56,7 +56,7 @@ open class HomeView : BaseView(), NavigationView.OnNavigationItemSelectedListene
         navView.getHeaderView(0).nav_header_email.text = presenter.app.auth.currentUser?.email
 
         //Checking if Google User, upload google profile pic
-        presenter.checkExistingPhoto(this)
+        //presenter.checkExistingPhoto(this)
 
         navView.getHeaderView(0).imageView
             .setOnClickListener { showImagePicker(this, 1) }

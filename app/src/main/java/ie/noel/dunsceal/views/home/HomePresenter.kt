@@ -39,14 +39,14 @@ open class HomePresenter(view: BaseView) : LoginPresenter(view) {
         val imageExists = app.userImage.toString().isNotEmpty()
         val googlePhotoExists = app.auth.currentUser?.photoUrl != null
 
-        if(imageExists)
+        if (imageExists)
             imageUri = app.userImage
         else
             if (googlePhotoExists)
                 imageUri = app.auth.currentUser?.photoUrl!!
 
         if (googlePhotoExists || imageExists) {
-            if(!app.auth.currentUser?.displayName.isNullOrEmpty())
+            if (!app.auth.currentUser?.displayName.isNullOrEmpty())
                 activity.navView.getHeaderView(0)
                     .nav_header_name.text = app.auth.currentUser?.displayName
             else
@@ -61,12 +61,13 @@ open class HomePresenter(view: BaseView) : LoginPresenter(view) {
                         // Drawable is ready
                         uploadImageView(activity.navView.getHeaderView(0).imageView)
                     }
+
                     override fun onError(e: Exception) {}
                 })
-        }
-        else    // New Regular User, upload default pic of homer
+        } else    // New Regular User, upload default pic of homer
         {
-            activity.navView.getHeaderView(0).imageView.setImageResource(R.mipmap.ic_launcher_homer_round)
+            activity.navView.getHeaderView(0)
+                .imageView.setImageResource(R.mipmap.ic_launcher_homer_round)
             uploadImageView(activity.navView.getHeaderView(0).imageView)
         }
     }
@@ -84,9 +85,13 @@ open class HomePresenter(view: BaseView) : LoginPresenter(view) {
 
                     override fun onDataChange(snapshot: DataSnapshot) {
                         snapshot.children.forEach {
-                            val usermodel = it.getValue<UserPhotoModel>(UserPhotoModel::class.java)
+                            val usermodel =
+                                it.getValue<UserPhotoModel>(UserPhotoModel::class.java)
                             app.userImage = usermodel!!.profilepic.toUri()
-                            Log.v("Dun", "checkExistingPhoto 2 app.userImage : ${app.userImage}")
+                            Log.v(
+                                "Dun",
+                                "checkExistingPhoto 2 app.userImage : ${app.userImage}"
+                            )
                         }
                         Log.v("Dun", "validatePhoto 3 app.userImage : ${app.userImage}")
                         validatePhoto(activity)
@@ -94,6 +99,7 @@ open class HomePresenter(view: BaseView) : LoginPresenter(view) {
 
                     override fun onCancelled(databaseError: DatabaseError) {}
                 })
+
         }
     }
 

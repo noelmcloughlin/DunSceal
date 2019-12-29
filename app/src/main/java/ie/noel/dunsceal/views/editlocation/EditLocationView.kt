@@ -8,6 +8,7 @@ import com.google.android.gms.maps.model.Marker
 import ie.noel.dunsceal.R
 import ie.noel.dunsceal.views.BaseView
 import kotlinx.android.synthetic.main.activity_edit_location.*
+import kotlinx.android.synthetic.main.appbar_fab.*
 
 class EditLocationView : BaseView(), GoogleMap.OnMarkerDragListener, GoogleMap.OnMarkerClickListener {
 
