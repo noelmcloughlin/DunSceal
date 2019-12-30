@@ -1,8 +1,8 @@
-package ie.noel.dunsceal.views.fragment
+package ie.noel.dunsceal.views.about
 
 import android.os.Bundle
 import android.view.View
-import ie.noel.dunsceal.views.BaseFragment
+import ie.noel.dunsceal.views.fragment.BaseFragment
 
 class AboutUsFragment : BaseFragment() {
 

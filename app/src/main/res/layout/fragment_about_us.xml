@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/colorBackground"
     android:textAlignment="center"
-    tools:context=".views.fragment.AboutUsFragment">
+    tools:context=".views.about.AboutUsFragment">
 
     <TextView
         android:id="@+id/homeTitle"

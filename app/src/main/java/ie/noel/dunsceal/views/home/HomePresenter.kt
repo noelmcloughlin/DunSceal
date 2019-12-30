@@ -189,4 +189,8 @@ open class HomePresenter(view: BaseView) : LoginPresenter(view) {
             }
         }
     }
+
+    fun onResume() {
+        app.duns.findAll()
+    }
 }

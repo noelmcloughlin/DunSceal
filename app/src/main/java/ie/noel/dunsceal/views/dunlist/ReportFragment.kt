@@ -1,4 +1,4 @@
-package ie.noel.dunsceal.views.fragment
+package ie.noel.dunsceal.views.dunlist
 
 import android.content.Intent
 import android.os.Bundle
@@ -9,7 +9,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
-import com.nicolettilu.hiddensearchwithrecyclerview.HiddenSearchWithRecyclerView
 
 import ie.noel.dunsceal.R
 import ie.noel.dunsceal.models.DunModel
@@ -18,16 +17,13 @@ import ie.noel.dunsceal.utils.Loader.hideLoader
 import ie.noel.dunsceal.utils.Loader.showLoader
 import ie.noel.dunsceal.utils.SwipeToDeleteCallback
 import ie.noel.dunsceal.utils.SwipeToEditCallback
-import ie.noel.dunsceal.views.BaseFragment
-import ie.noel.dunsceal.views.dunlist.DunAdapter
-import ie.noel.dunsceal.views.dunlist.DunListPresenter
-import ie.noel.dunsceal.views.dunlist.DunListener
+import ie.noel.dunsceal.views.fragment.BaseFragment
 import kotlinx.android.synthetic.main.activity_dun_list.*
 import kotlinx.android.synthetic.main.fragment_report.view.*
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.info
 
-open class ReportFragment(open var presenter: DunListPresenter) : BaseFragment(), AnkoLogger,
+open class ReportFragment(open var presenter: HomePresenter) : BaseFragment(), AnkoLogger,
     DunListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -73,7 +69,7 @@ open class ReportFragment(open var presenter: DunListPresenter) : BaseFragment()
 
     companion object {
         @JvmStatic
-        fun newInstance(presenter: DunListPresenter) =
+        fun newInstance(presenter: HomePresenter) =
             ReportFragment(presenter).apply {
                 arguments = Bundle().apply { }
             }

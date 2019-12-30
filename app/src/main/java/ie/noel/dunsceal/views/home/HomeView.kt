@@ -4,29 +4,23 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import android.view.View
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.view.GravityCompat
 import androidx.fragment.app.Fragment
 import com.google.android.material.navigation.NavigationView
 import com.google.android.material.snackbar.Snackbar
-import com.nicolettilu.hiddensearchwithrecyclerview.HiddenSearchWithRecyclerView
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
 import ie.noel.dunsceal.R
-import ie.noel.dunsceal.views.fragment.AboutUsFragment
-import ie.noel.dunsceal.views.fragment.HomeFragment
-import ie.noel.dunsceal.views.fragment.ReportAllFragment
-import ie.noel.dunsceal.views.fragment.ReportFragment
+import ie.noel.dunsceal.views.dunlist.ReportAllFragment
+import ie.noel.dunsceal.views.dunlist.ReportFragment
 import ie.noel.dunsceal.utils.Image.readImageUri
 import ie.noel.dunsceal.utils.Image.showImagePicker
 import ie.noel.dunsceal.views.BaseView
-import ie.noel.dunsceal.views.dunlist.DunListPresenter
+import ie.noel.dunsceal.views.about.AboutUsFragment
 import ie.noel.dunsceal.views.login.LoginView
 import jp.wasabeef.picasso.transformations.CropCircleTransformation
 import kotlinx.android.synthetic.main.appbar_fab.*
-import kotlinx.android.synthetic.main.fragment_home.*
-import kotlinx.android.synthetic.main.fragment_home.view.*
 import kotlinx.android.synthetic.main.home.*
 import kotlinx.android.synthetic.main.nav_header_home.view.*
 import org.jetbrains.anko.startActivity
@@ -71,7 +65,7 @@ open class HomeView : BaseView(), NavigationView.OnNavigationItemSelectedListene
         userName = presenter.app.auth.currentUser?.displayName.toString()
         navView.getHeaderView(0).nav_user_displayname.text = userName
         //if (userName != null)
-          //  homeTitle.text = "${getString(R.string.homeTitle) + userName}"
+        //  homeTitle.text = "${getString(R.string.homeTitle) + userName}"
 
         //Checking if Google User, upload google profile pic
         //presenter.checkExistingPhoto(this)
@@ -88,15 +82,18 @@ open class HomeView : BaseView(), NavigationView.OnNavigationItemSelectedListene
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
 
         when (item.itemId) {
+            R.id.nav_home -> {
+                navigateTo(HomeFragment.newInstance(presenter, userName))
+            }
+
             R.id.nav_aboutus ->
                 navigateTo(AboutUsFragment.newInstance())
-            
-            R.id.nav_home ->
-                navigateTo(HomeFragment.newInstance(presenter, userName))
+
             R.id.nav_report ->
-                navigateTo(ReportFragment.newInstance(presenter as DunListPresenter))
+                navigateTo(ReportFragment.newInstance(presenter))
+
             R.id.nav_report_all ->
-                navigateTo(ReportAllFragment.newInstance(presenter as DunListPresenter))
+                navigateTo(ReportAllFragment.newInstance(presenter))
 
             R.id.nav_sign_out -> signOut()
 
@@ -114,7 +111,7 @@ open class HomeView : BaseView(), NavigationView.OnNavigationItemSelectedListene
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when (item?.itemId) {
             R.id.item_add -> presenter.doAddDun()
-            R.id.item_logout ->presenter.doLogout()
+            R.id.item_logout -> presenter.doLogout()
             //R.id.item_search -> presenter.doSearch()
             R.id.item_map -> presenter.doShowDunsMap()
             //R.id.item_navigate -> presenter.doShowDunsRoute()
@@ -158,6 +155,7 @@ open class HomeView : BaseView(), NavigationView.OnNavigationItemSelectedListene
                                 // Drawable is ready
                                 presenter.uploadImageView(navView.getHeaderView(0).imageView)
                             }
+
                             override fun onError(e: Exception) {}
                         })
                 }

@@ -1,13 +1,9 @@
-package ie.noel.dunsceal.views.fragment
+package ie.noel.dunsceal.views.home
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AlertDialog
-import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
@@ -17,8 +13,7 @@ import ie.noel.dunsceal.models.DunModel
 import ie.noel.dunsceal.utils.Loader.createLoader
 import ie.noel.dunsceal.utils.Loader.hideLoader
 import ie.noel.dunsceal.utils.Loader.showLoader
-import ie.noel.dunsceal.views.BaseFragment
-import ie.noel.dunsceal.views.home.HomePresenter
+import ie.noel.dunsceal.views.fragment.BaseFragment
 import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.fragment_home.view.*
 

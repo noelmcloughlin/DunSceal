@@ -1,4 +1,4 @@
-package ie.noel.dunsceal.views.fragment
+package ie.noel.dunsceal.views.dunlist
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -15,11 +15,10 @@ import ie.noel.dunsceal.models.DunModel
 import ie.noel.dunsceal.utils.Loader.createLoader
 import ie.noel.dunsceal.utils.Loader.hideLoader
 import ie.noel.dunsceal.utils.Loader.showLoader
-import ie.noel.dunsceal.views.dunlist.DunListPresenter
 import kotlinx.android.synthetic.main.fragment_report.view.*
 import org.jetbrains.anko.info
 
-class ReportAllFragment(override var presenter: DunListPresenter) : ReportFragment(presenter),
+class ReportAllFragment(override var presenter: HomePresenter) : ReportFragment(presenter),
     DunListener {
 
     override fun onCreateView(
@@ -37,7 +36,7 @@ class ReportAllFragment(override var presenter: DunListPresenter) : ReportFragme
 
     companion object {
         @JvmStatic
-        fun newInstance(presenter: DunListPresenter) =
+        fun newInstance(presenter: HomePresenter) =
             ReportAllFragment(presenter).apply {
                 arguments = Bundle().apply { }
             }

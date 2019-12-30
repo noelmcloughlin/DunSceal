@@ -1,4 +1,4 @@
-package ie.noel.dunsceal.views
+package ie.noel.dunsceal.views.fragment
 
 import android.os.Bundle
 import android.view.*
