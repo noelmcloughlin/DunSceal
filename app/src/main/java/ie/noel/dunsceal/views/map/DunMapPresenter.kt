@@ -39,7 +39,7 @@ class DunMapPresenter(view: BaseView) : BasePresenter(view) {
     doAsync {
       val duns = app.duns.findAll()
       uiThread {
-        view?.showDuns(duns as ArrayList<DunModel>)
+        view?.getAllDuns(duns as ArrayList<DunModel>)
       }
     }
   }

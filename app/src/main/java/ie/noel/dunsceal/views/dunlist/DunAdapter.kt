@@ -18,10 +18,10 @@ interface DunListener {
 class DunAdapter constructor(
     private var duns: ArrayList<DunModel>,
     private val listener: DunListener,
-    reportall: Boolean
+    reportAll: Boolean
 ) : RecyclerView.Adapter<DunAdapter.MainHolder>() {
 
-    private val reportAll = reportall
+    private val reportAll = reportAll
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MainHolder {
         return MainHolder(

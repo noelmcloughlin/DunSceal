@@ -23,13 +23,21 @@ class DunListView : BaseView(), DunListener {
     presenter = initPresenter(DunListPresenter(this)) as DunListPresenter
 
     val layoutManager = LinearLayoutManager(this)
-    recyclerView.layoutManager = layoutManager
+    myRecyclerView.layoutManager = layoutManager
     presenter.loadDuns()
+
+    /* searchView.setOnClickListener {view ->
+    //startActivity(Intent(this, SearchViewActivity::class.java))
+    Snackbar.make(
+        view, "Replace with your own search action",
+        Snackbar.LENGTH_LONG
+    ).setAction("Action", null).show()
+} */
   }
 
-  override fun showDuns(duns: ArrayList<DunModel>) {
-    recyclerView.adapter = DunAdapter(duns, this, false)
-    recyclerView.adapter?.notifyDataSetChanged()
+  override fun getAllDuns(duns: ArrayList<DunModel>) {
+    myRecyclerView.adapter = DunAdapter(duns, this, false)
+    myRecyclerView.adapter?.notifyDataSetChanged()
   }
 
   override fun onDunClick(dun: DunModel) {

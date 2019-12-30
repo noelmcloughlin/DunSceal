@@ -75,6 +75,7 @@
         app:layout_constraintTop_toBottomOf="@+id/progressBar" />
 
     <SearchView
+        android:id="@+id/searchView"
         android:layout_width="406dp"
         android:layout_height="90dp"
         android:layout_marginStart="16dp"

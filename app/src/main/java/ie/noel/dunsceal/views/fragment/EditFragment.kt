@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AlertDialog
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
@@ -15,7 +14,7 @@ import ie.noel.dunsceal.models.DunModel
 import ie.noel.dunsceal.utils.Loader.createLoader
 import ie.noel.dunsceal.utils.Loader.hideLoader
 import ie.noel.dunsceal.utils.Loader.showLoader
-import ie.noel.dunsceal.views.fragment.common.BaseFragment
+import ie.noel.dunsceal.views.BaseFragment
 import kotlinx.android.synthetic.main.fragment_edit.view.*
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.info
@@ -23,13 +22,10 @@ import org.jetbrains.anko.info
 class EditFragment : BaseFragment(), AnkoLogger {
 
     lateinit var app: MainApp
-    lateinit var loader : AlertDialog
-    private lateinit var root: View
     private var editDun: DunModel? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         arguments?.let {
             editDun = it.getParcelable("editdun")
         }
@@ -42,6 +38,7 @@ class EditFragment : BaseFragment(), AnkoLogger {
         // Inflate the layout for this fragment
         root = inflater.inflate(R.layout.fragment_edit, container, false)
         activity?.title = getString(R.string.action_edit)
+
         loader = createLoader(activity!!)
 
         root.editAmount.setText(editDun!!.amount.toString())
@@ -55,7 +52,6 @@ class EditFragment : BaseFragment(), AnkoLogger {
             updateUserDun(app.auth.currentUser!!.uid,
                                editDun!!.id.toString(), editDun!!)
         }
-
         return root
     }
 
@@ -76,14 +72,14 @@ class EditFragment : BaseFragment(), AnkoLogger {
     }
 
     private fun updateUserDun(userId: String, uid: String?, dun: DunModel) {
-        app.db.child("user-duns").child(userId).child(uid!!)
+        app.db.child("users").child(userId).child("duns").child(userId).child(uid!!)
             .addListenerForSingleValueEvent(
                 object : ValueEventListener {
                     override fun onDataChange(snapshot: DataSnapshot) {
                         snapshot.ref.setValue(dun)
                         activity!!.supportFragmentManager.beginTransaction()
                         .replace(R.id.homeFrame,
-                            ReportFragment.newInstance()
+                            ReportFragment.newInstance(presenter)
                         )
                         .addToBackStack(null)
                         .commit()

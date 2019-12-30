@@ -15,10 +15,12 @@ import ie.noel.dunsceal.models.DunModel
 import ie.noel.dunsceal.utils.Loader.createLoader
 import ie.noel.dunsceal.utils.Loader.hideLoader
 import ie.noel.dunsceal.utils.Loader.showLoader
+import ie.noel.dunsceal.views.dunlist.DunListPresenter
 import kotlinx.android.synthetic.main.fragment_report.view.*
 import org.jetbrains.anko.info
 
-class ReportAllFragment : ReportFragment(), DunListener {
+class ReportAllFragment(override var presenter: DunListPresenter) : ReportFragment(presenter),
+    DunListener {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -27,7 +29,7 @@ class ReportAllFragment : ReportFragment(), DunListener {
         // Inflate the layout for this fragment
         root = inflater.inflate(R.layout.fragment_report, container, false)
         activity?.title = getString(R.string.menu_report_all)
-        root.recyclerView.layoutManager = LinearLayoutManager(activity)
+        root.myRecyclerView.layoutManager = LinearLayoutManager(activity)
         setSwipeRefresh()
 
         return root
@@ -35,15 +37,15 @@ class ReportAllFragment : ReportFragment(), DunListener {
 
     companion object {
         @JvmStatic
-        fun newInstance() =
-            ReportAllFragment().apply {
+        fun newInstance(presenter: DunListPresenter) =
+            ReportAllFragment(presenter).apply {
                 arguments = Bundle().apply { }
             }
     }
 
     override fun setSwipeRefresh() {
-        root.swiperefresh.setOnRefreshListener {
-            root.swiperefresh.isRefreshing = true
+        root.swipeRefresh.setOnRefreshListener {
+            root.swipeRefresh.isRefreshing = true
             getAllUsersDuns()
         }
     }
@@ -57,7 +59,7 @@ class ReportAllFragment : ReportFragment(), DunListener {
         loader = createLoader(activity!!)
         showLoader(loader, "Downloading All Users Duns from Firebase")
         val dunsList = ArrayList<DunModel>()
-        app.db.child("duns")
+        presenter.app.db.child("duns")
             .addValueEventListener(object : ValueEventListener {
                 override fun onCancelled(error: DatabaseError) {
                     info("Firebase Dun error : ${error.message}")
@@ -67,16 +69,15 @@ class ReportAllFragment : ReportFragment(), DunListener {
                     hideLoader(loader)
                     val children = snapshot.children
                     children.forEach {
-                        val dun = it.
-                            getValue<DunModel>(DunModel::class.java)
+                        val dun = it.getValue<DunModel>(DunModel::class.java)
 
                         dunsList.add(dun!!)
-                        root.recyclerView.adapter =
-                            DunAdapter(dunsList, this@ReportAllFragment,true)
-                        root.recyclerView.adapter?.notifyDataSetChanged()
+                        root.myRecyclerView.adapter =
+                            DunAdapter(dunsList, this@ReportAllFragment, true)
+                        root.myRecyclerView.adapter?.notifyDataSetChanged()
                         checkSwipeRefresh()
 
-                        app.db.child("duns").removeEventListener(this)
+                        presenter.app.db.child("duns").removeEventListener(this)
                     }
                 }
             })

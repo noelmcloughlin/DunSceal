@@ -6,6 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
@@ -15,6 +17,7 @@ import ie.noel.dunsceal.models.DunModel
 import ie.noel.dunsceal.utils.Loader.createLoader
 import ie.noel.dunsceal.utils.Loader.hideLoader
 import ie.noel.dunsceal.utils.Loader.showLoader
+import ie.noel.dunsceal.views.BaseFragment
 import ie.noel.dunsceal.views.home.HomePresenter
 import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.fragment_home.view.*
@@ -24,24 +27,26 @@ import org.jetbrains.anko.info
 import java.util.HashMap
 
 open class HomeFragment(private var presenter: HomePresenter, private val user: String)
-    : Fragment(), AnkoLogger {
+    : BaseFragment(), AnkoLogger {
 
     var totalDone = 0
-    private lateinit var loader: AlertDialog
     private lateinit var eventListener: ValueEventListener
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        super.onCreateView(inflater, container, savedInstanceState)
+        val rootView = inflater.inflate(R.layout.fragment_home, container, false)
+        rootView.findViewById<RecyclerView>(R.id.myRecyclerView).layoutManager =
+            LinearLayoutManager(context, RecyclerView.VERTICAL, false)
 
-        val root = inflater.inflate(R.layout.fragment_home, container, false)
         loader = createLoader(activity!!)
         activity?.title = getString(R.string.action_dun)
-        root.homeTitle.text = getString(R.string.homeTitle)
-
-        root.progressBar.max = 10000
-        return root
+        rootView.homeTitle.text = getString(R.string.homeTitle)
+        rootView.progressBar.max = 10000
+        return rootView
     }
 
     companion object {
@@ -61,7 +66,7 @@ open class HomeFragment(private var presenter: HomePresenter, private val user: 
     override fun onPause() {
         super.onPause()
         if (presenter.app.auth.uid != null)
-            presenter.app.db.child("user-duns")
+            presenter.app.db.child("users").child(userId).child("duns")
                 .child(presenter.app.auth.currentUser!!.uid)
                 .removeEventListener(eventListener)
     }

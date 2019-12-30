@@ -7,7 +7,7 @@
     tools:context=".views.fragment.ReportFragment">
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-        android:id="@+id/swiperefresh"
+        android:id="@+id/swipeRefresh"
         android:layout_width="403dp"
         android:layout_height="518dp"
         android:layout_marginStart="16dp"
@@ -20,8 +20,17 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.85">
 
+        <com.nicolettilu.hiddensearchwithrecyclerview.HiddenSearchWithRecyclerView
+            android:id="@+id/hidden_search_with_recycler"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:scrollToBottomBeforeHide="true"
+            app:scrollToTopBeforeShow="true"
+            app:filterWhileTyping="false"
+            app:visibleAtInit="true">
+        <!-- your RecyclerView here -->
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerView"
+            android:id="@+id/myRecyclerView"
             android:layout_width="399dp"
             android:layout_height="601dp"
             android:layout_marginTop="116dp"
@@ -30,6 +39,8 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.0" />
+        </com.nicolettilu.hiddensearchwithrecyclerview.HiddenSearchWithRecyclerView>
+
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

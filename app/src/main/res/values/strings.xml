@@ -117,7 +117,7 @@
 
 
     <!-- home -->
-    <string name="homeTitle">Explore </string>
+    <string name="homeTitle">Search </string>
     <string name="total">Total number of Duns visited</string>
     <string name="totalSoFar">Total</string>
 
@@ -145,4 +145,7 @@
     <string name="date_picker">Date Picker</string>
     <string name="default_date">"--/--/----"</string>
     <string name="visited_on_date">Visited on date</string>
+
+    <!-- test -->
+
 </resources>

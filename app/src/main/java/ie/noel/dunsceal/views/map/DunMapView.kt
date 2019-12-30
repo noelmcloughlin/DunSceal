@@ -37,7 +37,7 @@ class DunMapView : BaseView(), GoogleMap.OnMarkerClickListener {
     Glide.with(this).load(dun.image).into(currentImage)
   }
 
-  override fun showDuns(duns: ArrayList<DunModel>) {
+  override fun getAllDuns(duns: ArrayList<DunModel>) {
     presenter.doPopulateMap(map, duns)
   }
 

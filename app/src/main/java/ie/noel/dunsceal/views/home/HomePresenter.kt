@@ -141,7 +141,7 @@ open class HomePresenter(view: BaseView) : LoginPresenter(view) {
         val userEmail = app.auth.currentUser!!.email
         val dunRef = app.db.ref.child("duns")
             .orderByChild("email")
-        val userDonationRef = app.db.ref.child("user-duns")
+        val userDonationRef = app.db.ref.child("users").child(userId).child("duns")
             .child(userId).orderByChild("uid")
 
         dunRef.equalTo(userEmail).addListenerForSingleValueEvent(
@@ -185,7 +185,7 @@ open class HomePresenter(view: BaseView) : LoginPresenter(view) {
         doAsync {
             val duns = app.duns.findAll()
             uiThread {
-                view?.showDuns(duns as ArrayList<DunModel>)
+                view?.getAllDuns(duns as ArrayList<DunModel>)
             }
         }
     }

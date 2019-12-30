@@ -9,6 +9,10 @@ import ie.noel.dunsceal.views.VIEW
 
 class DunListPresenter(view: BaseView) : BasePresenter(view) {
 
+  fun onResume() {
+    app.duns.findAll()
+  }
+
   fun doAddDun() {
     view?.navigateTo(VIEW.DUN)
   }
@@ -25,7 +29,7 @@ class DunListPresenter(view: BaseView) : BasePresenter(view) {
     doAsync {
       val duns = app.duns.findAll()
       uiThread {
-        view?.showDuns(duns as ArrayList<DunModel>)
+        view?.getAllDuns(duns as ArrayList<DunModel>)
       }
     }
   }

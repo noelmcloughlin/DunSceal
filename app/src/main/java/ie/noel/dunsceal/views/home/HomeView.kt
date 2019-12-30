@@ -10,6 +10,7 @@ import androidx.core.view.GravityCompat
 import androidx.fragment.app.Fragment
 import com.google.android.material.navigation.NavigationView
 import com.google.android.material.snackbar.Snackbar
+import com.nicolettilu.hiddensearchwithrecyclerview.HiddenSearchWithRecyclerView
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
 import ie.noel.dunsceal.R
@@ -39,9 +40,18 @@ open class HomeView : BaseView(), NavigationView.OnNavigationItemSelectedListene
         super.onCreate(savedInstanceState)
         setContentView(R.layout.home)
         setSupportActionBar(toolbar)
+        supportActionBar?.title = "Explore"
 
         presenter = initPresenter(HomePresenter(this)) as HomePresenter
         presenter.fetchData()
+
+        /* searchView.setOnClickListener {view ->
+            //startActivity(Intent(this, SearchViewActivity::class.java))
+            Snackbar.make(
+                view, "Replace with your own search action",
+                Snackbar.LENGTH_LONG
+            ).setAction("Action", null).show()
+        } */
 
         fab.setOnClickListener { view ->
             Snackbar.make(
@@ -64,6 +74,14 @@ open class HomeView : BaseView(), NavigationView.OnNavigationItemSelectedListene
 
         //Checking if Google User, upload google profile pic
         //presenter.checkExistingPhoto(this)
+
+        // hidden search with recyclerView
+        val hiddenSearchWithInRecycler = findViewById<HiddenSearchWithRecyclerView>(R.id.hidden_search_with_recycler)
+        hiddenSearchWithInRecycler.hideAtScroll = true
+        hiddenSearchWithInRecycler.visibleAtInit = false
+        hiddenSearchWithInRecycler.scrollToBottomBeforeHide = false
+        hiddenSearchWithInRecycler.scrollToTopBeforeShow = false
+        hiddenSearchWithInRecycler.filterWhileTyping = true
 
         navView.getHeaderView(0).imageView
             .setOnClickListener { showImagePicker(this, 1) }

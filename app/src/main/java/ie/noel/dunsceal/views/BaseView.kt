@@ -83,7 +83,7 @@ open class BaseView : AppCompatActivity(), AnkoLogger {
   }
 
   open fun showDun(dun: DunModel) {}
-  open fun showDuns(duns: ArrayList<DunModel>) {}
+  open fun getAllDuns(duns: ArrayList<DunModel>) {}
   open fun showLocation(location : Location) {}
   open fun showProgress() {}
   open fun hideProgress() {}
