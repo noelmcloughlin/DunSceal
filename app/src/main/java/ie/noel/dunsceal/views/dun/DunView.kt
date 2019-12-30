@@ -43,8 +43,8 @@ class DunView : BaseView(), AnkoLogger {
   }
 
   override fun showLocation(location: Location) {
-    lat.text = "%.6f".format(location.lat)
-    lng.text = "%.6f".format(location.lng)
+    dunLatitude.text = "%.6f".format(location.lat)
+    dunLongitude.text = "%.6f".format(location.lng)
   }
 
   override fun onCreateOptionsMenu(menu: Menu): Boolean {

@@ -9,7 +9,15 @@
     tools:context="ie.noel.dunsceal.views.login.SplashView">
 
     <ImageView
-        android:id="@+id/imageView3"
+        android:layout_width="511dp"
+        android:layout_height="96dp"
+        app:layout_constraintBottom_toTopOf="@+id/splashPicture"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/logo" />
+
+    <ImageView
+        android:id="@+id/splashPicture"
         android:layout_width="match_parent"
         android:layout_height="394dp"
         app:layout_constraintBottom_toTopOf="@+id/textView3"
@@ -32,13 +40,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView3" />
+        app:layout_constraintTop_toBottomOf="@+id/splashPicture" />
 
-    <ImageView
-        android:layout_width="511dp"
-        android:layout_height="96dp"
-        app:layout_constraintBottom_toTopOf="@+id/imageView3"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/logo" />
 </androidx.constraintlayout.widget.ConstraintLayout>

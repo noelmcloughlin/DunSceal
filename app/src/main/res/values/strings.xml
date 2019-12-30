@@ -2,8 +2,16 @@
   <string name="app_name">DunSceal2</string>
   <string name="hint_dunTitle">Dun Title</string>
   <string name="hint_dunDescription">Description </string>
+
+  <!-- feature menu -->
   <string name="button_addDun">Add Dun</string>
-  <string name="menu_addDun">Add</string>
+  <string name="menu_addDun">Add Dun</string>
+  <string name="button_searchDuns">Search Duns</string>
+  <string name="menu_searchDuns">Search Duns</string>
+  <string name="button_navigateTo">Navigate to</string>
+  <string name="menu_navigateTo">Navigate to</string>
+  <!-- END feature menu -->
+
   <string name="menu_cancelDun">Cancel</string>
   <string name="enter_dun_title"> Please enter a Dun Title </string>
   <string name="save_dun"> Save Dun </string>
@@ -85,8 +93,6 @@
   <string name="paypal">PayPal</string>
   <string name="direct">Direct</string>
   <string name="amount">Amount</string>
-  <string name="total">Total so Far</string>
-  <string name="totalSoFar">$ Total</string>
   <string name="reportTitle">Duns Report</string>
   <string name="defaultAmount">00</string>
   <string name="defaultMethod">N/A</string>
@@ -98,7 +104,6 @@
   <string name="upvotes">Upvotes :</string>
   <string name="test">test</string>
   <string name="payment_type">Payment Type :</string>
-    <string name="_00_000000">00.000000</string>
 
 
   <!-- fragment containers -->
@@ -111,9 +116,14 @@
   <string name="access_control">Access Control</string>
 
 
+  <!-- home -->
+  <string name="homeTitle">Welcome </string>
+  <string name="total">Total number of Duns visited</string>
+  <string name="totalSoFar">Total</string>
+
+
   <!-- Dun -->
   <string name="action_dun">Dun</string>
-  <string name="donateTitle">Welcome Homer</string>
   <string name="donateSubtitle">Please Give Generously</string>
   <string name="donateButton">Dun</string>
   <string name="menu_donate">Dun</string>
@@ -134,4 +144,7 @@
   <string name="notVisited">Not visited</string>
   <string name="date_picker">Date Picker</string>
   <string name="default_date">"--/--/----"</string>
+    <string name="visited_on_date">Visited on date</string>
+  <string name="_00_000000">00.000000</string>
+  <string name="_00_000000">00.000000</string>
 </resources>

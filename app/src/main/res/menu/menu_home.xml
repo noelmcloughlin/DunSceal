@@ -1,17 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    tools:context="ie.noel.dunsceal.activities.Donate">
+  xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <item
-        android:id="@+id/action_report"
-        android:orderInCategory="100"
-        android:title="@string/action_report"
-        app:showAsAction="never" />
+  <item
+    android:id="@+id/item_add"
+    android:icon="@android:drawable/ic_menu_add"
+    android:title="@string/menu_addDun"
+    app:showAsAction="never"/>
 
-    <item
-        android:id="@+id/action_donate"
-        android:orderInCategory="100"
-        android:title="@string/action_dun"
-        app:showAsAction="never" />
+  <item
+    android:id="@+id/item_search"
+    android:icon="@android:drawable/ic_menu_search"
+    android:title="@string/menu_searchDuns"
+    app:showAsAction="never"/>
+
+  <item
+      android:id="@+id/item_navigate"
+      android:icon="@android:drawable/ic_menu_search"
+      android:title="@string/menu_navigateTo"
+      app:showAsAction="never"/>
+
+  <item
+      android:id="@+id/item_map"
+      android:icon="@android:drawable/ic_menu_mapmode"
+      android:title="@string/menu_showMap"
+      app:showAsAction="never"/>
+
+  <item
+      android:id="@+id/item_logout"
+      android:title="@string/menu_logout"
+      app:showAsAction="never"/>
 </menu>

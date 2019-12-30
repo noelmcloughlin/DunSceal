@@ -16,15 +16,15 @@ import ie.noel.dunsceal.utils.Loader.createLoader
 import ie.noel.dunsceal.utils.Loader.hideLoader
 import ie.noel.dunsceal.utils.Loader.showLoader
 import ie.noel.dunsceal.views.home.HomePresenter
-import kotlinx.android.synthetic.main.fragment_dun.*
-import kotlinx.android.synthetic.main.fragment_dun.view.*
+import kotlinx.android.synthetic.main.fragment_home.*
+import kotlinx.android.synthetic.main.fragment_home.view.*
 
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.info
-import org.jetbrains.anko.toast
 import java.util.HashMap
 
-open class DunFragment(private var presenter: HomePresenter) : Fragment(), AnkoLogger {
+open class HomeFragment(private var presenter: HomePresenter, private val user: String)
+    : Fragment(), AnkoLogger {
 
     var totalDone = 0
     private lateinit var loader: AlertDialog
@@ -35,48 +35,20 @@ open class DunFragment(private var presenter: HomePresenter) : Fragment(), AnkoL
         savedInstanceState: Bundle?
     ): View? {
 
-        val root = inflater.inflate(R.layout.fragment_dun, container, false)
+        val root = inflater.inflate(R.layout.fragment_home, container, false)
         loader = createLoader(activity!!)
         activity?.title = getString(R.string.action_dun)
+        root.homeTitle.text = getString(R.string.homeTitle)
 
         root.progressBar.max = 10000
-        root.amountPicker.minValue = 1
-        root.amountPicker.maxValue = 1000
-
-        root.amountPicker.setOnValueChangedListener { picker, oldVal, newVal ->
-            //Display the newly selected number to paymentAmount
-            root.paymentAmount.setText("$newVal")
-        }
-        setButtonListener(root)
         return root
     }
 
     companion object {
         @JvmStatic
-        fun newInstance(presenter: HomePresenter): DunFragment {
-            return DunFragment(presenter).apply {
+        fun newInstance(presenter: HomePresenter, user: String): HomeFragment {
+            return HomeFragment(presenter, user).apply {
                 arguments = Bundle().apply {}
-            }
-        }
-    }
-
-    private fun setButtonListener(layout: View) {
-        layout.donateButton.setOnClickListener {
-            val amount = if (layout.paymentAmount.text.isNotEmpty())
-                layout.paymentAmount.text.toString().toInt() else layout.amountPicker.value
-            if (totalDone >= layout.progressBar.max)
-                activity?.toast("Donate Amount Exceeded!")
-            else {
-                val paymentmethod =
-                    if (layout.paymentMethod.checkedRadioButtonId == R.id.Direct) "Direct" else "Paypal"
-                writeNewDun(
-                    DunModel(
-                        paymenttype = paymentmethod,
-                        amount = amount,
-                        profilepic = presenter.app.userImage.toString(),
-                        email = presenter.app.auth.currentUser?.email
-                    )
-                )
             }
         }
     }
@@ -131,7 +103,7 @@ open class DunFragment(private var presenter: HomePresenter) : Fragment(), AnkoL
                 if (progressBar != null)
                     progressBar.progress = totalDone
                 if (totalSoFar != null)
-                    totalSoFar.text = java.lang.String.format("$ ${this@DunFragment.totalDone}")
+                    totalSoFar.text = java.lang.String.format("$ ${this@HomeFragment.totalDone}")
             }
         }
         presenter.fetchData()
