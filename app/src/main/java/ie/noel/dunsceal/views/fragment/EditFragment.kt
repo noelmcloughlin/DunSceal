@@ -15,11 +15,13 @@ import ie.noel.dunsceal.utils.Loader.createLoader
 import ie.noel.dunsceal.utils.Loader.hideLoader
 import ie.noel.dunsceal.utils.Loader.showLoader
 import ie.noel.dunsceal.views.BaseFragment
+import ie.noel.dunsceal.views.dunlist.DunListPresenter
+import ie.noel.dunsceal.views.home.HomePresenter
 import kotlinx.android.synthetic.main.fragment_edit.view.*
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.info
 
-class EditFragment : BaseFragment(), AnkoLogger {
+class EditFragment(private var presenter: DunListPresenter) : BaseFragment(), AnkoLogger {
 
     lateinit var app: MainApp
     private var editDun: DunModel? = null
@@ -57,8 +59,8 @@ class EditFragment : BaseFragment(), AnkoLogger {
 
     companion object {
         @JvmStatic
-        fun newInstance(dun: DunModel) =
-            EditFragment().apply {
+        fun newInstance(presenter: DunListPresenter, dun: DunModel) =
+            EditFragment(presenter).apply {
                 arguments = Bundle().apply {
                     putParcelable("editdun",dun)
                 }

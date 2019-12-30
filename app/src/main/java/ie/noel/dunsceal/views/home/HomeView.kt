@@ -21,6 +21,7 @@ import ie.noel.dunsceal.views.fragment.ReportFragment
 import ie.noel.dunsceal.utils.Image.readImageUri
 import ie.noel.dunsceal.utils.Image.showImagePicker
 import ie.noel.dunsceal.views.BaseView
+import ie.noel.dunsceal.views.dunlist.DunListPresenter
 import ie.noel.dunsceal.views.login.LoginView
 import jp.wasabeef.picasso.transformations.CropCircleTransformation
 import kotlinx.android.synthetic.main.appbar_fab.*
@@ -75,14 +76,6 @@ open class HomeView : BaseView(), NavigationView.OnNavigationItemSelectedListene
         //Checking if Google User, upload google profile pic
         //presenter.checkExistingPhoto(this)
 
-        // hidden search with recyclerView
-        val hiddenSearchWithInRecycler = findViewById<HiddenSearchWithRecyclerView>(R.id.hidden_search_with_recycler)
-        hiddenSearchWithInRecycler.hideAtScroll = true
-        hiddenSearchWithInRecycler.visibleAtInit = false
-        hiddenSearchWithInRecycler.scrollToBottomBeforeHide = false
-        hiddenSearchWithInRecycler.scrollToTopBeforeShow = false
-        hiddenSearchWithInRecycler.filterWhileTyping = true
-
         navView.getHeaderView(0).imageView
             .setOnClickListener { showImagePicker(this, 1) }
 
@@ -98,9 +91,9 @@ open class HomeView : BaseView(), NavigationView.OnNavigationItemSelectedListene
             R.id.nav_donate ->
                 navigateTo(HomeFragment.newInstance(presenter, userName))
             R.id.nav_report ->
-                navigateTo(ReportFragment.newInstance())
+                navigateTo(ReportFragment.newInstance(presenter as DunListPresenter))
             R.id.nav_report_all ->
-                navigateTo(ReportAllFragment.newInstance())
+                navigateTo(ReportAllFragment.newInstance(presenter as DunListPresenter))
             R.id.nav_aboutus ->
                 navigateTo(AboutUsFragment.newInstance())
             R.id.nav_sign_out -> signOut()

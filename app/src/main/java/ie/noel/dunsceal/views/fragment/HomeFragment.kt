@@ -29,7 +29,6 @@ import java.util.HashMap
 open class HomeFragment(private var presenter: HomePresenter, private val user: String)
     : BaseFragment(), AnkoLogger {
 
-    var totalDone = 0
     private lateinit var eventListener: ValueEventListener
 
     override fun onCreateView(
@@ -65,8 +64,9 @@ open class HomeFragment(private var presenter: HomePresenter, private val user: 
 
     override fun onPause() {
         super.onPause()
+        val userId = presenter.app.auth.uid
         if (presenter.app.auth.uid != null)
-            presenter.app.db.child("users").child(userId).child("duns")
+        presenter.app.db.child("users").child(userId!!).child("duns")
                 .child(presenter.app.auth.currentUser!!.uid)
                 .removeEventListener(eventListener)
     }
@@ -113,7 +113,7 @@ open class HomeFragment(private var presenter: HomePresenter, private val user: 
         }
         presenter.fetchData()
         if (presenter.isUserLoggedIn()) {
-            presenter.app.db.child("users").child(presenter.app.userId!!).child("duns")
+            presenter.app.db.child("users").child(presenter.app.userId).child("duns")
                 .addValueEventListener(eventListener)
         }
     }

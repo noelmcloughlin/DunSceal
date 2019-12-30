@@ -1,17 +1,15 @@
 package ie.noel.dunsceal.views.fragment
 
+import android.content.Intent
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import androidx.appcompat.app.AlertDialog
-import androidx.fragment.app.Fragment
+import android.view.*
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
+import com.nicolettilu.hiddensearchwithrecyclerview.HiddenSearchWithRecyclerView
 
 import ie.noel.dunsceal.R
 import ie.noel.dunsceal.models.DunModel
@@ -29,17 +27,12 @@ import kotlinx.android.synthetic.main.fragment_report.view.*
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.info
 
-open class ReportFragment(open var presenter: DunListPresenter) : BaseFragment(), AnkoLogger,
+open class ReportFragment(var presenter: DunListPresenter) : BaseFragment(), AnkoLogger,
     DunListener {
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         presenter.loadDuns()
-
-        arguments?.let {
-            dummy = it.getParcelable("dummy")
-        }
     }
 
     override fun onCreateView(
@@ -164,5 +157,10 @@ open class ReportFragment(open var presenter: DunListPresenter) : BaseFragment()
                         info("Firebase Dun error : ${error.message}")
                     }
                 })
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        presenter.loadDuns()
+        super.onActivityResult(requestCode, resultCode, data)
     }
 }

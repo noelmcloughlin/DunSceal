@@ -1,20 +1,19 @@
 package ie.noel.dunsceal.views
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import ie.noel.dunsceal.R
 import ie.noel.dunsceal.models.DunModel
-import kotlinx.android.synthetic.main.fragment_base.*
+import ie.noel.dunsceal.views.dunlist.DunAdapter
+import kotlinx.android.synthetic.main.activity_dun_list.*
 
 open class BaseFragment : Fragment() {
 
     lateinit var loader: AlertDialog
     lateinit var root: View
-    private var dummy: DunModel? = null
+    var totalDone = 0
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
