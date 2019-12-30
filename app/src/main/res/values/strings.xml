@@ -147,5 +147,6 @@
     <string name="visited_on_date">Visited on date</string>
 
     <!-- test -->
+    <string name="AboutUsText">Exploration of HillForts (Duns) by archaeological students. Registered users are assigned a list of sites to visit. Users can visit sites and updated existing records with new details and photos, and rate sites, and add new sites.</string>
 
 </resources>

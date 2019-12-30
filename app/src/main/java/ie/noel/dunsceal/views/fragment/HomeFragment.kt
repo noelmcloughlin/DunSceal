@@ -38,8 +38,8 @@ open class HomeFragment(private var presenter: HomePresenter, private val user: 
     ): View? {
         super.onCreateView(inflater, container, savedInstanceState)
         val rootView = inflater.inflate(R.layout.fragment_home, container, false)
-        rootView.findViewById<RecyclerView>(R.id.myRecyclerView).layoutManager =
-            LinearLayoutManager(context, RecyclerView.VERTICAL, false)
+        //rootView.findViewById<RecyclerView>(R.id.myRecyclerView).layoutManager =
+          //  LinearLayoutManager(context, RecyclerView.VERTICAL, false)
 
         loader = createLoader(activity!!)
         activity?.title = getString(R.string.action_dun)

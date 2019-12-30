@@ -88,14 +88,16 @@ open class HomeView : BaseView(), NavigationView.OnNavigationItemSelectedListene
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
 
         when (item.itemId) {
-            R.id.nav_donate ->
+            R.id.nav_aboutus ->
+                navigateTo(AboutUsFragment.newInstance())
+            
+            R.id.nav_home ->
                 navigateTo(HomeFragment.newInstance(presenter, userName))
             R.id.nav_report ->
                 navigateTo(ReportFragment.newInstance(presenter as DunListPresenter))
             R.id.nav_report_all ->
                 navigateTo(ReportAllFragment.newInstance(presenter as DunListPresenter))
-            R.id.nav_aboutus ->
-                navigateTo(AboutUsFragment.newInstance())
+
             R.id.nav_sign_out -> signOut()
 
             else -> toast("You Selected Something Else")

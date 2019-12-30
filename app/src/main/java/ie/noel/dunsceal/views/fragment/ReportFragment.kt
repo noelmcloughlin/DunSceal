@@ -27,7 +27,7 @@ import kotlinx.android.synthetic.main.fragment_report.view.*
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.info
 
-open class ReportFragment(var presenter: DunListPresenter) : BaseFragment(), AnkoLogger,
+open class ReportFragment(open var presenter: DunListPresenter) : BaseFragment(), AnkoLogger,
     DunListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
