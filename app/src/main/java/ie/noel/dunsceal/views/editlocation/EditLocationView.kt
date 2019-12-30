@@ -46,8 +46,8 @@ class EditLocationView : BaseView(), GoogleMap.OnMarkerDragListener, GoogleMap.O
   override fun onMarkerDragStart(marker: Marker) {}
 
   override fun onMarkerDrag(marker: Marker) {
-    lat.text = "%.6f".format(marker.position.latitude)
-    lng.text = "%.6f".format(marker.position.longitude)
+    dunLatitude.text = "%.6f".format(marker.position.latitude)
+    dunLongitude.text = "%.6f".format(marker.position.longitude)
   }
 
   override fun onMarkerDragEnd(marker: Marker) {

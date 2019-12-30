@@ -59,7 +59,8 @@ open class HomeView : BaseView(), NavigationView.OnNavigationItemSelectedListene
         toggle.syncState()
         userName = presenter.app.auth.currentUser?.displayName.toString()
         navView.getHeaderView(0).nav_user_displayname.text = userName
-        homeTitle.text = "${getString(R.string.homeTitle) + userName}"
+        //if (userName != null)
+          //  homeTitle.text = "${getString(R.string.homeTitle) + userName}"
 
         //Checking if Google User, upload google profile pic
         //presenter.checkExistingPhoto(this)
@@ -101,9 +102,9 @@ open class HomeView : BaseView(), NavigationView.OnNavigationItemSelectedListene
         when (item?.itemId) {
             R.id.item_add -> presenter.doAddDun()
             R.id.item_logout ->presenter.doLogout()
-            R.id.item_search -> presenter.doSearch()
+            //R.id.item_search -> presenter.doSearch()
             R.id.item_map -> presenter.doShowDunsMap()
-            R.id.item_navigate -> presenter.doShowDunsRoute()
+            //R.id.item_navigate -> presenter.doShowDunsRoute()
         }
         return super.onOptionsItemSelected(item!!)
     }
