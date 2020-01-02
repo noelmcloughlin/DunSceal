@@ -7,13 +7,13 @@ import com.google.firebase.database.*
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import ie.noel.dunsceal.models.entity.DunEntity
-import ie.noel.dunsceal.models.entity.DunStore
+import ie.noel.dunsceal.models.entity.DunStoreEntity
 import ie.noel.dunsceal.utils.Image.readImageFromPath
 import org.jetbrains.anko.AnkoLogger
 import java.io.ByteArrayOutputStream
 import java.io.File
 
-class DunFireStore(val context: Context) : DunStore, AnkoLogger {
+class DunFireStoreEntity(val context: Context) : DunStoreEntity, AnkoLogger {
 
   val duns = ArrayList<DunEntity>()
   private lateinit var userId: String
