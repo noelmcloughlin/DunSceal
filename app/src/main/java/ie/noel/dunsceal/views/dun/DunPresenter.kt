@@ -157,4 +157,6 @@ class DunPresenter(view: BaseView) : BasePresenter(view) {
             }
         }
     }
+
+    fun navigateToDun() {}
 }

@@ -64,6 +64,10 @@ class DunView : BaseView(), AnkoLogger {
           presenter.doAddOrSave(dunTitle.text.toString(), description.text.toString())
         }
       }
+      R.id.item_route -> {
+        toast("You selected nav to dun")
+        //presenter.navigateToDun()
+      }
     }
     return super.onOptionsItemSelected(item!!)
   }

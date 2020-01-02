@@ -26,11 +26,11 @@ open class LoginPresenter(view: BaseView) : BasePresenter(view) {
                 if (dataStore != null) {
                     dataStore!!.fetchDuns {
                         view?.hideProgress()
-                        view?.navigateTo(VIEW.HOME)
+                        view?.navigateTo(VIEW.NEWHOME)
                     }
                 } else {
                     view?.hideProgress()
-                    view?.navigateTo(VIEW.HOME)
+                    view?.navigateTo(VIEW.NEWHOME)
                 }
             } else {
                 view?.hideProgress()
@@ -46,11 +46,11 @@ open class LoginPresenter(view: BaseView) : BasePresenter(view) {
                 if (dataStore != null) {
                     dataStore!!.fetchDuns {
                         view?.hideProgress()
-                        view?.navigateTo(VIEW.HOME)
+                        view?.navigateTo(VIEW.NEWHOME)
                     }
                 } else {
                     view?.hideProgress()
-                    view?.navigateTo(VIEW.HOME)
+                    view?.navigateTo(VIEW.NEWHOME)
                 }
             } else {
                 view?.hideProgress()

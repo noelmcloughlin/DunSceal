@@ -29,7 +29,6 @@ class DunListView : BaseView() {
     when (item?.itemId) {
       R.id.item_add -> presenter.doAddDun()
       R.id.item_map -> presenter.doShowDunsMap()
-      R.id.item_logout ->presenter.doLogout()
     }
     return super.onOptionsItemSelected(item!!)
   }

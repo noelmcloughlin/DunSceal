@@ -127,6 +127,7 @@
     <string name="donateSubtitle">Please Give Generously</string>
     <string name="donateButton">Dun</string>
     <string name="menu_donate">Dun</string>
+    <string name="menu_routeDun">Route</string>
     <string name="textview">TextView</string>
 
     <!-- END Dun -->

@@ -22,7 +22,7 @@ import ie.noel.dunsceal.utils.Loader.hideLoader
 import ie.noel.dunsceal.utils.Loader.showLoader
 import ie.noel.dunsceal.views.BaseView
 import ie.noel.dunsceal.views.VIEW
-import kotlinx.android.synthetic.main.activity_login.*
+import kotlinx.android.synthetic.main.fragment_login_screen.*
 import org.jetbrains.anko.toast
 
 open class LoginView : BaseView(), View.OnClickListener {
@@ -31,8 +31,7 @@ open class LoginView : BaseView(), View.OnClickListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_login)
-        //init(toolbar, false)
+        setContentView(R.layout.fragment_login_screen)
         progressBar.visibility = ProgressBar.INVISIBLE
 
         presenter = initPresenter(LoginPresenter(this)) as LoginPresenter
@@ -215,7 +214,7 @@ open class LoginView : BaseView(), View.OnClickListener {
             verifyEmailButton.isEnabled = !user.isEmailVerified
 
             presenter.dataStore!!.fetchDuns {
-                this.navigateTo(VIEW.HOME)
+                this.navigateTo(VIEW.NEWHOME)
             }
 
         } else {
@@ -294,7 +293,7 @@ open class LoginView : BaseView(), View.OnClickListener {
                 } else {
                     // If sign in fails, display a message to the user.
                     Log.w(TAG, "signInWithCredential:failure", task.exception)
-                    Snackbar.make(main_layout, "Authentication Failed.", Snackbar.LENGTH_SHORT)
+                    Snackbar.make(logIn, "Authentication Failed.", Snackbar.LENGTH_SHORT)
                         .show()
                     updateUI(null)
                 }

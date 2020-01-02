@@ -8,5 +8,9 @@
   <item
     android:id="@+id/item_delete"
     android:title="@string/menu_deleteDun"
-    app:showAsAction="always"/>
+    app:showAsAction="ifRoom"/>
+  <item
+      android:id="@+id/item_route"
+      android:title="@string/menu_routeDun"
+      app:showAsAction="always"/>
 </menu>
