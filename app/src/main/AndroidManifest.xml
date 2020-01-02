@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright 2017, The Android Open Source Project
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~      http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="ie.noel.dunsceal">
+
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+
+    <uses-feature android:name="android.hardware.location.gps"/>
+
+    <application
+        android:name="ie.noel.dunsceal.main.MainApp"
+        android:allowBackup="false"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme"
+        tools:ignore="GoogleAppIndexingWarning">
+
+    <meta-data
+        android:name="com.google.android.gms.version"
+        android:value="@integer/google_play_services_version" />
+
+    <meta-data
+        android:name="com.google.android.geo.API_KEY"
+        android:value="@string/google_maps_key" />
+
+
+      <!-- start here -->
+
+        <activity android:name="ie.noel.dunsceal.views.login.SplashView">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+            <!-- This is added to handle a deep link -->
+            <!-- nav-graph android:value="@navigation/navigation" -->
+        </activity>
+
+
+        <!-- Login Screen -->
+
+        <activity
+            android:name=".views.login.LoginView"
+            android:label="@string/app_name"
+            android:launchMode="singleTop">
+        </activity>
+
+        <!-- main authenticated activity -->
+
+        <activity
+            android:name=".views.home.HomeView"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+            </intent-filter>
+            <!-- This is added to handle a deep link -->
+            <nav-graph android:value="@navigation/navigation" />
+        </activity>
+
+        <!-- This is added to handle a deep link -->
+        <!-- nav-graph android:value="@navigation/navigation" -->
+
+        <activity
+            android:name=".views.dunlist.DunListView"
+            android:label="@string/title_activity_dun_list"
+            android:launchMode="singleTop">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".views.home.HomeView" />
+        </activity>
+
+        <activity
+            android:name=".views.dun.DunView"
+            android:label="@string/title_activity_dun">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".views.dunlist.DunListView" />
+        </activity>
+
+        <activity
+            android:name=".views.editlocation.EditLocationView"
+            android:label="@string/title_activity_edit_location">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".views.dun.DunView" />
+        </activity>
+
+        <activity
+            android:name=".views.map.DunMapView"
+            android:label="@string/title_activity_dun_maps"
+            android:launchMode="singleTop">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".views.dunlist.DunListView" />
+        </activity>
+    </application>
+
+</manifest>
