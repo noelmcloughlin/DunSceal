@@ -28,10 +28,10 @@ import ie.noel.dunsceal.ui.InvestigationClickCallback
 
 class InvestigationAdapter(private val mInvestigationClickCallback: InvestigationClickCallback?) : RecyclerView.Adapter<InvestigationAdapter.InvestigationViewHolder>() {
   private var mInvestigationList: List<Investigation>? = null
-  fun setInvestigationList(investigationModels: List<InvestigationEntity>?) {
+  fun setInvestigationList(investigationModels: List<InvestigationEntity>) {
     if (mInvestigationList == null) {
       mInvestigationList = investigationModels
-      notifyItemRangeInserted(0, investigationModels!!.size)
+      notifyItemRangeInserted(0, investigationModels.size)
     } else {
       val diffResult = DiffUtil.calculateDiff(object : DiffUtil.Callback() {
         override fun getOldListSize(): Int {
@@ -39,19 +39,19 @@ class InvestigationAdapter(private val mInvestigationClickCallback: Investigatio
         }
 
         override fun getNewListSize(): Int {
-          return investigationModels!!.size
+          return investigationModels.size
         }
 
         override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
           val old = mInvestigationList!![oldItemPosition]
-          val investigation = investigationModels!![newItemPosition]
-          return old!!.id == investigation!!.id
+          val investigation = investigationModels[newItemPosition]
+          return old.id == investigation.id
         }
 
         override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
           val old = mInvestigationList!![oldItemPosition]
-          val investigation = investigationModels!![newItemPosition]!!
-          return old!!.id == investigation.id && old!!.postedAt === investigation.postedAt && old.dunId == investigation.dunId && old.text == investigation.text
+          val investigation = investigationModels[newItemPosition]
+          return old.id == investigation.id && old.postedAt === investigation.postedAt && old.dunId == investigation.dunId && old.text == investigation.text
         }
       })
       mInvestigationList = investigationModels

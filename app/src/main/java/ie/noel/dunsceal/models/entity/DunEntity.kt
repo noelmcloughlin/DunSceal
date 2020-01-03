@@ -32,12 +32,12 @@ data class DunEntity(
     override var visited: Int = 0,
     override var upVotes: Int = 0,
     override var image: String = "",
-    @Embedded override var images: ArrayList<String> = arrayListOf(),
+    //@Embedded override var images: ArrayList<String> = arrayListOf("dummy1", "dummy2", "dummy3", "dummy4"),
     @Embedded override var location: Location = Location(),
     var paymenttype: String = "N/A",
-    override var amount: Int = 0,
-    override var message: String = "a message",
-    override var profilepic: String = "",
+    override var amount: Int? = 0,
+    override var message: String? = "a message",
+    override var profilepic: String? = "",
     override var email: String? = "joe@bloggs.com"
 ) : Parcelable, Dun {
   @Exclude
@@ -51,7 +51,7 @@ data class DunEntity(
         "visited" to visited,
         "upVotes" to upVotes,
         "image" to image,
-        "images" to images,
+       // "images" to images,
         "location" to location,
         "paymenttype" to paymenttype,
         "amount" to amount,

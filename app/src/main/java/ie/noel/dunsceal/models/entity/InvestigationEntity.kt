@@ -27,7 +27,7 @@ class InvestigationEntity : Investigation {
   override var text: String? = null
   override var postedAt: Date? = null
 
-  constructor() // needed
+  constructor() {} // needed
 
   @Ignore
   constructor(id: Int, dunId: Int, text: String?, postedAt: Date?) {

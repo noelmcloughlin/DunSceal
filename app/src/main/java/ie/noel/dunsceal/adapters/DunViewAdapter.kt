@@ -25,12 +25,13 @@ import ie.noel.dunsceal.databinding.DunCardBinding
 import ie.noel.dunsceal.models.entity.DunEntity
 import ie.noel.dunsceal.ui.DunClickCallback
 
-class DunViewDataAdapter(private val mDunClickCallback: DunClickCallback?) : RecyclerView.Adapter<DunViewDataAdapter.DunViewHolder>() {
+class DunViewAdapter(private val mDunClickCallback: DunClickCallback?) : RecyclerView.Adapter<DunViewAdapter.DunViewHolder>() {
   var mDunList: List<DunEntity>? = null
-  fun setDunList(dunList: List<DunEntity>?) {
+
+  fun setDunList(dunList: List<DunEntity>) {
     if (mDunList == null) {
       mDunList = dunList
-      notifyItemRangeInserted(0, dunList!!.size)
+      notifyItemRangeInserted(0, dunList.size)
     } else {
       val result = DiffUtil.calculateDiff(object : DiffUtil.Callback() {
         override fun getOldListSize(): Int {
@@ -38,18 +39,18 @@ class DunViewDataAdapter(private val mDunClickCallback: DunClickCallback?) : Rec
         }
 
         override fun getNewListSize(): Int {
-          return dunList!!.size
+          return dunList.size
         }
 
         override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
           return mDunList!![oldItemPosition].id ==
-              dunList?.get(newItemPosition)!!.id
+              dunList[newItemPosition].id
         }
 
         override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
-          val newDun = dunList?.get(newItemPosition)
+          val newDun = dunList[newItemPosition]
           val oldDun = mDunList!![oldItemPosition]
-          return (newDun!!.id == oldDun.id && newDun.description == oldDun.description
+          return (newDun.id == oldDun.id && newDun.description == oldDun.description
               && newDun.name == oldDun.name
               && newDun.price == oldDun.price)
         }

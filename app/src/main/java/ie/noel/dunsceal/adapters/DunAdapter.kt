@@ -55,8 +55,8 @@ class DunAdapter constructor(
             if (!reportAll)
                 itemView.setOnClickListener { listener.onDunClick(dun) }
 
-            if (dun.profilepic.isNotEmpty()) {
-                Picasso.get().load(dun.profilepic.toUri())
+            if (dun.profilepic!!.isNotEmpty()) {
+                Picasso.get().load(dun.profilepic!!.toUri())
                     //.resize(180, 180)
                     .transform(CropCircleTransformation())
                     .into(itemView.imageIcon)

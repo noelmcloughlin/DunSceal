@@ -98,7 +98,7 @@ open class HomeFragment(private var presenter: HomePresenter, private val user: 
                 val children = snapshot.children
                 children.forEach {
                     val dun = it.getValue<DunEntity>(DunEntity::class.java)
-                    totalDone += dun!!.amount
+                    totalDone += dun!!.amount!!
                 }
                 if (progressBar != null)
                     progressBar.progress = totalDone

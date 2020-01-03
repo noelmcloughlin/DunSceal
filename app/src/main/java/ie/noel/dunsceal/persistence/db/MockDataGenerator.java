@@ -31,9 +31,9 @@ import ie.noel.dunsceal.models.entity.InvestigationEntity;
 public class MockDataGenerator {
 
     private static final String[] FIRST = new String[]{
-            "Special edition", "New", "Cheap", "Quality", "Used"};
+            "Dun", "Killy", "Knock", "Bally", "Derry"};
     private static final String[] SECOND = new String[]{
-            "Three-headed Monkey", "Rubber Chicken", "Pint of Grog", "Monocle"};
+            "Bollog", "Farnham", "More", "Hoo"};
     private static final String[] DESCRIPTION = new String[]{
             "is finally here", "is recommended by Stan S. Stanman",
             "is the best sold dun on Mêlée Island", "is \uD83D\uDCAF", "is ❤️", "is fine"};
