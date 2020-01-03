@@ -41,12 +41,22 @@
         android:name="com.google.android.geo.API_KEY"
         android:value="@string/google_maps_key" />
 
+      <!-- test here -->
+
+        <activity android:name="ie.noel.dunsceal.main.TestActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+            <!-- This is added to handle a deep link -->
+            <!-- nav-graph android:value="@navigation/navigation" -->
+        </activity>
 
       <!-- start here -->
 
         <activity android:name="ie.noel.dunsceal.views.login.SplashView">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+                <!-- action android:name="android.intent.action.MAIN" /-->
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
             <!-- This is added to handle a deep link -->

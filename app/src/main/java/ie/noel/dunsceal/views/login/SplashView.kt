@@ -43,7 +43,7 @@ class SplashView : BaseView(), View.OnClickListener {
       presenter.skipSplash()
     }
 
-    // Using a handler to delay loading the MainActivity
+    // Using a handler to delay loading the main app
     Handler().postDelayed({
       // Start activity
       startActivity(Intent(this, LoginView::class.java))
