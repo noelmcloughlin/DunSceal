@@ -16,16 +16,20 @@
 package ie.noel.dunsceal.main
 
 import android.os.Bundle
+import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import ie.noel.dunsceal.R
 import ie.noel.dunsceal.models.Dun
 import ie.noel.dunsceal.ui.DunFragment
 import ie.noel.dunsceal.ui.DunListFragment
+import kotlinx.android.synthetic.main.search_activity.view.*
+
 
 class SearchActivity : AppCompatActivity() {
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
-    setContentView(R.layout.main_activity)
+    setContentView(R.layout.search_activity)
+
     // Add dun list fragment if this is first creation
     if (savedInstanceState == null) {
       val fragment = DunListFragment()
@@ -34,12 +38,14 @@ class SearchActivity : AppCompatActivity() {
     }
   }
 
-  /** Shows the dunModel detail fragment  */
+  /** Shows the dun detail fragment  */
   fun show(dun: Dun) {
     val dunFragment = DunFragment.forDun(dun.id)
+    // fix bug
+    // findViewById(android.R.id.content).getRootView()
     supportFragmentManager
         .beginTransaction()
-        .addToBackStack("dunModel")
+        .addToBackStack("dun")
         .replace(R.id.fragment_container,
             dunFragment, null).commit()
   }

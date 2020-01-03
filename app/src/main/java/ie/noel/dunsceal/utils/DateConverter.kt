@@ -13,20 +13,22 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package ie.noel.dunsceal.utils
 
-package ie.noel.dunsceal.utils;
+import androidx.room.TypeConverter
+import java.util.*
 
-import androidx.room.TypeConverter;
-import java.util.Date;
 
-public class DateConverter {
-    @TypeConverter
-    public static Date toDate(Long timestamp) {
-        return timestamp == null ? null : new Date(timestamp);
-    }
+object DateConverter {
+  @TypeConverter
+  @JvmStatic
+  fun toDate(timestamp: Long?): Date? {
+    return timestamp?.let { Date(it) }
+  }
 
-    @TypeConverter
-    public static Long toTimestamp(Date date) {
-        return date == null ? null : date.getTime();
-    }
+  @TypeConverter
+  @JvmStatic
+  fun toTimestamp(date: Date?): Long? {
+    return date?.time
+  }
 }

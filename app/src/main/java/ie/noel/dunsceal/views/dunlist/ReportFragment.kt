@@ -11,7 +11,7 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
 
 import ie.noel.dunsceal.R
-import ie.noel.dunsceal.adapters.DunAdapter
+import ie.noel.dunsceal.adapters.OldDunAdapter
 import ie.noel.dunsceal.adapters.DunListener
 import ie.noel.dunsceal.models.entity.DunEntity
 import ie.noel.dunsceal.utils.Loader.createLoader
@@ -47,7 +47,7 @@ open class ReportFragment(open var presenter: HomePresenter) : BaseFragment(), A
 
         val swipeDeleteHandler = object : SwipeToDeleteCallback(activity!!) {
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-                val adapter = root.myRecyclerView.adapter as DunAdapter
+                val adapter = root.myRecyclerView.adapter as OldDunAdapter
                 adapter.removeAt(viewHolder.adapterPosition)
                 deleteDun((viewHolder.itemView.tag as DunEntity).id.toString())
                 deleteUserDun(
@@ -99,7 +99,7 @@ open class ReportFragment(open var presenter: HomePresenter) : BaseFragment(), A
         loader = createLoader(activity!!)
         showLoader(loader, "Downloading Duns from Firebase")
         val duns = ArrayList<DunEntity>()
-        myRecyclerView.adapter = DunAdapter(duns, this, false)
+        myRecyclerView.adapter = OldDunAdapter(duns, this, false)
 
         presenter.app.db.child("users").child(userId!!).child("duns").child(userId)
             .addValueEventListener(object : ValueEventListener {
@@ -115,7 +115,7 @@ open class ReportFragment(open var presenter: HomePresenter) : BaseFragment(), A
 
                         duns.add(dun!!)
                         root.myRecyclerView.adapter =
-                            DunAdapter(duns, this@ReportFragment, false)
+                            OldDunAdapter(duns, this@ReportFragment, false)
                         root.myRecyclerView.adapter?.notifyDataSetChanged()
                         checkSwipeRefresh()
 

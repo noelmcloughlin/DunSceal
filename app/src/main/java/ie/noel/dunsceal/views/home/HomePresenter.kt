@@ -85,9 +85,9 @@ open class HomePresenter(view: BaseView) : LoginPresenter(view) {
 
                     override fun onDataChange(snapshot: DataSnapshot) {
                         snapshot.children.forEach {
-                            val usermodel =
+                            val user =
                                 it.getValue<UserPhoto>(UserPhoto::class.java)
-                            app.userImage = usermodel!!.profilepic.toUri()
+                            app.userImage = user!!.profilepic.toUri()
                             Log.v(
                                 "Dun",
                                 "checkExistingPhoto 2 app.userImage : ${app.userImage}"

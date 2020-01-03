@@ -1,4 +1,3 @@
-
 /*
  * Copyright 2017, The Android Open Source Project
  *
@@ -14,16 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package ie.noel.dunsceal.adapters
 
-package ie.noel.dunsceal.adapters;
+import android.view.View
+import androidx.databinding.BindingAdapter
 
-import androidx.databinding.BindingAdapter;
-import android.view.View;
-
-
-public class BindingAdapters {
-    @BindingAdapter("visibleGone")
-    public static void showHide(View view, boolean show) {
-        view.setVisibility(show ? View.VISIBLE : View.GONE);
-    }
+object BindingAdapters {
+  @BindingAdapter("visibleGone")
+  @JvmStatic
+  fun showHide(view: View, show: Boolean) {
+    view.visibility = if (show) View.VISIBLE else View.GONE
+  }
 }

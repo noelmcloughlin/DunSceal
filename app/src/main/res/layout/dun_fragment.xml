@@ -39,7 +39,7 @@
 
         <include
             layout="@layout/dun_item"
-            app:dunModel="@{dunViewModel.dunModel}"/>
+            app:dun="@{dunViewModel.dun}"/>
 
         <FrameLayout
             android:layout_width="match_parent"

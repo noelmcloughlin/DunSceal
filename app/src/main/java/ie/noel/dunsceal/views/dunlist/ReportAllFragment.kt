@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
-import ie.noel.dunsceal.adapters.DunAdapter
+import ie.noel.dunsceal.adapters.OldDunAdapter
 import ie.noel.dunsceal.R
 import ie.noel.dunsceal.adapters.DunListener
 import ie.noel.dunsceal.models.entity.DunEntity
@@ -73,7 +73,7 @@ class ReportAllFragment(override var presenter: HomePresenter) : ReportFragment(
 
                         dunsList.add(dun!!)
                         root.myRecyclerView.adapter =
-                            DunAdapter(dunsList, this@ReportAllFragment, true)
+                            OldDunAdapter(dunsList, this@ReportAllFragment, true)
                         root.myRecyclerView.adapter?.notifyDataSetChanged()
                         checkSwipeRefresh()
 

@@ -1,7 +1,7 @@
-
 package ie.noel.dunsceal.ui
 
 import android.os.Bundle
+import android.view.InflateException
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,24 +14,36 @@ import ie.noel.dunsceal.adapters.InvestigationAdapter
 import ie.noel.dunsceal.databinding.DunFragmentBinding
 import ie.noel.dunsceal.models.Investigation
 import ie.noel.dunsceal.persistence.viewmodel.DunViewModel
+import java.lang.Exception
 
 class DunFragment : Fragment() {
   private var mBinding: DunFragmentBinding? = null
   private var mInvestigationAdapter: InvestigationAdapter? = null
+
   override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                            savedInstanceState: Bundle?): View? { // Inflate this data binding layout
-    mBinding = DataBindingUtil.inflate(inflater, R.layout.dun_fragment, container, false)
-    // Create and set the adapter for the RecyclerView.
-    mInvestigationAdapter = InvestigationAdapter(mInvestigationClickCallback)
-    mBinding!!.investigationList.adapter = mInvestigationAdapter
+                            savedInstanceState: Bundle?): View? {
+
+    // fix bug
+    if (container != null) {
+      val parent = container.parent as ViewGroup
+      parent.removeView(container)
+    }
+    try {
+      // Inflate this data binding layout
+      mBinding = DataBindingUtil.inflate(inflater, R.layout.dun_fragment, container, false)
+      // Create and set the adapter for the RecyclerView.
+      mInvestigationAdapter = InvestigationAdapter(mInvestigationClickCallback)
+      mBinding!!.investigationList.adapter = mInvestigationAdapter
+    } catch (e: Exception) {
+      // bad
+    }
     return mBinding!!.investigationList
   }
 
   private val mInvestigationClickCallback = object : InvestigationClickCallback {
-     override fun onClick(investigation: Investigation?) {
-      TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    override fun onClick(investigation: Investigation?) {
     }
-    // no-op
+    // no-op, not needed
   }
 
   override fun onActivityCreated(savedInstanceState: Bundle?) {

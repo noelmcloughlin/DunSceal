@@ -18,7 +18,7 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto">
     <data>
-        <variable name="investigationModel"
+        <variable name="investigation"
                   type="ie.noel.dunsceal.models.Investigation"/>
         <variable name="callback"
                   type="ie.noel.dunsceal.ui.InvestigationClickCallback"/>
@@ -31,7 +31,7 @@
         android:layout_marginEnd="@dimen/investigation_horizontal_margin"
 
         android:minHeight="@dimen/investigation_minHeight"
-        android:onClick="@{() ->  callback.onClick(investigationModel)}"
+        android:onClick="@{() ->  callback.onClick(investigation)}"
         android:orientation="horizontal"
         android:padding="8dp"
         app:cardUseCompatPadding="true">
@@ -40,7 +40,7 @@
             <TextView android:layout_width="wrap_content"
                       android:layout_height="wrap_content"
                       android:layout_margin="@dimen/investigation_padding"
-                      android:text="@{investigationModel.text}"/>
+                      android:text="@{investigation.text}"/>
         </RelativeLayout>
     </androidx.cardview.widget.CardView>
 </layout>

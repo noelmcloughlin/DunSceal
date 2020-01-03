@@ -25,7 +25,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.*
 import ie.noel.dunsceal.R
-import ie.noel.dunsceal.adapters.DunViewAdapter
+import ie.noel.dunsceal.adapters.DunAdapter
 import ie.noel.dunsceal.databinding.ListFragmentBinding
 import ie.noel.dunsceal.main.SearchActivity
 import ie.noel.dunsceal.models.Dun
@@ -33,13 +33,15 @@ import ie.noel.dunsceal.models.entity.DunEntity
 import ie.noel.dunsceal.persistence.viewmodel.DunListViewModel
 
 class DunListFragment : Fragment() {
-  private var mDunViewAdapter: DunViewAdapter? = null
+  private var mDunAdapter: DunAdapter? = null
   private var mBinding: ListFragmentBinding? = null
+
   override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                             savedInstanceState: Bundle?): View? {
+
     mBinding = DataBindingUtil.inflate(inflater, R.layout.list_fragment, container, false)
-    mDunViewAdapter = DunViewAdapter(mDunClickCallback)
-    mBinding!!.dunsList.adapter = mDunViewAdapter
+    mDunAdapter = DunAdapter(mDunClickCallback)
+    mBinding!!.dunsList.adapter = mDunAdapter
     return mBinding!!.root
   }
 
@@ -51,19 +53,19 @@ class DunListFragment : Fragment() {
     mBinding!!.dunsSearchBtn.setOnClickListener {
       val query = mBinding!!.dunsSearchBox.text
       if (query == null || query.toString().isEmpty()) {
-        subscribeUi(viewModel.duns)
+        subscribeUi(viewModel.duns as LiveData<List<DunEntity>>)
       } else {
-        subscribeUi(viewModel.searchDuns("*$query*"))
+        subscribeUi(viewModel.searchDuns("*$query*") as LiveData<List<DunEntity>>)
       }
     }
-    subscribeUi(viewModel.duns)
+    subscribeUi(viewModel.duns as LiveData<List<DunEntity>>)
   }
 
   private fun subscribeUi(liveData: LiveData<List<DunEntity>>) { // Update the list when the data changes
     liveData.observe(viewLifecycleOwner, Observer { myDuns: List<DunEntity>? ->
       if (myDuns != null) {
           mBinding!!.isLoading = false
-          mDunViewAdapter!!.setDunList(myDuns)
+          mDunAdapter!!.setDunList(myDuns)
       } else {
         mBinding!!.isLoading = true
       }
@@ -73,9 +75,9 @@ class DunListFragment : Fragment() {
     })
   }
 
-  private val mDunClickCallback = DunClickCallback { dunModel: Dun? ->
+  private val mDunClickCallback = DunClickCallback { dun: Dun? ->
     if (lifecycle.currentState.isAtLeast(Lifecycle.State.STARTED)) {
-      (activity as SearchActivity?)!!.show(dunModel!!)
+      (activity as SearchActivity?)!!.show(dun!!)
     }
   }
 

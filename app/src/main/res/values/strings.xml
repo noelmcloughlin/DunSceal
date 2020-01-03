@@ -27,7 +27,7 @@
     <string name="search_duns_hint">Search Duns...</string>
     <string name="cd_duns_list">Duns list</string>
     <string name="cd_investigations_list">Investigations list</string>
-    <string name="cd_dun_name">Name of the dunModel</string>
+    <string name="cd_dun_name">Name of the dun</string>
     <string name="cd_search_duns">Search duns</string>
 
 

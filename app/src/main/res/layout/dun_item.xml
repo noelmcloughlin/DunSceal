@@ -18,7 +18,7 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto">
     <data>
-        <variable name="dunModel"
+        <variable name="dun"
                   type="ie.noel.dunsceal.models.Dun"/>
         <variable name="callback"
                   type="ie.noel.dunsceal.ui.DunClickCallback"/>
@@ -28,7 +28,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:minHeight="@dimen/dun_item_min_height"
-        android:onClick="@{() ->  callback.onClick(dunModel)}"
+        android:onClick="@{() ->  callback.onClick(dun)}"
         android:orientation="horizontal"
         android:layout_marginStart="@dimen/item_horizontal_margin"
         android:layout_marginEnd="@dimen/item_horizontal_margin"
@@ -45,20 +45,20 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:contentDescription="@string/cd_dun_name"
-                android:text="@{dunModel.name}"/>
+                android:text="@{dun.name}"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
                 android:layout_marginEnd="5dp"
-                android:text="@{@string/dun_price(dunModel.price)}"/>
+                android:text="@{@string/dun_price(dun.price)}"/>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/name"
-                android:text="@{dunModel.description}"/>
+                android:text="@{dun.description}"/>
         </RelativeLayout>
 
     </androidx.cardview.widget.CardView>
