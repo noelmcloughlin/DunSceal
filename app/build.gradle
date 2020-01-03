@@ -72,9 +72,9 @@ dependencies {
 
     // Architecture components
     implementation deps.lifecycle.runtime
-    annotationProcessor deps.lifecycle.compiler
+    kapt deps.lifecycle.compiler    // was annotationProcessor.
     implementation deps.room.runtime
-    annotationProcessor deps.room.compiler
+    kapt deps.room.compiler         // was annotationProcessor.
 
     // Android Testing Support Library's runner and rules
     androidTestImplementation deps.atsl.core

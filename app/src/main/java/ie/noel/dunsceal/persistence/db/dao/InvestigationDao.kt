@@ -22,7 +22,7 @@ interface InvestigationDao {
   fun createDun(investigation: InvestigationEntity?)
 
   @Query("SELECT * FROM investigations")
-  fun findAll(): ArrayList<InvestigationEntity?>?
+  fun findAll(): List<InvestigationEntity?>?
 
   @Query("select * from investigations where id = :id")
   fun findById(id: Int): InvestigationEntity?
