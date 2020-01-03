@@ -27,7 +27,7 @@ import androidx.lifecycle.*
 import ie.noel.dunsceal.R
 import ie.noel.dunsceal.adapters.DunViewAdapter
 import ie.noel.dunsceal.databinding.ListFragmentBinding
-import ie.noel.dunsceal.main.TestActivity
+import ie.noel.dunsceal.main.SearchActivity
 import ie.noel.dunsceal.models.Dun
 import ie.noel.dunsceal.models.entity.DunEntity
 import ie.noel.dunsceal.persistence.viewmodel.DunListViewModel
@@ -60,7 +60,7 @@ class DunListFragment : Fragment() {
   }
 
   private fun subscribeUi(liveData: LiveData<List<DunEntity>>) { // Update the list when the data changes
-    liveData.observe(this.viewLifecycleOwner, Observer { myDuns: List<DunEntity>? ->
+    liveData.observe(viewLifecycleOwner, Observer { myDuns: List<DunEntity>? ->
       if (myDuns != null) {
           mBinding!!.isLoading = false
           mDunViewAdapter!!.setDunList(myDuns)
@@ -75,7 +75,7 @@ class DunListFragment : Fragment() {
 
   private val mDunClickCallback = DunClickCallback { dunModel: Dun? ->
     if (lifecycle.currentState.isAtLeast(Lifecycle.State.STARTED)) {
-      (activity as TestActivity?)!!.show(dunModel!!)
+      (activity as SearchActivity?)!!.show(dunModel!!)
     }
   }
 

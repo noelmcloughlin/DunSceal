@@ -43,7 +43,7 @@
 
       <!-- test here -->
 
-        <activity android:name="ie.noel.dunsceal.main.TestActivity">
+        <activity android:name="ie.noel.dunsceal.main.SearchActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />

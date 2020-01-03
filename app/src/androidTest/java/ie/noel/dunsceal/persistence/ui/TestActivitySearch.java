@@ -24,7 +24,7 @@ import androidx.test.espresso.contrib.RecyclerViewActions;
 import androidx.test.espresso.matcher.ViewMatchers;
 import androidx.test.rule.ActivityTestRule;
 
-import ie.noel.dunsceal.main.TestActivity;
+import ie.noel.dunsceal.main.SearchActivity;
 import ie.noel.dunsceal.persistence.AppExecutors;
 import ie.noel.dunsceal.persistence.EspressoTestUtil;
 import ie.noel.dunsceal.R;
@@ -48,16 +48,16 @@ import static androidx.test.espresso.matcher.ViewMatchers.withContentDescription
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.core.IsNot.not;
 
-public class TestActivityTest {
+public class TestActivitySearch {
 
     @Rule
-    public ActivityTestRule<TestActivity> mActivityRule = new ActivityTestRule<>(
-            TestActivity.class);
+    public ActivityTestRule<SearchActivity> mActivityRule = new ActivityTestRule<>(
+            SearchActivity.class);
 
     @Rule
     public CountingTaskExecutorRule mCountingTaskExecutorRule = new CountingTaskExecutorRule();
 
-    public TestActivityTest() {
+    public TestActivitySearch() {
         // delete the database
         ApplicationProvider.getApplicationContext().deleteDatabase(MockDatabase.DATABASE_NAME);
     }
