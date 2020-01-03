@@ -182,10 +182,6 @@
 
     <!-- DunSceal -->
 
-    <string name="no_entrances">No entrances</string>
-    <string name="loading_entrances">Loading entrances...</string>
-    <string name="cd_entrances_list">Entrances list</string>
-
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="dun_over">Dun Over</string>

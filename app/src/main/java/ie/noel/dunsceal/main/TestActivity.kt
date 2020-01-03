@@ -22,7 +22,7 @@ import ie.noel.dunsceal.models.Dun
 import ie.noel.dunsceal.ui.DunFragment
 import ie.noel.dunsceal.ui.DunListFragment
 
-class MainActivity : AppCompatActivity() {
+class TestActivity : AppCompatActivity() {
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     setContentView(R.layout.main_activity)

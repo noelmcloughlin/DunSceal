@@ -29,18 +29,16 @@ import androidx.annotation.NonNull;
 import androidx.annotation.VisibleForTesting;
 
 import ie.noel.dunsceal.models.entity.DunEntity;
-import ie.noel.dunsceal.models.entity.EntranceEntity;
 import ie.noel.dunsceal.persistence.AppExecutors;
 import ie.noel.dunsceal.models.entity.DunFtsEntity;
 import ie.noel.dunsceal.models.entity.InvestigationEntity;
 import ie.noel.dunsceal.persistence.db.dao.DunDao;
-import ie.noel.dunsceal.persistence.db.dao.EntranceDao;
 import ie.noel.dunsceal.utils.DateConverter;
 import ie.noel.dunsceal.persistence.db.dao.InvestigationDao;
 
 import java.util.List;
 
-@Database(entities = {DunEntity.class, DunFtsEntity.class, InvestigationEntity.class, EntranceEntity.class}, version = 2)
+@Database(entities = {DunEntity.class, DunFtsEntity.class, InvestigationEntity.class}, version = 2)
 @TypeConverters(DateConverter.class)
 public abstract class MockDatabase extends RoomDatabase {
 
@@ -52,8 +50,6 @@ public abstract class MockDatabase extends RoomDatabase {
     public abstract DunDao dunDao();
 
     public abstract InvestigationDao InvestigationDao();
-
-    abstract EntranceDao EntranceDao();
 
     private final MutableLiveData<Boolean> mIsDatabaseCreated = new MutableLiveData<>();
 
@@ -89,10 +85,8 @@ public abstract class MockDatabase extends RoomDatabase {
                             List<DunEntity> duns = MockDataGenerator.generateDuns();
                             List<InvestigationEntity> investigations =
                                     MockDataGenerator.generateInvestigationsForDuns(duns);
-                            List<EntranceEntity> entrances =
-                                MockDataGenerator.generateEntrancesForDuns(duns);
 
-                            insertData(database, duns, investigations, entrances);
+                            insertData(database, duns, investigations);
                             // notify that the database was created and it's ready to be used
                             database.setDatabaseCreated();
                         });
@@ -117,12 +111,10 @@ public abstract class MockDatabase extends RoomDatabase {
 
     private static void insertData(final MockDatabase database, 
                                    final List<DunEntity> duns,
-                                   final List<InvestigationEntity> investigations,
-                                   final List<EntranceEntity> entrances) {
+                                   final List<InvestigationEntity> investigations) {
         database.runInTransaction(() -> {
             database.dunDao().insertAll(duns);
             database.InvestigationDao().insertAll(investigations);
-            database.EntranceDao().insertAll(entrances);
 
         });
     }

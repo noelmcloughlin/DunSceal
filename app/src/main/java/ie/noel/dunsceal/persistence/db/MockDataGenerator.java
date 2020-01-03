@@ -23,7 +23,6 @@ import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
 import ie.noel.dunsceal.models.entity.DunEntity;
-import ie.noel.dunsceal.models.entity.EntranceEntity;
 import ie.noel.dunsceal.models.entity.InvestigationEntity;
 
 /**
@@ -40,8 +39,6 @@ public class MockDataGenerator {
             "is the best sold dun on Mêlée Island", "is \uD83D\uDCAF", "is ❤️", "is fine"};
     private static final String[] INVESTIGATIONS = new String[]{
             "InvestigationModel 1", "InvestigationModel 2", "InvestigationModel 3", "InvestigationModel 4", "InvestigationModel 5", "InvestigationModel 6"};
-    private static final String[] ENTRANCES = new String[]{
-        "EntranceModel 1", "EntranceModel 2", "EntranceModel 3", "EntranceModel 4", "EntranceModel 5", "EntranceModel 6"};
 
     public static List<DunEntity> generateDuns() {
         List<DunEntity> duns = new ArrayList<>(FIRST.length * SECOND.length);
@@ -69,7 +66,7 @@ public class MockDataGenerator {
             for (int i = 0; i < investigationsNumber; i++) {
                 InvestigationEntity investigation = new InvestigationEntity();
                 investigation.setDunId(dunModel.getId());
-                investigation.setText(ENTRANCES[i] + " for " + dunModel.getName());
+                investigation.setText(INVESTIGATIONS[i] + " for " + dunModel.getName());
                 investigation.setPostedAt(new Date(System.currentTimeMillis()
                         - TimeUnit.DAYS.toMillis(investigationsNumber - i) + TimeUnit.HOURS.toMillis(i)));
                 investigations.add(investigation);
@@ -77,26 +74,5 @@ public class MockDataGenerator {
         }
 
         return investigations;
-    }
-
-    public static List<EntranceEntity> generateEntrancesForDuns(
-        final List<DunEntity> duns) {
-        List<EntranceEntity> entrances = new ArrayList<>();
-        Random rnd = new Random();
-
-        for (DunEntity dunModel : duns) {
-            int entrancesNumber = rnd.nextInt(5) + 1;
-            int i;
-            for (i = 0; i < entrancesNumber; i++) {
-                EntranceEntity entrance = new EntranceEntity();
-                entrance.setDunId(dunModel.getId());
-                entrance.setText(INVESTIGATIONS[i] + " for " + dunModel.getName());
-                entrance.setPostedAt(new Date(System.currentTimeMillis()
-                    - TimeUnit.DAYS.toMillis(entrancesNumber - i) + TimeUnit.HOURS.toMillis(i)));
-                entrances.add(entrance);
-            }
-        }
-
-        return entrances;
     }
 }

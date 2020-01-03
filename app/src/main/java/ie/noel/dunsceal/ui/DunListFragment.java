@@ -35,7 +35,7 @@ import ie.noel.dunsceal.R;
 import ie.noel.dunsceal.adapters.DunViewDataAdapter;
 import ie.noel.dunsceal.databinding.ListFragmentBinding;
 
-import ie.noel.dunsceal.main.MainActivity;
+import ie.noel.dunsceal.main.TestActivity;
 import ie.noel.dunsceal.models.entity.DunEntity;
 import ie.noel.dunsceal.persistence.viewmodel.DunListViewModel;
 
@@ -97,7 +97,7 @@ public class DunListFragment extends Fragment {
     private final DunClickCallback mDunClickCallback = dunModel -> {
 
         if (getLifecycle().getCurrentState().isAtLeast(Lifecycle.State.STARTED)) {
-            ((MainActivity) getActivity()).show(dunModel);
+            ((TestActivity) getActivity()).show(dunModel);
         }
     };
 }
