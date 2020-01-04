@@ -20,7 +20,7 @@ import android.app.Application;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MediatorLiveData;
-import ie.noel.dunsceal.persistence.SearchApp;
+import ie.noel.dunsceal.main.SearchApp;
 import ie.noel.dunsceal.persistence.DataRepository;
 import ie.noel.dunsceal.persistence.db.entity.DunEntity;
 import java.util.List;

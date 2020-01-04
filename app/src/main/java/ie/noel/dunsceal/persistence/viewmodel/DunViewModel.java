@@ -27,7 +27,7 @@ import androidx.annotation.NonNull;
 import java.util.List;
 
 import ie.noel.dunsceal.persistence.DataRepository;
-import ie.noel.dunsceal.persistence.SearchApp;
+import ie.noel.dunsceal.main.SearchApp;
 import ie.noel.dunsceal.persistence.db.entity.DunEntity;
 import ie.noel.dunsceal.persistence.db.entity.InvestigationEntity;
 

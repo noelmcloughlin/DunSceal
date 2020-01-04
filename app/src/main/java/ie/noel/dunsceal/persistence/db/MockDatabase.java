@@ -29,12 +29,12 @@ import androidx.annotation.NonNull;
 import androidx.annotation.VisibleForTesting;
 
 import ie.noel.dunsceal.persistence.AppExecutors;
-import ie.noel.dunsceal.persistence.db.converter.DateConverter;
 import ie.noel.dunsceal.persistence.db.dao.InvestigationDao;
 import ie.noel.dunsceal.persistence.db.dao.DunDao;
 import ie.noel.dunsceal.persistence.db.entity.DunEntity;
 import ie.noel.dunsceal.persistence.db.entity.DunFtsEntity;
 import ie.noel.dunsceal.persistence.db.entity.InvestigationEntity;
+import ie.noel.dunsceal.utils.DateConverter;
 
 import java.util.List;
 

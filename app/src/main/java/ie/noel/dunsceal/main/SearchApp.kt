@@ -13,31 +13,26 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package ie.noel.dunsceal.main
 
-package ie.noel.dunsceal.persistence;
-
-import android.app.Application;
-import ie.noel.dunsceal.persistence.db.MockDatabase;
+import android.app.Application
+import ie.noel.dunsceal.persistence.AppExecutors
+import ie.noel.dunsceal.persistence.DataRepository
+import ie.noel.dunsceal.persistence.db.MockDatabase
 
 /**
  * Android Application class. Used for accessing singletons.
  */
-public class SearchApp extends Application {
+class SearchApp : Application() {
+  private var mAppExecutors: AppExecutors? = null
+  override fun onCreate() {
+    super.onCreate()
+    mAppExecutors = AppExecutors()
+  }
 
-    private AppExecutors mAppExecutors;
+  val database: MockDatabase
+    get() = MockDatabase.getInstance(this, mAppExecutors)
 
-    @Override
-    public void onCreate() {
-        super.onCreate();
-
-        mAppExecutors = new AppExecutors();
-    }
-
-    public MockDatabase getDatabase() {
-        return MockDatabase.getInstance(this, mAppExecutors);
-    }
-
-    public DataRepository getRepository() {
-        return DataRepository.getInstance(getDatabase());
-    }
+  val repository: DataRepository
+    get() = DataRepository.getInstance(database)
 }

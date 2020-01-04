@@ -25,7 +25,7 @@
     <uses-feature android:name="android.hardware.location.gps"/>
 
     <application
-        android:name="ie.noel.dunsceal.persistence.SearchApp"
+        android:name="ie.noel.dunsceal.main.SearchApp"
         android:allowBackup="false"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
