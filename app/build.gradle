@@ -76,6 +76,7 @@ dependencies {
     implementation deps.room.runtime
     kapt deps.room.compiler         // was annotationProcessor.
 
+
     // Android Testing Support Library's runner and rules
     androidTestImplementation deps.atsl.core
     androidTestImplementation deps.atsl.runner
