@@ -19,9 +19,9 @@
         xmlns:app="http://schemas.android.com/apk/res-auto">
     <data>
         <variable name="dun"
-                  type="ie.noel.dunsceal.persistence.model.Dun"/>
+                  type="ie.noel.dunsceal.models.Dun"/>
         <variable name="callback"
-                  type="ie.noel.dunsceal.persistence.ui.DunClickCallback"/>
+                  type="ie.noel.dunsceal.views.dun.DunClickCallback"/>
     </data>
 
     <androidx.cardview.widget.CardView

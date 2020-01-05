@@ -1,7 +1,7 @@
 package ie.noel.dunsceal.persistence.db;
 
-import ie.noel.dunsceal.persistence.db.entity.InvestigationEntity;
-import ie.noel.dunsceal.persistence.db.entity.DunEntity;
+import ie.noel.dunsceal.models.entity.InvestigationEntity;
+import ie.noel.dunsceal.models.entity.DunEntity;
 
 import java.util.Arrays;
 import java.util.Date;

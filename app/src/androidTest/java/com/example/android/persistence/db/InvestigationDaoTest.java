@@ -33,10 +33,7 @@ import androidx.test.core.app.ApplicationProvider;
 import androidx.test.runner.AndroidJUnit4;
 import ie.noel.dunsceal.persistence.LiveDataTestUtil;
 
-import ie.noel.dunsceal.persistence.db.MockDatabase;
-import ie.noel.dunsceal.persistence.db.dao.InvestigationDao;
-import ie.noel.dunsceal.persistence.db.dao.DunDao;
-import ie.noel.dunsceal.persistence.db.entity.InvestigationEntity;
+import ie.noel.dunsceal.models.entity.InvestigationEntity;
 
 import org.junit.After;
 import org.junit.Before;

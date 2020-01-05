@@ -19,9 +19,9 @@
         xmlns:app="http://schemas.android.com/apk/res-auto">
     <data>
         <variable name="investigation"
-                  type="ie.noel.dunsceal.persistence.model.Investigation"/>
+                  type="ie.noel.dunsceal.models.Investigation"/>
         <variable name="callback"
-                  type="ie.noel.dunsceal.persistence.ui.InvestigationClickCallback"/>
+                  type="ie.noel.dunsceal.views.dun.InvestigationClickCallback"/>
     </data>
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"

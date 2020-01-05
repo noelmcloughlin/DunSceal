@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (C) 2018 The Android Open Source Project
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~      http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools"
+            app:startDestination="@+id/splash_screen">
+
+    <fragment
+        android:id="@+id/splash_screen"
+        android:name="ie.noel.dunsceal.views.login.SplashView"
+        android:label="fragment_splash_screen"
+        tools:layout="@layout/fragment_splash_screen">
+        <action
+            android:id="@+id/action_nav_splash_screen_to_login"
+            app:destination="@id/login_screen"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"/>
+    </fragment>
+
+    <fragment
+        android:id="@+id/login_screen"
+        android:name="ie.noel.dunsceal.views.login.LoginView"
+        android:label="fragment_login_screen"
+        tools:layout="@layout/fragment_login_screen">
+        <action
+            android:id="@+id/action_nav_login_screen_to_home"
+            app:destination="@id/title_screen"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"/>
+    </fragment>
+
+    <fragment
+            android:id="@+id/title_screen"
+            android:name="ie.noel.dunsceal.views.home.HomeView"
+            android:label="fragment_title_screen"
+            tools:layout="@layout/fragment_home_screen">
+    </fragment>
+
+
+    <fragment
+            android:id="@+id/leaderboard"
+            android:name="ie.noel.dunsceal.navigation.Leaderboard"
+            android:label="fragment_leaderboard"
+            tools:layout="@layout/fragment_leaderboard">
+        <action
+                android:id="@+id/action_leaderboard_to_userProfile"
+                app:destination="@id/user_profile"
+                app:popEnterAnim="@anim/slide_in_left"
+                app:popExitAnim="@anim/slide_out_right"
+                app:enterAnim="@anim/slide_in_right"
+                app:exitAnim="@anim/slide_out_left"/>
+    </fragment>
+    <fragment
+            android:id="@+id/match"
+            android:name="ie.noel.dunsceal.navigation.Match"
+            android:label="fragment_match"
+            tools:layout="@layout/fragment_match">
+        <action
+                android:id="@+id/action_match_to_in_dun"
+                app:destination="@id/in_dun"
+                app:popEnterAnim="@anim/slide_in_left"
+                app:popExitAnim="@anim/slide_out_right"
+                app:enterAnim="@anim/slide_in_right"
+                app:exitAnim="@anim/slide_out_left"/>
+    </fragment>
+    <fragment
+            android:id="@+id/user_profile"
+            android:name="ie.noel.dunsceal.navigation.UserProfile"
+            android:label="fragment_user_profile"
+            tools:layout="@layout/fragment_user_profile">
+        <argument android:name="userName"
+                  android:defaultValue="name"/>
+        <deepLink app:uri="www.example.com/user/{userName}" />
+    </fragment>
+    <fragment
+            android:id="@+id/in_dun"
+            android:name="ie.noel.dunsceal.navigation.InDun"
+            android:label="Dun"
+            tools:layout="@layout/fragment_in_dun">
+        <action
+                android:id="@+id/action_in_dun_to_resultsWinner"
+                app:destination="@id/results_visitor"
+                app:popUpTo="@+id/match"
+                app:popUpToInclusive="false"
+                app:popEnterAnim="@anim/slide_in_left"
+                app:popExitAnim="@anim/slide_out_right"
+                app:enterAnim="@anim/fade_in"
+                app:exitAnim="@anim/fade_out"/>
+        <action
+                android:id="@+id/action_in_dun_to_dunOver"
+                app:destination="@id/dun_over"
+                app:popUpTo="@id/match"
+                app:popUpToInclusive="false"
+                app:popEnterAnim="@anim/slide_in_left"
+                app:popExitAnim="@anim/slide_out_right"
+                app:enterAnim="@anim/fade_in"
+                app:exitAnim="@anim/fade_out"/>
+    </fragment>
+    <fragment
+            android:id="@+id/results_visitor"
+            android:name="ie.noel.dunsceal.navigation.ResultsWinner"
+            tools:layout="@layout/fragment_results_visitor">
+        <action android:id="@+id/action_results_visitor_to_leaderboard"
+                app:destination="@id/leaderboard"
+                app:popUpTo="@id/title_screen"/>
+        <action android:id="@+id/action_results_visitor_to_match"
+                app:popUpTo="@id/match"/>
+    </fragment>
+    <fragment
+            android:id="@+id/dun_over"
+            android:name="ie.noel.dunsceal.navigation.DunOver"
+            android:label="fragment_dun_over"
+            tools:layout="@layout/fragment_dun_over">
+        <action android:id="@+id/action_dun_over_to_match"
+                app:popUpTo="@id/match"/>
+    </fragment>
+</navigation>

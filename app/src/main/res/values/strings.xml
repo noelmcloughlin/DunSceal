@@ -122,11 +122,11 @@
     <string name="recordButton">Record</string>
     <string name="visited">no</string>
     <string name="direct">Direct</string>
-    <string name="amount">Amount</string>
+    <string name="upVote">Amount</string>
     <string name="reportTitle">Duns Report</string>
     <string name="defaultAmount">00</string>
     <string name="defaultMethod">N/A</string>
-    <string name="enter_amount">Enter Amount</string>
+    <string name="enter_upVote">Enter Amount</string>
     <string name="action_edit">Edit Dun</string>
     <string name="action_update">Update</string>
     <string name="message_edit">Please Update your Details Below</string>
@@ -209,9 +209,13 @@
     <string name="rank">Rank</string>
     <string name="rank_1">#1</string>
     <string name="wins">Visits</string>
-    <string name="wins_amount">42</string>
+    <string name="wins_upVote">42</string>
     <string name="losses">Losses</string>
-    <string name="losses_amount">03</string>
+    <string name="losses_upVote">03</string>
     <string name="congratulations">Congratulations!</string>
+
+
+    <string name="title_activity_fragment_default_tag">Welcome</string>
+
 
 </resources>

@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package ie.noel.dunsceal.persistence.ui;
+package ie.noel.dunsceal.views;
 
 import androidx.annotation.Nullable;
 import androidx.arch.core.executor.testing.CountingTaskExecutorRule;
@@ -28,7 +28,7 @@ import ie.noel.dunsceal.persistence.AppExecutors;
 import ie.noel.dunsceal.persistence.EspressoTestUtil;
 import ie.noel.dunsceal.R;
 import ie.noel.dunsceal.persistence.db.MockDatabase;
-import ie.noel.dunsceal.persistence.ui.SearchActivity;
+import ie.noel.dunsceal.main.SearchActivity;
 
 import org.hamcrest.CoreMatchers;
 import org.hamcrest.MatcherAssert;
