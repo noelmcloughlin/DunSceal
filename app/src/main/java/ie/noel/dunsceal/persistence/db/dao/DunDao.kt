@@ -18,39 +18,42 @@ package ie.noel.dunsceal.persistence.db.dao
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
+import ie.noel.dunsceal.models.Dun
 import ie.noel.dunsceal.models.entity.DunEntity
 
 @Dao
 interface DunDao {
   @Query("SELECT * FROM duns")
-  fun loadAllDuns(): LiveData<List<DunEntity?>?>?
+  fun loadAll(): LiveData<List<DunEntity?>?>?
 
   @Insert(onConflict = OnConflictStrategy.REPLACE)
   fun insertAll(duns: List<DunEntity?>?)
 
   @Query("select * from duns where id = :dunId")
-  fun loadDun(dunId: Int): LiveData<DunEntity?>?
+  fun load(dunId: Int): LiveData<DunEntity?>?
 
   @Query("select * from duns where id = :dunId")
-  fun loadDunSync(dunId: Int): DunEntity?
+  fun loadSync(dunId: Int): DunEntity?
 
   @Query("SELECT duns.* FROM duns JOIN dunsFts ON (duns.id = dunsFts.rowid) "
       + "WHERE dunsFts MATCH :query")
-  fun searchAllDuns(query: String?): LiveData<List<DunEntity?>?>?
+  fun searchAll(query: String?): LiveData<List<DunEntity?>?>?
 
-  // DunSceal Room DB integration
+
+  // Room DB integration without liveData
+
   @Insert(onConflict = OnConflictStrategy.REPLACE)
-  fun createDun(dun: DunEntity?)
+  fun create(dun: Dun?)
 
   @Query("SELECT * FROM duns")
-  fun findAll(): List<DunEntity?>?
+  fun findAll(): List<Dun?>?
 
   @Query("select * from duns where id = :id")
-  fun findById(id: Int): DunEntity?
+  fun findById(id: Int): Dun?
 
   @Update
-  fun updateDun(dun: DunEntity?)
+  fun updateDun(dun: Dun?)
 
   @Delete
-  fun deleteDun(dun: DunEntity?)
+  fun deleteDun(dun: Dun?)
 }

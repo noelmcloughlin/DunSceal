@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import ie.noel.dunsceal.models.entity.DunEntity
 import ie.noel.dunsceal.models.entity.InvestigationEntity
-import ie.noel.dunsceal.persistence.db.MockDatabase
+import ie.noel.dunsceal.persistence.db.mock.MockDatabase
 
 /**
  * Repository handling the work with duns and investigations.
@@ -18,7 +18,7 @@ class DataRepository private constructor(private val mDatabase: MockDatabase) {
     get() = mObservableDuns
 
   fun loadDun(dunId: Int): LiveData<DunEntity?>? {
-    return mDatabase.dunDao().loadDun(dunId)
+    return mDatabase.dunDao().load(dunId)
   }
 
   fun loadInvestigations(dunId: Int): LiveData<List<InvestigationEntity>?>? {
@@ -45,7 +45,7 @@ class DataRepository private constructor(private val mDatabase: MockDatabase) {
 
   init {
     mObservableDuns = MediatorLiveData()
-    mObservableDuns.addSource(mDatabase.dunDao().loadAllDuns()!!
+    mObservableDuns.addSource(mDatabase.dunDao().loadAll()!!
     ) { dunEntities: List<DunEntity?>? ->
       if (mDatabase.databaseCreated.value != null) {
         mObservableDuns.postValue(dunEntities)

@@ -16,30 +16,30 @@
 package ie.noel.dunsceal.adapters
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
+import androidx.core.net.toUri
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.squareup.picasso.Picasso
 import ie.noel.dunsceal.R
-import ie.noel.dunsceal.databinding.DunItemBinding
+import ie.noel.dunsceal.R.mipmap.img_hillfort_default_round
+import ie.noel.dunsceal.databinding.DunCardBinding
 import ie.noel.dunsceal.models.Dun
 import ie.noel.dunsceal.models.entity.DunEntity
-import ie.noel.dunsceal.views.dun.DunClickCallback
+import ie.noel.dunsceal.views.BaseClickCallback
+import jp.wasabeef.picasso.transformations.CropCircleTransformation
+import kotlinx.android.synthetic.main.dun_card.view.*
 
-interface DunListener {
-  fun onDunClick(dun: DunEntity)
-}
+class DunAdapter constructor(private val mBaseClickCallback: BaseClickCallback?,
+                             reportAll: Boolean
 
-class DunAdapter(
-    private val mDunClickCallback: DunClickCallback?,
-    private val reportall: Boolean = false
 ) : RecyclerView.Adapter<DunAdapter.DunViewHolder>() {
 
-  var mDunList: List<Dun>? = null
-  private val reportAll = reportall
+  private val reportAll = reportAll
+  var mDunList: MutableList<Dun>? = null
 
-  fun setDunList(dunList: List<Dun>) {
+  fun setDunList(dunList: MutableList<Dun>) {
     if (mDunList == null) {
       mDunList = dunList
       notifyItemRangeInserted(0, dunList.size)
@@ -58,12 +58,12 @@ class DunAdapter(
               dunList[newItemPosition].id
         }
 
-        override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
+        override fun areContentTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
           val newDun = dunList[newItemPosition]
           val oldDun = mDunList!![oldItemPosition]
           return (newDun.id == oldDun.id && newDun.description == oldDun.description
               && newDun.name == oldDun.name
-              && newDun.price === oldDun.price)
+              && newDun.votes === oldDun.votes)
         }
       })
       mDunList = dunList
@@ -73,33 +73,46 @@ class DunAdapter(
 
   override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DunViewHolder {
     val binding = DataBindingUtil
-        .inflate<DunItemBinding>(LayoutInflater.from(parent.context), R.layout.dun_item,
+        .inflate<DunCardBinding>(LayoutInflater.from(parent.context), R.layout.dun_card,
             parent, false)
-    binding.callback = mDunClickCallback
+    if (!this.reportAll) {
+      binding.callback = mBaseClickCallback
+    }
     return DunViewHolder(binding)
   }
 
   override fun onBindViewHolder(holder: DunViewHolder, position: Int) {
     holder.binding.dun = mDunList!![position]
-    //     holder.bind(dun, listener, reportAll)
     holder.binding.executePendingBindings()
   }
 
-  override fun getItemCount(): Int {
-    return if (mDunList == null) 0 else mDunList!!.size
-  }
+  override fun getItemCount(): Int { return if (mDunList == null) 0 else mDunList!!.size }
 
-  /* // swipe delete feature
+  //swipe delete feature
   fun removeAt(position: Int) {
-    mDunList.removeAt(position)
+    mDunList!!.removeAt(position)
     notifyItemRemoved(position)
-  } */
+  }
 
   override fun getItemId(position: Int): Long {
     return mDunList!![position].id.toLong()
   }
 
-  class DunViewHolder(val binding: DunItemBinding) : RecyclerView.ViewHolder(binding.root)
+  class DunViewHolder constructor(val binding: DunCardBinding) : RecyclerView.ViewHolder(binding.root) {
+    fun bind(dun: DunEntity) {
+      binding.root.tag = dun
+      binding.root.visited.text = dun.visited.toString()
+
+      if(dun.image.isNotEmpty()) {
+        Picasso.get().load(dun.image.toUri())
+            //.resize(180, 180)
+            .transform(CropCircleTransformation())
+            .into(binding.root.imageIcon)
+      }
+      else
+        itemView.imageIcon.setImageResource(img_hillfort_default_round)
+    }
+  }
 
   init {
     setHasStableIds(true)

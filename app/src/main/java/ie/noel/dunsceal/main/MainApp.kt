@@ -21,11 +21,12 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.storage.StorageReference
+import ie.noel.dunsceal.models.ContentStore
+import ie.noel.dunsceal.models.entity.DunPersistentStoreEntity
 import ie.noel.dunsceal.models.entity.DunStoreEntity
 import ie.noel.dunsceal.persistence.AppExecutors
 import ie.noel.dunsceal.persistence.DataRepository
-import ie.noel.dunsceal.persistence.DunFireStoreEntity
-import ie.noel.dunsceal.persistence.db.MockDatabase
+import ie.noel.dunsceal.persistence.db.mock.MockDatabase
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.info
 
@@ -36,7 +37,9 @@ class MainApp : Application(), AnkoLogger {
 
   private var mAppExecutors: AppExecutors? = null
 
-  lateinit var duns: DunStoreEntity
+  lateinit var duns: ContentStore
+  lateinit var content: ContentStore
+
   lateinit var auth: FirebaseAuth
   lateinit var googleSignInClient: GoogleSignInClient
   lateinit var userImage: Uri
@@ -47,7 +50,7 @@ class MainApp : Application(), AnkoLogger {
   override fun onCreate() {
     super.onCreate()
     mAppExecutors = AppExecutors()
-    duns = DunFireStoreEntity(applicationContext)
+    duns = DunPersistentStoreEntity(applicationContext)
     info("Dun started")
   }
 

@@ -24,6 +24,7 @@ class InvestigationEntity : Investigation {
   @PrimaryKey(autoGenerate = true)
   override var id = 0
   override var dunId = 0
+  override var image: String = ""
   override var text: String? = null
   override var postedAt: Date? = null
 
@@ -33,6 +34,7 @@ class InvestigationEntity : Investigation {
   constructor(id: Int, dunId: Int, text: String?, postedAt: Date?) {
     this.id = id
     this.dunId = dunId
+    this.image = image
     this.text = text
     this.postedAt = postedAt
   }

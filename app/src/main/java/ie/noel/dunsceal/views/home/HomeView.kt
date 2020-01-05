@@ -12,8 +12,8 @@ import com.google.android.material.snackbar.Snackbar
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
 import ie.noel.dunsceal.R
-import ie.noel.dunsceal.views.dunlist.ReportAllFragment
-import ie.noel.dunsceal.views.dunlist.ReportFragment
+import ie.noel.dunsceal.views.home.dunlist.ReportAllFragment
+import ie.noel.dunsceal.views.home.dunlist.ReportFragment
 import ie.noel.dunsceal.utils.Image.readImageUri
 import ie.noel.dunsceal.utils.Image.showImagePicker
 import ie.noel.dunsceal.views.BaseView

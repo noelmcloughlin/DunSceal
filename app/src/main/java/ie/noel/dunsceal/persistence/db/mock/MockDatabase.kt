@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package ie.noel.dunsceal.persistence.db
+package ie.noel.dunsceal.persistence.db.mock
 
 import android.content.Context
 import androidx.annotation.VisibleForTesting
@@ -29,8 +29,8 @@ import ie.noel.dunsceal.models.entity.DunEntity
 import ie.noel.dunsceal.models.entity.DunFtsEntity
 import ie.noel.dunsceal.models.entity.InvestigationEntity
 import ie.noel.dunsceal.persistence.AppExecutors
-import ie.noel.dunsceal.persistence.db.MockDataGenerator.generateDuns
-import ie.noel.dunsceal.persistence.db.MockDataGenerator.generateInvestigationsForDuns
+import ie.noel.dunsceal.persistence.db.mock.MockDataGenerator.generateDuns
+import ie.noel.dunsceal.persistence.db.mock.MockDataGenerator.generateInvestigationsForDuns
 import ie.noel.dunsceal.persistence.db.dao.DunDao
 import ie.noel.dunsceal.persistence.db.dao.InvestigationDao
 import ie.noel.dunsceal.utils.DateConverter

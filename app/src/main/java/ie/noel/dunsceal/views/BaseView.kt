@@ -7,21 +7,24 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import com.google.firebase.auth.FirebaseAuth
+import ie.noel.contentceal.views.BasePresenter
 import ie.noel.dunsceal.models.entity.DunEntity
 import ie.noel.dunsceal.models.entity.Location
 import org.jetbrains.anko.AnkoLogger
 import ie.noel.dunsceal.utils.Loader
-import ie.noel.dunsceal.views.dun.DunFragment
-import ie.noel.dunsceal.views.editlocation.EditLocationView
+import ie.noel.dunsceal.views.home.dun.DunFragment
+import ie.noel.dunsceal.views.home.dunlist.DunListView
+import ie.noel.dunsceal.views.home.editlocation.EditLocationView
 import ie.noel.dunsceal.views.home.HomeView
 import ie.noel.dunsceal.views.login.LoginView
-import ie.noel.dunsceal.views.map.DunMapView
+import ie.noel.dunsceal.views.home.map.DunMapView
+import ie.noel.dunsceal.views.login.SplashView
 
 const val IMAGE_REQUEST = 1
 const val LOCATION_REQUEST = 2
 
 enum class VIEW {
-    LOGIN, LOCATION, DUN, HOME, MAPS
+  DUN, HOME, LIST, LOCATION, LOGIN, MAPS, SPLASH
 }
 
 open class BaseView : AppCompatActivity(), AnkoLogger {
@@ -41,8 +44,9 @@ open class BaseView : AppCompatActivity(), AnkoLogger {
       VIEW.HOME -> Intent(this, HomeView::class.java)
       VIEW.DUN -> Intent(this, DunFragment::class.java)
       VIEW.MAPS -> Intent(this, DunMapView::class.java)
-      //VIEW.LIST -> Intent(this, DunListView::class.java)
+      VIEW.LIST -> Intent(this, DunListView::class.java)
       VIEW.LOGIN -> Intent(this, LoginView::class.java)
+      VIEW.SPLASH -> Intent(this, SplashView::class.java)
     }
     if (key != "") {
       intent.putExtra(key, value)

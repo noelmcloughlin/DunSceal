@@ -21,6 +21,7 @@ import java.util.*
 interface Investigation {
   val id: Int
   val dunId: Int
+  val image: String
   val text: String?
   val postedAt: Date?
 }

@@ -1,4 +1,4 @@
-package ie.noel.dunsceal.views.map
+package ie.noel.dunsceal.views.home.map
 
 import android.os.Bundle
 import com.bumptech.glide.Glide

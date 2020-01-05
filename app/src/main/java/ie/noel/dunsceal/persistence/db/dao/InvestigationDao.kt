@@ -1,6 +1,5 @@
 package ie.noel.dunsceal.persistence.db.dao
 
-
 import androidx.lifecycle.LiveData
 import androidx.room.*
 import ie.noel.dunsceal.models.entity.InvestigationEntity
@@ -17,7 +16,8 @@ interface InvestigationDao {
   @Insert(onConflict = OnConflictStrategy.REPLACE)
   fun insertAll(investigations: List<InvestigationEntity?>?)
 
-  // DunSceal Room DB integration
+  // Room DB integration
+
   @Insert(onConflict = OnConflictStrategy.REPLACE)
   fun createDun(investigation: InvestigationEntity?)
 

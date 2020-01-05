@@ -1,4 +1,4 @@
-package ie.noel.dunsceal.views.dun
+package ie.noel.dunsceal.views.home.dun
 
 import android.annotation.SuppressLint
 import android.content.Intent
@@ -158,6 +158,4 @@ class DunPresenter(view: BaseView) : BasePresenter(view) {
             }
         }
     }
-
-    fun navigateToDun() {}
 }

@@ -24,10 +24,15 @@ import ie.noel.dunsceal.R
 import ie.noel.dunsceal.databinding.InvestigationItemBinding
 import ie.noel.dunsceal.models.Investigation
 import ie.noel.dunsceal.models.entity.InvestigationEntity
-import ie.noel.dunsceal.views.dun.InvestigationClickCallback
+import ie.noel.dunsceal.views.home.dun.InvestigationClickCallback
 
-class InvestigationAdapter(private val mInvestigationClickCallback: InvestigationClickCallback?) : RecyclerView.Adapter<InvestigationAdapter.InvestigationViewHolder>() {
+class InvestigationAdapter(var investigations: List<InvestigationEntity>,
+                           private val mInvestigationClickCallback: InvestigationClickCallback?
+
+) : RecyclerView.Adapter<InvestigationAdapter.InvestigationViewHolder>() {
+
   private var mInvestigationList: List<Investigation>? = null
+
   fun setInvestigationList(investigations: List<InvestigationEntity>) {
     if (mInvestigationList == null) {
       mInvestigationList = investigations
@@ -48,10 +53,14 @@ class InvestigationAdapter(private val mInvestigationClickCallback: Investigatio
           return old.id == investigation.id
         }
 
-        override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
+        override fun areContentTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
           val old = mInvestigationList!![oldItemPosition]
           val investigation: Investigation = investigations[newItemPosition]
-          return old.id == investigation.id && old.postedAt === investigation.postedAt && old.dunId == investigation.dunId && old.text == investigation.text
+          return old.id == investigation.id
+              && old.image === investigation.image
+              && old.postedAt === investigation.postedAt
+              && old.dunId == investigation.dunId
+              && old.text == investigation.text
         }
       })
       mInvestigationList = investigations

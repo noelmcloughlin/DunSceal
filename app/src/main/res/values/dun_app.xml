@@ -16,6 +16,7 @@
   -->
 
 <resources>
-    <string name="dun_price">Price: $%d</string>
+    <string name="dun_votes">Value: %d</string>
+    <string name="dun_favourite"></string>
     <dimen name="dun_item_min_height">100dp</dimen>
 </resources>

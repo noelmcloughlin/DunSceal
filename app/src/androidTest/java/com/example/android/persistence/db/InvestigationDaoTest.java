@@ -34,6 +34,7 @@ import androidx.test.runner.AndroidJUnit4;
 import ie.noel.dunsceal.persistence.LiveDataTestUtil;
 
 import ie.noel.dunsceal.models.entity.InvestigationEntity;
+import ie.noel.dunsceal.persistence.db.mock.MockDatabase;
 
 import org.junit.After;
 import org.junit.Before;

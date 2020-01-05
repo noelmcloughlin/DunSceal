@@ -59,10 +59,6 @@ open class LoginPresenter(view: BaseView) : BasePresenter(view) {
         }
     }
 
-    fun skipSplash() {
-        view?.navigateTo(VIEW.LOGIN)
-    }
-
     fun fetchData() {
         if (dataStore != null && isUserLoggedIn()) {
             dataStore!!.fetchDuns {

@@ -13,10 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package ie.noel.dunsceal.views.dun
 
-import ie.noel.dunsceal.models.Investigation
+package ie.noel.dunsceal.views.home.dun;
 
-interface InvestigationClickCallback {
-  fun onClick(investigation: Investigation?)
+import ie.noel.dunsceal.models.Dun;
+
+public interface DunClickCallback {
+    void onClick(Dun dun);
 }

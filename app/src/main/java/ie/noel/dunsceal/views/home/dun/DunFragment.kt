@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package ie.noel.dunsceal.views.dun
+package ie.noel.dunsceal.views.home.dun
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -34,6 +34,7 @@ import ie.noel.dunsceal.views.BaseFragment
 class DunFragment : BaseFragment() {
 
   lateinit var app: MainApp
+  lateinit var presenter: DunPresenter
   private var mBinding: DunFragmentBinding? = null
   private var mInvestigationAdapter: InvestigationAdapter? = null
 
@@ -55,7 +56,7 @@ class DunFragment : BaseFragment() {
   }
 
   private val mInvestigationClickCallback = object : InvestigationClickCallback {
-    override fun onClick(investigation: Investigation?) {
+    override fun onClick(content: Investigation?) {
     }
     // no-op, not needed
   }

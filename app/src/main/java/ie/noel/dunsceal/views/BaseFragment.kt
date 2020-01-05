@@ -5,8 +5,11 @@ import android.view.*
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import ie.noel.dunsceal.R
+import ie.noel.dunsceal.models.entity.ContentEntity
+import ie.noel.dunsceal.utils.Loader
+import kotlinx.android.synthetic.main.fragment_report.view.*
 
-open class BaseFragment : Fragment() {
+open class BaseFragment(var presenter: BasePresenter) : Fragment() {
 
   lateinit var loader: AlertDialog
   lateinit var root: View
@@ -17,8 +20,28 @@ open class BaseFragment : Fragment() {
       container: ViewGroup?,
       savedInstanceState: Bundle?
   ): View? {
-    activity?.title = getString(R.string.title_activity_fragment_default_tag)
+
     // Inflate a default layout for this fragment
-    return inflater.inflate(R.layout.fragment_base, container, false)
+    activity?.title = getString(R.string.title_activity_fragment_default_tag)
+    root = inflater.inflate(R.layout.fragment_base, container, false)
+    loader = Loader.createLoader(activity!!)
+    setSwipeRefresh()
+    return root
   }
+
+  // Swipe support
+  open fun setSwipeRefresh() {
+    root.swipeRefresh.setOnRefreshListener {
+      root.swipeRefresh.isRefreshing = true
+    }
+  }
+
+  fun checkSwipeRefresh() {
+    if (root.swipeRefresh.isRefreshing) root.swipeRefresh.isRefreshing = false
+  }
+
+  fun onClick(dun: ContentEntity) {
+    presenter.doEditContent(dun)
+  }
+
 }

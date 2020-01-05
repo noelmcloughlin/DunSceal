@@ -13,10 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package ie.noel.dunsceal.views.dun
+package ie.noel.dunsceal.views
 
-import ie.noel.dunsceal.models.Dun
+import ie.noel.dunsceal.models.Content
 
-interface DunClickCallback {
-  fun onClick(dun: Dun?)
+interface BaseClickCallback {
+  fun onClick(content: Content?) {}
 }

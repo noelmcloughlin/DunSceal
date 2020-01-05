@@ -20,7 +20,7 @@ import androidx.appcompat.app.AppCompatActivity
 import ie.noel.dunsceal.R
 import ie.noel.dunsceal.models.Dun
 import ie.noel.dunsceal.ui.DunListFragment
-import ie.noel.dunsceal.views.dun.DunFragment
+import ie.noel.dunsceal.views.home.dun.DunFragment
 
 class SearchActivity : AppCompatActivity() {
   override fun onCreate(savedInstanceState: Bundle?) {

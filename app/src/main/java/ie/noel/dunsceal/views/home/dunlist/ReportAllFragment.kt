@@ -1,4 +1,4 @@
-package ie.noel.dunsceal.views.dunlist
+package ie.noel.dunsceal.views.home.dunlist
 
 import android.os.Bundle
 import android.view.LayoutInflater

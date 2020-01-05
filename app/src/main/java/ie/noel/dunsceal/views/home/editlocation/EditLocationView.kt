@@ -1,4 +1,4 @@
-package ie.noel.dunsceal.views.editlocation
+package ie.noel.dunsceal.views.home.editlocation
 
 import android.os.Bundle
 import android.view.Menu

@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package ie.noel.dunsceal.persistence.db
+package ie.noel.dunsceal.persistence.db.mock
 
 import ie.noel.dunsceal.models.entity.DunEntity
 import ie.noel.dunsceal.models.entity.InvestigationEntity
@@ -43,7 +43,7 @@ object MockDataGenerator {
         val dun = DunEntity()
         dun.name = FIRST[i] + " " + SECOND[j]
         dun.description = dun.name + " " + DESCRIPTION[j]
-        dun.price = rnd.nextInt(240)
+        dun.votes = rnd.nextInt(240)
         dun.id = FIRST.size * i + j + 1
         duns.add(dun)
       }

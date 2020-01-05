@@ -1,8 +1,11 @@
-package ie.noel.dunsceal.views
+package ie.noel.contentceal.views
 
 import android.content.Intent
 import com.google.firebase.auth.FirebaseAuth
-import ie.noel.dunsceal.main.MainApp
+import ie.noel.contentceal.main.MainApp
+import ie.noel.contentceal.models.entity.ContentEntity
+import ie.noel.dunsceal.models.entity.ContentEntity
+import ie.noel.dunsceal.views.VIEW
 
 open class BasePresenter(var view: BaseView?) {
 
@@ -19,8 +22,12 @@ open class BasePresenter(var view: BaseView?) {
     view = null
   }
 
+  fun onResume() {
+    app.content.findAll()
+  }
+
   fun doLogout() {
-    app.duns.clear()
+    app.content.clear()
     FirebaseAuth.getInstance().signOut()
     app.userId = ""
     view?.navigateTo(VIEW.LOGIN, 0, "logout")
@@ -33,5 +40,13 @@ open class BasePresenter(var view: BaseView?) {
       return true
     }
     return false
+  }
+
+  fun skipSplash() {
+    view?.navigateTo(VIEW.LOGIN)
+  }
+
+  fun doEditContent(content: ContentEntity) {
+    view?.navigateTo(VIEW.SPLASH, 0, "content_edit", content)
   }
 }

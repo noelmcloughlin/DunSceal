@@ -29,7 +29,8 @@
     <string name="cd_investigations_list">Investigations list</string>
     <string name="cd_dun_name">Name of the dun</string>
     <string name="cd_search_duns">Search duns</string>
-
+    <string name="cd_dun_image_icon">Image of the dun</string>
+    <string name="cd_dun_votes">Votes for the dun</string>
 
     <string name="hint_dunTitle">Dun Title</string>
     <string name="hint_dunDescription">Description </string>
@@ -131,7 +132,7 @@
     <string name="action_update">Update</string>
     <string name="message_edit">Please Update your Details Below</string>
     <string name="message">Message :</string>
-    <string name="upVotes">Upvotes :</string>
+    <string name="votes">Upvotes :</string>
     <string name="test">test</string>
     <string name="payment_type">Payment Type :</string>
 

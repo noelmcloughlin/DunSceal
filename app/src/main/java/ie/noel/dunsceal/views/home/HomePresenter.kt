@@ -87,7 +87,7 @@ open class HomePresenter(view: BaseView) : LoginPresenter(view) {
                         snapshot.children.forEach {
                             val user =
                                 it.getValue<UserPhoto>(UserPhoto::class.java)
-                            app.userImage = user!!.profilepic.toUri()
+                            app.userImage = user!!.image.toUri()
                             Log.v(
                                 "Dun",
                                 "checkExistingPhoto 2 app.userImage : ${app.userImage}"
@@ -149,7 +149,7 @@ open class HomePresenter(view: BaseView) : LoginPresenter(view) {
                 override fun onCancelled(error: DatabaseError) {}
                 override fun onDataChange(snapshot: DataSnapshot) {
                     snapshot.children.forEach {
-                        it.ref.child("profilepic")
+                        it.ref.child("image")
                             .setValue(app.userImage.toString())
                     }
                 }
@@ -160,7 +160,7 @@ open class HomePresenter(view: BaseView) : LoginPresenter(view) {
                 override fun onCancelled(error: DatabaseError) {}
                 override fun onDataChange(snapshot: DataSnapshot) {
                     snapshot.children.forEach {
-                        it.ref.child("profilepic")
+                        it.ref.child("image")
                             .setValue(app.userImage.toString())
                     }
                 }
@@ -173,9 +173,6 @@ open class HomePresenter(view: BaseView) : LoginPresenter(view) {
         view?.navigateTo(VIEW.DUN)
     }
 
-    fun doEditDun(dun: DunEntity) {
-        view?.navigateTo(VIEW.DUN, 0, "dun_edit", dun)
-    }
 
     fun doShowDunsMap() {
         view?.navigateTo(VIEW.MAPS)
@@ -190,7 +187,5 @@ open class HomePresenter(view: BaseView) : LoginPresenter(view) {
         }
     }
 
-    fun onResume() {
-        app.duns.findAll()
-    }
+    fun navigateToDun() {}
 }

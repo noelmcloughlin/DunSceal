@@ -4,17 +4,14 @@ import ie.noel.dunsceal.models.entity.Location
 
 interface Dun {
   val id: Int
-  val name: String
-  val description: String
-  val price: Int?
-  val fbId: String?
-  val visited: Int?
-  val upVotes: Int?
-  val image: String?
+  var name: String
+  var description: String
+  val votes: Int
+  var fbId: String
+  val visited: Boolean
+  var image: String
   //val images: ArrayList<String>
-  val location: Location?
-  var upVote: Int?
-  var message: String?
-  var profilepic: String?
-  var email: String?
+  var location: Location
+  var message: String
+  var email: String
 }

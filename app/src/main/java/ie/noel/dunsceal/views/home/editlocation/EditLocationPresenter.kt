@@ -1,4 +1,4 @@
-package ie.noel.dunsceal.views.editlocation
+package ie.noel.dunsceal.views.home.editlocation
 
 import android.content.Intent
 import com.google.android.gms.maps.CameraUpdateFactory

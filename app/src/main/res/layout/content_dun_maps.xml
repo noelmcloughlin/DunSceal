@@ -5,7 +5,7 @@
   android:layout_width="match_parent"
   android:layout_height="match_parent"
   app:layout_behavior="@string/appbar_scrolling_view_behavior"
-  tools:context=".views.map.DunMapView"
+  tools:context=".views.home.map.DunMapView"
   tools:showIn="@layout/activity_dun_map">
 
   <com.google.android.gms.maps.MapView

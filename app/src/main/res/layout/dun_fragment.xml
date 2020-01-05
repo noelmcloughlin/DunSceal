@@ -38,7 +38,7 @@
         android:orientation="vertical">
 
         <include
-            layout="@layout/dun_item"
+            layout="@layout/dun_card"
             app:dun="@{dunViewModel.dun}"/>
 
         <FrameLayout

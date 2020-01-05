@@ -38,6 +38,76 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+
+        <!-- start here -->
+
+        <activity android:name="ie.noel.dunsceal.views.login.SplashView">
+            <intent-filter>
+                <!-- action android:name="android.intent.action.MAIN" /-->
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+            <!-- This is added to handle a deep link -->
+            <!-- nav-graph android:value="@navigation/navigation" -->
+        </activity>
+
+
+        <!-- Login Screen -->
+
+        <activity
+            android:name=".views.login.LoginView"
+            android:label="@string/app_name"
+            android:launchMode="singleTop">
+        </activity>
+
+        <!-- main authenticated activity -->
+
+        <activity
+            android:name=".views.home.HomeView"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+            </intent-filter>
+            <!-- This is added to handle a deep link -->
+            <nav-graph android:value="@navigation/navigation" />
+        </activity>
+
+        <!-- This is added to handle a deep link -->
+        <!-- nav-graph android:value="@navigation/navigation" -->
+
+        <activity
+            android:name="ie.noel.dunsceal.views.home.dunlist.DunListView"
+            android:label="@string/title_activity_dun_list"
+            android:launchMode="singleTop">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".views.home.HomeView" />
+        </activity>
+
+        <activity
+            android:name="ie.noel.dunsceal.views.home.dun.DunFragment"
+            android:label="@string/title_activity_dun">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="ie.noel.dunsceal.views.home.dunlist.DunListView" />
+        </activity>
+
+        <activity
+            android:name="ie.noel.dunsceal.views.home.editlocation.EditLocationView"
+            android:label="@string/title_activity_edit_location">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="ie.noel.dunsceal.views.home.dun.DunFragment" />
+        </activity>
+
+        <activity
+            android:name="ie.noel.dunsceal.views.home.map.DunMapView"
+            android:label="@string/title_activity_dun_maps"
+            android:launchMode="singleTop">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="ie.noel.dunsceal.views.home.dunlist.DunListView" />
+        </activity>
     </application>
 
 </manifest>
