@@ -31,10 +31,13 @@ interface DunListener {
   fun onDunClick(dun: DunEntity)
 }
 
-class DunAdapter(private val mDunClickCallback: DunClickCallback?) : RecyclerView.Adapter<DunAdapter.DunViewHolder>() {
+class DunAdapter(
+    private val mDunClickCallback: DunClickCallback?,
+    private val reportall: Boolean = false
+) : RecyclerView.Adapter<DunAdapter.DunViewHolder>() {
 
   var mDunList: List<Dun>? = null
-  //private val reportAll = reportall
+  private val reportAll = reportall
 
   fun setDunList(dunList: List<Dun>) {
     if (mDunList == null) {
