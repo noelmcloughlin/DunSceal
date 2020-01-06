@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package ie.noel.dunsceal.views;
+package ie.noel.dunsceal.persistence.ui;
 
 import androidx.annotation.Nullable;
 import androidx.arch.core.executor.testing.CountingTaskExecutorRule;
@@ -24,11 +24,11 @@ import androidx.test.espresso.contrib.RecyclerViewActions;
 import androidx.test.espresso.matcher.ViewMatchers;
 import androidx.test.rule.ActivityTestRule;
 
-import ie.noel.dunsceal.persistence.AppExecutors;
+import ie.noel.dunsceal.main.AppExecutors;
 import ie.noel.dunsceal.persistence.EspressoTestUtil;
 import ie.noel.dunsceal.R;
 import ie.noel.dunsceal.persistence.db.mock.MockDatabase;
-import ie.noel.dunsceal.main.SearchActivity;
+import ie.noel.dunsceal.views.home.dunlist.DunListView;
 
 import org.hamcrest.CoreMatchers;
 import org.hamcrest.MatcherAssert;
@@ -48,18 +48,18 @@ import static androidx.test.espresso.matcher.ViewMatchers.withContentDescription
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.core.IsNot.not;
 
-public class SearchActivityTest {
+public class DunListViewTest {
 
     @Rule
-    public ActivityTestRule<SearchActivity> mActivityRule = new ActivityTestRule<>(
-            SearchActivity.class);
+    public ActivityTestRule<DunListView> mActivityRule = new ActivityTestRule<>(
+            DunListView.class);
 
     @Rule
     public CountingTaskExecutorRule mCountingTaskExecutorRule = new CountingTaskExecutorRule();
 
-    public SearchActivityTest() {
+    public DunListViewTest() {
         // delete the database
-        ApplicationProvider.getApplicationContext().deleteDatabase(MockDatabase.DATABASE_NAME);
+        ApplicationProvider.getApplicationContext().deleteDatabase(MockDatabase.DATABASE);
     }
 
     @Before

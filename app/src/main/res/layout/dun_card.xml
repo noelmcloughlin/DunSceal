@@ -9,7 +9,7 @@
             type="ie.noel.dunsceal.models.Dun" />
         <variable
             name="callback"
-            type="ie.noel.dunsceal.views.BaseClickCallback" />
+            type="ie.noel.dunsceal.views.home.dun.DunClickCallback" />
     </data>
 
     <androidx.cardview.widget.CardView

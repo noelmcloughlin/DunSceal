@@ -33,7 +33,7 @@ class DunPresenter(view: BaseView) : BasePresenter(view) {
     init {
         if (view.intent.hasExtra("dun_edit")) {
             edit = true
-            dun = view.intent.extras?.getParcelable<DunEntity>("dun_edit")!!
+            dun = view.intent.extras?.getParcelable("dun_edit")!!
             view.showDun(dun)
         } else {
             if (checkLocationPermissions(view)) {
@@ -106,9 +106,9 @@ class DunPresenter(view: BaseView) : BasePresenter(view) {
         dun.description = description
         doAsync {
             if (edit) {
-                app.duns.updateDun(dun)
+                app.duns.update(dun)
             } else {
-                app.duns.createDun(dun)
+                app.duns.create(dun)
             }
             uiThread {
                 view?.finish()
@@ -122,7 +122,7 @@ class DunPresenter(view: BaseView) : BasePresenter(view) {
 
     fun doDelete() {
         doAsync {
-            app.duns.deleteDun(dun)
+            app.duns.delete(dun)
             uiThread {
                 view?.finish()
             }

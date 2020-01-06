@@ -30,11 +30,11 @@ import ie.noel.dunsceal.models.Investigation
 import ie.noel.dunsceal.persistence.viewmodel.DunViewModel
 import ie.noel.dunsceal.utils.Loader
 import ie.noel.dunsceal.views.BaseFragment
+import ie.noel.dunsceal.views.home.HomePresenter
 
-class DunFragment : BaseFragment() {
+class DunFragment(override var presenter: HomePresenter) : BaseFragment(presenter) {
 
   lateinit var app: MainApp
-  lateinit var presenter: DunPresenter
   private var mBinding: DunFragmentBinding? = null
   private var mInvestigationAdapter: InvestigationAdapter? = null
 
@@ -55,8 +55,8 @@ class DunFragment : BaseFragment() {
     return mBinding!!.root
   }
 
-  private val mInvestigationClickCallback = object : InvestigationClickCallback {
-    override fun onClick(content: Investigation?) {
+  private val mInvestigationClickCallback = object : InvestigationClickCallback() {
+    override fun onClick(investigation: Investigation?) {
     }
     // no-op, not needed
   }
@@ -88,8 +88,8 @@ class DunFragment : BaseFragment() {
     private const val KEY_DUN_ID = "dun_id"
     /** Creates dun fragment for specific dun ID  */
     @JvmStatic
-    fun forDun(dunId: Int): DunFragment {
-      val fragment = DunFragment()
+    fun forDun(presenter: HomePresenter, dunId: Int): DunFragment {
+      val fragment = DunFragment(presenter)
       val args = Bundle()
       args.putInt(KEY_DUN_ID, dunId)
       fragment.arguments = args

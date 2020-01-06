@@ -1,4 +1,4 @@
-package ie.noel.dunsceal.views.home.editlocation
+package ie.noel.dunsceal.views.home.location
 
 import android.content.Intent
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -7,10 +7,9 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import ie.noel.dunsceal.models.entity.Location
-import ie.noel.dunsceal.views.BasePresenter
-import ie.noel.dunsceal.views.BaseView
+import ie.noel.dunsceal.views.home.HomePresenter
 
-class EditLocationPresenter(view: BaseView) : BasePresenter(view) {
+class EditLocationPresenter(view: EditLocationView) : HomePresenter(view) {
 
   var location = Location()
 

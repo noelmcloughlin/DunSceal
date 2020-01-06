@@ -21,10 +21,8 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.storage.StorageReference
-import ie.noel.dunsceal.models.ContentStore
-import ie.noel.dunsceal.models.entity.DunPersistentStoreEntity
-import ie.noel.dunsceal.models.entity.DunStoreEntity
-import ie.noel.dunsceal.persistence.AppExecutors
+import ie.noel.dunsceal.models.DunStore
+import ie.noel.dunsceal.models.firebase.DunFireStore
 import ie.noel.dunsceal.persistence.DataRepository
 import ie.noel.dunsceal.persistence.db.mock.MockDatabase
 import org.jetbrains.anko.AnkoLogger
@@ -37,8 +35,8 @@ class MainApp : Application(), AnkoLogger {
 
   private var mAppExecutors: AppExecutors? = null
 
-  lateinit var duns: ContentStore
-  lateinit var content: ContentStore
+  lateinit var duns: DunStore
+  //lateinit var content: ContentStore
 
   lateinit var auth: FirebaseAuth
   lateinit var googleSignInClient: GoogleSignInClient
@@ -50,13 +48,15 @@ class MainApp : Application(), AnkoLogger {
   override fun onCreate() {
     super.onCreate()
     mAppExecutors = AppExecutors()
-    duns = DunPersistentStoreEntity(applicationContext)
+    duns = DunFireStore(applicationContext)
     info("Dun started")
   }
 
+  // used during development
   private val mockDatabase: MockDatabase?
     get() = MockDatabase.getInstance(this, mAppExecutors!!)
 
+  // used during development
   val repository: DataRepository?
     get() = DataRepository.getInstance(mockDatabase!!)
 }

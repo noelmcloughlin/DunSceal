@@ -7,14 +7,13 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import com.google.firebase.auth.FirebaseAuth
-import ie.noel.contentceal.views.BasePresenter
 import ie.noel.dunsceal.models.entity.DunEntity
 import ie.noel.dunsceal.models.entity.Location
 import org.jetbrains.anko.AnkoLogger
 import ie.noel.dunsceal.utils.Loader
 import ie.noel.dunsceal.views.home.dun.DunFragment
 import ie.noel.dunsceal.views.home.dunlist.DunListView
-import ie.noel.dunsceal.views.home.editlocation.EditLocationView
+import ie.noel.dunsceal.views.home.location.EditLocationView
 import ie.noel.dunsceal.views.home.HomeView
 import ie.noel.dunsceal.views.login.LoginView
 import ie.noel.dunsceal.views.home.map.DunMapView

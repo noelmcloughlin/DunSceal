@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package ie.noel.dunsceal.persistence
+package ie.noel.dunsceal.main
 
 import android.os.Handler
 import android.os.Looper

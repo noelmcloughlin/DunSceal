@@ -13,7 +13,7 @@ import org.jetbrains.anko.AnkoLogger
 import java.io.ByteArrayOutputStream
 import java.io.File
 
-class DunFireStoreEntity(val context: Context) : DunStoreEntity, AnkoLogger {
+class DunFireStore(val context: Context) : DunStoreEntity, AnkoLogger {
 
   val duns = ArrayList<DunEntity>()
   private lateinit var userId: String
@@ -28,7 +28,7 @@ class DunFireStoreEntity(val context: Context) : DunStoreEntity, AnkoLogger {
     return duns.find { p -> p.id == id }
   }
 
-  override fun createDun(dun: DunEntity) {
+  override fun create(dun: DunEntity) {
     val key = db.child("users").child(userId).child("duns").push().key
     key?.let {
       dun.fbId = key
@@ -38,7 +38,7 @@ class DunFireStoreEntity(val context: Context) : DunStoreEntity, AnkoLogger {
     }
   }
 
-  override fun updateDun(dun: DunEntity) {
+  override fun update(dun: DunEntity) {
     val foundDun: DunEntity? = duns.find { p -> p.fbId == dun.fbId }
     if (foundDun != null) {
       foundDun.name = dun.name
@@ -53,7 +53,7 @@ class DunFireStoreEntity(val context: Context) : DunStoreEntity, AnkoLogger {
     }
   }
 
-  override fun deleteDun(dun: DunEntity) {
+  override fun delete(dun: DunEntity) {
     db.child("users").child(userId).child("duns").child(dun.fbId).removeValue()
     duns.remove(dun)
   }

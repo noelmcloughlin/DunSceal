@@ -1,10 +1,9 @@
-package ie.noel.dunsceal.persistence.db.storeroom
+package ie.noel.dunsceal.persistence.db
 
 import android.content.Context
 import androidx.room.Room
 import ie.noel.dunsceal.models.Dun
 import ie.noel.dunsceal.models.DunStore
-import ie.noel.dunsceal.persistence.db.DunDatabase
 import ie.noel.dunsceal.persistence.db.dao.DunDao
 
 

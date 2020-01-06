@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package ie.noel.dunsceal.ui
+package ie.noel.dunsceal.views.home.dunlist
 
 import android.content.Intent
 import android.os.Bundle
@@ -40,10 +40,10 @@ import ie.noel.dunsceal.utils.Loader
 import ie.noel.dunsceal.utils.SwipeToDeleteCallback
 import ie.noel.dunsceal.utils.SwipeToEditCallback
 import ie.noel.dunsceal.views.BaseFragment
-import ie.noel.dunsceal.views.BaseClickCallback
 import ie.noel.dunsceal.views.home.dunlist.ReportFragment
 import ie.noel.dunsceal.views.home.HomePresenter
-import ie.noel.dunsceal.views.home.editlocation.DunListPresenter
+import ie.noel.dunsceal.views.home.HomeView
+import ie.noel.dunsceal.views.home.dun.DunClickCallback
 import kotlinx.android.synthetic.main.fragment_report.view.*
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.info
@@ -140,10 +140,10 @@ class DunListFragment(override var presenter: HomePresenter) : BaseFragment(pres
     })
   }
 
-  private val mDunClickCallback = object : BaseClickCallback {
-    fun onClick(dun: Dun?) {
+  private val mDunClickCallback = object : DunClickCallback {
+    override fun onClick(dun: Dun?) {
       if (lifecycle.currentState.isAtLeast(Lifecycle.State.STARTED)) {
-        (activity as SearchActivity?)!!.show(dun!!)
+        (activity as HomeView?)!!.show(dun!!)
       }
     }
   }

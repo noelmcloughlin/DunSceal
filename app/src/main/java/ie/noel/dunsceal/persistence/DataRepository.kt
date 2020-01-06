@@ -26,7 +26,7 @@ class DataRepository private constructor(private val mDatabase: MockDatabase) {
   }
 
   fun searchDuns(query: String?): LiveData<List<DunEntity?>?>? {
-    return mDatabase.dunDao().searchAllDuns(query)
+    return mDatabase.dunDao().searchAll(query)
   }
 
   companion object {

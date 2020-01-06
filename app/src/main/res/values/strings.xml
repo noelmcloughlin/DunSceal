@@ -215,8 +215,7 @@
     <string name="losses_upVote">03</string>
     <string name="congratulations">Congratulations!</string>
 
-
     <string name="title_activity_fragment_default_tag">Welcome</string>
-
+    <string name="mock_database_name">mock_database.db</string>
 
 </resources>

@@ -53,6 +53,8 @@
 
         <!-- Login Screen -->
 
+        <activity android:name=".views.BaseView"/>
+
         <activity
             android:name=".views.login.LoginView"
             android:label="@string/app_name"
@@ -93,7 +95,7 @@
         </activity>
 
         <activity
-            android:name="ie.noel.dunsceal.views.home.editlocation.EditLocationView"
+            android:name="ie.noel.dunsceal.views.home.location.EditLocationView"
             android:label="@string/title_activity_edit_location">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"

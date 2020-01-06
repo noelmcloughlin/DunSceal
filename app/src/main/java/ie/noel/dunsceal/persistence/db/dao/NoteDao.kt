@@ -6,11 +6,11 @@ import ie.noel.dunsceal.models.entity.NoteEntity
 
 @Dao
 interface NoteDao {
-  @Query("SELECT * FROM notes where contentId = :contentId")
-  fun loadNotes(contentId: Int): LiveData<List<NoteEntity>?>?
+  @Query("SELECT * FROM notes where dunId = :dunId")
+  fun load(dunId: Int): LiveData<List<NoteEntity>?>?
 
-  @Query("SELECT * FROM notes where contentId = :contentId")
-  fun loadNotesSync(contentId: Int): List<NoteEntity?>?
+  @Query("SELECT * FROM notes where dunId = :dunId")
+  fun loadSync(dunId: Int): List<NoteEntity?>?
 
   @Insert(onConflict = OnConflictStrategy.REPLACE)
   fun insertAll(notes: List<NoteEntity?>?)
@@ -18,7 +18,7 @@ interface NoteDao {
   // Room DB integration
 
   @Insert(onConflict = OnConflictStrategy.REPLACE)
-  fun createDun(note: NoteEntity?)
+  fun create(note: NoteEntity?)
 
   @Query("SELECT * FROM notes")
   fun findAll(): List<NoteEntity?>?
@@ -27,8 +27,8 @@ interface NoteDao {
   fun findById(id: Int): NoteEntity?
 
   @Update
-  fun updateNote(note: NoteEntity?)
+  fun update(note: NoteEntity?)
 
   @Delete
-  fun deleteNote(note: NoteEntity?)
+  fun delete(note: NoteEntity?)
 }

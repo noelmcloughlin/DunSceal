@@ -21,8 +21,8 @@ import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.info
 import java.util.HashMap
 
-open class HomeFragment(private var presenter: HomePresenter, private val user: String)
-    : BaseFragment(), AnkoLogger {
+open class HomeFragment(override var presenter: HomePresenter, private val user: String)
+    : BaseFragment(presenter), AnkoLogger {
 
     private lateinit var eventListener: ValueEventListener
 
@@ -98,7 +98,7 @@ open class HomeFragment(private var presenter: HomePresenter, private val user: 
                 val children = snapshot.children
                 children.forEach {
                     val dun = it.getValue<DunEntity>(DunEntity::class.java)
-                    totalDone += dun!!.upVote!!
+                    totalDone += dun!!.votes!!
                 }
                 if (progressBar != null)
                     progressBar.progress = totalDone

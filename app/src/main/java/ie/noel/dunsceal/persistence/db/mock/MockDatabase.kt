@@ -28,7 +28,7 @@ import androidx.sqlite.db.SupportSQLiteDatabase
 import ie.noel.dunsceal.models.entity.DunEntity
 import ie.noel.dunsceal.models.entity.DunFtsEntity
 import ie.noel.dunsceal.models.entity.InvestigationEntity
-import ie.noel.dunsceal.persistence.AppExecutors
+import ie.noel.dunsceal.main.AppExecutors
 import ie.noel.dunsceal.persistence.db.mock.MockDataGenerator.generateDuns
 import ie.noel.dunsceal.persistence.db.mock.MockDataGenerator.generateInvestigationsForDuns
 import ie.noel.dunsceal.persistence.db.dao.DunDao
@@ -38,9 +38,11 @@ import ie.noel.dunsceal.utils.DateConverter
 @Database(entities = [DunEntity::class, DunFtsEntity::class, InvestigationEntity::class], version = 2)
 @TypeConverters(DateConverter::class)
 abstract class MockDatabase : RoomDatabase() {
+
   abstract fun dunDao(): DunDao
   abstract fun investigationDao(): InvestigationDao
   private val mIsDatabaseCreated = MutableLiveData<Boolean>()
+
   /**
    * Check whether the database already exists and expose it via [.getDatabaseCreated]
    */

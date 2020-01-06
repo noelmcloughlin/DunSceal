@@ -6,12 +6,9 @@ interface Dun {
   val id: Int
   var name: String
   var description: String
-  val votes: Int
+  var votes: Int
   var fbId: String
-  val visited: Boolean
+  var visited: Boolean
   var image: String
-  //val images: ArrayList<String>
   var location: Location
-  var message: String
-  var email: String
 }

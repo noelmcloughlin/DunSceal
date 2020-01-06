@@ -28,12 +28,15 @@ object MockDataGenerator {
   private val FIRST = arrayOf(
       "Dun", "Killy", "Knock", "Bally", "Derry")
   private val SECOND = arrayOf(
-      "Bollog", "Farnham", "More", "Hoo")
+      "Bollog", "Farnham", "More", "Hoo", "Cairn")
   private val DESCRIPTION = arrayOf(
-      "is finally here", "is recommended by Stan S. Stanman",
-      "is the best sold dun on Mêlée Island", "is \uD83D\uDCAF", "is ❤️", "is fine")
+      "is a very large dun", "is recommended by Stan S. Stanman",
+      "is the best  dun in Ireland", "is \uD83D\uDCAF", "is ❤️", "is fine")
   private val INVESTIGATIONS = arrayOf(
       "Investigation 1", "Investigation 2", "Investigation 3", "Investigation 4", "Investigation 5", "Investigation 6")
+  private val VISITED = arrayOf(true, false, true, false, true)
+  private val IMAGE = "https://firebasestorage.googleapis.com/v0/b/dunsceal.appspot.com/o/hillfort-default.png?alt=media&token=227979e6-344e-4653-8f75-a540d2ed2392"
+
 
   fun generateDuns(): List<DunEntity> {
     val duns: MutableList<DunEntity> = ArrayList(FIRST.size * SECOND.size)
@@ -44,7 +47,9 @@ object MockDataGenerator {
         dun.name = FIRST[i] + " " + SECOND[j]
         dun.description = dun.name + " " + DESCRIPTION[j]
         dun.votes = rnd.nextInt(240)
+        dun.visited = VISITED[i]
         dun.id = FIRST.size * i + j + 1
+        dun.image = IMAGE
         duns.add(dun)
       }
     }

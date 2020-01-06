@@ -12,12 +12,14 @@ import com.google.android.material.snackbar.Snackbar
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
 import ie.noel.dunsceal.R
+import ie.noel.dunsceal.models.Dun
 import ie.noel.dunsceal.views.home.dunlist.ReportAllFragment
 import ie.noel.dunsceal.views.home.dunlist.ReportFragment
 import ie.noel.dunsceal.utils.Image.readImageUri
 import ie.noel.dunsceal.utils.Image.showImagePicker
 import ie.noel.dunsceal.views.BaseView
 import ie.noel.dunsceal.views.about.AboutUsFragment
+import ie.noel.dunsceal.views.home.dun.DunFragment
 import ie.noel.dunsceal.views.login.LoginView
 import jp.wasabeef.picasso.transformations.CropCircleTransformation
 import kotlinx.android.synthetic.main.appbar_fab.*
@@ -26,7 +28,7 @@ import kotlinx.android.synthetic.main.nav_header_home.view.*
 import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.toast
 
-open class HomeView : BaseView(), NavigationView.OnNavigationItemSelectedListener {
+open class HomeView : LoginView(), NavigationView.OnNavigationItemSelectedListener {
 
     private lateinit var presenter: HomePresenter
     private var userName: String = "User"
@@ -110,10 +112,10 @@ open class HomeView : BaseView(), NavigationView.OnNavigationItemSelectedListene
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when (item?.itemId) {
-            R.id.item_add -> presenter.doAddDun()
+            R.id.item_add -> presenter.doAdd()
             //R.id.item_logout -> presenter.doLogout()
             //R.id.item_search -> presenter.doSearch()
-            R.id.item_map -> presenter.doShowDunsMap()
+            R.id.item_map -> presenter.doShowMap()
             //R.id.item_navigate -> presenter.doShowDunsRoute()
         }
         return super.onOptionsItemSelected(item!!)
@@ -161,5 +163,15 @@ open class HomeView : BaseView(), NavigationView.OnNavigationItemSelectedListene
                 }
             }
         }
+    }
+
+    /** Shows the dun detail fragment  */
+    fun show(dun: Dun) {
+        val dunFragment = DunFragment.forDun(dun.id)
+        supportFragmentManager
+            .beginTransaction()
+            .addToBackStack("dun")
+            .replace(R.id.fragment_container,
+                dunFragment, null).commit()
     }
 }

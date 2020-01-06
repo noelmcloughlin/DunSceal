@@ -24,7 +24,7 @@ import kotlinx.android.synthetic.main.fragment_report.view.*
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.info
 
-open class ReportFragment(open var presenter: HomePresenter) : BaseFragment(), AnkoLogger {
+open class ReportFragment(override var presenter: HomePresenter) : BaseFragment(presenter), AnkoLogger {
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
@@ -85,15 +85,11 @@ open class ReportFragment(open var presenter: HomePresenter) : BaseFragment(), A
       getAllDuns(presenter.app.auth.currentUser!!.uid)
   }
 
-  open fun setSwipeRefresh() {
+  override fun setSwipeRefresh() {
     root.swipeRefresh.setOnRefreshListener {
       root.swipeRefresh.isRefreshing = true
       getAllDuns(presenter.app.auth.currentUser!!.uid)
     }
-  }
-
-  fun checkSwipeRefresh() {
-    if (root.swipeRefresh.isRefreshing) root.swipeRefresh.isRefreshing = false
   }
 
   private fun getAllDuns(userId: String?) {

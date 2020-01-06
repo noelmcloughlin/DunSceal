@@ -26,8 +26,7 @@ import ie.noel.dunsceal.models.Investigation
 import ie.noel.dunsceal.models.entity.InvestigationEntity
 import ie.noel.dunsceal.views.home.dun.InvestigationClickCallback
 
-class InvestigationAdapter(var investigations: List<InvestigationEntity>,
-                           private val mInvestigationClickCallback: InvestigationClickCallback?
+class InvestigationAdapter(private val mInvestigationClickCallback: InvestigationClickCallback?
 
 ) : RecyclerView.Adapter<InvestigationAdapter.InvestigationViewHolder>() {
 
@@ -53,7 +52,7 @@ class InvestigationAdapter(var investigations: List<InvestigationEntity>,
           return old.id == investigation.id
         }
 
-        override fun areContentTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
+        override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
           val old = mInvestigationList!![oldItemPosition]
           val investigation: Investigation = investigations[newItemPosition]
           return old.id == investigation.id

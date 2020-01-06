@@ -6,6 +6,5 @@ interface DunStore {
   fun update(dun: Dun)
   fun delete(dun: Dun)
   fun findById(id: Int) : Dun?
-
   fun clear()
 }

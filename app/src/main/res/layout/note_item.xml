@@ -18,10 +18,10 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
   <data>
-    <variable name="content"
-        type="ie.noel.dunsceal.models.Content"/>
+    <variable name="note"
+        type="ie.noel.dunsceal.models.Note"/>
     <variable name="callback"
-        type="ie.noel.dunsceal.views.BaseClickCallback"/>
+        type="ie.noel.dunsceal.views.home.dun.NoteClickCallback"/>
   </data>
   <androidx.cardview.widget.CardView
       android:layout_width="match_parent"
@@ -31,7 +31,7 @@
       android:layout_marginEnd="@dimen/content_horizontal_margin"
 
       android:minHeight="@dimen/content_minHeight"
-      android:onClick="@{() ->  callback.onClick(content)}"
+      android:onClick="@{() ->  callback.onClick(note)}"
       android:orientation="horizontal"
       android:padding="8dp"
       app:cardUseCompatPadding="true">

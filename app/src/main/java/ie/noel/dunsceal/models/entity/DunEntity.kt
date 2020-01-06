@@ -30,9 +30,7 @@ data class DunEntity(
     override var visited : Boolean = false,
     override var image: String = "",
     //@Embedded override var images: ArrayList<String> = arrayListOf("dummy1", "dummy2", "dummy3", "dummy4"),
-    @Embedded override var location: Location = Location(),
-    override var message: String = "a message",
-    override var email: String = "joe@bloggs.com"
+    @Embedded override var location: Location = Location()
 ) : Parcelable, Dun {
   @Exclude
   fun toMap(): Map<String, Any?> {
@@ -43,37 +41,8 @@ data class DunEntity(
         "votes" to votes,
         "fbId" to fbId,
         "visited" to visited,
-        "image" to image,
-       // "images" to images,
         "location" to location,
-        "message" to message,
-        "image" to image,
-        "email" to email
-    )
-  }
-}
-
-@IgnoreExtraProperties
-@Parcelize
-data class User(
-    var uid: String? = "",
-    var paymenttype: String = "N/A",
-    var upVote: Int = 0,
-    var message: String = "a message",
-    var votes: Int = 0,
-    var image: String = "",
-    var email: String? = "joe@bloggs.com"
-) : Parcelable {
-  @Exclude
-  fun toMap(): Map<String, Any?> {
-    return mapOf(
-        "uid" to uid,
-        "paymenttype" to paymenttype,
-        "upVote" to upVote,
-        "message" to message,
-        "votes" to votes,
-        "image" to image,
-        "email" to email
+        "image" to image
     )
   }
 }

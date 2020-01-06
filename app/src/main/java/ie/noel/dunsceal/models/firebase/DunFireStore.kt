@@ -45,6 +45,8 @@ class DunFireStore(val context: Context) : DunStore, AnkoLogger {
       foundDun.description = dun.description
       foundDun.image = dun.image
       foundDun.location = dun.location
+      foundDun.votes = dun.votes
+      foundDun.visited = dun.visited
     }
 
     db.child("users").child(userId).child("duns").child(dun.fbId!!).setValue(dun)

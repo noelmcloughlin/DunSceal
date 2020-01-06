@@ -5,11 +5,11 @@ import android.view.*
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import ie.noel.dunsceal.R
-import ie.noel.dunsceal.models.entity.ContentEntity
 import ie.noel.dunsceal.utils.Loader
+import ie.noel.dunsceal.views.home.HomePresenter
 import kotlinx.android.synthetic.main.fragment_report.view.*
 
-open class BaseFragment(var presenter: BasePresenter) : Fragment() {
+open class BaseFragment(open var presenter: HomePresenter) : Fragment() {
 
   lateinit var loader: AlertDialog
   lateinit var root: View
@@ -39,9 +39,4 @@ open class BaseFragment(var presenter: BasePresenter) : Fragment() {
   fun checkSwipeRefresh() {
     if (root.swipeRefresh.isRefreshing) root.swipeRefresh.isRefreshing = false
   }
-
-  fun onClick(dun: ContentEntity) {
-    presenter.doEditContent(dun)
-  }
-
 }

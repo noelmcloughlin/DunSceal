@@ -16,8 +16,7 @@
 package ie.noel.dunsceal.views.home.dun
 
 import ie.noel.dunsceal.models.Investigation
-import ie.noel.dunsceal.views.BaseClickCallback
 
-class InvestigationClickCallback : BaseClickCallback {
-   fun onClick(investigation: Investigation?) {}
+open class InvestigationClickCallback {
+   open fun onClick(investigation: Investigation?) {}
 }

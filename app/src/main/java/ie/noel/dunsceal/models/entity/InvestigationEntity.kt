@@ -31,7 +31,7 @@ class InvestigationEntity : Investigation {
   constructor() {} // needed
 
   @Ignore
-  constructor(id: Int, dunId: Int, text: String?, postedAt: Date?) {
+  constructor(id: Int, dunId: Int, image: String, text: String?, postedAt: Date?) {
     this.id = id
     this.dunId = dunId
     this.image = image

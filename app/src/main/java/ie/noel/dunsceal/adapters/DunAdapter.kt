@@ -26,12 +26,11 @@ import ie.noel.dunsceal.R
 import ie.noel.dunsceal.R.mipmap.img_hillfort_default_round
 import ie.noel.dunsceal.databinding.DunCardBinding
 import ie.noel.dunsceal.models.Dun
-import ie.noel.dunsceal.models.entity.DunEntity
-import ie.noel.dunsceal.views.BaseClickCallback
+import ie.noel.dunsceal.views.home.dun.DunClickCallback
 import jp.wasabeef.picasso.transformations.CropCircleTransformation
 import kotlinx.android.synthetic.main.dun_card.view.*
 
-class DunAdapter constructor(private val mBaseClickCallback: BaseClickCallback?,
+class DunAdapter constructor(private val mDunClickCallback: DunClickCallback?,
                              reportAll: Boolean
 
 ) : RecyclerView.Adapter<DunAdapter.DunViewHolder>() {
@@ -58,12 +57,15 @@ class DunAdapter constructor(private val mBaseClickCallback: BaseClickCallback?,
               dunList[newItemPosition].id
         }
 
-        override fun areContentTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
+        override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
           val newDun = dunList[newItemPosition]
           val oldDun = mDunList!![oldItemPosition]
-          return (newDun.id == oldDun.id && newDun.description == oldDun.description
+          return (newDun.id == oldDun.id
+              && newDun.description == oldDun.description
               && newDun.name == oldDun.name
-              && newDun.votes === oldDun.votes)
+              && newDun.votes == oldDun.votes
+              && newDun.visited == oldDun.visited
+              && newDun.image === oldDun.image)
         }
       })
       mDunList = dunList
@@ -76,13 +78,14 @@ class DunAdapter constructor(private val mBaseClickCallback: BaseClickCallback?,
         .inflate<DunCardBinding>(LayoutInflater.from(parent.context), R.layout.dun_card,
             parent, false)
     if (!this.reportAll) {
-      binding.callback = mBaseClickCallback
+      binding.callback = mDunClickCallback
     }
     return DunViewHolder(binding)
   }
 
   override fun onBindViewHolder(holder: DunViewHolder, position: Int) {
     holder.binding.dun = mDunList!![position]
+    holder.bind(holder.binding.dun)
     holder.binding.executePendingBindings()
   }
 
@@ -99,7 +102,7 @@ class DunAdapter constructor(private val mBaseClickCallback: BaseClickCallback?,
   }
 
   class DunViewHolder constructor(val binding: DunCardBinding) : RecyclerView.ViewHolder(binding.root) {
-    fun bind(dun: DunEntity) {
+    fun bind(dun: Dun) {
       binding.root.tag = dun
       binding.root.visited.text = dun.visited.toString()
 

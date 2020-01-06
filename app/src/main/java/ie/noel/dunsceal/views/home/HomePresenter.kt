@@ -17,9 +17,9 @@ import ie.noel.dunsceal.main.MainApp
 import ie.noel.dunsceal.models.entity.DunEntity
 import ie.noel.dunsceal.models.UserPhoto
 import ie.noel.dunsceal.utils.Image.convertImageToBytes
-import ie.noel.dunsceal.views.BaseView
 import ie.noel.dunsceal.views.VIEW
 import ie.noel.dunsceal.views.login.LoginPresenter
+import ie.noel.dunsceal.views.login.LoginView
 import jp.wasabeef.picasso.transformations.CropCircleTransformation
 import kotlinx.android.synthetic.main.home.*
 import kotlinx.android.synthetic.main.nav_header_home.view.*
@@ -29,7 +29,7 @@ import org.jetbrains.anko.uiThread
 import java.lang.Exception
 import java.util.HashMap
 
-open class HomePresenter(view: BaseView) : LoginPresenter(view) {
+open class HomePresenter(view: LoginView) : LoginPresenter(view) {
 
     lateinit var ft: FragmentTransaction
 
@@ -169,12 +169,15 @@ open class HomePresenter(view: BaseView) : LoginPresenter(view) {
         writeImageRef(app.userImage.toString())
     }
 
-    fun doAddDun() {
+    fun doAdd() {
         view?.navigateTo(VIEW.DUN)
     }
 
+    fun doEditDun(dun: DunEntity) {
+        view?.navigateTo(VIEW.SPLASH, 0, "dun_edit", dun)
+    }
 
-    fun doShowDunsMap() {
+    fun doShowMap() {
         view?.navigateTo(VIEW.MAPS)
     }
 

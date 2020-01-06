@@ -1,4 +1,4 @@
-package ie.noel.dunsceal.views.home.editlocation
+package ie.noel.dunsceal.views.home.location
 
 import android.os.Bundle
 import android.view.Menu
@@ -6,11 +6,11 @@ import android.view.MenuItem
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.Marker
 import ie.noel.dunsceal.R
-import ie.noel.dunsceal.views.BaseView
+import ie.noel.dunsceal.views.login.LoginView
 import kotlinx.android.synthetic.main.activity_edit_location.*
 import kotlinx.android.synthetic.main.appbar_fab.*
 
-class EditLocationView : BaseView(), GoogleMap.OnMarkerDragListener, GoogleMap.OnMarkerClickListener {
+class EditLocationView : LoginView(), GoogleMap.OnMarkerDragListener, GoogleMap.OnMarkerClickListener {
 
   lateinit var presenter: EditLocationPresenter
 
