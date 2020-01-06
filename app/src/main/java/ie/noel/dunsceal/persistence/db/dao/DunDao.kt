@@ -19,25 +19,25 @@ package ie.noel.dunsceal.persistence.db.dao
 import androidx.lifecycle.LiveData
 import androidx.room.*
 import ie.noel.dunsceal.models.Dun
-import ie.noel.dunsceal.models.entity.DunEntity
+import ie.noel.dunsceal.models.entity.Dun
 
 @Dao
 interface DunDao {
   @Query("SELECT * FROM duns")
-  fun loadAll(): LiveData<List<DunEntity?>?>?
+  fun loadAll(): LiveData<List<Dun?>?>?
 
   @Insert(onConflict = OnConflictStrategy.REPLACE)
-  fun insertAll(duns: List<DunEntity?>?)
+  fun insertAll(duns: List<Dun?>?)
 
   @Query("select * from duns where id = :dunId")
-  fun load(dunId: Int): LiveData<DunEntity?>?
+  fun load(dunId: Int): LiveData<Dun?>?
 
   @Query("select * from duns where id = :dunId")
-  fun loadSync(dunId: Int): DunEntity?
+  fun loadSync(dunId: Int): Dun?
 
   @Query("SELECT duns.* FROM duns JOIN dunsFts ON (duns.id = dunsFts.rowid) "
       + "WHERE dunsFts MATCH :query")
-  fun searchAll(query: String?): LiveData<List<DunEntity?>?>?
+  fun searchAll(query: String?): LiveData<List<Dun?>?>?
 
 
   // Room DB integration without liveData
@@ -49,7 +49,7 @@ interface DunDao {
   fun findAll(): List<Dun?>?
 
   @Query("select * from duns where id = :id")
-  fun findById(id: Int): Dun?
+  fun findById(id: Long): Dun?
 
   @Update
   fun updateDun(dun: Dun?)

@@ -3,6 +3,7 @@ package ie.noel.dunsceal.views.about
 import android.os.Bundle
 import android.view.View
 import ie.noel.dunsceal.views.BaseFragment
+import ie.noel.dunsceal.views.home.HomePresenter
 
 class AboutUsFragment : BaseFragment() {
 

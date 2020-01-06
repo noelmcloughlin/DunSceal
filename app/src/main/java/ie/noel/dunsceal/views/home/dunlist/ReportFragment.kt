@@ -12,7 +12,7 @@ import com.google.firebase.database.ValueEventListener
 
 import ie.noel.dunsceal.R
 import ie.noel.dunsceal.adapters.DunAdapter
-import ie.noel.dunsceal.models.entity.DunEntity
+import ie.noel.dunsceal.models.entity.Dun
 import ie.noel.dunsceal.views.BaseFragment
 import ie.noel.dunsceal.utils.Loader.createLoader
 import ie.noel.dunsceal.utils.Loader.hideLoader
@@ -24,7 +24,7 @@ import kotlinx.android.synthetic.main.fragment_report.view.*
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.info
 
-open class ReportFragment(override var presenter: HomePresenter) : BaseFragment(presenter), AnkoLogger {
+open class ReportFragment(open var presenter: HomePresenter) : BaseFragment(), AnkoLogger {
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
@@ -50,10 +50,10 @@ open class ReportFragment(override var presenter: HomePresenter) : BaseFragment(
       override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
         val adapter = root.myRecyclerView.adapter as DunAdapter
         adapter.removeAt(viewHolder.adapterPosition)
-        deleteDun((viewHolder.itemView.tag as DunEntity).id.toString())
+        deleteDun((viewHolder.itemView.tag as Dun).id.toString())
         deleteUserDun(
             presenter.app.auth.currentUser!!.uid,
-            (viewHolder.itemView.tag as DunEntity).id.toString()
+            (viewHolder.itemView.tag as Dun).id.toString()
         )
       }
     }
@@ -62,7 +62,7 @@ open class ReportFragment(override var presenter: HomePresenter) : BaseFragment(
 
     val swipeEditHandler = object : SwipeToEditCallback(activity!!) {
       override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-        onClick(viewHolder.itemView.tag as DunEntity)
+        onClick(viewHolder.itemView.tag as Dun)
       }
     }
     val itemTouchEditHelper = ItemTouchHelper(swipeEditHandler)
@@ -85,17 +85,17 @@ open class ReportFragment(override var presenter: HomePresenter) : BaseFragment(
       getAllDuns(presenter.app.auth.currentUser!!.uid)
   }
 
-  override fun setSwipeRefresh() {
+  /*override fun setSwipeRefresh() {
     root.swipeRefresh.setOnRefreshListener {
       root.swipeRefresh.isRefreshing = true
       getAllDuns(presenter.app.auth.currentUser!!.uid)
     }
-  }
+  } */
 
   private fun getAllDuns(userId: String?) {
     loader = createLoader(activity!!)
     showLoader(loader, "Downloading Duns from Firebase")
-    val duns = ArrayList<DunEntity>()
+    val duns = ArrayList<Dun>()
     // myRecyclerView.adapter = OldDunAdapter(duns, this, false)
 
     presenter.app.db.child("users").child(userId!!).child("duns").child(userId)
@@ -108,7 +108,7 @@ open class ReportFragment(override var presenter: HomePresenter) : BaseFragment(
             hideLoader(loader)
             val children = snapshot.children
             children.forEach {
-              val dun = it.getValue<DunEntity>(DunEntity::class.java)
+              val dun = it.getValue<Dun>(Dun::class.java)
 
               duns.add(dun!!)
               //     root.myRecyclerView.adapter =
@@ -123,7 +123,7 @@ open class ReportFragment(override var presenter: HomePresenter) : BaseFragment(
         })
   }
 
-  fun onClick(dun: DunEntity) {
+  fun onClick(dun: Dun) {
     presenter.doEditDun(dun)
   }
 

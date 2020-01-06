@@ -1,9 +1,7 @@
-package ie.noel.dunsceal.models
-
-import ie.noel.dunsceal.models.entity.Dun
+package ie.noel.dunsceal.models.entity
 
 interface DunStore {
-  fun findAll(): List<Dun?>?
+  fun findAll(): List<Dun?>
   fun create(dun: Dun)
   fun update(dun: Dun)
   fun delete(dun: Dun)

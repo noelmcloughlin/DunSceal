@@ -3,9 +3,9 @@ package ie.noel.dunsceal.models
 import java.util.*
 
 interface Note {
-  val id: Int
-  val dunId: Int
-  val image: String
-  val text: String?
-  val postedAt: Date?
+  var id: Long
+  var dunId: Long
+  var image: String
+  var text: String?
+  var postedAt: Date?
 }

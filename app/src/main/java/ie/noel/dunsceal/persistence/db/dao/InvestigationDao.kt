@@ -2,34 +2,33 @@ package ie.noel.dunsceal.persistence.db.dao
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
-import ie.noel.dunsceal.models.entity.InvestigationEntity
-import java.util.*
+import ie.noel.dunsceal.models.entity.Investigation
 
 @Dao
 interface InvestigationDao {
   @Query("SELECT * FROM investigations where dunId = :dunId")
-  fun loadInvestigations(dunId: Int): LiveData<List<InvestigationEntity>?>?
+  fun loadInvestigations(dunId: Int): LiveData<List<Investigation>?>?
 
   @Query("SELECT * FROM investigations where dunId = :dunId")
-  fun loadInvestigationsSync(dunId: Int): List<InvestigationEntity?>?
+  fun loadInvestigationsSync(dunId: Int): List<Investigation?>?
 
   @Insert(onConflict = OnConflictStrategy.REPLACE)
-  fun insertAll(investigations: List<InvestigationEntity?>?)
+  fun insertAll(investigations: List<Investigation?>?)
 
   // Room DB integration
 
   @Insert(onConflict = OnConflictStrategy.REPLACE)
-  fun createDun(investigation: InvestigationEntity?)
+  fun createDun(investigation: Investigation?)
 
   @Query("SELECT * FROM investigations")
-  fun findAll(): List<InvestigationEntity?>?
+  fun findAll(): List<Investigation?>?
 
   @Query("select * from investigations where id = :id")
-  fun findById(id: Int): InvestigationEntity?
+  fun findById(id: Long): Investigation?
 
   @Update
-  fun updateInvestigation(investigation: InvestigationEntity?)
+  fun updateInvestigation(investigation: Investigation?)
 
   @Delete
-  fun deleteInvestigation(investigation: InvestigationEntity?)
+  fun deleteInvestigation(investigation: Investigation?)
 }

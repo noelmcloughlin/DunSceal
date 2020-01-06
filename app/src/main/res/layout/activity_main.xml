@@ -22,7 +22,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@android:color/background_light"
-    tools:context="ie.noel.dunsceal.main.SearchActivity">
+    tools:context="ie.noel.dunsceal.main.MainApp">
 
     <fragment
             android:id="@+id/my_nav_host_fragment"

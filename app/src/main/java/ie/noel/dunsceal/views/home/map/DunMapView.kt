@@ -5,7 +5,7 @@ import com.bumptech.glide.Glide
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.Marker
 import ie.noel.dunsceal.R
-import ie.noel.dunsceal.models.entity.DunEntity
+import ie.noel.dunsceal.models.entity.Dun
 import ie.noel.dunsceal.views.BaseView
 import kotlinx.android.synthetic.main.appbar_fab.*
 import kotlinx.android.synthetic.main.content_dun_maps.*
@@ -30,13 +30,13 @@ class DunMapView : BaseView(), GoogleMap.OnMarkerClickListener {
     }
   }
 
-  override fun showDun(dun: DunEntity) {
+  override fun showDun(dun: Dun) {
     currentTitle.text = dun.name
     currentDescription.text = dun.description
     Glide.with(this).load(dun.image).into(currentImage)
   }
 
-  override fun getAllDuns(duns: ArrayList<DunEntity>) {
+  override fun getAllDuns(duns: ArrayList<Dun>) {
     presenter.doPopulateMap(map, duns)
   }
 

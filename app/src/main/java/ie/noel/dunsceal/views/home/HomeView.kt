@@ -17,7 +17,6 @@ import ie.noel.dunsceal.views.home.dunlist.ReportAllFragment
 import ie.noel.dunsceal.views.home.dunlist.ReportFragment
 import ie.noel.dunsceal.utils.Image.readImageUri
 import ie.noel.dunsceal.utils.Image.showImagePicker
-import ie.noel.dunsceal.views.BaseView
 import ie.noel.dunsceal.views.about.AboutUsFragment
 import ie.noel.dunsceal.views.home.dun.DunFragment
 import ie.noel.dunsceal.views.login.LoginView

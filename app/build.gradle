@@ -132,6 +132,7 @@ dependencies {
     implementation deps.kotlinx.coroutines_android
     implementation deps.lifecycle.extensions
     implementation deps.nicolettilu
+
 }
 
 repositories {

@@ -9,8 +9,8 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
 import ie.noel.dunsceal.R
-import ie.noel.dunsceal.adapters.DunListener
-import ie.noel.dunsceal.models.entity.DunEntity
+import ie.noel.dunsceal.models.Dun
+import ie.noel.dunsceal.models.entity.Dun
 import ie.noel.dunsceal.utils.Loader.createLoader
 import ie.noel.dunsceal.utils.Loader.hideLoader
 import ie.noel.dunsceal.utils.Loader.showLoader
@@ -18,8 +18,11 @@ import ie.noel.dunsceal.views.home.HomePresenter
 import kotlinx.android.synthetic.main.fragment_report.view.*
 import org.jetbrains.anko.info
 
-class ReportAllFragment(override var presenter: HomePresenter) : ReportFragment(presenter),
-    DunListener {
+interface DunListener {
+    fun onDunClick(donation: Dun)
+}
+
+class ReportAllFragment(override var presenter: HomePresenter) : ReportFragment(presenter) {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -42,12 +45,12 @@ class ReportAllFragment(override var presenter: HomePresenter) : ReportFragment(
             }
     }
 
-    override fun setSwipeRefresh() {
+    /*override fun setSwipeRefresh() {
         root.swipeRefresh.setOnRefreshListener {
             root.swipeRefresh.isRefreshing = true
             getAllUsersDuns()
         }
-    }
+    }*/
 
     override fun onResume() {
         super.onResume()
@@ -57,7 +60,7 @@ class ReportAllFragment(override var presenter: HomePresenter) : ReportFragment(
     private fun getAllUsersDuns() {
         loader = createLoader(activity!!)
         showLoader(loader, "Downloading All Users Duns from Firebase")
-        val dunsList = ArrayList<DunEntity>()
+        val dunsList = ArrayList<Dun>()
         presenter.app.db.child("duns")
             .addValueEventListener(object : ValueEventListener {
                 override fun onCancelled(error: DatabaseError) {
@@ -68,7 +71,7 @@ class ReportAllFragment(override var presenter: HomePresenter) : ReportFragment(
                     hideLoader(loader)
                     val children = snapshot.children
                     children.forEach {
-                        val dun = it.getValue<DunEntity>(DunEntity::class.java)
+                        val dun = it.getValue<Dun>(Dun::class.java)
 
                         dunsList.add(dun!!)
                        // root.myRecyclerView.adapter =

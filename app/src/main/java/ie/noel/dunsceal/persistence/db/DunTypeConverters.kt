@@ -13,13 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package ie.noel.dunsceal.utils
+package ie.noel.dunsceal.persistence.db
 
 import androidx.room.TypeConverter
 import java.util.*
 
 
-object DateConverter {
+object DunTypeConverters {
   @TypeConverter
   @JvmStatic
   fun toDate(timestamp: Long?): Date? {

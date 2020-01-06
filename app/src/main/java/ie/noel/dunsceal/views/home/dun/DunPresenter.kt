@@ -10,7 +10,7 @@ import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
-import ie.noel.dunsceal.models.entity.DunEntity
+import ie.noel.dunsceal.models.entity.Dun
 import ie.noel.dunsceal.models.entity.Location
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
@@ -23,11 +23,10 @@ import ie.noel.dunsceal.views.*
 class DunPresenter(view: BaseView) : BasePresenter(view) {
 
     var map: GoogleMap? = null
-    var dun = DunEntity()
+    var dun = Dun()
     private var defaultLocation = Location(52.245696, -7.139102, "Waterford", 15f)
     private var edit = false
-    private var locationService: FusedLocationProviderClient =
-        LocationServices.getFusedLocationProviderClient(view)
+    private var locationService: FusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(view)
     private val locationRequest = createDefaultLocationRequest()
 
     init {

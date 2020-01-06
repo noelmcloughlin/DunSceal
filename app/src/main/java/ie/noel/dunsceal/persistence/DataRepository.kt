@@ -2,30 +2,30 @@ package ie.noel.dunsceal.persistence
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
-import ie.noel.dunsceal.models.entity.DunEntity
-import ie.noel.dunsceal.models.entity.InvestigationEntity
+import ie.noel.dunsceal.models.entity.Dun
+import ie.noel.dunsceal.models.entity.Investigation
 import ie.noel.dunsceal.persistence.db.mock.MockDatabase
 
 /**
  * Repository handling the work with duns and investigations.
  */
 class DataRepository private constructor(private val mDatabase: MockDatabase) {
-  private val mObservableDuns: MediatorLiveData<List<DunEntity?>?>
+  private val mObservableDuns: MediatorLiveData<List<Dun?>?>
   /**
    * Get the list of duns from the database and get notified when the data changes.
    */
-  val duns: LiveData<List<DunEntity?>?>
+  val duns: LiveData<List<Dun?>?>
     get() = mObservableDuns
 
-  fun loadDun(dunId: Int): LiveData<DunEntity?>? {
+  fun loadDun(dunId: Int): LiveData<Dun?>? {
     return mDatabase.dunDao().load(dunId)
   }
 
-  fun loadInvestigations(dunId: Int): LiveData<List<InvestigationEntity>?>? {
+  fun loadInvestigations(dunId: Int): LiveData<List<Investigation>?>? {
     return mDatabase.investigationDao().loadInvestigations(dunId)
   }
 
-  fun searchDuns(query: String?): LiveData<List<DunEntity?>?>? {
+  fun searchDuns(query: String?): LiveData<List<Dun?>?>? {
     return mDatabase.dunDao().searchAll(query)
   }
 
@@ -45,8 +45,8 @@ class DataRepository private constructor(private val mDatabase: MockDatabase) {
 
   init {
     mObservableDuns = MediatorLiveData()
-    mObservableDuns.addSource(mDatabase.dunDao().loadAll()!!
-    ) { dunEntities: List<DunEntity?>? ->
+    mObservableDuns.addSource(mDatabase.dunDao().loadAllDuns()!!
+    ) { dunEntities: List<Dun?>? ->
       if (mDatabase.databaseCreated.value != null) {
         mObservableDuns.postValue(dunEntities)
       }

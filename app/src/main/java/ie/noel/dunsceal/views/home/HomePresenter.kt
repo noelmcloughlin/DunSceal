@@ -14,7 +14,7 @@ import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
 import ie.noel.dunsceal.R
 import ie.noel.dunsceal.main.MainApp
-import ie.noel.dunsceal.models.entity.DunEntity
+import ie.noel.dunsceal.models.entity.Dun
 import ie.noel.dunsceal.models.UserPhoto
 import ie.noel.dunsceal.utils.Image.convertImageToBytes
 import ie.noel.dunsceal.views.VIEW
@@ -173,7 +173,7 @@ open class HomePresenter(view: LoginView) : LoginPresenter(view) {
         view?.navigateTo(VIEW.DUN)
     }
 
-    fun doEditDun(dun: DunEntity) {
+    fun doEditDun(dun: Dun) {
         view?.navigateTo(VIEW.SPLASH, 0, "dun_edit", dun)
     }
 
@@ -185,7 +185,7 @@ open class HomePresenter(view: LoginView) : LoginPresenter(view) {
         doAsync {
             val duns = app.duns.findAll()
             uiThread {
-                view?.getAllDuns(duns as ArrayList<DunEntity>)
+                view?.getAllDuns(duns as ArrayList<Dun>)
             }
         }
     }

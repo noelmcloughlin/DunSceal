@@ -9,7 +9,7 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
 
 import ie.noel.dunsceal.R
-import ie.noel.dunsceal.models.entity.DunEntity
+import ie.noel.dunsceal.models.entity.Dun
 import ie.noel.dunsceal.views.BaseFragment
 import ie.noel.dunsceal.utils.Loader.createLoader
 import ie.noel.dunsceal.utils.Loader.hideLoader
@@ -21,8 +21,8 @@ import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.info
 import java.util.HashMap
 
-open class HomeFragment(override var presenter: HomePresenter, private val user: String)
-    : BaseFragment(presenter), AnkoLogger {
+open class HomeFragment(val presenter: HomePresenter, private val user: String)
+    : BaseFragment(), AnkoLogger {
 
     private lateinit var eventListener: ValueEventListener
 
@@ -66,12 +66,12 @@ open class HomeFragment(override var presenter: HomePresenter, private val user:
                 .removeEventListener(eventListener)
     }
 
-    private fun writeNewDun(dun: DunEntity) {
+    private fun writeNewDun(dun: Dun) {
         // Create new dun at /duns & /duns/$uid
         showLoader(loader, "Adding Dun to Firebase")
         info("Firebase DB Reference : ${presenter.app}.database")
         val uid = presenter.app.auth.currentUser!!.uid
-        val key = presenter.app.db.child("duns").push().key!!.toInt()
+        val key = presenter.app.db.child("duns").push().key!!.toLong()
         if (key == null) {
             info("Firebase Error : Key Empty")
             return
@@ -97,8 +97,8 @@ open class HomeFragment(override var presenter: HomePresenter, private val user:
                 totalDone = 0
                 val children = snapshot.children
                 children.forEach {
-                    val dun = it.getValue<DunEntity>(DunEntity::class.java)
-                    totalDone += dun!!.votes!!
+                    val dun = it.getValue<Dun>(Dun::class.java)
+                    totalDone += dun!!.votes
                 }
                 if (progressBar != null)
                     progressBar.progress = totalDone

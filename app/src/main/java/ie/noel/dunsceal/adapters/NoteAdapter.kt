@@ -22,15 +22,13 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import ie.noel.dunsceal.R
 import ie.noel.dunsceal.databinding.NoteItemBinding
-import ie.noel.dunsceal.models.Note
-import ie.noel.dunsceal.models.entity.NoteEntity
 import ie.noel.dunsceal.views.home.dun.NoteClickCallback
 
 class NoteAdapter(private val mNoteClickCallback: NoteClickCallback?) : RecyclerView.Adapter<NoteAdapter.NoteViewHolder>() {
 
-  private var mNoteList: List<Note>? = null
+  private var mNoteList: List<ie.noel.dunsceal.models.Note>? = null
 
-  fun setNoteList(notes: List<NoteEntity>) {
+  fun setNoteList(notes: List<ie.noel.dunsceal.models.entity.Note>) {
     if (mNoteList == null) {
       mNoteList = notes
       notifyItemRangeInserted(0, notes.size)
@@ -52,11 +50,11 @@ class NoteAdapter(private val mNoteClickCallback: NoteClickCallback?) : Recycler
 
         override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
           val old = mNoteList!![oldItemPosition]
-          val note: Note = notes[newItemPosition]
+          val note: ie.noel.dunsceal.models.Note = notes[newItemPosition]
           return old.id == note.id
               && old.image === note.image
               && old.postedAt === note.postedAt
-              && old.contentId == note.contentId
+              && old.dunId == note.dunId
               && old.text == note.text
         }
       })

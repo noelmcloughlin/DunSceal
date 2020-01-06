@@ -24,18 +24,17 @@ import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 import ie.noel.dunsceal.R
 import ie.noel.dunsceal.R.mipmap.img_hillfort_default_round
-import ie.noel.dunsceal.databinding.DunCardBinding
+import ie.noel.dunsceal.databinding.DunItemBinding
 import ie.noel.dunsceal.models.Dun
 import ie.noel.dunsceal.views.home.dun.DunClickCallback
 import jp.wasabeef.picasso.transformations.CropCircleTransformation
-import kotlinx.android.synthetic.main.dun_card.view.*
+import kotlinx.android.synthetic.main.dun_item.view.*
 
 class DunAdapter constructor(private val mDunClickCallback: DunClickCallback?,
-                             reportAll: Boolean
+                             private val reportAll: Boolean
 
 ) : RecyclerView.Adapter<DunAdapter.DunViewHolder>() {
 
-  private val reportAll = reportAll
   var mDunList: MutableList<Dun>? = null
 
   fun setDunList(dunList: MutableList<Dun>) {
@@ -75,7 +74,7 @@ class DunAdapter constructor(private val mDunClickCallback: DunClickCallback?,
 
   override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DunViewHolder {
     val binding = DataBindingUtil
-        .inflate<DunCardBinding>(LayoutInflater.from(parent.context), R.layout.dun_card,
+        .inflate<DunItemBinding>(LayoutInflater.from(parent.context), R.layout.dun_item,
             parent, false)
     if (!this.reportAll) {
       binding.callback = mDunClickCallback
@@ -85,8 +84,10 @@ class DunAdapter constructor(private val mDunClickCallback: DunClickCallback?,
 
   override fun onBindViewHolder(holder: DunViewHolder, position: Int) {
     holder.binding.dun = mDunList!![position]
-    holder.bind(holder.binding.dun)
-    holder.binding.executePendingBindings()
+    with(holder) {
+      bind(binding.dun!!)
+      binding.executePendingBindings()
+    }
   }
 
   override fun getItemCount(): Int { return if (mDunList == null) 0 else mDunList!!.size }
@@ -98,10 +99,10 @@ class DunAdapter constructor(private val mDunClickCallback: DunClickCallback?,
   }
 
   override fun getItemId(position: Int): Long {
-    return mDunList!![position].id.toLong()
+    return mDunList!![position].id
   }
 
-  class DunViewHolder constructor(val binding: DunCardBinding) : RecyclerView.ViewHolder(binding.root) {
+  class DunViewHolder constructor(val binding: DunItemBinding) : RecyclerView.ViewHolder(binding.root) {
     fun bind(dun: Dun) {
       binding.root.tag = dun
       binding.root.visited.text = dun.visited.toString()

@@ -36,8 +36,6 @@ class MainApp : Application(), AnkoLogger {
   private var mAppExecutors: AppExecutors? = null
 
   lateinit var duns: DunStore
-  //lateinit var content: ContentStore
-
   lateinit var auth: FirebaseAuth
   lateinit var googleSignInClient: GoogleSignInClient
   lateinit var userImage: Uri

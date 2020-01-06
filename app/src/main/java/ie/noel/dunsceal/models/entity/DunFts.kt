@@ -19,5 +19,5 @@ import androidx.room.Entity
 import androidx.room.Fts4
 
 @Entity(tableName = "dunsFts")
-@Fts4(contentEntity = DunEntity::class)
-class DunFtsEntity(val name: String, val description: String)
+@Fts4(contentEntity = Dun::class)
+class DunFts(val name: String, val description: String)

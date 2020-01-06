@@ -62,7 +62,7 @@
     <string name="title_activity_dun">Dun</string>
     <string name="title_activity_edit_location">Dun</string>
     <string name="title_activity_login"> Signup/Login to Dun</string>
-    <string name="splash_play_btn_text">SignUp or Login</string>
+    <string name="splash_play_btn_text">skip splash</string>
     <string name="menu_showMap">Show Map</string>
     <string name="menu_logout">Logout</string>
 
@@ -123,11 +123,11 @@
     <string name="recordButton">Record</string>
     <string name="visited">no</string>
     <string name="direct">Direct</string>
-    <string name="upVote">Amount</string>
+    <string name="vote">Amount</string>
     <string name="reportTitle">Duns Report</string>
     <string name="defaultAmount">00</string>
     <string name="defaultMethod">N/A</string>
-    <string name="enter_upVote">Enter Amount</string>
+    <string name="enter_vote">Enter Amount</string>
     <string name="action_edit">Edit Dun</string>
     <string name="action_update">Update</string>
     <string name="message_edit">Please Update your Details Below</string>
@@ -210,9 +210,9 @@
     <string name="rank">Rank</string>
     <string name="rank_1">#1</string>
     <string name="wins">Visits</string>
-    <string name="wins_upVote">42</string>
+    <string name="wins_vote">42</string>
     <string name="losses">Losses</string>
-    <string name="losses_upVote">03</string>
+    <string name="losses_vote">03</string>
     <string name="congratulations">Congratulations!</string>
 
     <string name="title_activity_fragment_default_tag">Welcome</string>

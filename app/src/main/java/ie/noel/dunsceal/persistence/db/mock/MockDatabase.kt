@@ -25,18 +25,18 @@ import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import androidx.room.migration.Migration
 import androidx.sqlite.db.SupportSQLiteDatabase
-import ie.noel.dunsceal.models.entity.DunEntity
-import ie.noel.dunsceal.models.entity.DunFtsEntity
-import ie.noel.dunsceal.models.entity.InvestigationEntity
+import ie.noel.dunsceal.models.entity.Dun
+import ie.noel.dunsceal.models.entity.DunFts
+import ie.noel.dunsceal.models.entity.Investigation
 import ie.noel.dunsceal.main.AppExecutors
+import ie.noel.dunsceal.persistence.db.DunTypeConverters
 import ie.noel.dunsceal.persistence.db.mock.MockDataGenerator.generateDuns
 import ie.noel.dunsceal.persistence.db.mock.MockDataGenerator.generateInvestigationsForDuns
 import ie.noel.dunsceal.persistence.db.dao.DunDao
 import ie.noel.dunsceal.persistence.db.dao.InvestigationDao
-import ie.noel.dunsceal.utils.DateConverter
 
-@Database(entities = [DunEntity::class, DunFtsEntity::class, InvestigationEntity::class], version = 2)
-@TypeConverters(DateConverter::class)
+@Database(entities = [Dun::class, DunFts::class, Investigation::class], version = 2)
+@TypeConverters(DunTypeConverters::class)
 abstract class MockDatabase : RoomDatabase() {
 
   abstract fun dunDao(): DunDao
@@ -92,8 +92,8 @@ abstract class MockDatabase : RoomDatabase() {
                 addDelay()
                 // Generate the data for pre-population
                 val database = getInstance(appContext, executors)
-                val duns: List<DunEntity?> = generateDuns()
-                val investigations: List<InvestigationEntity?> = generateInvestigationsForDuns(duns as List<DunEntity>)
+                val duns: List<Dun?> = generateDuns()
+                val investigations: List<Investigation?> = generateInvestigationsForDuns(duns as List<Dun>)
                 insertData(database, duns, investigations)
                 // notify that the database was created and it's ready to be used
                 database!!.setDatabaseCreated()
@@ -105,8 +105,8 @@ abstract class MockDatabase : RoomDatabase() {
     }
 
     private fun insertData(database: MockDatabase?,
-                           duns: List<DunEntity?>,
-                           investigations: List<InvestigationEntity?>) {
+                           duns: List<Dun?>,
+                           investigations: List<Investigation?>) {
       database!!.runInTransaction {
         database.dunDao().insertAll(duns)
         database.investigationDao().insertAll(investigations)

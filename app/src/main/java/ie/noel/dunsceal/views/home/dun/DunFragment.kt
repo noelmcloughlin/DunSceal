@@ -30,9 +30,8 @@ import ie.noel.dunsceal.models.Investigation
 import ie.noel.dunsceal.persistence.viewmodel.DunViewModel
 import ie.noel.dunsceal.utils.Loader
 import ie.noel.dunsceal.views.BaseFragment
-import ie.noel.dunsceal.views.home.HomePresenter
 
-class DunFragment(override var presenter: HomePresenter) : BaseFragment(presenter) {
+class DunFragment : BaseFragment() {
 
   lateinit var app: MainApp
   private var mBinding: DunFragmentBinding? = null
@@ -72,7 +71,7 @@ class DunFragment(override var presenter: HomePresenter) : BaseFragment(presente
   }
 
   private fun subscribeToModel(model: DunViewModel) { // Observe dun data
-    model.observableDun!!.observe(viewLifecycleOwner, Observer { dunEntity -> model.setDun(dunEntity!!) })
+    model.observableDun!!.observe(viewLifecycleOwner, Observer { dun -> model.setDun(dun!!) })
     // Observe investigations
     model.investigations!!.observe(viewLifecycleOwner, Observer { investigationEntities ->
       if (investigationEntities != null) {
@@ -88,10 +87,10 @@ class DunFragment(override var presenter: HomePresenter) : BaseFragment(presente
     private const val KEY_DUN_ID = "dun_id"
     /** Creates dun fragment for specific dun ID  */
     @JvmStatic
-    fun forDun(presenter: HomePresenter, dunId: Int): DunFragment {
-      val fragment = DunFragment(presenter)
+    fun forDun(dunId: Long): DunFragment {
+      val fragment = DunFragment()
       val args = Bundle()
-      args.putInt(KEY_DUN_ID, dunId)
+      args.putInt(KEY_DUN_ID, dunId.toInt())
       fragment.arguments = args
       return fragment
     }

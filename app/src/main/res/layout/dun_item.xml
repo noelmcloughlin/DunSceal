@@ -37,7 +37,7 @@
                 android:layout_marginEnd="16dp"
                 app:srcCompat="@mipmap/ic_launcher_round"
                 android:contentDescription="@string/cd_dun_image_icon"
-                android:text="@{dun.image}"/>
+                android:src="@{dun.image}"/>
 
           <TextView
               android:id="@+id/name"
@@ -50,7 +50,7 @@
               android:text="@{dun.name}"/>
 
             <TextView
-                android:id="@+id/upVote"
+                android:id="@+id/vote"
                 android:layout_width="134dp"
                 android:layout_height="60dp"
                 android:layout_alignParentTop="true"
@@ -71,8 +71,8 @@
                 android:layout_alignParentTop="true"
                 android:layout_marginStart="58dp"
                 android:layout_marginTop="15dp"
-                android:layout_toEndOf="@+id/upVote"
-                android:text="@{dun.visited"
+                android:layout_toEndOf="@+id/vote"
+                android:text="@{dun.visited}"
                 android:textAlignment="viewStart"
                 android:textColor="#000000"
                 android:textSize="24sp" />
@@ -84,7 +84,7 @@
                 android:layout_alignParentTop="true"
                 android:layout_marginStart="21dp"
                 android:layout_toEndOf="@id/visited"
-                android:text="@{dun.image}"
+                android:text=""
                 app:srcCompat="@android:drawable/star_big_off" />
 
             <TextView

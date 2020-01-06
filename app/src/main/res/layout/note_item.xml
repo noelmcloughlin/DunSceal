@@ -40,7 +40,7 @@
       <TextView android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:layout_margin="@dimen/content_padding"
-          android:text="@{content.text}"/>
+          android:text="@{note.text}"/>
     </RelativeLayout>
   </androidx.cardview.widget.CardView>
 </layout>

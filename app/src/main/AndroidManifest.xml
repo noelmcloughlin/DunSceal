@@ -32,9 +32,17 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".main.SearchActivity">
+
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/google_maps_key" />
+
+        <activity android:name=".main.MainApp">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
@@ -43,7 +51,7 @@
 
         <activity android:name="ie.noel.dunsceal.views.login.SplashView">
             <intent-filter>
-                <!-- action android:name="android.intent.action.MAIN" /-->
+                <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
             <!-- This is added to handle a deep link -->
@@ -54,6 +62,7 @@
         <!-- Login Screen -->
 
         <activity android:name=".views.BaseView"/>
+        <activity android:name=".views.home.dun.DunView"/>
 
         <activity
             android:name=".views.login.LoginView"

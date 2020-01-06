@@ -8,6 +8,7 @@ import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import ie.noel.dunsceal.models.Dun
 import ie.noel.dunsceal.models.DunStore
+import ie.noel.dunsceal.models.entity.Dun
 import ie.noel.dunsceal.utils.Image.readImageFromPath
 import org.jetbrains.anko.AnkoLogger
 import java.io.ByteArrayOutputStream
@@ -24,7 +25,7 @@ class DunFireStore(val context: Context) : DunStore, AnkoLogger {
     return duns
   }
 
-  override fun findById(id: Int): Dun? {
+  override fun findById(id: Long): Dun? {
     return duns.find { p -> p.id == id }
   }
 
@@ -49,14 +50,14 @@ class DunFireStore(val context: Context) : DunStore, AnkoLogger {
       foundDun.visited = dun.visited
     }
 
-    db.child("users").child(userId).child("duns").child(dun.fbId!!).setValue(dun)
-    if ((dun.image!!.length) > 0 && (dun.image!![0] != 'h')) {
+    db.child("users").child(userId).child("duns").child(dun.fbId).setValue(dun)
+    if ((dun.image.length) > 0 && (dun.image[0] != 'h')) {
       updateImage(dun)
     }
   }
 
   override fun delete(dun: Dun) {
-    db.child("users").child(userId).child("duns").child(dun.fbId!!).removeValue()
+    db.child("users").child(userId).child("duns").child(dun.fbId).removeValue()
     duns.remove(dun)
   }
 
@@ -71,7 +72,7 @@ class DunFireStore(val context: Context) : DunStore, AnkoLogger {
 
       val imageRef = st.child("$userId/$imageName")
       val baos = ByteArrayOutputStream()
-      val bitmap = readImageFromPath(context, dun.image!!)
+      val bitmap = readImageFromPath(context, dun.image)
 
       bitmap?.let {
         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos)
@@ -82,7 +83,7 @@ class DunFireStore(val context: Context) : DunStore, AnkoLogger {
         }.addOnSuccessListener { taskSnapshot ->
           taskSnapshot.metadata!!.reference!!.downloadUrl.addOnSuccessListener {
             dun.image = it.toString()
-            db.child("users").child(userId).child("duns").child(dun.fbId!!).setValue(dun)
+            db.child("users").child(userId).child("duns").child(dun.fbId).setValue(dun)
           }
         }
       }

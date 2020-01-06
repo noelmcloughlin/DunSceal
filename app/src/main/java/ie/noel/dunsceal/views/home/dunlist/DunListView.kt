@@ -33,13 +33,13 @@ class DunListView(var presenter: HomePresenter) : HomeView(), AnkoLogger {
       presenter.loadDuns()
 
     }
+  }
 
-    fun onOptionsItemSelected(item: MenuItem?): Boolean {
-      when (item?.itemId) {
-        R.id.item_add -> presenter.doAdd()
-        R.id.item_map -> presenter.doShowMap()
-      }
-      return super.onOptionsItemSelected(item!!)
+  override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+    when (item?.itemId) {
+      R.id.item_add -> presenter.doAdd()
+      R.id.item_map -> presenter.doShowMap()
     }
+    return super.onOptionsItemSelected(item!!)
   }
 }

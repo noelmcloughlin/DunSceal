@@ -25,12 +25,12 @@ object Permissions {
         var permissionGranted = false
         if (code == REQUEST_PERMISSIONS_REQUEST_CODE) {
             when {
-                grantResults.isEmpty() -> Log.i("Location", "User interaction was cancelled.")
+                grantResults.isEmpty() -> Log.i("Location.kt", "User interaction was cancelled.")
                 (grantResults[0] == PackageManager.PERMISSION_GRANTED) -> {
                     permissionGranted = true
-                    Log.i("Location", "Permission Granted.")
+                    Log.i("Location.kt", "Permission Granted.")
                 }
-                else -> Log.i("Location", "Permission Denied.")
+                else -> Log.i("Location.kt", "Permission Denied.")
             }
         }
         return permissionGranted

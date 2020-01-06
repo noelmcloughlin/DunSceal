@@ -6,10 +6,9 @@ import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import ie.noel.dunsceal.R
 import ie.noel.dunsceal.utils.Loader
-import ie.noel.dunsceal.views.home.HomePresenter
 import kotlinx.android.synthetic.main.fragment_report.view.*
 
-open class BaseFragment(open var presenter: HomePresenter) : Fragment() {
+open class BaseFragment : Fragment() {
 
   lateinit var loader: AlertDialog
   lateinit var root: View
@@ -31,12 +30,15 @@ open class BaseFragment(open var presenter: HomePresenter) : Fragment() {
 
   // Swipe support
   open fun setSwipeRefresh() {
-    root.swipeRefresh.setOnRefreshListener {
-      root.swipeRefresh.isRefreshing = true
+    if (root.swipeRefresh != null) {
+      root.swipeRefresh.setOnRefreshListener {
+        root.swipeRefresh.isRefreshing = true
+      }
     }
   }
 
   fun checkSwipeRefresh() {
-    if (root.swipeRefresh.isRefreshing) root.swipeRefresh.isRefreshing = false
+    if ((root.swipeRefresh != null) && (root.swipeRefresh.isRefreshing))
+      root.swipeRefresh.isRefreshing = false
   }
 }

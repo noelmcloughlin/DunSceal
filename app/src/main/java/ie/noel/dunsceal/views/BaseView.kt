@@ -7,14 +7,13 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import com.google.firebase.auth.FirebaseAuth
-import ie.noel.dunsceal.models.entity.DunEntity
 import ie.noel.dunsceal.models.entity.Location
 import org.jetbrains.anko.AnkoLogger
 import ie.noel.dunsceal.utils.Loader
-import ie.noel.dunsceal.views.home.dun.DunFragment
 import ie.noel.dunsceal.views.home.dunlist.DunListView
 import ie.noel.dunsceal.views.home.location.EditLocationView
 import ie.noel.dunsceal.views.home.HomeView
+import ie.noel.dunsceal.views.home.dun.DunView
 import ie.noel.dunsceal.views.login.LoginView
 import ie.noel.dunsceal.views.home.map.DunMapView
 import ie.noel.dunsceal.views.login.SplashView
@@ -41,7 +40,7 @@ open class BaseView : AppCompatActivity(), AnkoLogger {
     val intent = when (view) {
       VIEW.LOCATION -> Intent(this, EditLocationView::class.java)
       VIEW.HOME -> Intent(this, HomeView::class.java)
-      VIEW.DUN -> Intent(this, DunFragment::class.java)
+      VIEW.DUN -> Intent(this, DunView::class.java)
       VIEW.MAPS -> Intent(this, DunMapView::class.java)
       VIEW.LIST -> Intent(this, DunListView::class.java)
       VIEW.LOGIN -> Intent(this, LoginView::class.java)
@@ -84,9 +83,10 @@ open class BaseView : AppCompatActivity(), AnkoLogger {
     basePresenter?.doRequestPermissionsResult(requestCode, permissions, grantResults)
   }
 
-  open fun showDun(dun: DunEntity) {}
-  open fun getAllDuns(duns: ArrayList<DunEntity>) {}
+  open fun showDun(dun: ie.noel.dunsceal.models.entity.Dun) {}
+  open fun getAllDuns(duns: ArrayList<ie.noel.dunsceal.models.entity.Dun>) {}
   open fun showLocation(location : Location) {}
   open fun showProgress() {}
   open fun hideProgress() {}
+
 }

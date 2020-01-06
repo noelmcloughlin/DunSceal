@@ -6,29 +6,29 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
-import ie.noel.dunsceal.models.entity.DunEntity
-import ie.noel.dunsceal.models.entity.DunStoreEntity
+import ie.noel.dunsceal.models.entity.Dun
+import ie.noel.dunsceal.models.entity.DunStore
 import ie.noel.dunsceal.utils.Image.readImageFromPath
 import org.jetbrains.anko.AnkoLogger
 import java.io.ByteArrayOutputStream
 import java.io.File
 
-class DunFireStore(val context: Context) : DunStoreEntity, AnkoLogger {
+class DunFireStore(val context: Context) : DunStore, AnkoLogger {
 
-  val duns = ArrayList<DunEntity>()
+  val duns = ArrayList<Dun>()
   private lateinit var userId: String
   lateinit var db: DatabaseReference
   private lateinit var st: StorageReference
 
-  override fun findAll(): List<DunEntity> {
+  override fun findAll(): List<Dun> {
     return duns
   }
 
-  override fun findById(id: Int): DunEntity? {
+  override fun findById(id: Long): Dun? {
     return duns.find { p -> p.id == id }
   }
 
-  override fun create(dun: DunEntity) {
+  override fun create(dun: Dun) {
     val key = db.child("users").child(userId).child("duns").push().key
     key?.let {
       dun.fbId = key
@@ -38,8 +38,8 @@ class DunFireStore(val context: Context) : DunStoreEntity, AnkoLogger {
     }
   }
 
-  override fun update(dun: DunEntity) {
-    val foundDun: DunEntity? = duns.find { p -> p.fbId == dun.fbId }
+  override fun update(dun: Dun) {
+    val foundDun: Dun? = duns.find { p -> p.fbId == dun.fbId }
     if (foundDun != null) {
       foundDun.name = dun.name
       foundDun.description = dun.description
@@ -53,7 +53,7 @@ class DunFireStore(val context: Context) : DunStoreEntity, AnkoLogger {
     }
   }
 
-  override fun delete(dun: DunEntity) {
+  override fun delete(dun: Dun) {
     db.child("users").child(userId).child("duns").child(dun.fbId).removeValue()
     duns.remove(dun)
   }
@@ -62,7 +62,7 @@ class DunFireStore(val context: Context) : DunStoreEntity, AnkoLogger {
     duns.clear()
   }
 
-  private fun updateImage(dun: DunEntity) {
+  private fun updateImage(dun: Dun) {
     if (dun.image != "") {
       val fileName = File(dun.image)
       val imageName = fileName.name
@@ -93,7 +93,7 @@ class DunFireStore(val context: Context) : DunStoreEntity, AnkoLogger {
       }
 
       override fun onDataChange(dataSnapshot: DataSnapshot) {
-        dataSnapshot.children.mapNotNullTo(duns) { it.getValue<DunEntity>(DunEntity::class.java) }
+        dataSnapshot.children.mapNotNullTo(duns) { it.getValue<Dun>(Dun::class.java) }
         dunsReady()
       }
     }
