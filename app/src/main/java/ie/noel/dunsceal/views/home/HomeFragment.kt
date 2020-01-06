@@ -9,7 +9,7 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
 
 import ie.noel.dunsceal.R
-import ie.noel.dunsceal.models.entity.Dun
+import ie.noel.dunsceal.models.entity.DunEntity
 import ie.noel.dunsceal.views.BaseFragment
 import ie.noel.dunsceal.utils.Loader.createLoader
 import ie.noel.dunsceal.utils.Loader.hideLoader
@@ -66,7 +66,7 @@ open class HomeFragment(val presenter: HomePresenter, private val user: String)
                 .removeEventListener(eventListener)
     }
 
-    private fun writeNewDun(dun: Dun) {
+    private fun writeNewDun(dun: DunEntity) {
         // Create new dun at /duns & /duns/$uid
         showLoader(loader, "Adding Dun to Firebase")
         info("Firebase DB Reference : ${presenter.app}.database")
@@ -97,7 +97,7 @@ open class HomeFragment(val presenter: HomePresenter, private val user: String)
                 totalDone = 0
                 val children = snapshot.children
                 children.forEach {
-                    val dun = it.getValue<Dun>(Dun::class.java)
+                    val dun = it.getValue<DunEntity>(DunEntity::class.java)
                     totalDone += dun!!.votes
                 }
                 if (progressBar != null)

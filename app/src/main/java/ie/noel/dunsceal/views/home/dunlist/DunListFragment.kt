@@ -32,9 +32,8 @@ import com.google.firebase.database.ValueEventListener
 import ie.noel.dunsceal.R
 import ie.noel.dunsceal.adapters.DunAdapter
 import ie.noel.dunsceal.databinding.ListFragmentBinding
-import ie.noel.dunsceal.models.Dun
-import ie.noel.dunsceal.models.entity.Dun
-import ie.noel.dunsceal.persistence.viewmodel.DunListViewModel
+import ie.noel.dunsceal.models.entity.DunEntity
+import ie.noel.dunsceal.models.viewmodel.DunListViewModel
 import ie.noel.dunsceal.utils.Loader
 import ie.noel.dunsceal.utils.SwipeToDeleteCallback
 import ie.noel.dunsceal.utils.SwipeToEditCallback
@@ -69,10 +68,10 @@ class DunListFragment(open var presenter: HomePresenter) : BaseFragment(), AnkoL
       override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
         val adapter = mBinding!!.root.myRecyclerView.adapter as DunAdapter
         adapter.removeAt(viewHolder.adapterPosition)
-        deleteDun((viewHolder.itemView.tag as Dun).id.toString())
+        deleteDun((viewHolder.itemView.tag as DunEntity).id.toString())
         deleteUserDun(
             presenter.app.auth.currentUser!!.uid,
-            (viewHolder.itemView.tag as Dun).id.toString()
+            (viewHolder.itemView.tag as DunEntity).id.toString()
         )
       }
     }
@@ -81,7 +80,7 @@ class DunListFragment(open var presenter: HomePresenter) : BaseFragment(), AnkoL
 
     val swipeEditHandler = object : SwipeToEditCallback(activity!!) {
       override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-        onClick(viewHolder.itemView.tag as Dun)
+        onClick(viewHolder.itemView.tag as DunEntity)
       }
     }
     val itemTouchEditHelper = ItemTouchHelper(swipeEditHandler)
@@ -110,19 +109,19 @@ class DunListFragment(open var presenter: HomePresenter) : BaseFragment(), AnkoL
     mBinding!!.dunsSearchBtn.setOnClickListener {
       val query = mBinding!!.dunsSearchBox.text
       if (query == null || query.toString().isEmpty()) {
-        subscribeUi(viewModel.duns as LiveData<List<Dun>>)
+        subscribeUi(viewModel.duns as LiveData<List<DunEntity>>)
       } else {
-        subscribeUi(viewModel.searchDuns("*$query*") as LiveData<List<Dun>>)
+        subscribeUi(viewModel.searchDuns("*$query*") as LiveData<List<DunEntity>>)
       }
     }
-    subscribeUi(viewModel.duns as LiveData<List<Dun>>)
+    subscribeUi(viewModel.duns as LiveData<List<DunEntity>>)
   }
 
-  private fun subscribeUi(liveData: LiveData<List<Dun>>) { // Update the list when the data changes
-    liveData.observe(viewLifecycleOwner, Observer { myDuns: List<Dun>? ->
+  private fun subscribeUi(liveData: LiveData<List<DunEntity>>) { // Update the list when the data changes
+    liveData.observe(viewLifecycleOwner, Observer { myDuns: List<DunEntity>? ->
       if (myDuns != null) {
         mBinding!!.isLoading = false
-        mDunAdapter!!.setDunList(myDuns as MutableList<Dun>)
+        mDunAdapter!!.setDunList(myDuns as MutableList<DunEntity>)
       } else {
         mBinding!!.isLoading = true
       }
@@ -133,7 +132,7 @@ class DunListFragment(open var presenter: HomePresenter) : BaseFragment(), AnkoL
   }
 
   private val mDunClickCallback = object : DunClickCallback {
-    override fun onClick(dun: Dun?) {
+    override fun onClick(dun: DunEntity?) {
       if (lifecycle.currentState.isAtLeast(Lifecycle.State.STARTED)) {
         (activity as HomeView?)!!.show(dun!!)
       }
@@ -157,7 +156,7 @@ class DunListFragment(open var presenter: HomePresenter) : BaseFragment(), AnkoL
   private fun getAllDuns(userId: String?) {
     loader = Loader.createLoader(activity!!)
     Loader.showLoader(loader, "Downloading Duns from Firebase")
-    val duns = ArrayList<Dun>()
+    val duns = ArrayList<DunEntity>()
     // myRecyclerView.adapter = OldDunAdapter(duns, this, false)
 
     presenter.app.db.child("users").child(userId!!).child("duns").child(userId)
@@ -170,7 +169,7 @@ class DunListFragment(open var presenter: HomePresenter) : BaseFragment(), AnkoL
             Loader.hideLoader(loader)
             val children = snapshot.children
             children.forEach {
-              val dun = it.getValue<Dun>(Dun::class.java)
+              val dun = it.getValue<DunEntity>(DunEntity::class.java)
 
               duns.add(dun!!)
               root.myRecyclerView.adapter = DunAdapter(mDunClickCallback, false)
@@ -184,7 +183,7 @@ class DunListFragment(open var presenter: HomePresenter) : BaseFragment(), AnkoL
         })
   }
 
-  fun onClick(dun: Dun) {
+  fun onClick(dun: DunEntity) {
     presenter.doEditDun(dun)
   }
 

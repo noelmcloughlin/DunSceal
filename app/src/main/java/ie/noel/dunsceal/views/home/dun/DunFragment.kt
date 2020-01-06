@@ -27,7 +27,8 @@ import ie.noel.dunsceal.adapters.InvestigationAdapter
 import ie.noel.dunsceal.databinding.DunFragmentBinding
 import ie.noel.dunsceal.main.MainApp
 import ie.noel.dunsceal.models.Investigation
-import ie.noel.dunsceal.persistence.viewmodel.DunViewModel
+import ie.noel.dunsceal.models.entity.DunEntity
+import ie.noel.dunsceal.models.viewmodel.DunViewModel
 import ie.noel.dunsceal.utils.Loader
 import ie.noel.dunsceal.views.BaseFragment
 
@@ -71,7 +72,7 @@ class DunFragment : BaseFragment() {
   }
 
   private fun subscribeToModel(model: DunViewModel) { // Observe dun data
-    model.observableDun!!.observe(viewLifecycleOwner, Observer { dun -> model.setDun(dun!!) })
+    model.observableDunEntity!!.observe(viewLifecycleOwner, Observer { dun: DunEntity? -> model.setDun(dun!!) })
     // Observe investigations
     model.investigations!!.observe(viewLifecycleOwner, Observer { investigationEntities ->
       if (investigationEntities != null) {

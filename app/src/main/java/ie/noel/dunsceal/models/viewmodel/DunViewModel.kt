@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package ie.noel.dunsceal.persistence.viewmodel
+package ie.noel.dunsceal.models.viewmodel
 
 import android.app.Application
 import androidx.databinding.ObservableField
@@ -22,20 +22,20 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider.NewInstanceFactory
 import ie.noel.dunsceal.main.MainApp
-import ie.noel.dunsceal.models.entity.Dun
-import ie.noel.dunsceal.models.entity.Investigation
+import ie.noel.dunsceal.models.entity.DunEntity
+import ie.noel.dunsceal.models.entity.InvestigationEntity
 import ie.noel.dunsceal.persistence.DataRepository
 
 class DunViewModel(application: Application, repository: DataRepository?,
-                   private val mDunId: Int) : AndroidViewModel(application) {
-  val observableDun: LiveData<Dun?>? = repository!!.loadDun(mDunId)
-  var dun = ObservableField<Dun>()
+                   private val mDunId: Long) : AndroidViewModel(application) {
+  val observableDunEntity: LiveData<DunEntity?>? = repository!!.loadDun(mDunId)
+  var dun = ObservableField<DunEntity>()
   /**
    * Expose the LiveData Investigations query so the UI can observe it.
    */
-  val investigations: LiveData<List<Investigation>?>? = repository!!.loadInvestigations(mDunId)
+  val investigations: LiveData<List<InvestigationEntity>?>? = repository!!.loadInvestigations(mDunId)
 
-  fun setDun(dun: Dun) {
+  fun setDun(dun: DunEntity) {
     this.dun.set(dun)
   }
 
@@ -49,7 +49,7 @@ class DunViewModel(application: Application, repository: DataRepository?,
   class Factory(private val mApplication: Application, private val mDunId: Int) : NewInstanceFactory() {
     private val mRepository: DataRepository? = (mApplication as MainApp).repository
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-      return DunViewModel(mApplication, mRepository, mDunId) as T
+      return DunViewModel(mApplication, mRepository, mDunId.toLong()) as T
     }
 
   }

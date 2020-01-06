@@ -22,6 +22,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import ie.noel.dunsceal.R
 import ie.noel.dunsceal.databinding.InvestigationItemBinding
+import ie.noel.dunsceal.models.entity.InvestigationEntity
 import ie.noel.dunsceal.views.home.dun.InvestigationClickCallback
 
 class InvestigationAdapter(private val mInvestigationClickCallback: InvestigationClickCallback?
@@ -30,10 +31,10 @@ class InvestigationAdapter(private val mInvestigationClickCallback: Investigatio
 
   private var mInvestigationList: List<ie.noel.dunsceal.models.Investigation>? = null
 
-  fun setInvestigationList(investigations: List<ie.noel.dunsceal.models.entity.Investigation>) {
+  fun setInvestigationList(investigationEntities: List<ie.noel.dunsceal.models.entity.InvestigationEntity>) {
     if (mInvestigationList == null) {
-      mInvestigationList = investigations
-      notifyItemRangeInserted(0, investigations.size)
+      mInvestigationList = investigationEntities
+      notifyItemRangeInserted(0, investigationEntities.size)
     } else {
       val diffResult = DiffUtil.calculateDiff(object : DiffUtil.Callback() {
         override fun getOldListSize(): Int {
@@ -41,18 +42,18 @@ class InvestigationAdapter(private val mInvestigationClickCallback: Investigatio
         }
 
         override fun getNewListSize(): Int {
-          return investigations.size
+          return investigationEntities.size
         }
 
         override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
           val old = mInvestigationList!![oldItemPosition]
-          val investigation = investigations[newItemPosition]
+          val investigation = investigationEntities[newItemPosition]
           return old.id == investigation.id
         }
 
         override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
           val old = mInvestigationList!![oldItemPosition]
-          val investigation: ie.noel.dunsceal.models.Investigation = investigations[newItemPosition]
+          val investigation: ie.noel.dunsceal.models.Investigation = investigationEntities[newItemPosition]
           return old.id == investigation.id
               && old.image === investigation.image
               && old.postedAt === investigation.postedAt
@@ -60,7 +61,7 @@ class InvestigationAdapter(private val mInvestigationClickCallback: Investigatio
               && old.text == investigation.text
         }
       })
-      mInvestigationList = investigations
+      mInvestigationList = investigationEntities
       diffResult.dispatchUpdatesTo(this)
     }
   }
@@ -74,7 +75,7 @@ class InvestigationAdapter(private val mInvestigationClickCallback: Investigatio
   }
 
   override fun onBindViewHolder(holder: InvestigationViewHolder, position: Int) {
-    holder.binding.investigation = mInvestigationList!![position]
+    holder.binding.investigation = mInvestigationList!![position] as InvestigationEntity?
     holder.binding.executePendingBindings()
   }
 

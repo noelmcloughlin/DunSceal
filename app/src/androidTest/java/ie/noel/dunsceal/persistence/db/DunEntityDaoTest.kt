@@ -15,31 +15,20 @@
  */
 package ie.noel.dunsceal.persistence.db
 
-import android.database.sqlite.SQLiteConstraintException
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.room.Room
 import androidx.test.core.app.ApplicationProvider
-import androidx.test.runner.AndroidJUnit4
-import ie.noel.dunsceal.persistence.db.TestData.INVESTIGATIONS
 import ie.noel.dunsceal.persistence.db.dao.DunDao
-import ie.noel.dunsceal.persistence.db.dao.InvestigationDao
 import ie.noel.dunsceal.persistence.db.mock.MockDatabase
-import junit.framework.TestCase.fail
-import org.junit.After
-import org.junit.Before
-import org.junit.Rule
-import org.junit.Test
-import org.junit.runner.RunWith
+import org.junit.*
 
 /**
- * Test the implementation of [InvestigationDao]
+ * Test the implementation of [DunDao]
  */
-@RunWith(AndroidJUnit4::class)
-class InvestigationDaoTest {
+class DunEntityDaoTest {
   @Rule
   var instantTaskExecutorRule = InstantTaskExecutorRule()
   private var mDatabase: MockDatabase? = null
-  private var mInvestigationDao: InvestigationDao? = null
   private var mDunDao: DunDao? = null
   @Before
   @Throws(Exception::class)
@@ -49,7 +38,6 @@ class InvestigationDaoTest {
         MockDatabase::class.java) // allowing main thread queries, just for testing
         .allowMainThreadQueries()
         .build()
-    mInvestigationDao = mDatabase!!.investigationDao()
     mDunDao = mDatabase!!.dunDao()
   }
 
@@ -57,16 +45,6 @@ class InvestigationDaoTest {
   @Throws(Exception::class)
   fun closeDb() {
     mDatabase!!.close()
-  }
-
-  @Test
-  @Throws(InterruptedException::class)
-  fun cantInsertInvestigationWithoutDun() {
-    try {
-      mInvestigationDao!!.insertAll(INVESTIGATIONS)
-      fail("SQLiteConstraintException expected")
-    } catch (ignored: SQLiteConstraintException) {
-    }
   }
 
 }

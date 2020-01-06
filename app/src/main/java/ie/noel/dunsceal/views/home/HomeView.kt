@@ -12,7 +12,7 @@ import com.google.android.material.snackbar.Snackbar
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
 import ie.noel.dunsceal.R
-import ie.noel.dunsceal.models.Dun
+import ie.noel.dunsceal.models.entity.DunEntity
 import ie.noel.dunsceal.views.home.dunlist.ReportAllFragment
 import ie.noel.dunsceal.views.home.dunlist.ReportFragment
 import ie.noel.dunsceal.utils.Image.readImageUri
@@ -64,7 +64,7 @@ open class HomeView : LoginView(), NavigationView.OnNavigationItemSelectedListen
         drawerLayout.addDrawerListener(toggle)
         toggle.syncState()
         userName = presenter.app.auth.currentUser?.displayName.toString()
-        navView.getHeaderView(0).nav_user_displayname.text = userName
+        //navView.getHeaderView(0).nav_user_displayname.text = userName
         //if (userName != null)
         //  homeTitle.text = "${getString(R.string.homeTitle) + userName}"
 
@@ -165,7 +165,7 @@ open class HomeView : LoginView(), NavigationView.OnNavigationItemSelectedListen
     }
 
     /** Shows the dun detail fragment  */
-    fun show(dun: Dun) {
+    fun show(dun: DunEntity) {
         val dunFragment = DunFragment.forDun(dun.id)
         supportFragmentManager
             .beginTransaction()

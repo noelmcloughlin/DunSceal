@@ -23,7 +23,7 @@ import org.jetbrains.anko.info
 class EditFragment(override var presenter: HomePresenter) : BaseFragment(presenter), AnkoLogger {
 
   lateinit var app: MainApp
-  private var editDun: Dun? = null
+  private var editDun: DunEntity? = null
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
@@ -59,7 +59,7 @@ class EditFragment(override var presenter: HomePresenter) : BaseFragment(present
 
   companion object {
     @JvmStatic
-    fun newInstance(presenter: HomePresenter, dun: Dun) =
+    fun newInstance(presenter: HomePresenter, dun: DunEntity) =
         EditFragment(presenter).apply {
           arguments = Bundle().apply {
             putParcelable("editdun",dun)
@@ -73,7 +73,7 @@ class EditFragment(override var presenter: HomePresenter) : BaseFragment(present
     editDun!!.votes = root.editUpvotes.text.toString().toInt()
   }
 
-  private fun updateUserDun(userId: String, uid: String?, dun: Dun) {
+  private fun updateUserDun(userId: String, uid: String?, dun: DunEntity) {
     app.db.child("users").child(userId).child("duns").child(userId).child(uid!!)
         .addListenerForSingleValueEvent(
             object : ValueEventListener {
@@ -94,7 +94,7 @@ class EditFragment(override var presenter: HomePresenter) : BaseFragment(present
             })
   }
 
-  private fun updateDun(uid: String?, dun: Dun) {
+  private fun updateDun(uid: String?, dun: DunEntity) {
     app.db.child("duns").child(uid!!)
         .addListenerForSingleValueEvent(
             object : ValueEventListener {

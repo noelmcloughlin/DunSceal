@@ -9,8 +9,7 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
 import ie.noel.dunsceal.R
-import ie.noel.dunsceal.models.Dun
-import ie.noel.dunsceal.models.entity.Dun
+import ie.noel.dunsceal.models.entity.DunEntity
 import ie.noel.dunsceal.utils.Loader.createLoader
 import ie.noel.dunsceal.utils.Loader.hideLoader
 import ie.noel.dunsceal.utils.Loader.showLoader
@@ -19,7 +18,7 @@ import kotlinx.android.synthetic.main.fragment_report.view.*
 import org.jetbrains.anko.info
 
 interface DunListener {
-    fun onDunClick(donation: Dun)
+    fun onDunClick(donation: DunEntity)
 }
 
 class ReportAllFragment(override var presenter: HomePresenter) : ReportFragment(presenter) {
@@ -60,7 +59,7 @@ class ReportAllFragment(override var presenter: HomePresenter) : ReportFragment(
     private fun getAllUsersDuns() {
         loader = createLoader(activity!!)
         showLoader(loader, "Downloading All Users Duns from Firebase")
-        val dunsList = ArrayList<Dun>()
+        val dunsList = ArrayList<DunEntity>()
         presenter.app.db.child("duns")
             .addValueEventListener(object : ValueEventListener {
                 override fun onCancelled(error: DatabaseError) {
@@ -71,7 +70,7 @@ class ReportAllFragment(override var presenter: HomePresenter) : ReportFragment(
                     hideLoader(loader)
                     val children = snapshot.children
                     children.forEach {
-                        val dun = it.getValue<Dun>(Dun::class.java)
+                        val dun = it.getValue<DunEntity>(DunEntity::class.java)
 
                         dunsList.add(dun!!)
                        // root.myRecyclerView.adapter =

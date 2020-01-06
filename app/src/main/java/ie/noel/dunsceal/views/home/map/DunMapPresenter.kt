@@ -5,7 +5,7 @@ import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
-import ie.noel.dunsceal.models.entity.Dun
+import ie.noel.dunsceal.models.entity.DunEntity
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
 import ie.noel.dunsceal.views.BasePresenter
@@ -13,10 +13,10 @@ import ie.noel.dunsceal.views.BaseView
 
 class DunMapPresenter(view: BaseView) : BasePresenter(view) {
 
-  fun doPopulateMap(map: GoogleMap, duns: List<Dun>) {
+  fun doPopulateMap(map: GoogleMap, duns: List<DunEntity>) {
     map.uiSettings.isZoomControlsEnabled = true
     duns.forEach {
-      val loc = LatLng(it.location.lat, it.location.lng)
+      val loc = LatLng(it.location.latitude, it.location.longitude)
       val options = MarkerOptions().title(it.name).position(loc)
       map.addMarker(options).tag = it
       map.moveCamera(CameraUpdateFactory.newLatLngZoom(loc, it.location.zoom))
@@ -27,9 +27,9 @@ class DunMapPresenter(view: BaseView) : BasePresenter(view) {
     if (marker.tag != null) {
       val tag = marker.tag
       doAsync {
-        val dun = tag as Dun
+        val dun = tag as DunEntity
         uiThread {
-          if (dun != null) view?.showDun(dun)
+          view?.showDun(dun)
         }
       }
     }
@@ -39,7 +39,7 @@ class DunMapPresenter(view: BaseView) : BasePresenter(view) {
     doAsync {
       val duns = app.duns.findAll()
       uiThread {
-        view?.getAllDuns(duns as ArrayList<Dun>)
+        view?.getAllDuns(duns as ArrayList<DunEntity>)
       }
     }
   }

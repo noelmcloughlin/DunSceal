@@ -8,8 +8,9 @@ import android.view.MenuItem
 import com.bumptech.glide.Glide
 import org.jetbrains.anko.AnkoLogger
 import ie.noel.dunsceal.R
-import ie.noel.dunsceal.models.entity.Dun
-import ie.noel.dunsceal.models.entity.Location
+import ie.noel.dunsceal.models.Dun
+import ie.noel.dunsceal.models.entity.DunEntity
+import ie.noel.dunsceal.models.entity.LocationEntity
 import ie.noel.dunsceal.views.BaseView
 import kotlinx.android.synthetic.main.activity_dun.*
 import kotlinx.android.synthetic.main.appbar_fab.*
@@ -18,7 +19,7 @@ import org.jetbrains.anko.toast
 class DunView : BaseView(), AnkoLogger {
 
   lateinit var presenter: DunPresenter
-  var dun = Dun()
+  var dun = DunEntity()
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
@@ -36,7 +37,7 @@ class DunView : BaseView(), AnkoLogger {
     chooseImage.setOnClickListener { presenter.doSelectImage() }
   }
 
-  override fun showDun(dun: Dun) {
+  override fun showDun(dun: DunEntity) {
     dunTitle.setText(dun.name)
     description.setText(dun.description)
     Glide.with(this).load(dun.image).into(dunImage)
@@ -45,9 +46,9 @@ class DunView : BaseView(), AnkoLogger {
   }
 
   @SuppressLint("SetTextI18n")
-  override fun showLocation(location: Location) {
-    dunLatitude.text = "%.6f".format(location.latitude)
-    dunLongitude.text = "%.6f".format(location.longitude)
+  override fun showLocation(locationEntity: LocationEntity) {
+    dunLatitude.text = "%.6f".format(locationEntity.latitude)
+    dunLongitude.text = "%.6f".format(locationEntity.longitude)
   }
 
   override fun onCreateOptionsMenu(menu: Menu): Boolean {

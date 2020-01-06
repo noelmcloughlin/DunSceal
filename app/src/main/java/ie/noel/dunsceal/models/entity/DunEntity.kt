@@ -8,13 +8,13 @@ import androidx.room.PrimaryKey
 import com.google.firebase.database.Exclude
 import com.google.firebase.database.IgnoreExtraProperties
 import ie.noel.dunsceal.models.Dun
+import ie.noel.dunsceal.models.entity.DunEntity
 import kotlinx.android.parcel.Parcelize
-import kotlinx.android.parcel.RawValue
 
 @IgnoreExtraProperties
 @Parcelize
 @Entity(tableName = "duns")
-data class Dun(
+data class DunEntity(
     @PrimaryKey(autoGenerate = true) override var id: Long = 0,
     override var name: String = "",
     override var description: String = "",
@@ -23,7 +23,7 @@ data class Dun(
     override var visited : Int = 0,
     override var image: String = "",
     //@Embedded override var images: ArrayList<String> = arrayListOf("dummy1", "dummy2", "dummy3", "dummy4"),
-    @Embedded override var location: Location = Location()
+    @Embedded override var location: LocationEntity = LocationEntity()
 ) : Parcelable, Dun {
   @Exclude
   fun toMap(): Map<String, Any?> {

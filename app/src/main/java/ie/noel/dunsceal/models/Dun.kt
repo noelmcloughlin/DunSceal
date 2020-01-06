@@ -1,6 +1,6 @@
 package ie.noel.dunsceal.models
 
-import ie.noel.dunsceal.models.entity.Location
+import ie.noel.dunsceal.models.entity.LocationEntity
 
 interface Dun {
   var id: Long
@@ -10,5 +10,5 @@ interface Dun {
   var fbId: String
   var visited: Int
   var image: String
-  var location: Location
+  var location: LocationEntity
 }

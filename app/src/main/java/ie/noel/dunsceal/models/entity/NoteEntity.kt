@@ -4,8 +4,8 @@ import androidx.room.*
 import ie.noel.dunsceal.models.Note
 import java.util.*
 
-@Entity(tableName = "notes", foreignKeys = [ForeignKey(entity = Dun::class, parentColumns = ["id"], childColumns = ["dunId"], onDelete = ForeignKey.CASCADE)], indices = [Index(value = ["dunId"])])
-class Note : Note {
+@Entity(tableName = "notes", foreignKeys = [ForeignKey(entity = DunEntity::class, parentColumns = ["id"], childColumns = ["dunId"], onDelete = ForeignKey.CASCADE)], indices = [Index(value = ["dunId"])])
+class NoteEntity : Note {
   @PrimaryKey(autoGenerate = true)
   override var id = 0L
   override var dunId = 0L

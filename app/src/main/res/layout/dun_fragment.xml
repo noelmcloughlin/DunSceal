@@ -28,7 +28,7 @@
 
         <variable
             name="dunViewModel"
-            type="ie.noel.dunsceal.persistence.viewmodel.DunViewModel"/>
+            type="ie.noel.dunsceal.models.viewmodel.DunViewModel"/>
     </data>
 
     <LinearLayout

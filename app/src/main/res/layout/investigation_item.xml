@@ -19,7 +19,7 @@
         xmlns:app="http://schemas.android.com/apk/res-auto">
     <data>
         <variable name="investigation"
-                  type="ie.noel.dunsceal.models.Investigation"/>
+                  type="ie.noel.dunsceal.models.entity.InvestigationEntity"/>
         <variable name="callback"
                   type="ie.noel.dunsceal.views.home.dun.InvestigationClickCallback"/>
     </data>

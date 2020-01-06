@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.view.MenuItem
 import androidx.recyclerview.widget.LinearLayoutManager
 import ie.noel.dunsceal.R
-import ie.noel.dunsceal.models.Dun
+import ie.noel.dunsceal.models.entity.DunEntity
 import ie.noel.dunsceal.views.BaseView
 import ie.noel.dunsceal.views.home.HomePresenter
 import ie.noel.dunsceal.views.home.HomeView

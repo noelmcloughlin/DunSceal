@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorBackground"
     android:textAlignment="center"
     tools:context=".views.about.AboutUsFragment">
 
@@ -15,7 +14,8 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="16dp"
+        android:layout_marginStart="48dp"
+        android:layout_marginTop="32dp"
         android:fontFamily="cursive"
         android:text="About"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
@@ -28,20 +28,22 @@
 
     <ImageView
         android:id="@+id/imageView3"
-        android:layout_width="543dp"
-        android:layout_height="125dp"
+        android:layout_width="322dp"
+        android:layout_height="48dp"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
+        android:layout_marginBottom="100dp"
         app:layout_constraintBottom_toTopOf="@+id/splashPicture"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/logo" />
+        app:layout_constraintTop_toBottomOf="@+id/homeTitle"
+        app:srcCompat="@drawable/logo_contrasted" />
 
     <ImageView
         android:id="@+id/splashPicture"
-        android:layout_width="426dp"
-        android:layout_height="412dp"
-        android:layout_marginTop="192dp"
+        android:layout_width="316dp"
+        android:layout_height="110dp"
+        android:layout_marginTop="24dp"
         app:layout_constraintBottom_toTopOf="@+id/aboutUsText"
         app:layout_constraintDimensionRatio=""
         app:layout_constraintEnd_toEndOf="parent"
@@ -52,17 +54,19 @@
 
     <TextView
         android:id="@+id/aboutUsText"
-        android:layout_width="549dp"
-        android:layout_height="312dp"
+        android:layout_width="240dp"
+        android:layout_height="215dp"
         android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:text="@string/AboutUsText"
         android:textAlignment="center"
-        android:textColor="#FFFFFF"
-        android:textSize="24sp"
+        android:textColor="@color/blue_700"
+        android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.329"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/splashPicture" />
 

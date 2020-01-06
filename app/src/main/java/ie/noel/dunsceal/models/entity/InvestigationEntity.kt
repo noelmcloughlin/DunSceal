@@ -19,8 +19,8 @@ import androidx.room.*
 import ie.noel.dunsceal.models.Investigation
 import java.util.*
 
-@Entity(tableName = "investigations", foreignKeys = [ForeignKey(entity = Dun::class, parentColumns = ["id"], childColumns = ["dunId"], onDelete = ForeignKey.CASCADE)], indices = [Index(value = ["dunId"])])
-class Investigation : Investigation {
+@Entity(tableName = "investigations", foreignKeys = [ForeignKey(entity = DunEntity::class, parentColumns = ["id"], childColumns = ["dunId"], onDelete = ForeignKey.CASCADE)], indices = [Index(value = ["dunId"])])
+class InvestigationEntity : Investigation {
   @PrimaryKey(autoGenerate = true)
   override var id = 0L
   override var dunId = 0L

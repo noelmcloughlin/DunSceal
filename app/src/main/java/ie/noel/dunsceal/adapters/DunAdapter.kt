@@ -25,7 +25,7 @@ import com.squareup.picasso.Picasso
 import ie.noel.dunsceal.R
 import ie.noel.dunsceal.R.mipmap.img_hillfort_default_round
 import ie.noel.dunsceal.databinding.DunItemBinding
-import ie.noel.dunsceal.models.Dun
+import ie.noel.dunsceal.models.entity.DunEntity
 import ie.noel.dunsceal.views.home.dun.DunClickCallback
 import jp.wasabeef.picasso.transformations.CropCircleTransformation
 import kotlinx.android.synthetic.main.dun_item.view.*
@@ -35,9 +35,9 @@ class DunAdapter constructor(private val mDunClickCallback: DunClickCallback?,
 
 ) : RecyclerView.Adapter<DunAdapter.DunViewHolder>() {
 
-  var mDunList: MutableList<Dun>? = null
+  var mDunList: MutableList<DunEntity>? = null
 
-  fun setDunList(dunList: MutableList<Dun>) {
+  fun setDunList(dunList: MutableList<DunEntity>) {
     if (mDunList == null) {
       mDunList = dunList
       notifyItemRangeInserted(0, dunList.size)
@@ -103,7 +103,7 @@ class DunAdapter constructor(private val mDunClickCallback: DunClickCallback?,
   }
 
   class DunViewHolder constructor(val binding: DunItemBinding) : RecyclerView.ViewHolder(binding.root) {
-    fun bind(dun: Dun) {
+    fun bind(dun: DunEntity) {
       binding.root.tag = dun
       binding.root.visited.text = dun.visited.toString()
 

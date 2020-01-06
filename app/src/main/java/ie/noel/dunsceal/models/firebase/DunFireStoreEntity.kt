@@ -1,4 +1,4 @@
-package ie.noel.dunsceal.persistence
+package ie.noel.dunsceal.models.firebase
 
 import android.content.Context
 import android.graphics.Bitmap
@@ -6,29 +6,29 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
-import ie.noel.dunsceal.models.entity.Dun
-import ie.noel.dunsceal.models.entity.DunStore
+import ie.noel.dunsceal.models.entity.DunEntity
+import ie.noel.dunsceal.models.entity.DunStoreEntity
 import ie.noel.dunsceal.utils.Image.readImageFromPath
 import org.jetbrains.anko.AnkoLogger
 import java.io.ByteArrayOutputStream
 import java.io.File
 
-class DunFireStore(val context: Context) : DunStore, AnkoLogger {
+class DunFireStoreEntity(val context: Context) : DunStoreEntity, AnkoLogger {
 
-  val duns = ArrayList<Dun>()
-  private lateinit var userId: String
+  val duns = ArrayList<DunEntity>()
+  lateinit var userId: String
   lateinit var db: DatabaseReference
   private lateinit var st: StorageReference
 
-  override fun findAll(): List<Dun> {
+  override fun findAll(): List<DunEntity> {
     return duns
   }
 
-  override fun findById(id: Long): Dun? {
+  override fun findById(id: Long): DunEntity? {
     return duns.find { p -> p.id == id }
   }
 
-  override fun create(dun: Dun) {
+  override fun create(dun: DunEntity) {
     val key = db.child("users").child(userId).child("duns").push().key
     key?.let {
       dun.fbId = key
@@ -38,22 +38,24 @@ class DunFireStore(val context: Context) : DunStore, AnkoLogger {
     }
   }
 
-  override fun update(dun: Dun) {
-    val foundDun: Dun? = duns.find { p -> p.fbId == dun.fbId }
+  override fun update(dun: DunEntity) {
+    val foundDun: DunEntity? = duns.find { p -> p.fbId == dun.fbId }
     if (foundDun != null) {
       foundDun.name = dun.name
       foundDun.description = dun.description
       foundDun.image = dun.image
       foundDun.location = dun.location
+      foundDun.votes = dun.votes
+      foundDun.visited = dun.visited
     }
 
     db.child("users").child(userId).child("duns").child(dun.fbId).setValue(dun)
-    if ((dun.image != null) && (dun.image.toString().length) > 0 && (dun.image[0] != 'h')) {
+    if ((dun.image.length) > 0 && (dun.image[0] != 'h')) {
       updateImage(dun)
     }
   }
 
-  override fun delete(dun: Dun) {
+  override fun delete(dun: DunEntity) {
     db.child("users").child(userId).child("duns").child(dun.fbId).removeValue()
     duns.remove(dun)
   }
@@ -62,7 +64,7 @@ class DunFireStore(val context: Context) : DunStore, AnkoLogger {
     duns.clear()
   }
 
-  private fun updateImage(dun: Dun) {
+  private fun updateImage(dun: DunEntity) {
     if (dun.image != "") {
       val fileName = File(dun.image)
       val imageName = fileName.name
@@ -91,17 +93,15 @@ class DunFireStore(val context: Context) : DunStore, AnkoLogger {
     val valueEventListener = object : ValueEventListener {
       override fun onCancelled(dataSnapshot: DatabaseError) {
       }
-
       override fun onDataChange(dataSnapshot: DataSnapshot) {
-        dataSnapshot.children.mapNotNullTo(duns) { it.getValue<Dun>(Dun::class.java) }
+        dataSnapshot.children.mapNotNullTo(duns) { it.getValue<DunEntity>(DunEntity::class.java) }
         dunsReady()
       }
     }
     userId = FirebaseAuth.getInstance().currentUser!!.uid
     db = FirebaseDatabase.getInstance().reference
     st = FirebaseStorage.getInstance().reference
-    db.child("users").child(userId).child("duns")
-        .addListenerForSingleValueEvent(valueEventListener)
     duns.clear()
+    db.child("users").child(userId).child("duns").addListenerForSingleValueEvent(valueEventListener)
   }
 }

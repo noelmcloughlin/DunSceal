@@ -10,8 +10,8 @@ import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
-import ie.noel.dunsceal.models.entity.Dun
-import ie.noel.dunsceal.models.entity.Location
+import ie.noel.dunsceal.models.entity.DunEntity
+import ie.noel.dunsceal.models.entity.LocationEntity
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
 import ie.noel.dunsceal.utils.Permissions.checkLocationPermissions
@@ -23,8 +23,8 @@ import ie.noel.dunsceal.views.*
 class DunPresenter(view: BaseView) : BasePresenter(view) {
 
     var map: GoogleMap? = null
-    var dun = Dun()
-    private var defaultLocation = Location(52.245696, -7.139102, "Waterford", 15f)
+    var dun = DunEntity()
+    private var defaultLocation = LocationEntity(52.245696, -7.139102, "Waterford", 15f)
     private var edit = false
     private var locationService: FusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(view)
     private val locationRequest = createDefaultLocationRequest()
@@ -45,7 +45,7 @@ class DunPresenter(view: BaseView) : BasePresenter(view) {
     fun doSetCurrentLocation() {
         locationService.lastLocation.addOnSuccessListener {
             if (it != null)
-                locationUpdate(Location(it.latitude, it.longitude))
+                locationUpdate(LocationEntity(it.latitude, it.longitude))
         }
     }
 
@@ -56,7 +56,7 @@ class DunPresenter(view: BaseView) : BasePresenter(view) {
                 if (locationResult != null && locationResult.locations != null) {
                     val l = locationResult.locations.last()
                     if (l != null)
-                        locationUpdate(Location(l.latitude, l.longitude))
+                        locationUpdate(LocationEntity(l.latitude, l.longitude))
                 }
             }
         }
@@ -82,18 +82,18 @@ class DunPresenter(view: BaseView) : BasePresenter(view) {
         locationUpdate(dun.location)
     }
 
-    fun locationUpdate(location: Location) {
-        dun.location = location
+    fun locationUpdate(locationEntity: LocationEntity) {
+        dun.location = locationEntity
         dun.location.zoom = 15f
         map?.clear()
         val options =
-            MarkerOptions().title(dun.name).position(LatLng(dun.location.lat, dun.location.lng))
+            MarkerOptions().title(dun.name).position(LatLng(dun.location.latitude, dun.location.longitude))
         map?.addMarker(options)
         map?.moveCamera(
             CameraUpdateFactory.newLatLngZoom(
                 LatLng(
-                    dun.location.lat,
-                    dun.location.lng
+                    dun.location.latitude,
+                    dun.location.longitude
                 ), dun.location.zoom
             )
         )
@@ -139,7 +139,7 @@ class DunPresenter(view: BaseView) : BasePresenter(view) {
             VIEW.LOCATION,
             LOCATION_REQUEST,
             "location",
-            Location(dun.location.lat, dun.location.lng, dun.location.county, dun.location.zoom)
+            LocationEntity(dun.location.latitude, dun.location.longitude, dun.location.county, dun.location.zoom)
         )
     }
 
@@ -151,7 +151,7 @@ class DunPresenter(view: BaseView) : BasePresenter(view) {
                 view?.showDun(dun)
             }
             LOCATION_REQUEST -> {
-                val location = data.extras?.getParcelable<Location>("location")!!
+                val location = data.extras?.getParcelable<LocationEntity>("location")!!
                 dun.location = location
                 locationUpdate(location)
             }

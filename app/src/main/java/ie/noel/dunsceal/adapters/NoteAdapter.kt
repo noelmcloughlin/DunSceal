@@ -22,16 +22,17 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import ie.noel.dunsceal.R
 import ie.noel.dunsceal.databinding.NoteItemBinding
+import ie.noel.dunsceal.models.entity.NoteEntity
 import ie.noel.dunsceal.views.home.dun.NoteClickCallback
 
 class NoteAdapter(private val mNoteClickCallback: NoteClickCallback?) : RecyclerView.Adapter<NoteAdapter.NoteViewHolder>() {
 
   private var mNoteList: List<ie.noel.dunsceal.models.Note>? = null
 
-  fun setNoteList(notes: List<ie.noel.dunsceal.models.entity.Note>) {
+  fun setNoteList(noteEntities: List<NoteEntity>) {
     if (mNoteList == null) {
-      mNoteList = notes
-      notifyItemRangeInserted(0, notes.size)
+      mNoteList = noteEntities
+      notifyItemRangeInserted(0, noteEntities.size)
     } else {
       val diffResult = DiffUtil.calculateDiff(object : DiffUtil.Callback() {
         override fun getOldListSize(): Int {
@@ -39,18 +40,18 @@ class NoteAdapter(private val mNoteClickCallback: NoteClickCallback?) : Recycler
         }
 
         override fun getNewListSize(): Int {
-          return notes.size
+          return noteEntities.size
         }
 
         override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
           val old = mNoteList!![oldItemPosition]
-          val note = notes[newItemPosition]
+          val note = noteEntities[newItemPosition]
           return old.id == note.id
         }
 
         override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
           val old = mNoteList!![oldItemPosition]
-          val note: ie.noel.dunsceal.models.Note = notes[newItemPosition]
+          val note: ie.noel.dunsceal.models.Note = noteEntities[newItemPosition]
           return old.id == note.id
               && old.image === note.image
               && old.postedAt === note.postedAt
@@ -58,7 +59,7 @@ class NoteAdapter(private val mNoteClickCallback: NoteClickCallback?) : Recycler
               && old.text == note.text
         }
       })
-      mNoteList = notes
+      mNoteList = noteEntities
       diffResult.dispatchUpdatesTo(this)
     }
   }
@@ -72,7 +73,7 @@ class NoteAdapter(private val mNoteClickCallback: NoteClickCallback?) : Recycler
   }
 
   override fun onBindViewHolder(holder: NoteViewHolder, position: Int) {
-    holder.binding.note = mNoteList!![position]
+    holder.binding.note = mNoteList!![position] as NoteEntity?
     holder.binding.executePendingBindings()
   }
 

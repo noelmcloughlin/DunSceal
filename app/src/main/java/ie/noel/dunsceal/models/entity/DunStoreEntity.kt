@@ -1,9 +1,7 @@
-package ie.noel.dunsceal.models
+package ie.noel.dunsceal.models.entity
 
-import ie.noel.dunsceal.models.entity.DunEntity
-
-interface DunStore {
-  fun findAll(): List<DunEntity?>?
+interface DunStoreEntity {
+  fun findAll(): List<DunEntity?>
   fun create(dun: DunEntity)
   fun update(dun: DunEntity)
   fun delete(dun: DunEntity)

@@ -22,7 +22,7 @@ open class BaseFragment : Fragment() {
 
     // Inflate a default layout for this fragment
     activity?.title = getString(R.string.title_activity_fragment_default_tag)
-    root = inflater.inflate(R.layout.fragment_base, container, false)
+    root = inflater.inflate(R.layout.fragment_home, container, false)
     loader = Loader.createLoader(activity!!)
     setSwipeRefresh()
     return root

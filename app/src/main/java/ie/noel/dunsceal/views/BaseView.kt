@@ -7,7 +7,9 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import com.google.firebase.auth.FirebaseAuth
-import ie.noel.dunsceal.models.entity.Location
+import ie.noel.dunsceal.models.Dun
+import ie.noel.dunsceal.models.entity.DunEntity
+import ie.noel.dunsceal.models.entity.LocationEntity
 import org.jetbrains.anko.AnkoLogger
 import ie.noel.dunsceal.utils.Loader
 import ie.noel.dunsceal.views.home.dunlist.DunListView
@@ -83,9 +85,9 @@ open class BaseView : AppCompatActivity(), AnkoLogger {
     basePresenter?.doRequestPermissionsResult(requestCode, permissions, grantResults)
   }
 
-  open fun showDun(dun: ie.noel.dunsceal.models.entity.Dun) {}
-  open fun getAllDuns(duns: ArrayList<ie.noel.dunsceal.models.entity.Dun>) {}
-  open fun showLocation(location : Location) {}
+  open fun showDun(dun: DunEntity) {}
+  open fun getAllDuns(duns: ArrayList<DunEntity>) {}
+  open fun showLocation(locationEntity : LocationEntity) {}
   open fun showProgress() {}
   open fun hideProgress() {}
 

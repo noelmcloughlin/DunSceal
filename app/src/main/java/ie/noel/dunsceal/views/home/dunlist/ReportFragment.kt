@@ -12,7 +12,7 @@ import com.google.firebase.database.ValueEventListener
 
 import ie.noel.dunsceal.R
 import ie.noel.dunsceal.adapters.DunAdapter
-import ie.noel.dunsceal.models.entity.Dun
+import ie.noel.dunsceal.models.entity.DunEntity
 import ie.noel.dunsceal.views.BaseFragment
 import ie.noel.dunsceal.utils.Loader.createLoader
 import ie.noel.dunsceal.utils.Loader.hideLoader
@@ -50,10 +50,10 @@ open class ReportFragment(open var presenter: HomePresenter) : BaseFragment(), A
       override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
         val adapter = root.myRecyclerView.adapter as DunAdapter
         adapter.removeAt(viewHolder.adapterPosition)
-        deleteDun((viewHolder.itemView.tag as Dun).id.toString())
+        deleteDun((viewHolder.itemView.tag as DunEntity).id.toString())
         deleteUserDun(
             presenter.app.auth.currentUser!!.uid,
-            (viewHolder.itemView.tag as Dun).id.toString()
+            (viewHolder.itemView.tag as DunEntity).id.toString()
         )
       }
     }
@@ -62,7 +62,7 @@ open class ReportFragment(open var presenter: HomePresenter) : BaseFragment(), A
 
     val swipeEditHandler = object : SwipeToEditCallback(activity!!) {
       override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-        onClick(viewHolder.itemView.tag as Dun)
+        onClick(viewHolder.itemView.tag as DunEntity)
       }
     }
     val itemTouchEditHelper = ItemTouchHelper(swipeEditHandler)
@@ -95,7 +95,7 @@ open class ReportFragment(open var presenter: HomePresenter) : BaseFragment(), A
   private fun getAllDuns(userId: String?) {
     loader = createLoader(activity!!)
     showLoader(loader, "Downloading Duns from Firebase")
-    val duns = ArrayList<Dun>()
+    val duns = ArrayList<DunEntity>()
     // myRecyclerView.adapter = OldDunAdapter(duns, this, false)
 
     presenter.app.db.child("users").child(userId!!).child("duns").child(userId)
@@ -108,7 +108,7 @@ open class ReportFragment(open var presenter: HomePresenter) : BaseFragment(), A
             hideLoader(loader)
             val children = snapshot.children
             children.forEach {
-              val dun = it.getValue<Dun>(Dun::class.java)
+              val dun = it.getValue<DunEntity>(DunEntity::class.java)
 
               duns.add(dun!!)
               //     root.myRecyclerView.adapter =
@@ -123,7 +123,7 @@ open class ReportFragment(open var presenter: HomePresenter) : BaseFragment(), A
         })
   }
 
-  fun onClick(dun: Dun) {
+  fun onClick(dun: DunEntity) {
     presenter.doEditDun(dun)
   }
 

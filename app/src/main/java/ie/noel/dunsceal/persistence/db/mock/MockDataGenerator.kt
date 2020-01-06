@@ -15,8 +15,8 @@
  */
 package ie.noel.dunsceal.persistence.db.mock
 
-import ie.noel.dunsceal.models.entity.Dun
-import ie.noel.dunsceal.models.entity.Investigation
+import ie.noel.dunsceal.models.entity.DunEntity
+import ie.noel.dunsceal.models.entity.InvestigationEntity
 import java.util.*
 import java.util.concurrent.TimeUnit
 
@@ -35,15 +35,15 @@ object MockDataGenerator {
   private val INVESTIGATIONS = arrayOf(
       "Investigation 1", "Investigation 2", "Investigation 3", "Investigation 4", "Investigation 5", "Investigation 6")
   private val VISITED = arrayOf(1, 0, 1, 0, 1)
-  private val IMAGE = "https://firebasestorage.googleapis.com/v0/b/dunsceal.appspot.com/o/hillfort-default.png?alt=media&token=227979e6-344e-4653-8f75-a540d2ed2392"
+  private const val IMAGE = "https://firebasestorage.googleapis.com/v0/b/dunsceal.appspot.com/o/hillfort-default.png?alt=media&token=227979e6-344e-4653-8f75-a540d2ed2392"
 
 
-  fun generateDuns(): List<Dun> {
-    val duns: MutableList<Dun> = ArrayList(FIRST.size * SECOND.size)
+  fun generateDuns(): List<DunEntity> {
+    val duns: MutableList<DunEntity> = ArrayList(FIRST.size * SECOND.size)
     val rnd = Random()
     for (i in FIRST.indices) {
       for (j in SECOND.indices) {
-        val dun = Dun()
+        val dun = DunEntity()
         dun.name = FIRST[i] + " " + SECOND[j]
         dun.description = dun.name + " " + DESCRIPTION[j]
         dun.votes = rnd.nextInt(240)
@@ -57,20 +57,20 @@ object MockDataGenerator {
   }
 
   fun generateInvestigationsForDuns(
-      duns: List<Dun>): List<Investigation> {
-    val investigations: MutableList<Investigation> = ArrayList()
+      duns: List<DunEntity>): List<InvestigationEntity> {
+    val investigationEntities: MutableList<InvestigationEntity> = ArrayList()
     val rnd = Random()
     for ((id, name) in duns) {
       val investigationsNumber = rnd.nextInt(5) + 1
       for (i in 0 until investigationsNumber) {
-        val investigation = Investigation()
+        val investigation = InvestigationEntity()
         investigation.dunId = id
         investigation.text = INVESTIGATIONS[i] + " for " + name
         investigation.postedAt = Date(System.currentTimeMillis()
             - TimeUnit.DAYS.toMillis(investigationsNumber - i.toLong()) + TimeUnit.HOURS.toMillis(i.toLong()))
-        investigations.add(investigation)
+        investigationEntities.add(investigation)
       }
     }
-    return investigations
+    return investigationEntities
   }
 }

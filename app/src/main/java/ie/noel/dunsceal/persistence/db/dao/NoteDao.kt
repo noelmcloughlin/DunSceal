@@ -2,33 +2,33 @@ package ie.noel.dunsceal.persistence.db.dao
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
-import ie.noel.dunsceal.models.entity.Note
+import ie.noel.dunsceal.models.entity.NoteEntity
 
 @Dao
 interface NoteDao {
   @Query("SELECT * FROM notes where dunId = :dunId")
-  fun load(dunId: Int): LiveData<List<Note>?>?
+  fun load(dunId: Int): LiveData<List<NoteEntity>?>?
 
   @Query("SELECT * FROM notes where dunId = :dunId")
-  fun loadSync(dunId: Int): List<Note?>?
+  fun loadSync(dunId: Int): List<NoteEntity?>?
 
   @Insert(onConflict = OnConflictStrategy.REPLACE)
-  fun insertAll(notes: List<Note?>?)
+  fun insertAll(noteEntities: List<NoteEntity?>?)
 
   // Room DB integration
 
   @Insert(onConflict = OnConflictStrategy.REPLACE)
-  fun create(note: Note?)
+  fun create(noteEntity: NoteEntity?)
 
   @Query("SELECT * FROM notes")
-  fun findAll(): List<Note?>?
+  fun findAll(): List<NoteEntity?>?
 
   @Query("select * from notes where id = :id")
-  fun findById(id: Long): Note?
+  fun findById(id: Long): NoteEntity?
 
   @Update
-  fun update(note: Note?)
+  fun update(noteEntity: NoteEntity?)
 
   @Delete
-  fun delete(note: Note?)
+  fun delete(noteEntity: NoteEntity?)
 }
