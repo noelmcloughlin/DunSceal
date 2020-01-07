@@ -12,11 +12,12 @@ import ie.noel.dunsceal.models.Dun
 import ie.noel.dunsceal.models.entity.DunEntity
 import ie.noel.dunsceal.models.entity.LocationEntity
 import ie.noel.dunsceal.views.BaseView
+import ie.noel.dunsceal.views.login.LoginView
 import kotlinx.android.synthetic.main.activity_dun.*
-import kotlinx.android.synthetic.main.appbar_fab.*
+import kotlinx.android.synthetic.main.appbar_fab_home.*
 import org.jetbrains.anko.toast
 
-class DunView : BaseView(), AnkoLogger {
+class DunView : LoginView(), AnkoLogger {
 
   lateinit var presenter: DunPresenter
   var dun = DunEntity()
@@ -24,7 +25,7 @@ class DunView : BaseView(), AnkoLogger {
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     setContentView(R.layout.activity_dun)
-    super.init(toolbar, true)
+    //super.init(toolbar, true)
 
     presenter = initPresenter (DunPresenter(this)) as DunPresenter
 
@@ -107,6 +108,16 @@ class DunView : BaseView(), AnkoLogger {
   override fun onSaveInstanceState(outState: Bundle) {
     super.onSaveInstanceState(outState)
     mapView.onSaveInstanceState(outState)
+  }
+
+  /** Shows dun detail fragment  */
+  fun showDunFragment(dun: DunEntity) {
+    val dunFragment = DunFragment.forDun(presenter, dun.id)
+    supportFragmentManager
+        .beginTransaction()
+        .addToBackStack("dun")
+        .replace(R.id.fragment_container,
+            dunFragment, null).commit()
   }
 }
 

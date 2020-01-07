@@ -11,4 +11,5 @@ interface Dun {
   var visited: Int
   var image: String
   var location: LocationEntity
+  var email: String?
 }

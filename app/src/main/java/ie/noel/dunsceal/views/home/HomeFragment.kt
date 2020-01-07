@@ -15,7 +15,8 @@ import ie.noel.dunsceal.utils.Loader.createLoader
 import ie.noel.dunsceal.utils.Loader.hideLoader
 import ie.noel.dunsceal.utils.Loader.showLoader
 import kotlinx.android.synthetic.main.fragment_home.*
-import kotlinx.android.synthetic.main.fragment_home.view.*
+import kotlinx.android.synthetic.main.activity_login_screen.*
+import kotlinx.android.synthetic.main.activity_login_screen.view.*
 
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.info
@@ -37,9 +38,12 @@ open class HomeFragment(val presenter: HomePresenter, private val user: String)
           //  LinearLayoutManager(context, RecyclerView.VERTICAL, false)
 
         loader = createLoader(activity!!)
+        presenter.fetchData()
+
         activity?.title = getString(R.string.action_dun)
-        rootView.homeTitle.text = getString(R.string.homeTitle)
-        rootView.progressBar.max = 10000
+        if (rootView.progressBar != null) {
+            rootView.progressBar.max = 10000   // TODO dynamic calculation
+        }
         return rootView
     }
 
@@ -55,6 +59,7 @@ open class HomeFragment(val presenter: HomePresenter, private val user: String)
     override fun onResume() {
         super.onResume()
         getTotalDone(presenter.app.auth.currentUser?.uid)
+        presenter.fetchData()
     }
 
     override fun onPause() {
@@ -64,27 +69,6 @@ open class HomeFragment(val presenter: HomePresenter, private val user: String)
         presenter.app.db.child("users").child(userId!!).child("duns")
                 .child(presenter.app.auth.currentUser!!.uid)
                 .removeEventListener(eventListener)
-    }
-
-    private fun writeNewDun(dun: DunEntity) {
-        // Create new dun at /duns & /duns/$uid
-        showLoader(loader, "Adding Dun to Firebase")
-        info("Firebase DB Reference : ${presenter.app}.database")
-        val uid = presenter.app.auth.currentUser!!.uid
-        val key = presenter.app.db.child("duns").push().key!!.toLong()
-        if (key == null) {
-            info("Firebase Error : Key Empty")
-            return
-        }
-        dun.id = key
-        val dunValues = dun.toMap()
-
-        val childUpdates = HashMap<String, Any>()
-        childUpdates["/duns/$key"] = dunValues
-        childUpdates["/user-duns/$uid/$key"] = dunValues
-
-        presenter.app.db.updateChildren(childUpdates)
-        hideLoader(loader)
     }
 
     private fun getTotalDone(userId: String?) {
@@ -102,8 +86,8 @@ open class HomeFragment(val presenter: HomePresenter, private val user: String)
                 }
                 if (progressBar != null)
                     progressBar.progress = totalDone
-                if (totalSoFar != null)
-                    totalSoFar.text = java.lang.String.format("$ ${this@HomeFragment.totalDone}")
+                if (home_total_visited_amount != null)
+                    home_total_visited_amount.text = java.lang.String.format("$ ${this@HomeFragment.totalDone}")
             }
         }
         presenter.fetchData()

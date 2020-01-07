@@ -23,7 +23,8 @@ data class DunEntity(
     override var visited : Int = 0,
     override var image: String = "",
     //@Embedded override var images: ArrayList<String> = arrayListOf("dummy1", "dummy2", "dummy3", "dummy4"),
-    @Embedded override var location: LocationEntity = LocationEntity()
+    @Embedded override var location: LocationEntity = LocationEntity(),
+    override var email: String? = "john@doe.com"
 ) : Parcelable, Dun {
   @Exclude
   fun toMap(): Map<String, Any?> {
@@ -35,7 +36,8 @@ data class DunEntity(
         "fbId" to fbId,
         "visited" to visited,
         "location" to location,
-        "image" to image
+        "image" to image,
+        "email" to email
     )
   }
 }

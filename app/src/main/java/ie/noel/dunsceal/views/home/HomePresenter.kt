@@ -17,7 +17,9 @@ import ie.noel.dunsceal.main.MainApp
 import ie.noel.dunsceal.models.UserPhoto
 import ie.noel.dunsceal.models.entity.DunEntity
 import ie.noel.dunsceal.utils.Image.convertImageToBytes
+import ie.noel.dunsceal.views.BaseFragment
 import ie.noel.dunsceal.views.VIEW
+import ie.noel.dunsceal.views.home.dunlist.DunListFragment
 import ie.noel.dunsceal.views.login.LoginPresenter
 import ie.noel.dunsceal.views.login.LoginView
 import jp.wasabeef.picasso.transformations.CropCircleTransformation
@@ -169,12 +171,13 @@ open class HomePresenter(view: LoginView) : LoginPresenter(view) {
         writeImageRef(app.userImage.toString())
     }
 
+    // LIST MENU
     fun doAdd() {
         view?.navigateTo(VIEW.DUN)
     }
 
-    fun doEditDun(dun: DunEntity) {
-        view?.navigateTo(VIEW.SPLASH, 0, "dun_edit", dun)
+    fun doEdit(dun: DunEntity) {
+        view?.navigateTo(VIEW.DUN, 0, "dun_edit", dun)
     }
 
     fun doShowMap() {
@@ -189,6 +192,4 @@ open class HomePresenter(view: LoginView) : LoginPresenter(view) {
             }
         }
     }
-
-    fun navigateToDun() {}
 }

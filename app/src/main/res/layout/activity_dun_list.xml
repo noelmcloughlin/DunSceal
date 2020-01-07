@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".views.home.dunlist.ReportFragment">
 
-    <include layout="@layout/appbar_fab" />
+    <include layout="@layout/appbar_fab_home" />
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/swipeRefresh"

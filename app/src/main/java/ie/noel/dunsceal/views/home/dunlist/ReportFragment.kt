@@ -124,7 +124,7 @@ open class ReportFragment(open var presenter: HomePresenter) : BaseFragment(), A
   }
 
   fun onClick(dun: DunEntity) {
-    presenter.doEditDun(dun)
+    presenter.doEdit(dun)
   }
 
   fun deleteUserDun(userId: String, uid: String?) {

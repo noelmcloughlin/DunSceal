@@ -15,7 +15,7 @@
       tools:layout_editor_absoluteX="-16dp"
       >
 
-    <include layout="@layout/appbar_fab"/>
+
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"

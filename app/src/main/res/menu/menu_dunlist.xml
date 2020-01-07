@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto">
+
+  <item
+      android:id="@+id/menu_dunlist_item_add"
+      android:icon="@android:drawable/ic_menu_add"
+      android:title="@string/home_menu_add"
+      app:showAsAction="never"/>
+
+  <item
+      android:id="@+id/menu_dunlist_item_map"
+      android:icon="@android:drawable/ic_menu_search"
+      android:title="@string/home_menu_list"
+      app:showAsAction="never"/>
+
+  <item
+    android:id="@+id/menu_dunlist_item_logout"
+    android:title="@string/menu_logout"
+    android:visible="true"
+    app:showAsAction="never" />
+</menu>

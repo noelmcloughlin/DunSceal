@@ -25,16 +25,15 @@ import androidx.lifecycle.ViewModelProvider
 import ie.noel.dunsceal.R
 import ie.noel.dunsceal.adapters.InvestigationAdapter
 import ie.noel.dunsceal.databinding.DunFragmentBinding
-import ie.noel.dunsceal.main.MainApp
 import ie.noel.dunsceal.models.Investigation
 import ie.noel.dunsceal.models.entity.DunEntity
 import ie.noel.dunsceal.models.viewmodel.DunViewModel
 import ie.noel.dunsceal.utils.Loader
 import ie.noel.dunsceal.views.BaseFragment
+import java.util.HashMap
 
-class DunFragment : BaseFragment() {
+class DunFragment(val presenter: DunPresenter) : BaseFragment() {
 
-  lateinit var app: MainApp
   private var mBinding: DunFragmentBinding? = null
   private var mInvestigationAdapter: InvestigationAdapter? = null
 
@@ -45,7 +44,6 @@ class DunFragment : BaseFragment() {
   ): View? {
     // Inflate this data binding layout (or fragment_edit)
     mBinding = DataBindingUtil.inflate(inflater, R.layout.dun_fragment, container, false)
-
     loader = Loader.createLoader(activity!!)
 
     // Create and set the adapter for the RecyclerView.
@@ -88,12 +86,34 @@ class DunFragment : BaseFragment() {
     private const val KEY_DUN_ID = "dun_id"
     /** Creates dun fragment for specific dun ID  */
     @JvmStatic
-    fun forDun(dunId: Long): DunFragment {
-      val fragment = DunFragment()
+    fun forDun(presenter: DunPresenter, dunId: Long): DunFragment {
+      val fragment = DunFragment(presenter)
       val args = Bundle()
       args.putInt(KEY_DUN_ID, dunId.toInt())
       fragment.arguments = args
       return fragment
     }
+  }
+
+  override fun onResume() {
+    super.onResume()
+    presenter
+  }
+
+  // TODO incorporate this in doAdd()
+  private fun writeNewDun(dun: DunEntity) {
+    // Create new dun at /duns & /duns/$uid
+    Loader.showLoader(loader, "Adding Dun to Firebase")
+    val uid = presenter.app.auth.currentUser!!.uid
+    val key = presenter.app.db.child("duns").push().key!!.toLong()
+    dun.id = key
+    val dunValues = dun.toMap()
+
+    val childUpdates = HashMap<String, Any>()
+    childUpdates["/duns/$key"] = dunValues
+    childUpdates["/user-duns/$uid/$key"] = dunValues
+
+    presenter.app.db.updateChildren(childUpdates)
+    Loader.hideLoader(loader)
   }
 }

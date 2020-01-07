@@ -37,9 +37,8 @@
 
     <!-- feature menu -->
     <string name="button_addDun">Add Dun</string>
-    <string name="menu_addDun">Add Dun</string>
     <string name="button_searchDuns">Search Duns</string>
-    <string name="menu_searchDuns">Search Duns</string>
+
     <string name="button_navigateTo">Navigate to</string>
     <string name="menu_navigateTo">Navigate to</string>
     <!-- END feature menu -->
@@ -62,15 +61,18 @@
     <string name="title_activity_dun">Dun</string>
     <string name="title_activity_edit_location">Dun</string>
     <string name="title_activity_login"> Signup/Login to Dun</string>
-    <string name="splash_play_btn_text">skip splash</string>
     <string name="menu_showMap">Show Map</string>
     <string name="menu_logout">Logout</string>
+
+    <string name="play_btn_splash">skip splash</string>
+    <string name="play_btn_signup">Sign In</string>
+    <string name="play_btn_login">Login</string>
+
 
     <!-- START Firebase Resources-->
 
     <string name="label_emailpassword">Email/Password Authentication</string>
     <string name="desc_emailpassword">Use an email and password to authenticate with Firebase.</string>
-    <string name="sign_in">Sign In</string>
     <string name="create_account">Create Account</string>
     <string name="send_link">Send Link</string>
     <string name="sign_out">Sign Out</string>
@@ -146,12 +148,12 @@
     <string name="communicate">Communicate</string>
     <string name="access_control">Access Control</string>
 
-
     <!-- home -->
-    <string name="homeTitle">Search </string>
-    <string name="total">Total number of Duns visited</string>
-    <string name="totalSoFar">Total</string>
-
+    <string name="home_title">Search </string>
+    <string name="home_total_visited_text">Number of Duns visited</string>
+    <string name="home_total_visited_amount">0</string>
+    <string name="home_menu_add">Add Dun</string>
+    <string name="home_menu_list">List Duns</string>
 
     <!-- Dun -->
     <string name="action_dun">Dun</string>
@@ -168,7 +170,6 @@
     <string name="action_dun_list">Report</string>
     <string name="completeButton">Complete</string>
     <string name="date">Date</string>
-    <string name="total_visited_so_far">Total number of Duns visited</string>
     <string name="defaultComplete">0</string>
     <string name="enter_date">Enter Date</string>
 

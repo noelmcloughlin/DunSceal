@@ -18,69 +18,69 @@ import kotlinx.android.synthetic.main.fragment_report.view.*
 import org.jetbrains.anko.info
 
 interface DunListener {
-    fun onDunClick(donation: DunEntity)
+  fun onDunClick(dun: DunEntity)
 }
 
 class ReportAllFragment(override var presenter: HomePresenter) : ReportFragment(presenter) {
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        root = inflater.inflate(R.layout.fragment_report, container, false)
-        activity?.title = getString(R.string.menu_report_all)
-        root.myRecyclerView.layoutManager = LinearLayoutManager(activity)
-        setSwipeRefresh()
+  override fun onCreateView(
+      inflater: LayoutInflater, container: ViewGroup?,
+      savedInstanceState: Bundle?
+  ): View? {
+    // Inflate the layout for this fragment
+    root = inflater.inflate(R.layout.fragment_report, container, false)
+    activity?.title = getString(R.string.menu_report_all)
+    root.myRecyclerView.layoutManager = LinearLayoutManager(activity)
+    setSwipeRefresh()
 
-        return root
-    }
+    return root
+  }
 
-    companion object {
-        @JvmStatic
-        fun newInstance(presenter: HomePresenter) =
-            ReportAllFragment(presenter).apply {
-                arguments = Bundle().apply { }
-            }
-    }
-
-    /*override fun setSwipeRefresh() {
-        root.swipeRefresh.setOnRefreshListener {
-            root.swipeRefresh.isRefreshing = true
-            getAllUsersDuns()
+  companion object {
+    @JvmStatic
+    fun newInstance(presenter: HomePresenter) =
+        ReportAllFragment(presenter).apply {
+          arguments = Bundle().apply { }
         }
-    }*/
+  }
 
-    override fun onResume() {
-        super.onResume()
-        getAllUsersDuns()
-    }
+  /*override fun setSwipeRefresh() {
+      root.swipeRefresh.setOnRefreshListener {
+          root.swipeRefresh.isRefreshing = true
+          getAllUsersDuns()
+      }
+  }*/
 
-    private fun getAllUsersDuns() {
-        loader = createLoader(activity!!)
-        showLoader(loader, "Downloading All Users Duns from Firebase")
-        val dunsList = ArrayList<DunEntity>()
-        presenter.app.db.child("duns")
-            .addValueEventListener(object : ValueEventListener {
-                override fun onCancelled(error: DatabaseError) {
-                    info("Firebase Dun error : ${error.message}")
-                }
+  override fun onResume() {
+    super.onResume()
+    getAllUsersDuns()
+  }
 
-                override fun onDataChange(snapshot: DataSnapshot) {
-                    hideLoader(loader)
-                    val children = snapshot.children
-                    children.forEach {
-                        val dun = it.getValue<DunEntity>(DunEntity::class.java)
+  private fun getAllUsersDuns() {
+    loader = createLoader(activity!!)
+    showLoader(loader, "Downloading All Users Duns from Firebase")
+    val dunsList = ArrayList<DunEntity>()
+    presenter.app.db.child("duns")
+        .addValueEventListener(object : ValueEventListener {
+          override fun onCancelled(error: DatabaseError) {
+            info("Firebase Dun error : ${error.message}")
+          }
 
-                        dunsList.add(dun!!)
-                       // root.myRecyclerView.adapter =
-                     //       OldDunAdapter(dunsList, this@ReportAllFragment, true)
-                        root.myRecyclerView.adapter?.notifyDataSetChanged()
-                        checkSwipeRefresh()
+          override fun onDataChange(snapshot: DataSnapshot) {
+            hideLoader(loader)
+            val children = snapshot.children
+            children.forEach {
+              val dun = it.getValue<DunEntity>(DunEntity::class.java)
 
-                        presenter.app.db.child("duns").removeEventListener(this)
-                    }
-                }
-            })
-    }
+              dunsList.add(dun!!)
+              // root.myRecyclerView.adapter =
+              //       OldDunAdapter(dunsList, this@ReportAllFragment, true)
+              root.myRecyclerView.adapter?.notifyDataSetChanged()
+              checkSwipeRefresh()
+
+              presenter.app.db.child("duns").removeEventListener(this)
+            }
+          }
+        })
+  }
 }

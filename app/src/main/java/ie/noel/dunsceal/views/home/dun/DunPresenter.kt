@@ -19,8 +19,11 @@ import ie.noel.dunsceal.utils.Permissions.createDefaultLocationRequest
 import ie.noel.dunsceal.utils.Permissions.isPermissionGranted
 import ie.noel.dunsceal.utils.Image.showImagePicker
 import ie.noel.dunsceal.views.*
+import ie.noel.dunsceal.views.home.HomePresenter
+import ie.noel.dunsceal.views.home.HomeView
+import ie.noel.dunsceal.views.login.LoginView
 
-class DunPresenter(view: BaseView) : BasePresenter(view) {
+class DunPresenter(view: DunView) : HomePresenter(view) {
 
     var map: GoogleMap? = null
     var dun = DunEntity()

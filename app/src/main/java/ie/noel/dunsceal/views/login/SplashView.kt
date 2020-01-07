@@ -22,7 +22,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.view.*
 import ie.noel.dunsceal.views.BaseView
-import kotlinx.android.synthetic.main.fragment_splash_screen.*
+import kotlinx.android.synthetic.main.fragment_splash.*
 
 /**
  * An startup activity can inflate layout with NavHostFragment.
@@ -35,7 +35,7 @@ class SplashView : BaseView(), View.OnClickListener {
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     makeFullScreen()
-    setContentView(R.layout.fragment_splash_screen)
+    setContentView(R.layout.fragment_splash)
 
     presenter = initPresenter(LoginPresenter(this)) as LoginPresenter
 
@@ -68,16 +68,4 @@ class SplashView : BaseView(), View.OnClickListener {
     // Hide the toolbar
     supportActionBar?.hide()
   }
-
-  /* fun onCreateView(
-      inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
-  ): View? {
-    val view = inflater.inflate(R.layout.fragment_splash_screen, container, false)
-
-    view.findViewById<Button>(R.id.play_btn).setOnClickListener {
-      //Navigation.findNavController(view).navigate(R.id.action_nav_splash_screen_to_login)
-      startActivity(Intent(this, LoginView::class.java))
-    }
-    return view
-  } */
 }

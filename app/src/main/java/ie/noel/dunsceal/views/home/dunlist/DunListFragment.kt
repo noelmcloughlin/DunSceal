@@ -41,11 +41,14 @@ import ie.noel.dunsceal.views.BaseFragment
 import ie.noel.dunsceal.views.home.HomePresenter
 import ie.noel.dunsceal.views.home.HomeView
 import ie.noel.dunsceal.views.home.dun.DunClickCallback
+import ie.noel.dunsceal.views.home.dun.DunPresenter
+import ie.noel.dunsceal.views.home.dun.DunView
+import kotlinx.android.synthetic.main.activity_dun_list.*
 import kotlinx.android.synthetic.main.fragment_report.view.*
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.info
 
-class DunListFragment(open var presenter: HomePresenter) : BaseFragment(), AnkoLogger {
+class DunListFragment(var presenter: DunPresenter) : BaseFragment(), AnkoLogger {
 
   private var mDunAdapter: DunAdapter? = null
   private var mBinding: ListFragmentBinding? = null
@@ -134,7 +137,7 @@ class DunListFragment(open var presenter: HomePresenter) : BaseFragment(), AnkoL
   private val mDunClickCallback = object : DunClickCallback {
     override fun onClick(dun: DunEntity?) {
       if (lifecycle.currentState.isAtLeast(Lifecycle.State.STARTED)) {
-        (activity as HomeView?)!!.show(dun!!)
+        (activity as DunView?)!!.showDunFragment(dun!!)
       }
     }
   }
@@ -157,7 +160,6 @@ class DunListFragment(open var presenter: HomePresenter) : BaseFragment(), AnkoL
     loader = Loader.createLoader(activity!!)
     Loader.showLoader(loader, "Downloading Duns from Firebase")
     val duns = ArrayList<DunEntity>()
-    // myRecyclerView.adapter = OldDunAdapter(duns, this, false)
 
     presenter.app.db.child("users").child(userId!!).child("duns").child(userId)
         .addValueEventListener(object : ValueEventListener {
@@ -184,7 +186,7 @@ class DunListFragment(open var presenter: HomePresenter) : BaseFragment(), AnkoL
   }
 
   fun onClick(dun: DunEntity) {
-    presenter.doEditDun(dun)
+    presenter.doEdit(dun)
   }
 
   fun deleteUserDun(userId: String, uid: String?) {
