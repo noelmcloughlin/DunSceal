@@ -58,21 +58,21 @@ open class HomeFragment(val presenter: HomePresenter, private val user: String)
 
     override fun onResume() {
         super.onResume()
-        getTotalDone(presenter.app.auth.currentUser?.uid)
         presenter.fetchData()
+        // getTotalDone(presenter.app.auth.currentUser?.uid)
     }
 
     override fun onPause() {
         super.onPause()
         val userId = presenter.app.auth.uid
-        if (presenter.app.auth.uid != null)
+        /* if (presenter.app.auth.uid != null)
         presenter.app.db.child("users").child(userId!!).child("duns")
                 .child(presenter.app.auth.currentUser!!.uid)
-                .removeEventListener(eventListener)
+                .removeEventListener(eventListener) */
     }
 
     private fun getTotalDone(userId: String?) {
-        eventListener = object : ValueEventListener {
+      /* eventListener = object : ValueEventListener {
             override fun onCancelled(error: DatabaseError) {
                 info("Firebase Dun error : ${error.message}")
             }
@@ -95,5 +95,6 @@ open class HomeFragment(val presenter: HomePresenter, private val user: String)
             presenter.app.db.child("users").child(presenter.app.userId).child("duns")
                 .addValueEventListener(eventListener)
         }
+       */
     }
 }

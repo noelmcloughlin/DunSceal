@@ -6,10 +6,8 @@ import android.view.MenuItem
 import androidx.recyclerview.widget.LinearLayoutManager
 import ie.noel.dunsceal.R
 import ie.noel.dunsceal.models.entity.DunEntity
-import ie.noel.dunsceal.views.home.HomePresenter
+import ie.noel.dunsceal.views.BaseFragment
 import ie.noel.dunsceal.views.home.HomeView
-import ie.noel.dunsceal.views.home.dun.DunFragment
-import ie.noel.dunsceal.views.home.dun.DunPresenter
 import kotlinx.android.synthetic.main.activity_dun_list.*
 import kotlinx.android.synthetic.main.appbar_fab_home.*
 import org.jetbrains.anko.AnkoLogger
@@ -24,27 +22,28 @@ class DunListView : HomeView(), AnkoLogger, DunListener {
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
-    setContentView(R.layout.dunlist_activity)
-    if (toolbar == null) {
-      super.init(toolbar, false)
+    setContentView(R.layout.fragment_container_view)
+    if (supportActionBar == null) {
+      setSupportActionBar(toolbar)
+      supportActionBar?.title = TAG
     }
 
     presenter = initPresenter(DunListPresenter(this)) as DunListPresenter
 
-    // Add fragment if this is first creation
+    // Add product list fragment if this is first creation
     if (savedInstanceState == null) {
-      val fragment = DunListFragment.newInstance(presenter)
-      // Start home fragment
-      R.id.content_home_frame.addFragment(fragment, TAG)
+      val fragment : BaseFragment = DunListFragment.newInstance(presenter)
+      supportFragmentManager.beginTransaction()
+          .replace(R.id.fragment_container, fragment, TAG).commit()
     }
 
-    val layoutManager = LinearLayoutManager(this)
-    myRecyclerView.layoutManager = layoutManager
+    //val layoutManager = LinearLayoutManager(this)
+    //myRecyclerView.layoutManager = layoutManager
     presenter.loadDuns()
   }
 
   override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-    menuInflater.inflate(R.menu.menu_home, menu)
+    menuInflater.inflate(R.menu.menu_dunlist, menu)
     return true   // TODO check if we call super
   }
 

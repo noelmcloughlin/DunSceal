@@ -154,6 +154,8 @@
     <string name="home_total_visited_amount">0</string>
     <string name="home_menu_add">Add Dun</string>
     <string name="home_menu_list">List Duns</string>
+    <string name="home_menu_map">Map</string>
+
 
     <!-- Dun -->
     <string name="action_dun">Dun</string>

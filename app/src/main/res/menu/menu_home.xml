@@ -3,12 +3,6 @@
   xmlns:app="http://schemas.android.com/apk/res-auto">
 
   <item
-    android:id="@+id/menu_home_item_add"
-    android:icon="@android:drawable/ic_menu_add"
-    android:title="@string/home_menu_add"
-    app:showAsAction="never"/>
-
-  <item
     android:id="@+id/menu_home_item_list"
     android:icon="@android:drawable/ic_menu_search"
     android:title="@string/home_menu_list"

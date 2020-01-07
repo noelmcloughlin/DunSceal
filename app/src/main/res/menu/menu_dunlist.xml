@@ -10,8 +10,8 @@
 
   <item
       android:id="@+id/menu_dunlist_item_map"
-      android:icon="@android:drawable/ic_menu_search"
-      android:title="@string/home_menu_list"
+      android:icon="@android:drawable/ic_menu_mapmode"
+      android:title="@string/home_menu_map"
       app:showAsAction="never"/>
 
   <item
