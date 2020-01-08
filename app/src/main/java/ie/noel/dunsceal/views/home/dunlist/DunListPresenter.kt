@@ -10,6 +10,4 @@ import org.jetbrains.anko.uiThread
 
 class DunListPresenter(view: BaseView) : HomePresenter(view) {
 
-
-
 }

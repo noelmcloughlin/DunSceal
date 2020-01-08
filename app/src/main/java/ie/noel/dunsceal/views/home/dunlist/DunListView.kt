@@ -8,6 +8,7 @@ import ie.noel.dunsceal.R
 import ie.noel.dunsceal.models.entity.DunEntity
 import ie.noel.dunsceal.views.BaseFragment
 import ie.noel.dunsceal.views.BaseView
+import ie.noel.dunsceal.views.home.dun.DunListener
 import kotlinx.android.synthetic.main.appbar_fab_home.*
 import org.jetbrains.anko.AnkoLogger
 

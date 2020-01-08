@@ -191,6 +191,11 @@ open class HomeView : BaseView(), NavigationView.OnNavigationItemSelectedListene
             dunFragment, null).commit()
   }
 
+  fun OnPlayBtnSelected() {
+    supportFragmentManager.beginTransaction()
+        .replace(R.id.content_home_frame, DunListFragment.newInstance(presenter), TAG).commit()
+  }
+
   // OPTIONS MENU
   override fun onOptionsItemSelected(item: MenuItem?): Boolean {
     when (item?.itemId) {

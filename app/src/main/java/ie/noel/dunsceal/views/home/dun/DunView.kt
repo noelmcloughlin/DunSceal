@@ -28,7 +28,6 @@ open class DunView : BaseView(), AnkoLogger {
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     setContentView(R.layout.home)
-//    super.init(toolbar, false, TAG)
 
     presenter = initPresenter(DunPresenter(this)) as DunPresenter
 

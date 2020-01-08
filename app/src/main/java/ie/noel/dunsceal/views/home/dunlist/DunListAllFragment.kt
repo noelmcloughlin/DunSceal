@@ -24,10 +24,6 @@ import kotlinx.android.synthetic.main.fragment_dun_list.view.*
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.info
 
-interface DunListener {
-  fun onDunClick(dun: DunEntity)
-}
-
 class DunListAllFragment(var presenter: BasePresenter) : BaseFragment(), AnkoLogger {
 
   private var mBinding: FragmentDunListBinding? = null

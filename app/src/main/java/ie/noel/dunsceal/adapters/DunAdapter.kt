@@ -30,10 +30,6 @@ import ie.noel.dunsceal.views.home.dun.DunClickCallback
 import jp.wasabeef.picasso.transformations.CropCircleTransformation
 import kotlinx.android.synthetic.main.dun_item.view.*
 
-interface DunListener {
-  fun onDunClick(dun: DunEntity)
-}
-
 class DunAdapter constructor(private val mDunClickCallback: DunClickCallback?,
                              private val reportAll: Boolean
 

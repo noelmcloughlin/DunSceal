@@ -25,7 +25,7 @@ import kotlinx.android.synthetic.main.nav_header_home.view.*
 import java.lang.Exception
 import java.util.HashMap
 
-open class HomePresenter(view: HomeView) : LoginPresenter(view) {
+open class HomePresenter(view: BaseView) : LoginPresenter(view) {
 
     lateinit var ft: FragmentTransaction
 
