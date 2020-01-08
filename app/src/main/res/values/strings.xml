@@ -33,7 +33,7 @@
 
     <!-- Dun -->
 
-    <string name="hint_dunTitle">Dun Title</string>
+    <string name="hint_name">Dun Title</string>
     <string name="hint_dunDescription">Description </string>
 
     <!-- feature menu -->
@@ -106,7 +106,7 @@
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
 
-    <string name="nav_menu_home">Home</string>
+    <string name="nav_menu_main">Home</string>
     <string name="nav_menu_report">Report</string>
     <string name="nav_menu_report_all">All Duns</string>
     <string name="nav_menu_favourites">Favourites</string>

@@ -18,6 +18,8 @@ import ie.noel.dunsceal.utils.Loader.createLoader
 import ie.noel.dunsceal.utils.Loader.hideLoader
 import ie.noel.dunsceal.utils.Loader.showLoader
 import ie.noel.dunsceal.views.BaseFragment
+import ie.noel.dunsceal.views.BasePresenter
+import ie.noel.dunsceal.views.home.HomePresenter
 import kotlinx.android.synthetic.main.fragment_dun_list.view.*
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.info
@@ -26,9 +28,17 @@ interface DunListener {
   fun onDunClick(dun: DunEntity)
 }
 
-class DunListAllFragment(var presenter: DunListPresenter) : BaseFragment(), AnkoLogger {
+class DunListAllFragment(var presenter: BasePresenter) : BaseFragment(), AnkoLogger {
 
   private var mBinding: FragmentDunListBinding? = null
+
+  companion object {
+    @JvmStatic
+    fun newInstance(presenter: BasePresenter) =
+        DunListAllFragment(presenter).apply {
+          arguments = Bundle().apply { }
+        }
+  }
 
   override fun onCreateView(
       inflater: LayoutInflater, container: ViewGroup?,
@@ -45,14 +55,6 @@ class DunListAllFragment(var presenter: DunListPresenter) : BaseFragment(), Anko
     setSwipeRefresh()
 
     return mBinding!!.root
-  }
-
-  companion object {
-    @JvmStatic
-    fun newInstance(presenter: DunListPresenter) =
-        DunListAllFragment(presenter).apply {
-          arguments = Bundle().apply { }
-        }
   }
 
   override fun setSwipeRefresh() {

@@ -4,11 +4,9 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.*
 import androidx.appcompat.app.ActionBarDrawerToggle
-import androidx.appcompat.widget.Toolbar
 import androidx.core.view.GravityCompat
 import androidx.fragment.app.Fragment
 import com.google.android.material.navigation.NavigationView
-import com.google.firebase.auth.FirebaseAuth
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
 import ie.noel.dunsceal.R
@@ -17,7 +15,7 @@ import ie.noel.dunsceal.views.home.dunlist.DunListAllFragment
 import ie.noel.dunsceal.utils.Image.readImageUri
 import ie.noel.dunsceal.utils.Image.showImagePicker
 import ie.noel.dunsceal.views.BaseFragment
-import ie.noel.dunsceal.views.VIEW
+import ie.noel.dunsceal.views.BaseView
 import ie.noel.dunsceal.views.about.AboutUsFragment
 import ie.noel.dunsceal.views.home.dun.DunFragment
 import ie.noel.dunsceal.views.home.dunlist.DunListFragment
@@ -30,9 +28,9 @@ import kotlinx.android.synthetic.main.nav_header_home.view.*
 import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.toast
 
-open class HomeView : LoginView(), NavigationView.OnNavigationItemSelectedListener {
+open class HomeView : BaseView(), NavigationView.OnNavigationItemSelectedListener {
 
-  private lateinit var presenter: DunListPresenter
+  private lateinit var presenter: HomePresenter
   private var userName: String = "User"
 
   companion object {
@@ -71,12 +69,6 @@ open class HomeView : LoginView(), NavigationView.OnNavigationItemSelectedListen
           .add(R.id.content_home_frame, fragment, TAG).commit()
     }
 
-    /*if (home_play_btn != null) {
-      home_play_btn.setOnClickListener {
-        navigateTo(VIEW.LIST)
-      }
-    */
-
     /* TODO fab or no fab?
   fab.setOnClickListener { view ->
     Snackbar.make(
@@ -87,7 +79,7 @@ open class HomeView : LoginView(), NavigationView.OnNavigationItemSelectedListen
   }
 
   override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-    menuInflater.inflate(R.menu.menu_home, menu)
+    menuInflater.inflate(R.menu.menu_main, menu)
     return super.onCreateOptionsMenu(menu)
   }
 
@@ -121,15 +113,6 @@ open class HomeView : LoginView(), NavigationView.OnNavigationItemSelectedListen
     }
     drawerLayout.closeDrawer(GravityCompat.START)
     return true
-  }
-
-  override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-    when (item?.itemId) {
-      R.id.menu_home_item_list -> {
-        navigateTo(DunListFragment.newInstance(presenter))
-      }
-    }
-    return super.onOptionsItemSelected(item!!)
   }
 
   override fun onBackPressed() {
@@ -206,5 +189,15 @@ open class HomeView : LoginView(), NavigationView.OnNavigationItemSelectedListen
         .addToBackStack("dun")
         .replace(R.id.content_home_frame,
             dunFragment, null).commit()
+  }
+
+  // OPTIONS MENU
+  override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+    when (item?.itemId) {
+      R.id.menu_main_item_add -> presenter.doAdd()
+      R.id.menu_main_item_map -> presenter.doShowMap()
+      R.id.menu_main_item_logout -> presenter.doLogout()
+    }
+    return super.onOptionsItemSelected(item!!)
   }
 }

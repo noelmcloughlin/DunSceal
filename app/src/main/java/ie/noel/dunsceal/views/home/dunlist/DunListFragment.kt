@@ -38,16 +38,25 @@ import ie.noel.dunsceal.utils.Loader
 import ie.noel.dunsceal.utils.SwipeToDeleteCallback
 import ie.noel.dunsceal.utils.SwipeToEditCallback
 import ie.noel.dunsceal.views.BaseFragment
+import ie.noel.dunsceal.views.BasePresenter
 import ie.noel.dunsceal.views.home.HomeView
 import ie.noel.dunsceal.views.home.dun.DunClickCallback
 import kotlinx.android.synthetic.main.fragment_dun_list.view.*
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.info
 
-class DunListFragment(var presenter: DunListPresenter) : BaseFragment(), AnkoLogger {
+class DunListFragment(var presenter: BasePresenter) : BaseFragment(), AnkoLogger {
 
   private var mDunAdapter: DunAdapter? = null
   private var mBinding: FragmentDunListBinding? = null
+
+  companion object {
+    @JvmStatic
+    fun newInstance(presenter: BasePresenter) =
+        DunListFragment(presenter).apply {
+          arguments = Bundle().apply { }
+        }
+  }
 
   override fun onCreateView(inflater: LayoutInflater,
                             container: ViewGroup?,
@@ -93,14 +102,6 @@ class DunListFragment(var presenter: DunListPresenter) : BaseFragment(), AnkoLog
     presenter.loadDuns()
 
     return mBinding!!.root
-  }
-
-  companion object {
-    @JvmStatic
-    fun newInstance(presenter: DunListPresenter) =
-        DunListFragment(presenter).apply {
-          arguments = Bundle().apply { }
-        }
   }
 
   override fun onResume() {

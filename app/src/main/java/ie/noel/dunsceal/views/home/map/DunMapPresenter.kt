@@ -35,7 +35,7 @@ class DunMapPresenter(view: BaseView) : BasePresenter(view) {
     }
   }
 
-  fun loadDuns() {
+  override fun loadDuns() {
     doAsync {
       val duns = app.duns.findAll()
       uiThread {

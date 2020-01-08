@@ -10,14 +10,15 @@ import org.jetbrains.anko.AnkoLogger
 import ie.noel.dunsceal.R
 import ie.noel.dunsceal.models.entity.DunEntity
 import ie.noel.dunsceal.models.entity.LocationEntity
-import ie.noel.dunsceal.views.home.dunlist.DunListView
-import kotlinx.android.synthetic.main.activity_dun.*
-import kotlinx.android.synthetic.main.appbar_fab_home.*
+import ie.noel.dunsceal.views.BaseFragment
+import ie.noel.dunsceal.views.BaseView
+import ie.noel.dunsceal.views.home.dunlist.DunListFragment
+import kotlinx.android.synthetic.main.fragment_dun.*
 import org.jetbrains.anko.toast
 
-open class DunView : DunListView(), AnkoLogger {
+open class DunView : BaseView(), AnkoLogger {
 
-  override lateinit var presenter: DunPresenter
+  lateinit var presenter: DunPresenter
   var dun = DunEntity()
 
   companion object {
@@ -26,10 +27,18 @@ open class DunView : DunListView(), AnkoLogger {
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
-    setContentView(R.layout.activity_dun)
-    super.init(toolbar, true, TAG)
+    setContentView(R.layout.home)
+//    super.init(toolbar, false, TAG)
 
-    presenter = initPresenter (DunPresenter(this)) as DunPresenter
+    presenter = initPresenter(DunPresenter(this)) as DunPresenter
+
+    // Add product list fragment if this is first creation
+    if (savedInstanceState == null) {
+      val fragment : BaseFragment = DunListFragment.newInstance(presenter)
+      supportFragmentManager.beginTransaction()
+          .replace(R.id.home, fragment, TAG).commit()
+    }
+    presenter.loadDuns()
 
     mapView.onCreate(savedInstanceState)
     mapView.getMapAsync {
@@ -40,7 +49,7 @@ open class DunView : DunListView(), AnkoLogger {
   }
 
   override fun showDun(dun: DunEntity) {
-    dunTitle.setText(dun.name)
+    name.setText(dun.name)
     description.setText(dun.description)
     Glide.with(this).load(dun.image).into(dunImage)
     if (dun.image != null) {
@@ -105,10 +114,10 @@ open class DunView : DunListView(), AnkoLogger {
         presenter.doDelete()
       }
       R.id.item_save -> {
-        if (dunTitle.text.toString().isEmpty()) {
+        if (name.text.toString().isEmpty()) {
           toast(R.string.enter_dun_title)
         } else {
-          presenter.doAddOrSave(dunTitle.text.toString(), description.text.toString())
+          presenter.doAddOrSave(name.text.toString(), description.text.toString())
         }
       }
     }

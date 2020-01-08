@@ -9,14 +9,17 @@ import com.google.firebase.database.ValueEventListener
 import ie.noel.dunsceal.R
 import ie.noel.dunsceal.views.BaseFragment
 import ie.noel.dunsceal.utils.Loader.createLoader
+import ie.noel.dunsceal.views.VIEW
 import kotlinx.android.synthetic.main.activity_login_screen.view.*
 import kotlinx.android.synthetic.main.fragment_dun_list.view.*
+import kotlinx.android.synthetic.main.fragment_home.*
+import kotlinx.android.synthetic.main.fragment_home.view.*
 
 import org.jetbrains.anko.AnkoLogger
 
 
 open class HomeFragment(val presenter: HomePresenter, private val user: String)
-    : BaseFragment(), AnkoLogger {
+    : BaseFragment(), AnkoLogger, View.OnClickListener {
 
     private lateinit var eventListener: ValueEventListener
 
@@ -35,7 +38,13 @@ open class HomeFragment(val presenter: HomePresenter, private val user: String)
         if (rootView.progressBar != null) {
             rootView.progressBar.max = 10000   // TODO dynamic calculation
         }
-        return rootView
+
+        if (rootView.home_play_btn != null) {
+            home_play_btn.setOnClickListener {
+
+            }
+            return rootView
+        }
     }
 
 

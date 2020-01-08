@@ -22,7 +22,7 @@ import ie.noel.dunsceal.views.*
 import ie.noel.dunsceal.views.home.HomePresenter
 import ie.noel.dunsceal.views.home.HomeView
 
-open class DunPresenter(view: HomeView) : HomePresenter(view) {
+open class DunPresenter(view: BaseView) : HomePresenter(view) {
 
     var map: GoogleMap? = null
     var dun = DunEntity()

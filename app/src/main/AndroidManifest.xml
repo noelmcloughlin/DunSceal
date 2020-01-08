@@ -83,9 +83,6 @@
             <nav-graph android:value="@navigation/navigation" />
         </activity>
 
-        <!-- This is added to handle a deep link -->
-        <!-- nav-graph android:value="@navigation/navigation" -->
-
         <activity
             android:name="ie.noel.dunsceal.views.home.dunlist.DunListView"
             android:label="@string/title_activity_dun_list"

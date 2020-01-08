@@ -30,12 +30,26 @@ import ie.noel.dunsceal.models.entity.DunEntity
 import ie.noel.dunsceal.models.viewmodel.DunViewModel
 import ie.noel.dunsceal.utils.Loader
 import ie.noel.dunsceal.views.BaseFragment
+import ie.noel.dunsceal.views.BasePresenter
 import java.util.HashMap
 
-class DunFragment(val presenter: DunPresenter) : BaseFragment() {
+class DunFragment(val presenter: BasePresenter) : BaseFragment() {
 
   private var mBinding: DunFragmentBinding? = null
   private var mInvestigationAdapter: InvestigationAdapter? = null
+
+  companion object {
+    private const val KEY_DUN_ID = "dun_id"
+    /** Creates dun fragment for specific dun ID  */
+    @JvmStatic
+    fun forDun(presenter: BasePresenter, dunId: Long): DunFragment {
+      val fragment = DunFragment(presenter)
+      val args = Bundle()
+      args.putInt(KEY_DUN_ID, dunId.toInt())
+      fragment.arguments = args
+      return fragment
+    }
+  }
 
   override fun onCreateView(
       inflater: LayoutInflater,
@@ -80,19 +94,6 @@ class DunFragment(val presenter: DunPresenter) : BaseFragment() {
         mBinding!!.isLoading = true
       }
     })
-  }
-
-  companion object {
-    private const val KEY_DUN_ID = "dun_id"
-    /** Creates dun fragment for specific dun ID  */
-    @JvmStatic
-    fun forDun(presenter: DunPresenter, dunId: Long): DunFragment {
-      val fragment = DunFragment(presenter)
-      val args = Bundle()
-      args.putInt(KEY_DUN_ID, dunId.toInt())
-      fragment.arguments = args
-      return fragment
-    }
   }
 
   override fun onResume() {

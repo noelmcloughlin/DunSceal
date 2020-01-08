@@ -59,8 +59,8 @@ open abstract class BaseView : AppCompatActivity(), AnkoLogger {
   }
 
   fun init(toolbar: Toolbar, upEnabled: Boolean, title: String) {
-    setSupportActionBar(toolbar)
     toolbar.title = title
+    setSupportActionBar(toolbar)
     val user = FirebaseAuth.getInstance().currentUser
     if (user != null) {
       toolbar.title = "${title}: ${user.email}"
@@ -89,5 +89,4 @@ open abstract class BaseView : AppCompatActivity(), AnkoLogger {
   open fun showLocation(locationEntity : LocationEntity) {}
   open fun showProgress() {}
   open fun hideProgress() {}
-
 }
