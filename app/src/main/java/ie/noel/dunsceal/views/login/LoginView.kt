@@ -22,7 +22,9 @@ import ie.noel.dunsceal.utils.Loader.hideLoader
 import ie.noel.dunsceal.utils.Loader.showLoader
 import ie.noel.dunsceal.views.BaseView
 import ie.noel.dunsceal.views.VIEW
+import ie.noel.dunsceal.views.home.HomeView
 import kotlinx.android.synthetic.main.activity_login_screen.*
+import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.toast
 
 open class LoginView : BaseView(), View.OnClickListener {
@@ -36,7 +38,9 @@ open class LoginView : BaseView(), View.OnClickListener {
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
+
     setContentView(R.layout.activity_login_screen)
+    //init(toolbar, false)
     progressBar.visibility = ProgressBar.INVISIBLE
 
     presenter = initPresenter(LoginPresenter(this)) as LoginPresenter
@@ -226,8 +230,8 @@ open class LoginView : BaseView(), View.OnClickListener {
 
       // get firebase references Now!!!!
       presenter.dataStore!!.fetchDuns {
-        // do not startActivity, just navigate ..
-        this.navigateTo(VIEW.HOME)
+        // need to startActivity for new fragment managment
+        startActivity<HomeView>()
       }
 
     } else {

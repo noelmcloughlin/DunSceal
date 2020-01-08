@@ -6,19 +6,28 @@ import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.Marker
 import ie.noel.dunsceal.R
 import ie.noel.dunsceal.models.entity.DunEntity
-import ie.noel.dunsceal.views.BaseView
+import ie.noel.dunsceal.views.home.HomeView
+import ie.noel.dunsceal.views.home.location.EditLocationView
 import kotlinx.android.synthetic.main.appbar_fab_home.*
 import kotlinx.android.synthetic.main.content_dun_maps.*
 
-class DunMapView : BaseView(), GoogleMap.OnMarkerClickListener {
+class DunMapView : HomeView(), GoogleMap.OnMarkerClickListener {
 
   private lateinit var presenter: DunMapPresenter
   lateinit var map : GoogleMap
 
+  companion object {
+    private const val TAG = "DunMapView"
+  }
+
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     setContentView(R.layout.activity_dun_map)
-    super.init(toolbar, true)
+    super.init(toolbar, true, TAG)
+
+    if (supportActionBar != null) {
+      supportActionBar?.title = TAG
+    }
 
     presenter = initPresenter (DunMapPresenter(this)) as DunMapPresenter
 

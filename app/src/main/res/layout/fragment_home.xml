@@ -24,10 +24,9 @@
     tools:context="ie.noel.dunsceal.views.home.HomeView"
     tools:layout_editor_absoluteY="81dp">
 
-    <!-- TODO: Update blank fragment layout -->
-
     <ImageView
         android:id="@+id/home_splash_picture"
+        android:contentDescription="@string/splash_picture_description"
         android:layout_width="363dp"
         android:layout_height="92dp"
         android:layout_marginTop="36dp"

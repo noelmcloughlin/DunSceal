@@ -7,7 +7,6 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import com.google.firebase.auth.FirebaseAuth
-import ie.noel.dunsceal.models.Dun
 import ie.noel.dunsceal.models.entity.DunEntity
 import ie.noel.dunsceal.models.entity.LocationEntity
 import org.jetbrains.anko.AnkoLogger
@@ -27,7 +26,7 @@ enum class VIEW {
   DUN, HOME, LIST, LOCATION, LOGIN, MAPS, SPLASH
 }
 
-open class BaseView : AppCompatActivity(), AnkoLogger {
+open abstract class BaseView : AppCompatActivity(), AnkoLogger {
 
   // declare a presenter
   private var basePresenter: BasePresenter? = null
@@ -59,9 +58,9 @@ open class BaseView : AppCompatActivity(), AnkoLogger {
     return presenter
   }
 
-  fun init(toolbar: Toolbar, upEnabled: Boolean) {
+  fun init(toolbar: Toolbar, upEnabled: Boolean, title: String) {
+    setSupportActionBar(toolbar)
     toolbar.title = title
-//    setSupportActionBar(toolbar)
     val user = FirebaseAuth.getInstance().currentUser
     if (user != null) {
       toolbar.title = "${title}: ${user.email}"

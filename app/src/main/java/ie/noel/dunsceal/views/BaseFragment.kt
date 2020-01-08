@@ -6,27 +6,12 @@ import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import ie.noel.dunsceal.R
 import ie.noel.dunsceal.utils.Loader
-import kotlinx.android.synthetic.main.fragment_report.view.*
+import kotlinx.android.synthetic.main.fragment_dun_list.view.*
 
 open class BaseFragment : Fragment() {
 
   lateinit var loader: AlertDialog
   lateinit var root: View
-  var totalDone = 0
-
-  override fun onCreateView(
-      inflater: LayoutInflater,
-      container: ViewGroup?,
-      savedInstanceState: Bundle?
-  ): View? {
-
-    // Inflate a default layout for this fragment
-    activity?.title = getString(R.string.title_activity_fragment_default_tag)
-    root = inflater.inflate(R.layout.fragment_home, container, false)
-    loader = Loader.createLoader(activity!!)
-    setSwipeRefresh()
-    return root
-  }
 
   // Swipe support
   open fun setSwipeRefresh() {
@@ -37,7 +22,7 @@ open class BaseFragment : Fragment() {
     }
   }
 
-  fun checkSwipeRefresh() {
+  open fun checkSwipeRefresh() {
     if ((root.swipeRefresh != null) && (root.swipeRefresh.isRefreshing))
       root.swipeRefresh.isRefreshing = false
   }

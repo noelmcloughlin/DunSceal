@@ -4,23 +4,16 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
 
 import ie.noel.dunsceal.R
-import ie.noel.dunsceal.models.entity.DunEntity
 import ie.noel.dunsceal.views.BaseFragment
 import ie.noel.dunsceal.utils.Loader.createLoader
-import ie.noel.dunsceal.utils.Loader.hideLoader
-import ie.noel.dunsceal.utils.Loader.showLoader
-import kotlinx.android.synthetic.main.fragment_home.*
-import kotlinx.android.synthetic.main.activity_login_screen.*
 import kotlinx.android.synthetic.main.activity_login_screen.view.*
+import kotlinx.android.synthetic.main.fragment_dun_list.view.*
 
 import org.jetbrains.anko.AnkoLogger
-import org.jetbrains.anko.info
-import java.util.HashMap
+
 
 open class HomeFragment(val presenter: HomePresenter, private val user: String)
     : BaseFragment(), AnkoLogger {
@@ -34,8 +27,6 @@ open class HomeFragment(val presenter: HomePresenter, private val user: String)
     ): View? {
         super.onCreateView(inflater, container, savedInstanceState)
         val rootView = inflater.inflate(R.layout.fragment_home, container, false)
-        //rootView.findViewById<RecyclerView>(R.id.myRecyclerView).layoutManager =
-          //  LinearLayoutManager(context, RecyclerView.VERTICAL, false)
 
         loader = createLoader(activity!!)
         presenter.fetchData()
@@ -46,6 +37,7 @@ open class HomeFragment(val presenter: HomePresenter, private val user: String)
         }
         return rootView
     }
+
 
     companion object {
         @JvmStatic

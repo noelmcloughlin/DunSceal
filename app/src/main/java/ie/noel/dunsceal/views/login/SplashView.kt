@@ -34,12 +34,13 @@ class SplashView : BaseView(), View.OnClickListener {
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
+
     makeFullScreen()
     setContentView(R.layout.fragment_splash)
 
     presenter = initPresenter(LoginPresenter(this)) as LoginPresenter
 
-    register_login_play_btn.setOnClickListener {
+    play_btn.setOnClickListener {
       presenter.skipSplash()
     }
 

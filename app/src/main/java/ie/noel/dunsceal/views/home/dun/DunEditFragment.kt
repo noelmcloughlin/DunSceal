@@ -80,8 +80,8 @@ class EditFragment(override var presenter: HomePresenter) : BaseFragment(present
               override fun onDataChange(snapshot: DataSnapshot) {
                 snapshot.ref.setValue(dun)
                 activity!!.supportFragmentManager.beginTransaction()
-                    .replace(R.id.homeFrame,
-                        ReportFragment.newInstance(presenter)
+                    .replace(R.id.content_home_frame,
+                        DunListFragment.newInstance(presenter)
                     )
                     .addToBackStack(null)
                     .commit()

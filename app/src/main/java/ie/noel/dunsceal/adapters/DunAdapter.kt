@@ -90,7 +90,7 @@ class DunAdapter constructor(private val mDunClickCallback: DunClickCallback?,
     holder.binding.dun = mDunList!![position]
     with(holder) {
       bind(binding.dun!!)
-      binding.executePendingBindings()
+      //binding.executePendingBindings()
     }
   }
 
@@ -107,9 +107,17 @@ class DunAdapter constructor(private val mDunClickCallback: DunClickCallback?,
   }
 
   class DunViewHolder constructor(val binding: DunItemBinding) : RecyclerView.ViewHolder(binding.root) {
+
     fun bind(dun: DunEntity) {
       binding.root.tag = dun
-      binding.root.visited.text = dun.visited.toString()
+      binding.root.name.text = dun.name
+      binding.root.description.text = dun.description
+      binding.root.votes.text = dun.votes.toString()
+      if (dun.visited > 0) {
+        binding.root.visited.text = R.string.yes.toString()
+      } else {
+        binding.root.visited.text = R.string.no.toString()
+      }
 
       if(dun.image.isNotEmpty()) {
         Picasso.get().load(dun.image.toUri())

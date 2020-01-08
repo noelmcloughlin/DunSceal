@@ -31,27 +31,23 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
 import ie.noel.dunsceal.R
 import ie.noel.dunsceal.adapters.DunAdapter
-import ie.noel.dunsceal.databinding.ListFragmentBinding
+import ie.noel.dunsceal.databinding.FragmentDunListBinding
 import ie.noel.dunsceal.models.entity.DunEntity
 import ie.noel.dunsceal.models.viewmodel.DunListViewModel
 import ie.noel.dunsceal.utils.Loader
 import ie.noel.dunsceal.utils.SwipeToDeleteCallback
 import ie.noel.dunsceal.utils.SwipeToEditCallback
 import ie.noel.dunsceal.views.BaseFragment
-import ie.noel.dunsceal.views.home.HomePresenter
 import ie.noel.dunsceal.views.home.HomeView
 import ie.noel.dunsceal.views.home.dun.DunClickCallback
-import ie.noel.dunsceal.views.home.dun.DunPresenter
-import ie.noel.dunsceal.views.home.dun.DunView
-import kotlinx.android.synthetic.main.activity_dun_list.*
-import kotlinx.android.synthetic.main.fragment_report.view.*
+import kotlinx.android.synthetic.main.fragment_dun_list.view.*
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.info
 
-class DunListFragment(var presenter: DunPresenter) : BaseFragment(), AnkoLogger {
+class DunListFragment(var presenter: DunListPresenter) : BaseFragment(), AnkoLogger {
 
   private var mDunAdapter: DunAdapter? = null
-  private var mBinding: ListFragmentBinding? = null
+  private var mBinding: FragmentDunListBinding? = null
 
   override fun onCreateView(inflater: LayoutInflater,
                             container: ViewGroup?,
@@ -59,7 +55,7 @@ class DunListFragment(var presenter: DunPresenter) : BaseFragment(), AnkoLogger 
   ): View? {
 
     // Inflate the layout for this fragment
-    mBinding = DataBindingUtil.inflate(inflater, R.layout.list_fragment, container, false)
+    mBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_dun_list, container, false)
     activity?.title = getString(R.string.action_report)
     loader = Loader.createLoader(activity!!)
 
@@ -78,6 +74,7 @@ class DunListFragment(var presenter: DunPresenter) : BaseFragment(), AnkoLogger 
         )
       }
     }
+
     val itemTouchDeleteHelper = ItemTouchHelper(swipeDeleteHandler)
     itemTouchDeleteHelper.attachToRecyclerView(mBinding!!.root.myRecyclerView)
 
@@ -89,19 +86,109 @@ class DunListFragment(var presenter: DunPresenter) : BaseFragment(), AnkoLogger 
     val itemTouchEditHelper = ItemTouchHelper(swipeEditHandler)
     itemTouchEditHelper.attachToRecyclerView(mBinding!!.root.myRecyclerView)
 
+    // with LiveData binding
     mDunAdapter = DunAdapter(mDunClickCallback, false)
-    mBinding!!.dunsList.adapter = mDunAdapter
+    mBinding!!.myRecyclerView.adapter = mDunAdapter
+
+    presenter.loadDuns()
 
     return mBinding!!.root
   }
 
   companion object {
-    const val TAG = "DunListFragment"
     @JvmStatic
-    fun newInstance(presenter: HomePresenter) =
-        ReportFragment(presenter).apply {
+    fun newInstance(presenter: DunListPresenter) =
+        DunListFragment(presenter).apply {
           arguments = Bundle().apply { }
         }
+  }
+
+  override fun onResume() {
+    super.onResume()
+    if (this::class == DunListFragment::class)
+      getAllDuns(presenter.app.auth.currentUser!!.uid)
+  }
+
+  override fun setSwipeRefresh() {
+    mBinding!!.root.swipeRefresh.setOnRefreshListener {
+      mBinding!!.root.swipeRefresh.isRefreshing = true
+      getAllDuns(presenter.app.auth.currentUser!!.uid)
+    }
+  }
+
+  // Swipe support
+  override fun checkSwipeRefresh() {
+    if ((root.swipeRefresh != null) && (root.swipeRefresh.isRefreshing))
+      root.swipeRefresh.isRefreshing = false
+  }
+
+  private fun getAllDuns(userId: String?) {
+    loader = Loader.createLoader(activity!!)
+    Loader.showLoader(loader, "Downloading Duns from Firebase")
+    val duns = ArrayList<DunEntity>()
+    // myRecyclerView.adapter = OldDunAdapter(duns, this, false)
+
+    presenter.app.db.child("users").child(userId!!).child("duns").child(userId)
+        .addValueEventListener(object : ValueEventListener {
+          override fun onCancelled(error: DatabaseError) {
+            info("Firebase Dun error : ${error.message}")
+          }
+
+          override fun onDataChange(snapshot: DataSnapshot) {
+            Loader.hideLoader(loader)
+            val children = snapshot.children
+            children.forEach {
+              val dun = it.getValue<DunEntity>(DunEntity::class.java)
+
+              duns.add(dun!!)
+              //     mBinding!!.root.myRecyclerView.adapter =
+              //       DunAdapter(duns, this@DunListFragment, false)
+              mBinding!!.root.myRecyclerView.adapter?.notifyDataSetChanged()
+              checkSwipeRefresh()
+
+              presenter.app.db.child("users").child(userId).child("duns").child(userId)
+                  .removeEventListener(this)
+            }
+          }
+        })
+  }
+
+  fun onClick(dun: DunEntity) {
+    presenter.doEdit(dun)
+  }
+
+
+  fun deleteUserDun(userId: String, uid: String?) {
+    presenter.app.db.child("users").child(userId).child("duns").child(userId).child(uid!!)
+        .addListenerForSingleValueEvent(
+            object : ValueEventListener {
+              override fun onDataChange(snapshot: DataSnapshot) {
+                snapshot.ref.removeValue()
+              }
+
+              override fun onCancelled(error: DatabaseError) {
+                info("Firebase Dun error : ${error.message}")
+              }
+            })
+  }
+
+  fun deleteDun(uid: String?) {
+    presenter.app.db.child("duns").child(uid!!)
+        .addListenerForSingleValueEvent(
+            object : ValueEventListener {
+              override fun onDataChange(snapshot: DataSnapshot) {
+                snapshot.ref.removeValue()
+              }
+
+              override fun onCancelled(error: DatabaseError) {
+                info("Firebase Dun error : ${error.message}")
+              }
+            })
+  }
+
+  override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+    presenter.loadDuns()
+    super.onActivityResult(requestCode, resultCode, data)
   }
 
   @Override
@@ -137,88 +224,8 @@ class DunListFragment(var presenter: DunPresenter) : BaseFragment(), AnkoLogger 
   private val mDunClickCallback = object : DunClickCallback {
     override fun onClick(dun: DunEntity?) {
       if (lifecycle.currentState.isAtLeast(Lifecycle.State.STARTED)) {
-        (activity as DunView?)!!.showDunFragment(dun!!)
+        (activity as HomeView?)!!.showDunFragment(dun!!)
       }
     }
-  }
-
-  override fun onResume() {
-    super.onResume()
-    if (this::class == ReportFragment::class)
-      getAllDuns(presenter.app.auth.currentUser!!.uid)
-  }
-
-  // Swipe support
-  override fun setSwipeRefresh() {
-    root.swipeRefresh.setOnRefreshListener {
-      root.swipeRefresh.isRefreshing = true
-      getAllDuns(presenter.app.auth.currentUser!!.uid)
-    }
-  }
-
-  private fun getAllDuns(userId: String?) {
-    loader = Loader.createLoader(activity!!)
-    Loader.showLoader(loader, "Downloading Duns from Firebase")
-    val duns = ArrayList<DunEntity>()
-
-    presenter.app.db.child("users").child(userId!!).child("duns").child(userId)
-        .addValueEventListener(object : ValueEventListener {
-          override fun onCancelled(error: DatabaseError) {
-            info("Firebase Dun error : ${error.message}")
-          }
-
-          override fun onDataChange(snapshot: DataSnapshot) {
-            Loader.hideLoader(loader)
-            val children = snapshot.children
-            children.forEach {
-              val dun = it.getValue<DunEntity>(DunEntity::class.java)
-
-              duns.add(dun!!)
-              root.myRecyclerView.adapter = DunAdapter(mDunClickCallback, false)
-              root.myRecyclerView.adapter?.notifyDataSetChanged()
-              checkSwipeRefresh()
-
-              presenter.app.db.child("users").child(userId).child("duns").child(userId)
-                  .removeEventListener(this)
-            }
-          }
-        })
-  }
-
-  fun onClick(dun: DunEntity) {
-    presenter.doEdit(dun)
-  }
-
-  fun deleteUserDun(userId: String, uid: String?) {
-    presenter.app.db.child("users").child(userId).child("duns").child(userId).child(uid!!)
-        .addListenerForSingleValueEvent(
-            object : ValueEventListener {
-              override fun onDataChange(snapshot: DataSnapshot) {
-                snapshot.ref.removeValue()
-              }
-
-              override fun onCancelled(error: DatabaseError) {
-                info("Firebase Dun error : ${error.message}")
-              }
-            })
-  }
-
-  fun deleteDun(uid: String?) {
-    presenter.app.db.child("duns").child(uid!!)
-        .addListenerForSingleValueEvent(
-            object : ValueEventListener {
-              override fun onDataChange(snapshot: DataSnapshot) {
-                snapshot.ref.removeValue()
-              }
-
-              override fun onCancelled(error: DatabaseError) {
-                info("Firebase Dun error : ${error.message}")
-              }
-            })
-  }
-
-  override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-    presenter.loadDuns()
-    super.onActivityResult(requestCode, resultCode, data)
   }
 }

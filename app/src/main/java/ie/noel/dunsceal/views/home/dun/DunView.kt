@@ -8,24 +8,26 @@ import android.view.MenuItem
 import com.bumptech.glide.Glide
 import org.jetbrains.anko.AnkoLogger
 import ie.noel.dunsceal.R
-import ie.noel.dunsceal.models.Dun
 import ie.noel.dunsceal.models.entity.DunEntity
 import ie.noel.dunsceal.models.entity.LocationEntity
-import ie.noel.dunsceal.views.BaseView
-import ie.noel.dunsceal.views.login.LoginView
+import ie.noel.dunsceal.views.home.dunlist.DunListView
 import kotlinx.android.synthetic.main.activity_dun.*
 import kotlinx.android.synthetic.main.appbar_fab_home.*
 import org.jetbrains.anko.toast
 
-class DunView : LoginView(), AnkoLogger {
+open class DunView : DunListView(), AnkoLogger {
 
-  lateinit var presenter: DunPresenter
+  override lateinit var presenter: DunPresenter
   var dun = DunEntity()
+
+  companion object {
+    private const val TAG = "DunView"
+  }
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     setContentView(R.layout.activity_dun)
-    //super.init(toolbar, true)
+    super.init(toolbar, true, TAG)
 
     presenter = initPresenter (DunPresenter(this)) as DunPresenter
 
@@ -34,7 +36,6 @@ class DunView : LoginView(), AnkoLogger {
       presenter.doConfigureMap(it)
       it.setOnMapClickListener { presenter.doSetLocation() }
     }
-
     chooseImage.setOnClickListener { presenter.doSelectImage() }
   }
 
@@ -42,7 +43,9 @@ class DunView : LoginView(), AnkoLogger {
     dunTitle.setText(dun.name)
     description.setText(dun.description)
     Glide.with(this).load(dun.image).into(dunImage)
-    chooseImage.setText(R.string.change_dun_image)
+    if (dun.image != null) {
+      chooseImage.setText(R.string.change_dun_image)
+    }
     this.showLocation(dun.location)
   }
 
@@ -50,27 +53,6 @@ class DunView : LoginView(), AnkoLogger {
   override fun showLocation(locationEntity: LocationEntity) {
     dunLatitude.text = "%.6f".format(locationEntity.latitude)
     dunLongitude.text = "%.6f".format(locationEntity.longitude)
-  }
-
-  override fun onCreateOptionsMenu(menu: Menu): Boolean {
-    menuInflater.inflate(R.menu.menu_dun, menu)
-    return super.onCreateOptionsMenu(menu)
-  }
-
-  override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-    when (item?.itemId) {
-      R.id.item_delete -> {
-        presenter.doDelete()
-      }
-      R.id.item_save -> {
-        if (dunTitle.text.toString().isEmpty()) {
-          toast(R.string.enter_dun_title)
-        } else {
-          presenter.doAddOrSave(dunTitle.text.toString(), description.text.toString())
-        }
-      }
-    }
-    return super.onOptionsItemSelected(item)
   }
 
   override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -110,14 +92,27 @@ class DunView : LoginView(), AnkoLogger {
     mapView.onSaveInstanceState(outState)
   }
 
-  /** Shows dun detail fragment  */
-  fun showDunFragment(dun: DunEntity) {
-    val dunFragment = DunFragment.forDun(presenter, dun.id)
-    supportFragmentManager
-        .beginTransaction()
-        .addToBackStack("dun")
-        .replace(R.id.fragment_container,
-            dunFragment, null).commit()
+  // Options Menu
+
+  override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+    menuInflater.inflate(R.menu.menu_dun, menu)
+    return super.onCreateOptionsMenu(menu)
+  }
+
+  override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+    when (item?.itemId) {
+      R.id.item_delete -> {
+        presenter.doDelete()
+      }
+      R.id.item_save -> {
+        if (dunTitle.text.toString().isEmpty()) {
+          toast(R.string.enter_dun_title)
+        } else {
+          presenter.doAddOrSave(dunTitle.text.toString(), description.text.toString())
+        }
+      }
+    }
+    return super.onOptionsItemSelected(item)
   }
 }
 

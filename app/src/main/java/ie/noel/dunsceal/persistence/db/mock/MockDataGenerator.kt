@@ -35,8 +35,8 @@ object MockDataGenerator {
   private val INVESTIGATIONS = arrayOf(
       "Investigation 1", "Investigation 2", "Investigation 3", "Investigation 4", "Investigation 5", "Investigation 6")
   private val VISITED = arrayOf(1, 0, 1, 0, 1)
-  private const val IMAGE = "https://firebasestorage.googleapis.com/v0/b/dunsceal.appspot.com/o/hillfort-default.png?alt=media&token=227979e6-344e-4653-8f75-a540d2ed2392"
-
+  //private const val IMAGE = "https://firebasestorage.googleapis.com/v0/b/dunsceal.appspot.com/o/hillfort-default.bmp?alt=media&token=d9c756f3-0cc9-4c5a-b6dc-9f13bd1d53d9"
+  private const val IMAGE = ""
 
   fun generateDuns(): List<DunEntity> {
     val duns: MutableList<DunEntity> = ArrayList(FIRST.size * SECOND.size)

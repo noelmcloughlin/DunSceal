@@ -20,8 +20,7 @@
 
     <!-- DunSceal -->
 
-    <string name="app_name">DunSceal dev1</string>
-    <string name="no_investigations">No investigations</string>
+    <string name="app_name">DunSceal2</string>
     <string name="loading_investigations">Loading investigations...</string>
     <string name="loading_duns">Loading duns...</string>
     <string name="search_duns_hint">Search Duns...</string>
@@ -32,15 +31,14 @@
     <string name="cd_dun_image_icon">Image of the dun</string>
     <string name="cd_dun_votes">Votes for the dun</string>
 
+    <!-- Dun -->
+
     <string name="hint_dunTitle">Dun Title</string>
     <string name="hint_dunDescription">Description </string>
 
     <!-- feature menu -->
     <string name="button_addDun">Add Dun</string>
-    <string name="button_searchDuns">Search Duns</string>
-
     <string name="button_navigateTo">Navigate to</string>
-    <string name="menu_navigateTo">Navigate to</string>
     <!-- END feature menu -->
 
     <string name="menu_cancelDun">Cancel</string>
@@ -65,6 +63,7 @@
     <string name="menu_logout">Logout</string>
 
     <string name="play_btn_splash">skip splash</string>
+    <string name="play_btn_home">go home</string>
     <string name="play_btn_signup">Sign In</string>
     <string name="play_btn_login">Login</string>
 
@@ -91,35 +90,49 @@
     <string name="emailpassword_status_fmt">Email User: %1$s (verified: %2$b)</string>
     <string name="emailpassword_title_text">Please Login Below</string>
 
-    <string name="menu_report_all">All Duns</string>
     <string name="select_profile_image">Select Profile Image</string>
     <!--END Firebase Resources-->
 
     <string name="messageLoading">Please wait while we Connect to the Server . . .</string>
+
+    <!-- NAVIGATION MENU -->
 
     <!-- Navigation Drawer -->
     <string name="title_activity_home">Home</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="nav_header_title">DunSceal2</string>
-    <string name="nav_header_subtitle">voteforhomer@android.com</string>
+    <string name="nav_header_subtitle">john@doe.com</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
 
-    <string name="menu_record">Record</string>
-    <string name="menu_report">Report</string>
-    <string name="menu_favourites">Favourites</string>
-    <string name="menu_about">About Us</string>
-    <string name="menu_share">Share</string>
-    <string name="menu_send">Send</string>
-
-    <string name="aboutus_title">Homer for President !!</string>
-    <string name="aboutus_message">Hi, I\'m Homer\n\nPlease vote for me.\n\n Please Please Please Please!!</string>
+    <string name="nav_menu_home">Home</string>
+    <string name="nav_menu_report">Report</string>
+    <string name="nav_menu_report_all">All Duns</string>
+    <string name="nav_menu_favourites">Favourites</string>
+    <string name="nav_menu_about">About Us</string>
+    <string name="nav_menu_share">Share</string>
+    <string name="nav_menu_send">Send</string>
     <!-- END Navigation Drawer -->
 
-    <!-- merging -->
-    <string name="action_record">Record</string>
+    <!-- NAV MENUS -->
+
+    <string name="home_menu_add">Add Dun</string>
+    <string name="home_menu_list">List Duns</string>
+    <string name="home_menu_map">Map</string>
+
+    <!-- home -->
+    <string name="home_title">Search </string>
+    <string name="home_total_visited_text">Number of Duns visited</string>
+    <string name="home_total_visited_amount">0</string>
+
+    <!-- duns -->
     <string name="action_report">Report Duns</string>
+    <string name="action_report_all">Report All Duns</string>
+    <string name="yes">yes</string>
+    <string name="no">yes</string>
+
+    <!-- merging -->
     <string name="recordTitle">Welcome Homer</string>
     <string name="recordSubtitle">Please Give Generously</string>
     <string name="recordButton">Record</string>
@@ -148,20 +161,13 @@
     <string name="communicate">Communicate</string>
     <string name="access_control">Access Control</string>
 
-    <!-- home -->
-    <string name="home_title">Search </string>
-    <string name="home_total_visited_text">Number of Duns visited</string>
-    <string name="home_total_visited_amount">0</string>
-    <string name="home_menu_add">Add Dun</string>
-    <string name="home_menu_list">List Duns</string>
-    <string name="home_menu_map">Map</string>
+
 
 
     <!-- Dun -->
     <string name="action_dun">Dun</string>
     <string name="donateSubtitle">Please Give Generously</string>
     <string name="donateButton">Dun</string>
-    <string name="menu_donate">Dun</string>
     <string name="menu_routeDun">Route</string>
     <string name="textview">TextView</string>
 
@@ -220,5 +226,6 @@
 
     <string name="title_activity_fragment_default_tag">Welcome</string>
     <string name="mock_database_name">mock_database.db</string>
+  <string name="splash_picture_description">Logo</string>
 
 </resources>

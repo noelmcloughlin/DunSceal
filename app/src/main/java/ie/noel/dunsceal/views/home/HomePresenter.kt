@@ -17,9 +17,7 @@ import ie.noel.dunsceal.main.MainApp
 import ie.noel.dunsceal.models.UserPhoto
 import ie.noel.dunsceal.models.entity.DunEntity
 import ie.noel.dunsceal.utils.Image.convertImageToBytes
-import ie.noel.dunsceal.views.BaseFragment
 import ie.noel.dunsceal.views.VIEW
-import ie.noel.dunsceal.views.home.dunlist.DunListFragment
 import ie.noel.dunsceal.views.login.LoginPresenter
 import ie.noel.dunsceal.views.login.LoginView
 import jp.wasabeef.picasso.transformations.CropCircleTransformation

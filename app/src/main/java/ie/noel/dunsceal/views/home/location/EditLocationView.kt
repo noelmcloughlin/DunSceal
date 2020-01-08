@@ -1,23 +1,30 @@
 package ie.noel.dunsceal.views.home.location
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.Marker
 import ie.noel.dunsceal.R
-import ie.noel.dunsceal.views.login.LoginView
+import ie.noel.dunsceal.views.home.HomeView
+import ie.noel.dunsceal.views.home.dun.DunView
 import kotlinx.android.synthetic.main.activity_edit_location.*
 import kotlinx.android.synthetic.main.appbar_fab_home.*
 
-class EditLocationView : LoginView(), GoogleMap.OnMarkerDragListener, GoogleMap.OnMarkerClickListener {
+class EditLocationView : HomeView(), GoogleMap.OnMarkerDragListener, GoogleMap.OnMarkerClickListener {
 
   lateinit var presenter: EditLocationPresenter
+
+  companion object {
+    private const val TAG = "EditLocationView"
+  }
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     setContentView(R.layout.activity_edit_location)
-    super.init(toolbar, true)
+    super.init(toolbar, true, TAG)
+
 
     presenter = initPresenter(EditLocationPresenter(this)) as EditLocationPresenter
 
@@ -29,22 +36,9 @@ class EditLocationView : LoginView(), GoogleMap.OnMarkerDragListener, GoogleMap.
     }
   }
 
-  override fun onCreateOptionsMenu(menu: Menu): Boolean {
-    menuInflater.inflate(R.menu.menu_edit_location, menu)
-    return super.onCreateOptionsMenu(menu)
-  }
-
-  override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-    when (item?.itemId) {
-      R.id.item_save -> {
-        presenter.doSave()
-      }
-    }
-    return super.onOptionsItemSelected(item)
-  }
-
   override fun onMarkerDragStart(marker: Marker) {}
 
+  @SuppressLint("SetTextI18n")
   override fun onMarkerDrag(marker: Marker) {
     dunLatitude.text = "%.6f".format(marker.position.latitude)
     dunLongitude.text = "%.6f".format(marker.position.longitude)
@@ -82,5 +76,20 @@ class EditLocationView : LoginView(), GoogleMap.OnMarkerDragListener, GoogleMap.
   override fun onSaveInstanceState(outState: Bundle) {
     super.onSaveInstanceState(outState)
     mapView.onSaveInstanceState(outState)
+  }
+
+  // OPTIONS MENU
+  override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+    menuInflater.inflate(R.menu.menu_edit_location, menu)
+    return super.onCreateOptionsMenu(menu)
+  }
+
+  override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+    when (item?.itemId) {
+      R.id.item_save -> {
+        presenter.doSave()
+      }
+    }
+    return super.onOptionsItemSelected(item)
   }
 }

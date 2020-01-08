@@ -7,9 +7,9 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import ie.noel.dunsceal.models.entity.LocationEntity
-import ie.noel.dunsceal.views.home.HomePresenter
+import ie.noel.dunsceal.views.BasePresenter
 
-class EditLocationPresenter(view: EditLocationView) : HomePresenter(view) {
+class EditLocationPresenter(view: EditLocationView) : BasePresenter(view) {
 
   var location = LocationEntity()
 

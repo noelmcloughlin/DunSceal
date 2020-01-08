@@ -21,9 +21,8 @@ import ie.noel.dunsceal.utils.Image.showImagePicker
 import ie.noel.dunsceal.views.*
 import ie.noel.dunsceal.views.home.HomePresenter
 import ie.noel.dunsceal.views.home.HomeView
-import ie.noel.dunsceal.views.login.LoginView
 
-class DunPresenter(view: DunView) : HomePresenter(view) {
+open class DunPresenter(view: HomeView) : HomePresenter(view) {
 
     var map: GoogleMap? = null
     var dun = DunEntity()
@@ -80,8 +79,7 @@ class DunPresenter(view: DunView) : HomePresenter(view) {
         }
     }
 
-    fun doConfigureMap(m: GoogleMap) {
-        map = m
+    open fun doConfigureMap(map: GoogleMap) {
         locationUpdate(dun.location)
     }
 
