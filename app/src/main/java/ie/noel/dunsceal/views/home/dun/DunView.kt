@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import com.bumptech.glide.Glide
 import org.jetbrains.anko.AnkoLogger
 import ie.noel.dunsceal.R
@@ -13,7 +14,8 @@ import ie.noel.dunsceal.models.entity.LocationEntity
 import ie.noel.dunsceal.views.BaseFragment
 import ie.noel.dunsceal.views.BaseView
 import ie.noel.dunsceal.views.home.dunlist.DunListFragment
-import kotlinx.android.synthetic.main.fragment_dun.*
+import kotlinx.android.synthetic.main.appbar_fab_home.*
+import kotlinx.android.synthetic.main.fragment_dun_add.*
 import org.jetbrains.anko.toast
 
 open class DunView : BaseView(), AnkoLogger {
@@ -31,20 +33,15 @@ open class DunView : BaseView(), AnkoLogger {
 
     presenter = initPresenter(DunPresenter(this)) as DunPresenter
 
-    // Add product list fragment if this is first creation
+    // Add fragment if this is first creation
     if (savedInstanceState == null) {
-      val fragment : BaseFragment = DunListFragment.newInstance(presenter)
+      val fragment : BaseFragment = DunViewFragment.newInstance(presenter, "")
       supportFragmentManager.beginTransaction()
           .replace(R.id.home, fragment, TAG).commit()
     }
     presenter.loadDuns()
 
-    mapView.onCreate(savedInstanceState)
-    mapView.getMapAsync {
-      presenter.doConfigureMap(it)
-      it.setOnMapClickListener { presenter.doSetLocation() }
-    }
-    chooseImage.setOnClickListener { presenter.doSelectImage() }
+
   }
 
   override fun showDun(dun: DunEntity) {
@@ -109,10 +106,10 @@ open class DunView : BaseView(), AnkoLogger {
 
   override fun onOptionsItemSelected(item: MenuItem?): Boolean {
     when (item?.itemId) {
-      R.id.item_delete -> {
+      R.id.menu_dun_item_delete -> {
         presenter.doDelete()
       }
-      R.id.item_save -> {
+      R.id.menu_dun_item_save -> {
         if (name.text.toString().isEmpty()) {
           toast(R.string.enter_dun_title)
         } else {
@@ -121,6 +118,16 @@ open class DunView : BaseView(), AnkoLogger {
       }
     }
     return super.onOptionsItemSelected(item)
+  }
+
+  /** Shows dun detail fragment  */
+  fun showDunFragment(dun: DunEntity) {
+    val dunFragment = DunViewFragment.forDun(presenter, dun.id)
+    supportFragmentManager
+        .beginTransaction()
+        .addToBackStack("dun")
+        .replace(R.id.content_home_frame,
+            dunFragment, null).commit()
   }
 }
 

@@ -7,6 +7,6 @@
 
   <include layout="@layout/appbar_fab_home" />
 
-  <include layout="@layout/content_dun_maps" />
+  <include layout="@layout/fragment_dun_maps" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

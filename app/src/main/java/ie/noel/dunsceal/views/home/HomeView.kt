@@ -6,18 +6,19 @@ import android.view.*
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.view.GravityCompat
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import com.google.android.material.navigation.NavigationView
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
 import ie.noel.dunsceal.R
-import ie.noel.dunsceal.models.entity.DunEntity
 import ie.noel.dunsceal.views.home.dunlist.DunListAllFragment
 import ie.noel.dunsceal.utils.Image.readImageUri
 import ie.noel.dunsceal.utils.Image.showImagePicker
 import ie.noel.dunsceal.views.BaseFragment
 import ie.noel.dunsceal.views.BaseView
 import ie.noel.dunsceal.views.about.AboutUsFragment
-import ie.noel.dunsceal.views.home.dun.DunFragment
+import ie.noel.dunsceal.views.home.dun.DunAddFragment
+import ie.noel.dunsceal.views.home.dun.DunPresenter
 import ie.noel.dunsceal.views.home.dunlist.DunListFragment
 import ie.noel.dunsceal.views.home.dunlist.DunListPresenter
 import ie.noel.dunsceal.views.login.LoginView
@@ -32,6 +33,8 @@ open class HomeView : BaseView(), NavigationView.OnNavigationItemSelectedListene
 
   private lateinit var presenter: HomePresenter
   private var userName: String = "User"
+  private val fragManager: FragmentManager = supportFragmentManager
+
 
   companion object {
     private const val TAG = "HomeView"
@@ -65,22 +68,9 @@ open class HomeView : BaseView(), NavigationView.OnNavigationItemSelectedListene
     // add home fragment if this is the first creation
     if (savedInstanceState == null) {
       val fragment = HomeFragment.newInstance(presenter, userName)
-      supportFragmentManager.beginTransaction()
+      fragManager.beginTransaction()
           .add(R.id.content_home_frame, fragment, TAG).commit()
     }
-
-    /* TODO fab or no fab?
-  fab.setOnClickListener { view ->
-    Snackbar.make(
-        view, "Replace with your own action",
-        Snackbar.LENGTH_LONG
-    ).setAction("Action", null).show()
-  } */
-  }
-
-  override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-    menuInflater.inflate(R.menu.menu_main, menu)
-    return super.onCreateOptionsMenu(menu)
   }
 
   override fun onNavigationItemSelected(item: MenuItem): Boolean {
@@ -181,27 +171,29 @@ open class HomeView : BaseView(), NavigationView.OnNavigationItemSelectedListene
     presenter.ft.commit()
   }
 
-  /** Shows dun detail fragment  */
-  fun showDunFragment(dun: DunEntity) {
-    val dunFragment = DunFragment.forDun(presenter, dun.id)
-    supportFragmentManager
-        .beginTransaction()
-        .addToBackStack("dun")
-        .replace(R.id.content_home_frame,
-            dunFragment, null).commit()
+  // Options Menu
+  override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+    menuInflater.inflate(R.menu.menu_main, menu)
+    return super.onCreateOptionsMenu(menu)
   }
 
-  fun OnPlayBtnSelected() {
-    supportFragmentManager.beginTransaction()
-        .replace(R.id.content_home_frame, DunListFragment.newInstance(presenter), TAG).commit()
-  }
-
-  // OPTIONS MENU
   override fun onOptionsItemSelected(item: MenuItem?): Boolean {
     when (item?.itemId) {
-      R.id.menu_main_item_add -> presenter.doAdd()
-      R.id.menu_main_item_map -> presenter.doShowMap()
-      R.id.menu_main_item_logout -> presenter.doLogout()
+      R.id.menu_main_item_add ->
+      {
+        fragManager.beginTransaction()
+            .replace(R.id.content_home_frame, DunAddFragment.newInstance(DunPresenter(this), userName), DunAddFragment.TAG).commit()
+      }
+      R.id.menu_main_item_map ->
+      {
+        fragManager.beginTransaction()
+            .replace(R.id.content_home_frame, DunAddFragment.newInstance(DunPresenter(this), userName), DunAddFragment.TAG).commit()
+      }
+      R.id.menu_main_item_logout ->
+      {
+        fragManager.beginTransaction()
+            .replace(R.id.content_home_frame, DunAddFragment.newInstance(DunPresenter(this), userName), DunAddFragment.TAG).commit()
+      }
     }
     return super.onOptionsItemSelected(item!!)
   }

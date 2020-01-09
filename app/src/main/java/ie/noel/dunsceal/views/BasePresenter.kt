@@ -48,19 +48,6 @@ open class BasePresenter(var view: BaseView?) {
     }
   }
 
-  // LIST MENU
-  fun doAdd() {
-    view?.navigateTo(VIEW.DUN)
-  }
-
-  fun doEdit(dun: DunEntity) {
-    view?.navigateTo(VIEW.DUN, 0, "dun_edit", dun)
-  }
-
-  fun doShowMap() {
-    view?.navigateTo(VIEW.MAPS)
-  }
-
   fun doLogout() {
     app.duns.clear()
     FirebaseAuth.getInstance().signOut()

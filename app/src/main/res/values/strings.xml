@@ -165,6 +165,7 @@
 
 
     <!-- Dun -->
+    <string name="action_home">Home</string>
     <string name="action_dun">Dun</string>
     <string name="donateSubtitle">Please Give Generously</string>
     <string name="donateButton">Dun</string>

@@ -39,20 +39,22 @@ import ie.noel.dunsceal.utils.SwipeToDeleteCallback
 import ie.noel.dunsceal.utils.SwipeToEditCallback
 import ie.noel.dunsceal.views.BaseFragment
 import ie.noel.dunsceal.views.BasePresenter
+import ie.noel.dunsceal.views.home.HomePresenter
 import ie.noel.dunsceal.views.home.HomeView
 import ie.noel.dunsceal.views.home.dun.DunClickCallback
+import ie.noel.dunsceal.views.home.dun.DunView
 import kotlinx.android.synthetic.main.fragment_dun_list.view.*
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.info
 
-class DunListFragment(var presenter: BasePresenter) : BaseFragment(), AnkoLogger {
+class DunListFragment(var presenter: HomePresenter) : BaseFragment(), AnkoLogger {
 
   private var mDunAdapter: DunAdapter? = null
   private var mBinding: FragmentDunListBinding? = null
 
   companion object {
     @JvmStatic
-    fun newInstance(presenter: BasePresenter) =
+    fun newInstance(presenter: HomePresenter) =
         DunListFragment(presenter).apply {
           arguments = Bundle().apply { }
         }
@@ -225,7 +227,7 @@ class DunListFragment(var presenter: BasePresenter) : BaseFragment(), AnkoLogger
   private val mDunClickCallback = object : DunClickCallback {
     override fun onClick(dun: DunEntity?) {
       if (lifecycle.currentState.isAtLeast(Lifecycle.State.STARTED)) {
-        (activity as HomeView?)!!.showDunFragment(dun!!)
+        (activity as DunView?)!!.showDunFragment(dun!!)
       }
     }
   }

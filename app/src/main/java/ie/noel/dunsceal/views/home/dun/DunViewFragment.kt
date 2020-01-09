@@ -20,30 +20,38 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import ie.noel.dunsceal.R
-import ie.noel.dunsceal.adapters.InvestigationAdapter
-import ie.noel.dunsceal.databinding.DunFragmentBinding
-import ie.noel.dunsceal.models.Investigation
+import ie.noel.dunsceal.databinding.FragmentDunViewBinding
 import ie.noel.dunsceal.models.entity.DunEntity
-import ie.noel.dunsceal.models.viewmodel.DunViewModel
 import ie.noel.dunsceal.utils.Loader
 import ie.noel.dunsceal.views.BaseFragment
-import ie.noel.dunsceal.views.BasePresenter
-import java.util.HashMap
+import ie.noel.dunsceal.views.home.HomeFragment
+import ie.noel.dunsceal.views.home.HomePresenter
+import kotlinx.android.synthetic.main.fragment_dun_maps.view.mapView
+import kotlinx.android.synthetic.main.fragment_dun_add.view.*
+import java.util.*
 
-class DunFragment(val presenter: BasePresenter) : BaseFragment() {
+class DunViewFragment(val presenter: DunPresenter) : BaseFragment() {
 
-  private var mBinding: DunFragmentBinding? = null
-  private var mInvestigationAdapter: InvestigationAdapter? = null
+  private var mBinding: FragmentDunViewBinding? = null
+  //private var mInvestigationAdapter: InvestigationAdapter? = null
 
   companion object {
     private const val KEY_DUN_ID = "dun_id"
+    //private const val TAG = "DunViewFragment"
+
+    /** Creates empty dun fragment  */
+    @JvmStatic
+    fun newInstance(presenter: HomePresenter, user: String): HomeFragment {
+      return HomeFragment(presenter, user).apply {
+        arguments = Bundle().apply {}
+      }
+    }
+
     /** Creates dun fragment for specific dun ID  */
     @JvmStatic
-    fun forDun(presenter: BasePresenter, dunId: Long): DunFragment {
-      val fragment = DunFragment(presenter)
+    fun forDun(presenter: DunPresenter, dunId: Long): DunViewFragment {
+      val fragment = DunViewFragment(presenter)
       val args = Bundle()
       args.putInt(KEY_DUN_ID, dunId.toInt())
       fragment.arguments = args
@@ -56,45 +64,31 @@ class DunFragment(val presenter: BasePresenter) : BaseFragment() {
       container: ViewGroup?,
       savedInstanceState: Bundle?
   ): View? {
-    // Inflate this data binding layout (or fragment_edit)
-    mBinding = DataBindingUtil.inflate(inflater, R.layout.dun_fragment, container, false)
+    // Inflate this data binding layout
+    mBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_dun_view, container, false)
     loader = Loader.createLoader(activity!!)
 
-    // Create and set the adapter for the RecyclerView.
-    mInvestigationAdapter = InvestigationAdapter(mInvestigationClickCallback)
-    mBinding!!.investigationList.adapter = mInvestigationAdapter
+    // Setup the map view
+    if (mBinding!!.root.mapView != null) {
+      mBinding!!.mapView.onCreate(savedInstanceState)
+      mBinding!!.mapView.getMapAsync {
+        presenter.doConfigureMap(it)
+        it.setOnMapClickListener { presenter.doSetLocation() }
+      }
+    }
 
+    // setup the image chooser
+    if (mBinding!!.root.chooseImage != null) {
+      mBinding!!.chooseImage.setOnClickListener { presenter.doSelectImage() }
+    }
     return mBinding!!.root
   }
 
-  private val mInvestigationClickCallback = object : InvestigationClickCallback() {
+  /*private val mInvestigationClickCallback = object : InvestigationClickCallback() {
     override fun onClick(investigation: Investigation?) {
     }
     // no-op, not needed
-  }
-
-  override fun onActivityCreated(savedInstanceState: Bundle?) {
-    super.onActivityCreated(savedInstanceState)
-    val factory = DunViewModel.Factory(
-        requireActivity().application, arguments!!.getInt(KEY_DUN_ID))
-    val model = ViewModelProvider(this, factory)
-        .get(DunViewModel::class.java)
-    mBinding!!.dunViewModel = model
-    subscribeToModel(model)
-  }
-
-  private fun subscribeToModel(model: DunViewModel) { // Observe dun data
-    model.observableDunEntity!!.observe(viewLifecycleOwner, Observer { dun: DunEntity? -> model.setDun(dun!!) })
-    // Observe investigations
-    model.investigations!!.observe(viewLifecycleOwner, Observer { investigationEntities ->
-      if (investigationEntities != null) {
-        mBinding!!.isLoading = false
-        mInvestigationAdapter!!.setInvestigationList(investigationEntities)
-      } else {
-        mBinding!!.isLoading = true
-      }
-    })
-  }
+  } */
 
   override fun onResume() {
     super.onResume()

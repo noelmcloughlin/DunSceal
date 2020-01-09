@@ -9,7 +9,7 @@ import ie.noel.dunsceal.models.entity.DunEntity
 import ie.noel.dunsceal.views.home.HomeView
 import ie.noel.dunsceal.views.home.location.EditLocationView
 import kotlinx.android.synthetic.main.appbar_fab_home.*
-import kotlinx.android.synthetic.main.content_dun_maps.*
+import kotlinx.android.synthetic.main.fragment_dun_maps.*
 
 class DunMapView : HomeView(), GoogleMap.OnMarkerClickListener {
 

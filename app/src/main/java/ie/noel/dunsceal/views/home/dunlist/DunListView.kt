@@ -41,21 +41,6 @@ open class DunListView : BaseView(), AnkoLogger, DunListener {
   recyclerView.adapter?.notifyDataSetChanged()
 } */
 
-  // Options Menu
-  override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-    menuInflater.inflate(R.menu.menu_main, menu)
-    return super.onCreateOptionsMenu(menu)
-  }
-
-  override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-    when (item?.itemId) {
-      R.id.menu_main_item_add -> presenter.doAdd()
-      R.id.menu_main_item_map -> presenter.doShowMap()
-      R.id.menu_main_item_logout -> presenter.doLogout()
-    }
-    return super.onOptionsItemSelected(item!!)
-  }
-
   override fun onDunClick(dun: DunEntity) {
     presenter.doEdit(dun)
   }
