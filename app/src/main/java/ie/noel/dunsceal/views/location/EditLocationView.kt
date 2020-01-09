@@ -1,4 +1,4 @@
-package ie.noel.dunsceal.views.home.location
+package ie.noel.dunsceal.views.location
 
 import android.annotation.SuppressLint
 import android.os.Bundle
@@ -8,7 +8,6 @@ import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.Marker
 import ie.noel.dunsceal.R
 import ie.noel.dunsceal.views.home.HomeView
-import ie.noel.dunsceal.views.home.dun.DunView
 import kotlinx.android.synthetic.main.activity_edit_location.*
 import kotlinx.android.synthetic.main.appbar_fab_home.*
 

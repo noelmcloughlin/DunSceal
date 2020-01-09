@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package ie.noel.dunsceal.views.home.dun
+package ie.noel.dunsceal.views.dun
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -29,24 +29,17 @@ import ie.noel.dunsceal.views.home.HomeFragment
 import ie.noel.dunsceal.views.home.HomePresenter
 import kotlinx.android.synthetic.main.fragment_dun_maps.view.mapView
 import kotlinx.android.synthetic.main.fragment_dun_add.view.*
+import org.jetbrains.anko.AnkoLogger
 import java.util.*
 
-class DunViewFragment(val presenter: DunPresenter) : BaseFragment() {
+class DunViewFragment(val presenter: DunPresenter) : BaseFragment(), AnkoLogger {
 
   private var mBinding: FragmentDunViewBinding? = null
   //private var mInvestigationAdapter: InvestigationAdapter? = null
 
   companion object {
     private const val KEY_DUN_ID = "dun_id"
-    //private const val TAG = "DunViewFragment"
-
-    /** Creates empty dun fragment  */
-    @JvmStatic
-    fun newInstance(presenter: HomePresenter, user: String): HomeFragment {
-      return HomeFragment(presenter, user).apply {
-        arguments = Bundle().apply {}
-      }
-    }
+    const val TAG = "DunViewFragment"
 
     /** Creates dun fragment for specific dun ID  */
     @JvmStatic
@@ -67,6 +60,7 @@ class DunViewFragment(val presenter: DunPresenter) : BaseFragment() {
     // Inflate this data binding layout
     mBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_dun_view, container, false)
     loader = Loader.createLoader(activity!!)
+    activity?.title = getString(R.string.action_dun)
 
     // Setup the map view
     if (mBinding!!.root.mapView != null) {

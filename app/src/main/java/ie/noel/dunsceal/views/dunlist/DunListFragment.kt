@@ -13,13 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package ie.noel.dunsceal.views.home.dunlist
+package ie.noel.dunsceal.views.dunlist
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import androidx.annotation.Nullable
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.*
@@ -38,21 +36,22 @@ import ie.noel.dunsceal.utils.Loader
 import ie.noel.dunsceal.utils.SwipeToDeleteCallback
 import ie.noel.dunsceal.utils.SwipeToEditCallback
 import ie.noel.dunsceal.views.BaseFragment
-import ie.noel.dunsceal.views.BasePresenter
+import ie.noel.dunsceal.views.BaseView
 import ie.noel.dunsceal.views.home.HomePresenter
-import ie.noel.dunsceal.views.home.HomeView
-import ie.noel.dunsceal.views.home.dun.DunClickCallback
-import ie.noel.dunsceal.views.home.dun.DunView
+import ie.noel.dunsceal.views.dun.DunClickCallback
+import ie.noel.dunsceal.views.dun.DunView
 import kotlinx.android.synthetic.main.fragment_dun_list.view.*
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.info
 
-class DunListFragment(var presenter: HomePresenter) : BaseFragment(), AnkoLogger {
+class DunListFragment(val presenter: HomePresenter) : BaseFragment(), AnkoLogger {
 
   private var mDunAdapter: DunAdapter? = null
   private var mBinding: FragmentDunListBinding? = null
 
   companion object {
+    const val TAG = "DunListFragment"
+
     @JvmStatic
     fun newInstance(presenter: HomePresenter) =
         DunListFragment(presenter).apply {
@@ -60,13 +59,18 @@ class DunListFragment(var presenter: HomePresenter) : BaseFragment(), AnkoLogger
         }
   }
 
-  override fun onCreateView(inflater: LayoutInflater,
-                            container: ViewGroup?,
-                            savedInstanceState: Bundle?
+  override fun onCreateView(
+      inflater: LayoutInflater,
+      container: ViewGroup?,
+      savedInstanceState: Bundle?
   ): View? {
+
+    super.onCreateView(inflater, container, savedInstanceState)
 
     // Inflate the layout for this fragment
     mBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_dun_list, container, false)
+    setHasOptionsMenu(true)
+
     activity?.title = getString(R.string.action_report)
     loader = Loader.createLoader(activity!!)
 

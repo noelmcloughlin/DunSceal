@@ -6,25 +6,25 @@ import android.view.*
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.view.GravityCompat
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
 import com.google.android.material.navigation.NavigationView
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
 import ie.noel.dunsceal.R
-import ie.noel.dunsceal.views.home.dunlist.DunListAllFragment
+import ie.noel.dunsceal.views.dunlist.DunListAllFragment
 import ie.noel.dunsceal.utils.Image.readImageUri
 import ie.noel.dunsceal.utils.Image.showImagePicker
 import ie.noel.dunsceal.views.BaseFragment
 import ie.noel.dunsceal.views.BaseView
+import ie.noel.dunsceal.views.VIEW
 import ie.noel.dunsceal.views.about.AboutUsFragment
-import ie.noel.dunsceal.views.home.dun.DunAddFragment
-import ie.noel.dunsceal.views.home.dun.DunPresenter
-import ie.noel.dunsceal.views.home.dunlist.DunListFragment
-import ie.noel.dunsceal.views.home.dunlist.DunListPresenter
+import ie.noel.dunsceal.views.dun.DunAddFragment
+import ie.noel.dunsceal.views.dun.DunPresenter
+import ie.noel.dunsceal.views.dunlist.DunListFragment
+import ie.noel.dunsceal.views.dunlist.DunListPresenter
 import ie.noel.dunsceal.views.login.LoginView
 import jp.wasabeef.picasso.transformations.CropCircleTransformation
 import kotlinx.android.synthetic.main.appbar_fab_home.*
-import kotlinx.android.synthetic.main.home.*
+import kotlinx.android.synthetic.main.nav_drawer_home.*
 import kotlinx.android.synthetic.main.nav_header_home.view.*
 import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.toast
@@ -33,8 +33,6 @@ open class HomeView : BaseView(), NavigationView.OnNavigationItemSelectedListene
 
   private lateinit var presenter: HomePresenter
   private var userName: String = "User"
-  private val fragManager: FragmentManager = supportFragmentManager
-
 
   companion object {
     private const val TAG = "HomeView"
@@ -42,7 +40,7 @@ open class HomeView : BaseView(), NavigationView.OnNavigationItemSelectedListene
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
-    setContentView(R.layout.home)
+    setContentView(R.layout.nav_drawer_home)
     super.init(toolbar, false, TAG)
 
     presenter = initPresenter(DunListPresenter(this)) as DunListPresenter
@@ -65,11 +63,11 @@ open class HomeView : BaseView(), NavigationView.OnNavigationItemSelectedListene
     navView.getHeaderView(0).imageView
         .setOnClickListener { showImagePicker(this, 1) }
 
-    // add home fragment if this is the first creation
+    // add nav_drawer_home fragment if this is the first creation
     if (savedInstanceState == null) {
       val fragment = HomeFragment.newInstance(presenter, userName)
       fragManager.beginTransaction()
-          .add(R.id.content_home_frame, fragment, TAG).commit()
+          .add(R.id.content_home_frame, fragment, HomeFragment.TAG).commit()
     }
   }
 
@@ -78,21 +76,21 @@ open class HomeView : BaseView(), NavigationView.OnNavigationItemSelectedListene
     when (item.itemId) {
       R.id.nav_home -> {
         presenter.dataStore!!.fetchDuns {
-          startActivity<HomeView>()
+          navigateTo(VIEW.HOME)
         }
       }
       R.id.nav_report -> {
         presenter.dataStore!!.fetchDuns {
-          navigateTo(DunListFragment.newInstance(presenter))
+          fragmentTo(DunListFragment.newInstance(presenter))
         }
       }
       R.id.nav_report_all -> {
         toast("You Selected report all")
-        navigateTo(DunListAllFragment.newInstance(presenter))
+        fragmentTo(DunListAllFragment.newInstance(presenter))
       }
       R.id.nav_aboutus -> {
         toast("You Selected about us")
-        navigateTo(AboutUsFragment.newInstance())
+        fragmentTo(AboutUsFragment.newInstance())
       }
       R.id.nav_sign_out -> {
         toast("You Selected Sign out")
@@ -112,7 +110,7 @@ open class HomeView : BaseView(), NavigationView.OnNavigationItemSelectedListene
       super.onBackPressed()
   }
 
-  private fun navigateTo(fragment: Fragment) {
+  private fun fragmentTo(fragment: Fragment) {
     supportFragmentManager.beginTransaction()
         .replace(R.id.content_home_frame, fragment)
         .addToBackStack(null)

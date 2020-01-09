@@ -23,7 +23,7 @@ import androidx.recyclerview.widget.RecyclerView
 import ie.noel.dunsceal.R
 import ie.noel.dunsceal.databinding.NoteItemBinding
 import ie.noel.dunsceal.models.entity.NoteEntity
-import ie.noel.dunsceal.views.home.dun.NoteClickCallback
+import ie.noel.dunsceal.views.dun.NoteClickCallback
 
 class NoteAdapter(private val mNoteClickCallback: NoteClickCallback?) : RecyclerView.Adapter<NoteAdapter.NoteViewHolder>() {
 

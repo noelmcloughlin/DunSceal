@@ -1,4 +1,4 @@
-package ie.noel.dunsceal.views.home.dun
+package ie.noel.dunsceal.views.dun
 
 import android.annotation.SuppressLint
 import android.content.Intent
@@ -20,7 +20,6 @@ import ie.noel.dunsceal.utils.Permissions.isPermissionGranted
 import ie.noel.dunsceal.utils.Image.showImagePicker
 import ie.noel.dunsceal.views.*
 import ie.noel.dunsceal.views.home.HomePresenter
-import ie.noel.dunsceal.views.home.HomeView
 
 open class DunPresenter(view: BaseView) : HomePresenter(view) {
 

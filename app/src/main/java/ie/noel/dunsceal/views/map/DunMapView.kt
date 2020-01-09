@@ -1,4 +1,4 @@
-package ie.noel.dunsceal.views.home.map
+package ie.noel.dunsceal.views.map
 
 import android.os.Bundle
 import com.bumptech.glide.Glide
@@ -7,7 +7,6 @@ import com.google.android.gms.maps.model.Marker
 import ie.noel.dunsceal.R
 import ie.noel.dunsceal.models.entity.DunEntity
 import ie.noel.dunsceal.views.home.HomeView
-import ie.noel.dunsceal.views.home.location.EditLocationView
 import kotlinx.android.synthetic.main.appbar_fab_home.*
 import kotlinx.android.synthetic.main.fragment_dun_maps.*
 

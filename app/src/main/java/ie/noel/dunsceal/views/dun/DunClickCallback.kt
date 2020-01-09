@@ -1,5 +1,5 @@
 
-package ie.noel.dunsceal.views.home.dun
+package ie.noel.dunsceal.views.dun
 
 import ie.noel.dunsceal.models.entity.DunEntity
 

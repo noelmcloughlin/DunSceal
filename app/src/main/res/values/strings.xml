@@ -121,7 +121,7 @@
     <string name="home_menu_list">List Duns</string>
     <string name="home_menu_map">Map</string>
 
-    <!-- home -->
+    <!-- nav_drawer_home -->
     <string name="home_title">Search </string>
     <string name="home_total_visited_text">Number of Duns visited</string>
     <string name="home_total_visited_amount">0</string>

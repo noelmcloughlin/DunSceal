@@ -26,7 +26,7 @@ import ie.noel.dunsceal.R
 import ie.noel.dunsceal.R.mipmap.img_hillfort_default_round
 import ie.noel.dunsceal.databinding.DunItemBinding
 import ie.noel.dunsceal.models.entity.DunEntity
-import ie.noel.dunsceal.views.home.dun.DunClickCallback
+import ie.noel.dunsceal.views.dun.DunClickCallback
 import jp.wasabeef.picasso.transformations.CropCircleTransformation
 import kotlinx.android.synthetic.main.dun_item.view.*
 

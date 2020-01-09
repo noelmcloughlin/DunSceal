@@ -1,24 +1,33 @@
-package ie.noel.dunsceal.views.home.dun
+package ie.noel.dunsceal.views.dun
 
 import android.content.Intent
 import android.os.Bundle
 import android.view.*
+import android.widget.Toast
+import androidx.databinding.DataBindingUtil
 import com.bumptech.glide.Glide
 import ie.noel.dunsceal.R
+import ie.noel.dunsceal.databinding.FragmentDunAddBinding
 import ie.noel.dunsceal.models.entity.DunEntity
 import ie.noel.dunsceal.models.entity.LocationEntity
 import ie.noel.dunsceal.utils.Loader
 import ie.noel.dunsceal.views.BaseFragment
+import ie.noel.dunsceal.views.BaseView
 import kotlinx.android.synthetic.main.fragment_dun_add.*
+import kotlinx.android.synthetic.main.fragment_dun_add.view.*
+import kotlinx.android.synthetic.main.fragment_dun_maps.view.mapView
 import org.jetbrains.anko.AnkoLogger
 
 class DunAddFragment(val presenter: DunPresenter, private val user: String)
   : BaseFragment(), AnkoLogger {
 
   var dun = DunEntity()
+  private var mBinding: FragmentDunAddBinding? = null
 
   companion object {
     const val TAG = "DunAddFragment"
+
+    /** Creates empty dun fragment  */
     @JvmStatic
     fun newInstance(presenter: DunPresenter, user: String): DunAddFragment {
       return DunAddFragment(presenter, user).apply {
@@ -27,24 +36,38 @@ class DunAddFragment(val presenter: DunPresenter, private val user: String)
     }
   }
 
+  override fun onCreate(savedInstanceState: Bundle?) {
+    setHasOptionsMenu(true)
+    super.onCreate(savedInstanceState)
+  }
+
   override fun onCreateView(
       inflater: LayoutInflater,
       container: ViewGroup?,
       savedInstanceState: Bundle?
   ): View? {
-    super.onCreateView(inflater, container, savedInstanceState)
-    val rootView = inflater.inflate(R.layout.fragment_dun_add, container, false)
 
+    super.onCreateView(inflater, container, savedInstanceState)
+
+    // Inflate this data binding layout
+    mBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_dun_add, container, false)
     loader = Loader.createLoader(activity!!)
     activity?.title = getString(R.string.action_dun)
 
-    mapView.onCreate(savedInstanceState)
-    mapView.getMapAsync {
-      presenter.doConfigureMap(it)
-      it.setOnMapClickListener { presenter.doSetLocation() }
+    // Setup the map view
+    if (mBinding!!.root.mapView != null) {
+      mBinding!!.mapView.onCreate(savedInstanceState)
+      mBinding!!.mapView.getMapAsync {
+        presenter.doConfigureMap(it)
+        it.setOnMapClickListener { presenter.doSetLocation() }
+      }
     }
-    chooseImage.setOnClickListener { presenter.doSelectImage() }
-    return rootView
+
+    // setup the image chooser
+    if (mBinding!!.root.chooseImage != null) {
+      mBinding!!.chooseImage.setOnClickListener { presenter.doSelectImage() }
+    }
+    return mBinding!!.root
   }
 
   fun showDun(dun: DunEntity) {
@@ -68,7 +91,6 @@ class DunAddFragment(val presenter: DunPresenter, private val user: String)
       presenter.doActivityResult(requestCode, resultCode, data)
     }
   }
-
 
   override fun onDestroy() {
     super.onDestroy()
@@ -95,6 +117,30 @@ class DunAddFragment(val presenter: DunPresenter, private val user: String)
     super.onSaveInstanceState(outState)
     mapView.onSaveInstanceState(outState)
   }
+
+  // FRAGMENT OPTIONS MENU
+
+  override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+    inflater!!.inflate(R.menu.menu_dun, menu)
+    super.onCreateOptionsMenu(menu!!, inflater)
+  }
+
+  //handle item clicks of menu
+  override fun onOptionsItemSelected(item: MenuItem): Boolean {
+    //get item id to handle item clicks
+    val id = item!!.itemId
+    //handle item clicks
+    if (id == R.id.menu_dun_item_save){
+      Toast.makeText(activity, "Save", Toast.LENGTH_SHORT).show()
+    }
+    if (id == R.id.menu_dun_item_delete){
+      //do your action here, im just showing toast
+      Toast.makeText(activity, "Sort", Toast.LENGTH_SHORT).show()
+    }
+
+    return super.onOptionsItemSelected(item)
+  }
+
 }
 
 

@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package ie.noel.dunsceal.views.home.dun
+package ie.noel.dunsceal.views.dun
 
 import ie.noel.dunsceal.models.Note
 

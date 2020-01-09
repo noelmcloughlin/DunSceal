@@ -1,14 +1,12 @@
-package ie.noel.dunsceal.views.home.dunlist
+package ie.noel.dunsceal.views.dunlist
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.Menu
-import android.view.MenuItem
 import ie.noel.dunsceal.R
 import ie.noel.dunsceal.models.entity.DunEntity
 import ie.noel.dunsceal.views.BaseFragment
 import ie.noel.dunsceal.views.BaseView
-import ie.noel.dunsceal.views.home.dun.DunListener
+import ie.noel.dunsceal.views.dun.DunListener
 import kotlinx.android.synthetic.main.appbar_fab_home.*
 import org.jetbrains.anko.AnkoLogger
 
@@ -22,7 +20,7 @@ open class DunListView : BaseView(), AnkoLogger, DunListener {
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
-    setContentView(R.layout.home)
+    setContentView(R.layout.nav_drawer_home)
     super.init(toolbar, false, TAG)
 
     presenter = initPresenter(DunListPresenter(this)) as DunListPresenter
@@ -30,8 +28,8 @@ open class DunListView : BaseView(), AnkoLogger, DunListener {
     // Add product list fragment if this is first creation
     if (savedInstanceState == null) {
       val fragment : BaseFragment = DunListFragment.newInstance(presenter)
-      supportFragmentManager.beginTransaction()
-          .replace(R.id.content_home_frame, fragment, TAG).commit()
+      fragManager.beginTransaction()
+          .replace(R.id.content_home_frame, fragment, DunListFragment.TAG).commit()
     }
     presenter.loadDuns()
   }

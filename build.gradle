@@ -44,4 +44,5 @@ task clean(type: Delete) {
 
 repositories {
     google()
+    jcenter()
 }

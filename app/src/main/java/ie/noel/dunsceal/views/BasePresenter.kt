@@ -1,6 +1,7 @@
 package ie.noel.dunsceal.views
 
 import android.content.Intent
+import androidx.fragment.app.FragmentManager
 import com.google.firebase.auth.FirebaseAuth
 import ie.noel.dunsceal.main.MainApp
 import ie.noel.dunsceal.models.entity.DunEntity
@@ -33,6 +34,14 @@ open class BasePresenter(var view: BaseView?) {
       return true
     }
     return false
+  }
+
+  fun getUserLoggedIn() : String? {
+    auth = FirebaseAuth.getInstance()
+    return if (auth != null)
+      auth!!.currentUser.toString()
+    else
+      null
   }
 
   fun skipSplash() {

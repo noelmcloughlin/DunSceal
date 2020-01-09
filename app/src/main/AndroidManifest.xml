@@ -62,7 +62,7 @@
         <!-- Login Screen -->
 
         <activity android:name=".views.BaseView"/>
-        <activity android:name=".views.home.dun.DunView"/>
+        <activity android:name="ie.noel.dunsceal.views.dun.DunView"/>
 
         <activity
             android:name=".views.login.LoginView"
@@ -84,7 +84,7 @@
         </activity>
 
         <activity
-            android:name="ie.noel.dunsceal.views.home.dunlist.DunListView"
+            android:name="ie.noel.dunsceal.views.dunlist.DunListView"
             android:label="@string/title_activity_dun_list"
             android:launchMode="singleTop">
             <meta-data
@@ -93,28 +93,28 @@
         </activity>
 
         <activity
-            android:name="ie.noel.dunsceal.views.home.dun.DunFragment"
+            android:name="ie.noel.dunsceal.views.dun.DunFragment"
             android:label="@string/title_activity_dun">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="ie.noel.dunsceal.views.home.dunlist.DunListView" />
+                android:value="ie.noel.dunsceal.views.dunlist.DunListView" />
         </activity>
 
         <activity
-            android:name="ie.noel.dunsceal.views.home.location.EditLocationView"
+            android:name="ie.noel.dunsceal.views.location.EditLocationView"
             android:label="@string/title_activity_edit_location">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="ie.noel.dunsceal.views.home.dun.DunFragment" />
+                android:value="ie.noel.dunsceal.views.dun.DunFragment" />
         </activity>
 
         <activity
-            android:name="ie.noel.dunsceal.views.home.map.DunMapView"
+            android:name="ie.noel.dunsceal.views.map.DunMapView"
             android:label="@string/title_activity_dun_maps"
             android:launchMode="singleTop">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="ie.noel.dunsceal.views.home.dunlist.DunListView" />
+                android:value="ie.noel.dunsceal.views.dunlist.DunListView" />
         </activity>
     </application>
 

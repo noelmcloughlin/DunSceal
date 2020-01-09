@@ -3,20 +3,27 @@ package ie.noel.dunsceal.views
 import android.content.Intent
 import android.os.Bundle
 import android.os.Parcelable
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import androidx.fragment.app.FragmentManager
 import com.google.firebase.auth.FirebaseAuth
+import ie.noel.dunsceal.R
 import ie.noel.dunsceal.models.entity.DunEntity
 import ie.noel.dunsceal.models.entity.LocationEntity
 import org.jetbrains.anko.AnkoLogger
 import ie.noel.dunsceal.utils.Loader
-import ie.noel.dunsceal.views.home.dunlist.DunListView
-import ie.noel.dunsceal.views.home.location.EditLocationView
+import ie.noel.dunsceal.views.dun.DunAddFragment
+import ie.noel.dunsceal.views.dun.DunPresenter
+import ie.noel.dunsceal.views.dunlist.DunListView
+import ie.noel.dunsceal.views.location.EditLocationView
 import ie.noel.dunsceal.views.home.HomeView
-import ie.noel.dunsceal.views.home.dun.DunView
+import ie.noel.dunsceal.views.dun.DunView
 import ie.noel.dunsceal.views.login.LoginView
-import ie.noel.dunsceal.views.home.map.DunMapView
+import ie.noel.dunsceal.views.map.DunMapView
 import ie.noel.dunsceal.views.login.SplashView
 
 const val IMAGE_REQUEST = 1
@@ -31,6 +38,7 @@ open abstract class BaseView : AppCompatActivity(), AnkoLogger {
   // declare a presenter
   private var basePresenter: BasePresenter? = null
   lateinit var loader : AlertDialog
+  open val fragManager: FragmentManager = supportFragmentManager
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)

@@ -1,4 +1,4 @@
-package ie.noel.dunsceal.models.firebase
+package ie.noel.dunsceal.models.storage
 
 import android.content.Context
 import android.graphics.Bitmap

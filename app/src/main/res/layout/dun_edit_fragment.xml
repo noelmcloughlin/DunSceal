@@ -6,7 +6,7 @@
     android:id="@+id/frameLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".views.home.dun.DunView">
+    tools:context=".views.dun.DunView">
 
   <TextView
       android:id="@+id/textView4"

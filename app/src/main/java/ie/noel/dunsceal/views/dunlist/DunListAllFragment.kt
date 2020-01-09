@@ -1,4 +1,4 @@
-package ie.noel.dunsceal.views.home.dunlist
+package ie.noel.dunsceal.views.dunlist
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,25 +10,24 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
 import ie.noel.dunsceal.R
-import ie.noel.dunsceal.adapters.DunAdapter
 import ie.noel.dunsceal.databinding.FragmentDunListBinding
 import ie.noel.dunsceal.models.entity.DunEntity
-import ie.noel.dunsceal.utils.Loader
 import ie.noel.dunsceal.utils.Loader.createLoader
 import ie.noel.dunsceal.utils.Loader.hideLoader
 import ie.noel.dunsceal.utils.Loader.showLoader
 import ie.noel.dunsceal.views.BaseFragment
 import ie.noel.dunsceal.views.BasePresenter
-import ie.noel.dunsceal.views.home.HomePresenter
 import kotlinx.android.synthetic.main.fragment_dun_list.view.*
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.info
 
-class DunListAllFragment(var presenter: BasePresenter) : BaseFragment(), AnkoLogger {
+class DunListAllFragment(val presenter: BasePresenter) : BaseFragment(), AnkoLogger {
 
   private var mBinding: FragmentDunListBinding? = null
 
   companion object {
+    const val TAG = "DunListAllFragment"
+
     @JvmStatic
     fun newInstance(presenter: BasePresenter) =
         DunListAllFragment(presenter).apply {
@@ -37,10 +36,14 @@ class DunListAllFragment(var presenter: BasePresenter) : BaseFragment(), AnkoLog
   }
 
   override fun onCreateView(
-      inflater: LayoutInflater, container: ViewGroup?,
+      inflater: LayoutInflater,
+      container: ViewGroup?,
       savedInstanceState: Bundle?
 
   ): View? {
+
+    super.onCreateView(inflater, container, savedInstanceState)
+    setHasOptionsMenu(true)
 
     // Inflate the layout for this fragment
     mBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_dun_list, container, false)

@@ -1,4 +1,4 @@
-package ie.noel.dunsceal.views.home.map
+package ie.noel.dunsceal.views.map
 
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap

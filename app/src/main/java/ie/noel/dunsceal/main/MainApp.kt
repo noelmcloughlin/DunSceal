@@ -22,7 +22,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.storage.StorageReference
 import ie.noel.dunsceal.models.entity.DunStoreEntity
-import ie.noel.dunsceal.models.firebase.DunFireStoreEntity
+import ie.noel.dunsceal.models.storage.DunFireStoreEntity
 import ie.noel.dunsceal.persistence.DataRepository
 import ie.noel.dunsceal.persistence.db.mock.MockDatabase
 import org.jetbrains.anko.AnkoLogger

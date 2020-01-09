@@ -1,11 +1,10 @@
-package ie.noel.dunsceal.views.home.dun
+package ie.noel.dunsceal.views.dun
 
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import android.view.View
 import com.bumptech.glide.Glide
 import org.jetbrains.anko.AnkoLogger
 import ie.noel.dunsceal.R
@@ -13,9 +12,8 @@ import ie.noel.dunsceal.models.entity.DunEntity
 import ie.noel.dunsceal.models.entity.LocationEntity
 import ie.noel.dunsceal.views.BaseFragment
 import ie.noel.dunsceal.views.BaseView
-import ie.noel.dunsceal.views.home.dunlist.DunListFragment
 import kotlinx.android.synthetic.main.appbar_fab_home.*
-import kotlinx.android.synthetic.main.fragment_dun_add.*
+import kotlinx.android.synthetic.main.fragment_dun_view.*
 import org.jetbrains.anko.toast
 
 open class DunView : BaseView(), AnkoLogger {
@@ -24,24 +22,23 @@ open class DunView : BaseView(), AnkoLogger {
   var dun = DunEntity()
 
   companion object {
-    private const val TAG = "DunView"
+    const val TAG = "DunView"
   }
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
-    setContentView(R.layout.home)
+    setContentView(R.layout.nav_drawer_home)
+    super.init(toolbar, true, TAG)
 
     presenter = initPresenter(DunPresenter(this)) as DunPresenter
 
     // Add fragment if this is first creation
     if (savedInstanceState == null) {
-      val fragment : BaseFragment = DunViewFragment.newInstance(presenter, "")
-      supportFragmentManager.beginTransaction()
-          .replace(R.id.home, fragment, TAG).commit()
+      val fragment : BaseFragment = DunViewFragment.forDun(presenter, dun.id)
+      fragManager.beginTransaction()
+          .replace(R.id.home, fragment, DunViewFragment.TAG).commit()
     }
     presenter.loadDuns()
-
-
   }
 
   override fun showDun(dun: DunEntity) {
@@ -101,7 +98,7 @@ open class DunView : BaseView(), AnkoLogger {
 
   override fun onCreateOptionsMenu(menu: Menu?): Boolean {
     menuInflater.inflate(R.menu.menu_dun, menu)
-    return super.onCreateOptionsMenu(menu)
+    return true
   }
 
   override fun onOptionsItemSelected(item: MenuItem?): Boolean {
@@ -123,7 +120,7 @@ open class DunView : BaseView(), AnkoLogger {
   /** Shows dun detail fragment  */
   fun showDunFragment(dun: DunEntity) {
     val dunFragment = DunViewFragment.forDun(presenter, dun.id)
-    supportFragmentManager
+    fragManager
         .beginTransaction()
         .addToBackStack("dun")
         .replace(R.id.content_home_frame,

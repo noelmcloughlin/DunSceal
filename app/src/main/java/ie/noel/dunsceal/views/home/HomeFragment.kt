@@ -1,15 +1,14 @@
 package ie.noel.dunsceal.views.home
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.Toast
 import androidx.fragment.app.FragmentManager
 import ie.noel.dunsceal.R
 import ie.noel.dunsceal.utils.Loader.createLoader
 import ie.noel.dunsceal.views.BaseFragment
-import ie.noel.dunsceal.views.home.dunlist.DunListFragment
+import ie.noel.dunsceal.views.BaseView
+import ie.noel.dunsceal.views.dunlist.DunListFragment
 import kotlinx.android.synthetic.main.activity_login_screen.view.*
 import kotlinx.android.synthetic.main.fragment_home.view.*
 import org.jetbrains.anko.AnkoLogger
@@ -19,7 +18,7 @@ open class HomeFragment(val presenter: HomePresenter, private val user: String)
   : BaseFragment(), AnkoLogger {
 
   companion object {
-    private const val TAG = "HomeFragment"
+    const val TAG = "HomeFragment"
     @JvmStatic
     fun newInstance(presenter: HomePresenter, user: String): HomeFragment {
       return HomeFragment(presenter, user).apply {
@@ -28,11 +27,18 @@ open class HomeFragment(val presenter: HomePresenter, private val user: String)
     }
   }
 
+  //enable options menu
+  override fun onCreate(savedInstanceState: Bundle?) {
+    setHasOptionsMenu(true)
+    super.onCreate(savedInstanceState)
+  }
+
   override fun onCreateView(
       inflater: LayoutInflater,
       container: ViewGroup?,
       savedInstanceState: Bundle?
   ): View? {
+
     super.onCreateView(inflater, container, savedInstanceState)
     val rootView = inflater.inflate(R.layout.fragment_home, container, false)
 
@@ -46,9 +52,8 @@ open class HomeFragment(val presenter: HomePresenter, private val user: String)
     if (rootView.home_play_btn != null) {
       rootView.home_play_btn.setOnClickListener {
         val fragment: BaseFragment = DunListFragment.newInstance(presenter)
-        val fragManager: FragmentManager = (activity as HomeView).supportFragmentManager
-        fragManager.beginTransaction()
-            .replace(R.id.content_home_frame, fragment, TAG).commit()
+        (activity as BaseView).fragManager.beginTransaction()
+            .replace(R.id.content_home_frame, fragment, DunListFragment.TAG).commit()
       }
     }
     return rootView
@@ -98,4 +103,4 @@ open class HomeFragment(val presenter: HomePresenter, private val user: String)
               .addValueEventListener(eventListener)
       }
      */
-  }
+}

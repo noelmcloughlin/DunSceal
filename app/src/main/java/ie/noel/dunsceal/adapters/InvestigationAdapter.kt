@@ -23,7 +23,7 @@ import androidx.recyclerview.widget.RecyclerView
 import ie.noel.dunsceal.R
 import ie.noel.dunsceal.databinding.InvestigationItemBinding
 import ie.noel.dunsceal.models.entity.InvestigationEntity
-import ie.noel.dunsceal.views.home.dun.InvestigationClickCallback
+import ie.noel.dunsceal.views.dun.InvestigationClickCallback
 
 class InvestigationAdapter(private val mInvestigationClickCallback: InvestigationClickCallback?
 

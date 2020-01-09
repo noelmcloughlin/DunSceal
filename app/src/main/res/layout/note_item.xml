@@ -21,7 +21,7 @@
     <variable name="note"
         type="ie.noel.dunsceal.models.entity.NoteEntity"/>
     <variable name="callback"
-        type="ie.noel.dunsceal.views.home.dun.NoteClickCallback"/>
+        type="ie.noel.dunsceal.views.dun.NoteClickCallback"/>
   </data>
   <androidx.cardview.widget.CardView
       android:layout_width="match_parent"

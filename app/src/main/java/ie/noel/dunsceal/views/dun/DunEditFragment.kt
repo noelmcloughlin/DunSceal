@@ -15,7 +15,7 @@ import ie.noel.dunsceal.utils.Loader.createLoader
 import ie.noel.dunsceal.utils.Loader.hideLoader
 import ie.noel.dunsceal.utils.Loader.showLoader
 import ie.noel.dunsceal.views.BaseFragment
-import ie.noel.dunsceal.views.home.HomePresenter
+import ie.noel.dunsceal.views.nav_drawer_home.HomePresenter
 import kotlinx.android.synthetic.main.fragment_edit.view.*
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.info

@@ -5,7 +5,6 @@ import android.net.Uri
 import android.util.Log
 import android.widget.ImageView
 import androidx.core.net.toUri
-import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import com.google.android.gms.tasks.OnFailureListener
 import com.google.firebase.database.DataSnapshot
@@ -18,14 +17,10 @@ import ie.noel.dunsceal.main.MainApp
 import ie.noel.dunsceal.models.UserPhoto
 import ie.noel.dunsceal.models.entity.DunEntity
 import ie.noel.dunsceal.utils.Image.convertImageToBytes
-import ie.noel.dunsceal.views.BaseFragment
 import ie.noel.dunsceal.views.BaseView
-import ie.noel.dunsceal.views.VIEW
-import ie.noel.dunsceal.views.home.dun.DunAddFragment
-import ie.noel.dunsceal.views.home.dunlist.DunListFragment
 import ie.noel.dunsceal.views.login.LoginPresenter
 import jp.wasabeef.picasso.transformations.CropCircleTransformation
-import kotlinx.android.synthetic.main.home.*
+import kotlinx.android.synthetic.main.nav_drawer_home.*
 import kotlinx.android.synthetic.main.nav_header_home.view.*
 
 import java.lang.Exception
