@@ -8,7 +8,6 @@ import androidx.room.PrimaryKey
 import com.google.firebase.database.Exclude
 import com.google.firebase.database.IgnoreExtraProperties
 import ie.noel.dunsceal.models.Dun
-import ie.noel.dunsceal.models.entity.DunEntity
 import kotlinx.android.parcel.Parcelize
 
 @IgnoreExtraProperties

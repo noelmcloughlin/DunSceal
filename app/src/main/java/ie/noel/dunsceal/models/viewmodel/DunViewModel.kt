@@ -33,7 +33,7 @@ class DunViewModel(application: Application, repository: DataRepository?,
   /**
    * Expose the LiveData Investigations query so the UI can observe it.
    */
-  val investigations: LiveData<List<InvestigationEntity>?>? = repository!!.loadInvestigations(mDunId)
+  val investigations: LiveData<InvestigationEntity> = repository!!.loadInvestigations(mDunId)
 
   fun setDun(dun: DunEntity) {
     this.dun.set(dun)

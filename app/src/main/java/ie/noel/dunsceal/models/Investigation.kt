@@ -20,6 +20,7 @@ import java.util.*
 
 interface Investigation {
   var id: Long
+  var fbId: String
   var dunId: Long
   var image: String
   var text: String?

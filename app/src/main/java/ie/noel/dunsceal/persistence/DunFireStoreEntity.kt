@@ -8,6 +8,7 @@ import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import ie.noel.dunsceal.models.entity.DunEntity
 import ie.noel.dunsceal.models.entity.DunStoreEntity
+import ie.noel.dunsceal.models.entity.InvestigationEntity
 import ie.noel.dunsceal.utils.Image.readImageFromPath
 import org.jetbrains.anko.AnkoLogger
 import java.io.ByteArrayOutputStream
@@ -16,6 +17,8 @@ import java.io.File
 class DunFireStoreEntity(val context: Context) : DunStoreEntity, AnkoLogger {
 
   val duns = ArrayList<DunEntity>()
+  val investigations = ArrayList<InvestigationEntity>()
+
   private lateinit var userId: String
   lateinit var db: DatabaseReference
   private lateinit var st: StorageReference
@@ -88,7 +91,7 @@ class DunFireStoreEntity(val context: Context) : DunStoreEntity, AnkoLogger {
   }
 
   fun fetchDuns(dunsReady: () -> Unit) {
-    val valueEventListener = object : ValueEventListener {
+    val dunValueEventListener = object : ValueEventListener {
       override fun onCancelled(dataSnapshot: DatabaseError) {
       }
 
@@ -97,11 +100,25 @@ class DunFireStoreEntity(val context: Context) : DunStoreEntity, AnkoLogger {
         dunsReady()
       }
     }
-    userId = FirebaseAuth.getInstance().currentUser!!.uid
-    db = FirebaseDatabase.getInstance().reference
-    st = FirebaseStorage.getInstance().reference
-    db.child("users").child(userId).child("duns")
-        .addListenerForSingleValueEvent(valueEventListener)
-    duns.clear()
+
+    fun fetchInvestigations(investigationsReady: () -> Unit) {
+      val investigationValueEventListener = object : ValueEventListener {
+        override fun onCancelled(dataSnapshot: DatabaseError) {
+        }
+
+        override fun onDataChange(dataSnapshot: DataSnapshot) {
+          dataSnapshot.children.mapNotNullTo(investigations) { it.getValue<InvestigationEntity>(InvestigationEntity::class.java) }
+          dunsReady()
+        }
+      }
+      userId = FirebaseAuth.getInstance().currentUser!!.uid
+      db = FirebaseDatabase.getInstance().reference
+      st = FirebaseStorage.getInstance().reference
+      db.child("users").child(userId).child("duns")
+          .addListenerForSingleValueEvent(dunValueEventListener)
+      db.child("users").child(userId).child("investigations")
+          .addListenerForSingleValueEvent(investigationValueEventListener)
+      duns.clear()
+    }
   }
 }

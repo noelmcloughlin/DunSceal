@@ -25,7 +25,7 @@ open class DunPresenter(view: BaseView) : HomePresenter(view) {
 
     var map: GoogleMap? = null
     var dun = DunEntity()
-    private var defaultLocation = LocationEntity(52.245696, -7.139102, "Waterford", 15f)
+    private var defaultLocation = LocationEntity(52.245696, -7.139102, 15f)
     private var edit = false
     private var locationService: FusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(view)
     private val locationRequest = createDefaultLocationRequest()
@@ -46,7 +46,7 @@ open class DunPresenter(view: BaseView) : HomePresenter(view) {
     fun doSetCurrentLocation() {
         locationService.lastLocation.addOnSuccessListener {
             if (it != null)
-                locationUpdate(LocationEntity(it.latitude, it.longitude))
+                locationUpdate(LocationEntity( it.latitude, it.longitude))
         }
     }
 
@@ -116,14 +116,14 @@ open class DunPresenter(view: BaseView) : HomePresenter(view) {
     }
 
     fun doCancel() {
-        view?.finish()
+        view?.fragManager!!.popBackStackImmediate()
     }
 
     fun doDelete() {
         doAsync {
             app.duns.delete(dun)
             uiThread {
-                view?.finish()
+                view?.fragManager!!.popBackStackImmediate()
             }
         }
     }
@@ -139,7 +139,7 @@ open class DunPresenter(view: BaseView) : HomePresenter(view) {
             VIEW.LOCATION,
             LOCATION_REQUEST,
             "location",
-            LocationEntity(dun.location.latitude, dun.location.longitude, dun.location.county, dun.location.zoom)
+            LocationEntity(dun.location.latitude, dun.location.longitude, dun.location.zoom)
         )
     }
 

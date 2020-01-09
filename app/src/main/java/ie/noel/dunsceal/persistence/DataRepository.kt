@@ -18,15 +18,15 @@ class DataRepository private constructor(private val mDatabase: MockDatabase) {
     get() = mObservableDuns
 
   fun loadDun(dunId: Long): LiveData<DunEntity?>? {
-    return mDatabase.dunDao().load(dunId.toInt())
+    return mDatabase.dunDao().loadDun(dunId.toInt())
   }
 
-  fun loadInvestigations(dunId: Long): LiveData<List<InvestigationEntity>?>? {
+  fun loadInvestigations(dunId: Long): LiveData<InvestigationEntity> {
     return mDatabase.investigationDao().loadInvestigations(dunId.toInt())
   }
 
   fun searchDuns(query: String?): LiveData<List<DunEntity?>?>? {
-    return mDatabase.dunDao().searchAll(query)
+    return mDatabase.dunDao().searchAllDuns(query)
   }
 
   companion object {

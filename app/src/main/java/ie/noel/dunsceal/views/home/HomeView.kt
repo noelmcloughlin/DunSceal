@@ -75,13 +75,17 @@ open class HomeView : BaseView(), NavigationView.OnNavigationItemSelectedListene
 
     when (item.itemId) {
       R.id.nav_home -> {
-        presenter.dataStore!!.fetchDuns {
-          navigateTo(VIEW.HOME)
+        presenter.dunDataStore!!.fetchDuns {
+          presenter.investigationDataStore!!.fetchInvestigations {
+            navigateTo(VIEW.HOME)
+          }
         }
       }
       R.id.nav_report -> {
-        presenter.dataStore!!.fetchDuns {
-          fragmentTo(DunListFragment.newInstance(presenter))
+        presenter.dunDataStore!!.fetchDuns {
+          presenter.investigationDataStore!!.fetchInvestigations {
+            fragmentTo(DunListFragment.newInstance(presenter))
+          }
         }
       }
       R.id.nav_report_all -> {

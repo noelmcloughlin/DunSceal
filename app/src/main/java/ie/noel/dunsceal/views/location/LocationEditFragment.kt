@@ -11,16 +11,12 @@ import ie.noel.dunsceal.databinding.FragmentDunAddBinding
 import ie.noel.dunsceal.models.entity.LocationEntity
 import ie.noel.dunsceal.utils.Loader
 import ie.noel.dunsceal.views.BaseFragment
-import ie.noel.dunsceal.views.dun.DunAddFragment
-import ie.noel.dunsceal.views.dun.DunPresenter
 import ie.noel.dunsceal.views.home.HomeView
 import kotlinx.android.synthetic.main.fragment_dun_add.dunLatitude
 import kotlinx.android.synthetic.main.fragment_dun_add.dunLongitude
-import kotlinx.android.synthetic.main.fragment_dun_add.mapView
-import kotlinx.android.synthetic.main.fragment_dun_maps.view.mapView
 import org.jetbrains.anko.AnkoLogger
 
-class LocationFragment(val presenter: LocationPresenter)
+class LocationEditFragment(val presenter: LocationEditPresenter)
   : BaseFragment(), AnkoLogger, GoogleMap.OnMarkerDragListener, GoogleMap.OnMarkerClickListener {
 
   var location = LocationEntity()
@@ -28,12 +24,20 @@ class LocationFragment(val presenter: LocationPresenter)
 
   companion object {
     private const val KEY_LOCATION_ID = "location_id"
-    const val TAG = "LocationFragment"
+    const val TAG = "LocationEditFragment"
+
+    /** Creates blank location dun fragment  */
+    @JvmStatic
+    fun newInstance(presenter: LocationEditPresenter): LocationEditFragment {
+      return LocationEditFragment(presenter).apply {
+        arguments = Bundle().apply {}
+      }
+    }
 
     /** Creates location fragment for specific location ID  */
     @JvmStatic
-    fun forLocation(presenter: LocationPresenter, locationId: Long): LocationFragment {
-      val fragment = LocationFragment(presenter)
+    fun forLocation(presenter: LocationEditPresenter, locationId: Long): LocationEditFragment {
+      val fragment = LocationEditFragment(presenter)
       val args = Bundle()
       args.putInt(KEY_LOCATION_ID, locationId.toInt())
       fragment.arguments = args
@@ -109,6 +113,10 @@ class LocationFragment(val presenter: LocationPresenter)
     mBinding!!.mapView.onResume()
   }
 
+  fun onBackPressed() {
+    (activity as HomeView).fragManager.popBackStackImmediate()
+  }
+
   override fun onSaveInstanceState(outState: Bundle) {
     super.onSaveInstanceState(outState)
     mBinding!!.mapView.onSaveInstanceState(outState)
@@ -117,21 +125,21 @@ class LocationFragment(val presenter: LocationPresenter)
   // OPTIONS MENU
   override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
     inflater.inflate(R.menu.menu_edit_location, menu)
-    return super.onCreateOptionsMenu(menu!!, inflater)
+    return super.onCreateOptionsMenu(menu, inflater)
   }
 
   //handle item clicks
   override fun onOptionsItemSelected(item: MenuItem): Boolean {
-    when (item?.itemId) {
+    when (item.itemId) {
       R.id.menu_location_item_save -> {
         presenter.doSaveMapLocation()
       }
     }
-    presenter.dataStore!!.fetchDuns {
-      (activity as HomeView).fragManager.popBackStackImmediate()
+    presenter.dunDataStore!!.fetchDuns {
+      presenter.investigationDataStore!!.fetchInvestigations {
+        (activity as HomeView).fragManager.popBackStackImmediate()
+      }
     }
     return true
   }
 }
-
-

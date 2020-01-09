@@ -229,9 +229,11 @@ open class LoginView : BaseView(), View.OnClickListener {
       verifyEmailButton.isEnabled = !user.isEmailVerified
 
       // get firebase references Now!!!!
-      presenter.dataStore!!.fetchDuns {
-        // need to startActivity for new fragment managment
-        startActivity<HomeView>()
+      presenter.dunDataStore!!.fetchDuns {
+        presenter.investigationDataStore!!.fetchInvestigations {
+          // need to startActivity for new fragment managment
+          startActivity<HomeView>()
+        }
       }
 
     } else {

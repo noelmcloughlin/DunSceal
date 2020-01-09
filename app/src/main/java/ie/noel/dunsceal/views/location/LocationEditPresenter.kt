@@ -7,11 +7,10 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import ie.noel.dunsceal.models.entity.LocationEntity
-import ie.noel.dunsceal.views.BasePresenter
 import ie.noel.dunsceal.views.BaseView
 import ie.noel.dunsceal.views.home.HomePresenter
 
-open class LocationPresenter(view: BaseView) : HomePresenter(view) {
+open class LocationEditPresenter(view: BaseView) : HomePresenter(view) {
 
   var location = LocationEntity()
 
@@ -39,11 +38,15 @@ open class LocationPresenter(view: BaseView) : HomePresenter(view) {
     val resultIntent = Intent()
     resultIntent.putExtra("location", location)
     view?.setResult(0, resultIntent)
-    view?.finish()
+    view?.fragManager!!.popBackStackImmediate()
   }
 
   fun doUpdateMapMarker(marker: Marker) {
     val loc = LatLng(location.latitude, location.longitude)
     marker.snippet = "GPS : $loc"
+  }
+
+  fun doCancel() {
+    view?.fragManager!!.popBackStackImmediate()
   }
 }

@@ -1,12 +1,15 @@
 package ie.noel.dunsceal.models.entity
 
 import android.os.Parcelable
-import androidx.room.*
-import com.google.firebase.database.Exclude
-import com.google.firebase.database.IgnoreExtraProperties
-import ie.noel.dunsceal.models.Location
 import kotlinx.android.parcel.Parcelize
 
+@Parcelize
+data class LocationEntity(var latitude: Double = 52.245696,
+                          var longitude: Double = -7.139102,
+                          var zoom: Float = 15f) : Parcelable
+
+
+/* Not needed ...
 @IgnoreExtraProperties
 @Parcelize
 @Entity(tableName = "locations", foreignKeys = [ForeignKey(entity = DunEntity::class, parentColumns = ["id"], childColumns = ["dunId"], onDelete = ForeignKey.CASCADE)], indices = [Index(value = ["dunId"])])
@@ -16,7 +19,7 @@ data class LocationEntity(
     override var latitude: Double = 52.245696,
     override var longitude: Double = -7.139102,
     override var zoom: Float = 15f
-) : Parcelable, Location {
+) : Parcelable, LocationEntity {
   @Exclude
   fun toMap(): Map<String, Any?> {
     return mapOf(
@@ -27,4 +30,4 @@ data class LocationEntity(
         "zoom" to zoom
         )
   }
-}
+} */

@@ -20,7 +20,6 @@ import kotlinx.android.synthetic.main.fragment_dun_add.dunLatitude
 import kotlinx.android.synthetic.main.fragment_dun_add.dunLongitude
 import kotlinx.android.synthetic.main.fragment_dun_add.name
 import kotlinx.android.synthetic.main.fragment_dun_add.view.*
-import kotlinx.android.synthetic.main.fragment_dun_maps.view.mapView
 import org.jetbrains.anko.AnkoLogger
 
 class DunAddFragment(val presenter: DunPresenter, private val user: String)
@@ -148,8 +147,10 @@ class DunAddFragment(val presenter: DunPresenter, private val user: String)
         }
       }
     }
-    presenter.dataStore!!.fetchDuns {
-      (activity as HomeView).fragManager.popBackStackImmediate()
+    presenter.dunDataStore!!.fetchDuns {
+      presenter.investigationDataStore!!.fetchInvestigations {
+        (activity as HomeView).fragManager.popBackStackImmediate()
+      }
     }
     return true
   }

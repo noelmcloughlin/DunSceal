@@ -71,7 +71,7 @@ open class HomePresenter(view: BaseView) : LoginPresenter(view) {
 
     fun checkExistingPhoto(activity: Activity) {
 
-        if (dataStore != null && isUserLoggedIn()) {
+        if (dunDataStore != null && isUserLoggedIn()) {
             fetchData()
             app.userImage = "".toUri()
             Log.v("Dun", "checkExistingPhoto 1 app.userImage : ${app.userImage}")
