@@ -25,14 +25,12 @@ import ie.noel.dunsceal.databinding.FragmentDunViewBinding
 import ie.noel.dunsceal.models.entity.DunEntity
 import ie.noel.dunsceal.utils.Loader
 import ie.noel.dunsceal.views.BaseFragment
-import ie.noel.dunsceal.views.home.HomeFragment
-import ie.noel.dunsceal.views.home.HomePresenter
 import kotlinx.android.synthetic.main.fragment_dun_maps.view.mapView
 import kotlinx.android.synthetic.main.fragment_dun_add.view.*
 import org.jetbrains.anko.AnkoLogger
 import java.util.*
 
-class DunViewFragment(val presenter: DunPresenter) : BaseFragment(), AnkoLogger {
+class InvestigationViewFragment(val presenter: DunPresenter) : BaseFragment(), AnkoLogger {
 
   private var mBinding: FragmentDunViewBinding? = null
   //private var mInvestigationAdapter: InvestigationAdapter? = null
@@ -43,8 +41,8 @@ class DunViewFragment(val presenter: DunPresenter) : BaseFragment(), AnkoLogger 
 
     /** Creates dun fragment for specific dun ID  */
     @JvmStatic
-    fun forDun(presenter: DunPresenter, dunId: Long): DunViewFragment {
-      val fragment = DunViewFragment(presenter)
+    fun forDun(presenter: DunPresenter, dunId: Long): InvestigationViewFragment {
+      val fragment = InvestigationViewFragment(presenter)
       val args = Bundle()
       args.putInt(KEY_DUN_ID, dunId.toInt())
       fragment.arguments = args

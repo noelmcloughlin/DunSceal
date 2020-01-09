@@ -34,9 +34,9 @@ open class DunView : BaseView(), AnkoLogger {
 
     // Add fragment if this is first creation
     if (savedInstanceState == null) {
-      val fragment : BaseFragment = DunViewFragment.forDun(presenter, dun.id)
+      val fragment : BaseFragment = InvestigationViewFragment.forDun(presenter, dun.id)
       fragManager.beginTransaction()
-          .replace(R.id.home, fragment, DunViewFragment.TAG).commit()
+          .replace(R.id.home, fragment, InvestigationViewFragment.TAG).commit()
     }
     presenter.loadDuns()
   }
@@ -119,7 +119,7 @@ open class DunView : BaseView(), AnkoLogger {
 
   /** Shows dun detail fragment  */
   fun showDunFragment(dun: DunEntity) {
-    val dunFragment = DunViewFragment.forDun(presenter, dun.id)
+    val dunFragment = InvestigationViewFragment.forDun(presenter, dun.id)
     fragManager
         .beginTransaction()
         .addToBackStack("dun")

@@ -110,13 +110,6 @@ open class HomeView : BaseView(), NavigationView.OnNavigationItemSelectedListene
       super.onBackPressed()
   }
 
-  private fun fragmentTo(fragment: Fragment) {
-    supportFragmentManager.beginTransaction()
-        .replace(R.id.content_home_frame, fragment)
-        .addToBackStack(null)
-        .commit()
-  }
-
   // Return to login screen if we sign out
   private fun signOut() {
     presenter.app.googleSignInClient.signOut().addOnCompleteListener(this) {
@@ -157,16 +150,11 @@ open class HomeView : BaseView(), NavigationView.OnNavigationItemSelectedListene
     presenter.fetchData()
   }
 
-  open fun Int.swapFragment(fragment: BaseFragment) {
-    presenter.ft = supportFragmentManager.beginTransaction()
-    presenter.ft.replace(this, fragment)
-    presenter.ft.commit()
-  }
-
-  open fun Int.addFragment(fragment: BaseFragment, tag: String) {
-    presenter.ft = supportFragmentManager.beginTransaction()
-    presenter.ft.add(this, fragment, tag)
-    presenter.ft.commit()
+  open fun fragmentTo(fragment: Fragment) {
+    fragManager.beginTransaction()
+        .replace(R.id.content_home_frame, fragment)
+        .addToBackStack(null)
+        .commit()
   }
 
   // Options Menu

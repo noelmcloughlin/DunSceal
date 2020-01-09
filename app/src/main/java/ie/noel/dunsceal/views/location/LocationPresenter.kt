@@ -8,8 +8,10 @@ import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import ie.noel.dunsceal.models.entity.LocationEntity
 import ie.noel.dunsceal.views.BasePresenter
+import ie.noel.dunsceal.views.BaseView
+import ie.noel.dunsceal.views.home.HomePresenter
 
-class EditLocationPresenter(view: EditLocationView) : BasePresenter(view) {
+open class LocationPresenter(view: BaseView) : HomePresenter(view) {
 
   var location = LocationEntity()
 
@@ -17,7 +19,7 @@ class EditLocationPresenter(view: EditLocationView) : BasePresenter(view) {
     location = view.intent.extras?.getParcelable("location")!!
   }
 
-  fun doConfigureMap(map: GoogleMap) {
+  fun doConfigureMapLocation(map: GoogleMap) {
     val loc = LatLng(location.latitude, location.longitude)
     val options = MarkerOptions()
       .title("Dun")
@@ -28,19 +30,19 @@ class EditLocationPresenter(view: EditLocationView) : BasePresenter(view) {
     map.moveCamera(CameraUpdateFactory.newLatLngZoom(loc, location.zoom))
   }
 
-  fun doUpdateLocation(latitude: Double, longitude: Double) {
+  fun doUpdateMapLocation(latitude: Double, longitude: Double) {
     location.latitude = latitude
     location.longitude = longitude
   }
 
-  fun doSave() {
+  fun doSaveMapLocation() {
     val resultIntent = Intent()
     resultIntent.putExtra("location", location)
     view?.setResult(0, resultIntent)
     view?.finish()
   }
 
-  fun doUpdateMarker(marker: Marker) {
+  fun doUpdateMapMarker(marker: Marker) {
     val loc = LatLng(location.latitude, location.longitude)
     marker.snippet = "GPS : $loc"
   }

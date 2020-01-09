@@ -104,7 +104,6 @@
     <string name="nav_header_title">DunSceal2</string>
     <string name="nav_header_subtitle">john@doe.com</string>
     <string name="nav_header_desc">Navigation header</string>
-    <string name="action_settings">Settings</string>
 
     <string name="nav_menu_main">Home</string>
     <string name="nav_menu_report">Report</string>
@@ -131,6 +130,8 @@
     <string name="action_report_all">Report All Duns</string>
     <string name="yes">yes</string>
     <string name="no">yes</string>
+    <string name="action_settings">Settings</string>
+    <string name="action_location_edit">Edit Location</string>
 
     <!-- merging -->
     <string name="recordTitle">Welcome Homer</string>

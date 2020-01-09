@@ -17,6 +17,7 @@ package ie.noel.dunsceal.persistence.db.mock
 
 import ie.noel.dunsceal.models.entity.DunEntity
 import ie.noel.dunsceal.models.entity.InvestigationEntity
+import ie.noel.dunsceal.models.entity.LocationEntity
 import java.util.*
 import java.util.concurrent.TimeUnit
 
@@ -37,6 +38,9 @@ object MockDataGenerator {
   private val VISITED = arrayOf(1, 0, 1, 0, 1)
   //private const val IMAGE = "https://firebasestorage.googleapis.com/v0/b/dunsceal.appspot.com/o/hillfort-default.bmp?alt=media&token=d9c756f3-0cc9-4c5a-b6dc-9f13bd1d53d9"
   private const val IMAGE = ""
+
+  private val LATITUDES = arrayOf(52.245696, 52.245696, 52.245696, 52.245696, 52.245696, 52.245696)
+  private val LONGITUDES = arrayOf(-7.139102, -7.139102, -7.139102, -7.139102, -7.139102, -7.139102)
 
   fun generateDuns(): List<DunEntity> {
     val duns: MutableList<DunEntity> = ArrayList(FIRST.size * SECOND.size)
@@ -72,5 +76,23 @@ object MockDataGenerator {
       }
     }
     return investigationEntities
+  }
+
+  fun generateLocationsForDuns(
+      duns: List<DunEntity>): List<LocationEntity> {
+    val locationEntities: MutableList<LocationEntity> = ArrayList()
+    val rnd = Random()
+    for ((id, name) in duns) {
+      val locationsNumber = rnd.nextInt(5) + 1
+      for (i in 0 until locationsNumber) {
+        val location = LocationEntity()
+        location.dunId = id
+        location.latitude = LATITUDES[i]
+        location.longitude = LONGITUDES[i]
+        location.zoom = 0F
+        locationEntities.add(location)
+      }
+    }
+    return locationEntities
   }
 }

@@ -15,6 +15,7 @@
  */
 package ie.noel.dunsceal.persistence.db.mock
 
+import LocationDao
 import android.content.Context
 import androidx.annotation.VisibleForTesting
 import androidx.lifecycle.LiveData
@@ -29,11 +30,13 @@ import ie.noel.dunsceal.models.entity.DunFtsEntity
 import ie.noel.dunsceal.models.entity.InvestigationEntity
 import ie.noel.dunsceal.main.AppExecutors
 import ie.noel.dunsceal.models.entity.DunEntity
+import ie.noel.dunsceal.models.entity.LocationEntity
 import ie.noel.dunsceal.persistence.db.DunTypeConverters
 import ie.noel.dunsceal.persistence.db.mock.MockDataGenerator.generateDuns
 import ie.noel.dunsceal.persistence.db.mock.MockDataGenerator.generateInvestigationsForDuns
 import ie.noel.dunsceal.persistence.db.dao.DunDao
 import ie.noel.dunsceal.persistence.db.dao.InvestigationDao
+import ie.noel.dunsceal.persistence.db.mock.MockDataGenerator.generateLocationsForDuns
 
 @Database(entities = [DunEntity::class, DunFtsEntity::class, InvestigationEntity::class], version = 2)
 @TypeConverters(DunTypeConverters::class)
@@ -41,6 +44,8 @@ abstract class MockDatabase : RoomDatabase() {
 
   abstract fun dunDao(): DunDao
   abstract fun investigationDao(): InvestigationDao
+  abstract fun locationDao(): LocationDao
+
   private val mIsDatabaseCreated = MutableLiveData<Boolean>()
 
   /**
@@ -92,9 +97,12 @@ abstract class MockDatabase : RoomDatabase() {
                 addDelay()
                 // Generate the data for pre-population
                 val database = getInstance(appContext, executors)
-                val duns: List<DunEntity?> = generateDuns()
-                val investigationEntities: List<InvestigationEntity?> = generateInvestigationsForDuns(duns as List<DunEntity>)
-                insertData(database, duns, investigationEntities)
+                val duns: List<DunEntity> = generateDuns()
+
+                val investigationEntities: List<InvestigationEntity?> = generateInvestigationsForDuns(duns)
+                val locationEntities: List<LocationEntity?> = generateLocationsForDuns(duns)
+
+                insertData(database, duns, investigationEntities, locationEntities)
                 // notify that the database was created and it's ready to be used
                 database!!.setDatabaseCreated()
               }
@@ -105,11 +113,13 @@ abstract class MockDatabase : RoomDatabase() {
     }
 
     private fun insertData(database: MockDatabase?,
-                           duns: List<DunEntity?>,
-                           investigationEntities: List<InvestigationEntity?>) {
+                           duns: List<DunEntity>,
+                           investigationEntities: List<InvestigationEntity?>,
+                           locationEntities: List<LocationEntity?>) {
       database!!.runInTransaction {
         database.dunDao().insertAll(duns)
         database.investigationDao().insertAll(investigationEntities)
+        database.locationDao().insertAll(locationEntities)
       }
     }
 

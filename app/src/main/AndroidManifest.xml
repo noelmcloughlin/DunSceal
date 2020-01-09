@@ -93,20 +93,13 @@
         </activity>
 
         <activity
-            android:name="ie.noel.dunsceal.views.dun.DunFragment"
+            android:name="ie.noel.dunsceal.views.dun.DunAddFragment"
             android:label="@string/title_activity_dun">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="ie.noel.dunsceal.views.dunlist.DunListView" />
         </activity>
 
-        <activity
-            android:name="ie.noel.dunsceal.views.location.EditLocationView"
-            android:label="@string/title_activity_edit_location">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="ie.noel.dunsceal.views.dun.DunFragment" />
-        </activity>
 
         <activity
             android:name="ie.noel.dunsceal.views.map.DunMapView"

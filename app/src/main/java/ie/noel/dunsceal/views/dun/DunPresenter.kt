@@ -110,7 +110,7 @@ open class DunPresenter(view: BaseView) : HomePresenter(view) {
                 app.duns.create(dun)
             }
             uiThread {
-                view?.finish()
+                //view?.finish()
             }
         }
     }

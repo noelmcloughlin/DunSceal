@@ -133,6 +133,8 @@ dependencies {
     implementation deps.lifecycle.extensions
     implementation deps.nicolettilu
 
+    //implementation deps.kotlin.extensions
+
 }
 
 repositories {

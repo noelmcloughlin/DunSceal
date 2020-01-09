@@ -3,23 +3,16 @@ package ie.noel.dunsceal.views
 import android.content.Intent
 import android.os.Bundle
 import android.os.Parcelable
-import android.view.Menu
-import android.view.MenuInflater
-import android.view.MenuItem
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.FragmentManager
 import com.google.firebase.auth.FirebaseAuth
-import ie.noel.dunsceal.R
 import ie.noel.dunsceal.models.entity.DunEntity
 import ie.noel.dunsceal.models.entity.LocationEntity
 import org.jetbrains.anko.AnkoLogger
 import ie.noel.dunsceal.utils.Loader
-import ie.noel.dunsceal.views.dun.DunAddFragment
-import ie.noel.dunsceal.views.dun.DunPresenter
 import ie.noel.dunsceal.views.dunlist.DunListView
-import ie.noel.dunsceal.views.location.EditLocationView
 import ie.noel.dunsceal.views.home.HomeView
 import ie.noel.dunsceal.views.dun.DunView
 import ie.noel.dunsceal.views.login.LoginView
@@ -47,7 +40,7 @@ open abstract class BaseView : AppCompatActivity(), AnkoLogger {
 
   fun navigateTo(view: VIEW, code: Int = 0, key: String = "", value: Parcelable? = null) {
     val intent = when (view) {
-      VIEW.LOCATION -> Intent(this, EditLocationView::class.java)
+      VIEW.LOCATION -> Intent(this, DunView::class.java)
       VIEW.HOME -> Intent(this, HomeView::class.java)
       VIEW.DUN -> Intent(this, DunView::class.java)
       VIEW.MAPS -> Intent(this, DunMapView::class.java)

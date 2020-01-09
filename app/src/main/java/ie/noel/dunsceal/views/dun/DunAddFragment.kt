@@ -12,8 +12,13 @@ import ie.noel.dunsceal.models.entity.DunEntity
 import ie.noel.dunsceal.models.entity.LocationEntity
 import ie.noel.dunsceal.utils.Loader
 import ie.noel.dunsceal.views.BaseFragment
-import ie.noel.dunsceal.views.BaseView
-import kotlinx.android.synthetic.main.fragment_dun_add.*
+import ie.noel.dunsceal.views.home.HomeView
+import kotlinx.android.synthetic.main.fragment_dun_add.chooseImage
+import kotlinx.android.synthetic.main.fragment_dun_add.description
+import kotlinx.android.synthetic.main.fragment_dun_add.dunImage
+import kotlinx.android.synthetic.main.fragment_dun_add.dunLatitude
+import kotlinx.android.synthetic.main.fragment_dun_add.dunLongitude
+import kotlinx.android.synthetic.main.fragment_dun_add.name
 import kotlinx.android.synthetic.main.fragment_dun_add.view.*
 import kotlinx.android.synthetic.main.fragment_dun_maps.view.mapView
 import org.jetbrains.anko.AnkoLogger
@@ -37,6 +42,7 @@ class DunAddFragment(val presenter: DunPresenter, private val user: String)
   }
 
   override fun onCreate(savedInstanceState: Bundle?) {
+    // We need new options menu
     setHasOptionsMenu(true)
     super.onCreate(savedInstanceState)
   }
@@ -55,7 +61,7 @@ class DunAddFragment(val presenter: DunPresenter, private val user: String)
     activity?.title = getString(R.string.action_dun)
 
     // Setup the map view
-    if (mBinding!!.root.mapView != null) {
+    if (mBinding!!.mapView != null) {
       mBinding!!.mapView.onCreate(savedInstanceState)
       mBinding!!.mapView.getMapAsync {
         presenter.doConfigureMap(it)
@@ -80,7 +86,7 @@ class DunAddFragment(val presenter: DunPresenter, private val user: String)
     this.showLocation(dun.location)
   }
 
-  fun showLocation(location: LocationEntity) {
+  private fun showLocation(location: LocationEntity) {
     dunLatitude.text = ("%.6f".format(location.latitude))
     dunLongitude.text = ("%.6f".format(location.longitude))
   }
@@ -94,53 +100,59 @@ class DunAddFragment(val presenter: DunPresenter, private val user: String)
 
   override fun onDestroy() {
     super.onDestroy()
-    mapView.onDestroy()
+    mBinding!!.mapView.onDestroy()
   }
 
   override fun onLowMemory() {
     super.onLowMemory()
-    mapView.onLowMemory()
+    mBinding!!.mapView.onLowMemory()
   }
 
   override fun onPause() {
     super.onPause()
-    mapView.onPause()
+    mBinding!!.mapView.onPause()
   }
 
   override fun onResume() {
     super.onResume()
-    mapView.onResume()
+    mBinding!!.mapView.onResume()
     presenter.doRestartLocationUpdates()
   }
 
   override fun onSaveInstanceState(outState: Bundle) {
     super.onSaveInstanceState(outState)
-    mapView.onSaveInstanceState(outState)
+    mBinding!!.mapView.onSaveInstanceState(outState)
   }
 
-  // FRAGMENT OPTIONS MENU
-
+  // OPTIONS MENU
   override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-    inflater!!.inflate(R.menu.menu_dun, menu)
+    inflater.inflate(R.menu.menu_dun, menu)
     super.onCreateOptionsMenu(menu!!, inflater)
   }
 
-  //handle item clicks of menu
+  //handle item clicks
   override fun onOptionsItemSelected(item: MenuItem): Boolean {
-    //get item id to handle item clicks
-    val id = item!!.itemId
-    //handle item clicks
-    if (id == R.id.menu_dun_item_save){
-      Toast.makeText(activity, "Save", Toast.LENGTH_SHORT).show()
+    when (item?.itemId) {
+      R.id.menu_dun_item_delete -> {
+        presenter.doDelete()
+      }
+      R.id.menu_dun_item_save -> {
+        if (name.text.toString().isEmpty()) {
+          // anko toast is not working inside fragment, using Toast instead.
+          Toast.makeText(
+              context, R.string.enter_dun_title,
+              Toast.LENGTH_SHORT
+          ).show()
+        } else {
+          presenter.doAddOrSave(name.text.toString(), description.text.toString())
+        }
+      }
     }
-    if (id == R.id.menu_dun_item_delete){
-      //do your action here, im just showing toast
-      Toast.makeText(activity, "Sort", Toast.LENGTH_SHORT).show()
+    presenter.dataStore!!.fetchDuns {
+      (activity as HomeView).fragManager.popBackStackImmediate()
     }
-
-    return super.onOptionsItemSelected(item)
+    return true
   }
-
 }
 
 
