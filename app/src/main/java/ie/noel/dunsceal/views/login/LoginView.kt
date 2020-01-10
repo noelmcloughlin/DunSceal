@@ -6,7 +6,6 @@ import android.text.TextUtils
 import android.util.Log
 import android.view.View
 import android.widget.ProgressBar
-import android.widget.Toast
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
@@ -21,7 +20,6 @@ import ie.noel.dunsceal.utils.Loader.createLoader
 import ie.noel.dunsceal.utils.Loader.hideLoader
 import ie.noel.dunsceal.utils.Loader.showLoader
 import ie.noel.dunsceal.views.BaseView
-import ie.noel.dunsceal.views.VIEW
 import ie.noel.dunsceal.views.home.HomeView
 import kotlinx.android.synthetic.main.activity_login_screen.*
 import org.jetbrains.anko.startActivity
@@ -108,10 +106,7 @@ open class LoginView : BaseView(), View.OnClickListener {
           } else {
             // If sign in fails, display a message to the user.
             Log.w(TAG, "createUserWithEmail:failure", task.exception)
-            Toast.makeText(
-                baseContext, "Authentication failed.",
-                Toast.LENGTH_SHORT
-            ).show()
+            toast( "Authentication failed.")
             updateUI(null)
           }
           // [START_EXCLUDE]
@@ -137,10 +132,7 @@ open class LoginView : BaseView(), View.OnClickListener {
           } else {
             // If sign in fails, display a message to the user.
             Log.w(TAG, "signInWithEmail:failure", task.exception)
-            Toast.makeText(
-                baseContext, "Authentication failed.",
-                Toast.LENGTH_SHORT
-            ).show()
+          toast("Authentication failed.")
             updateUI(null)
           }
           // [START_EXCLUDE]
@@ -175,18 +167,10 @@ open class LoginView : BaseView(), View.OnClickListener {
           verifyEmailButton.isEnabled = true
 
           if (task.isSuccessful) {
-            Toast.makeText(
-                baseContext,
-                "Verification email sent to ${user.email} ",
-                Toast.LENGTH_SHORT
-            ).show()
+           toast("Verification email sent to ${user.email}")
           } else {
             Log.e(TAG, "sendEmailVerification", task.exception)
-            Toast.makeText(
-                baseContext,
-                "Failed to send verification email.",
-                Toast.LENGTH_SHORT
-            ).show()
+            toast("Failed to send verification email.")
           }
           // [END_EXCLUDE]
         }

@@ -20,13 +20,11 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import ie.noel.dunsceal.main.MainApp
-import ie.noel.dunsceal.models.DunStore
 import ie.noel.dunsceal.models.entity.DunEntity
-import ie.noel.dunsceal.persistence.db.DataRepository
-import ie.noel.dunsceal.persistence.db.DunFireStore
+import ie.noel.dunsceal.persistence.db.LiveDataRepository
 
 open class DunListViewModel(application: Application) : AndroidViewModel(application) {
-  private val mRepository: DunStore?
+  private val mRepositoryLive: LiveDataRepository?
 
   // MediatorLiveData can observe other LiveData objects and react on their emissions.
   private val mObservableDuns: MediatorLiveData<List<DunEntity?>?> = MediatorLiveData()
@@ -38,15 +36,15 @@ open class DunListViewModel(application: Application) : AndroidViewModel(applica
     get() = mObservableDuns
 
   fun ldSearchDuns(query: String?): LiveData<List<DunEntity?>?>? {
-    return mRepository!!.ldSearchDuns(query)
+    return mRepositoryLive!!.ldSearchDuns(query)
   }
 
   init {
     // set by default null, until we get data from the database.
     mObservableDuns.value = null
-    mRepository = (application as MainApp).liveduns
-    val liveduns = mRepository
+    mRepositoryLive = (application as MainApp).getRepository()!!
+    val duns = mRepositoryLive.duns
     // observe the changes of the duns from the database and forward them
-    mObservableDuns.addSource(mRepository) { value: List<DunEntity?>? -> mObservableDuns.setValue(value) }
+    mObservableDuns.addSource(duns) { value: List<DunEntity?>? -> mObservableDuns.setValue(value) }
   }
 }

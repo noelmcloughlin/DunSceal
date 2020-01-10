@@ -23,7 +23,7 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.storage.StorageReference
 import ie.noel.dunsceal.models.DunStore
 import ie.noel.dunsceal.persistence.db.DunFireStore
-import ie.noel.dunsceal.persistence.db.DataRepository
+import ie.noel.dunsceal.persistence.db.LiveDataRepository
 import ie.noel.dunsceal.persistence.db.room.DunDatabase
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.info
@@ -36,7 +36,7 @@ class MainApp : Application(), AnkoLogger {
   private var mAppExecutors: AppExecutors? = null
 
   lateinit var duns: DunStore
-  lateinit var liveduns: DunStore
+  lateinit var liveduns: LiveDataRepository
   lateinit var auth: FirebaseAuth
   lateinit var googleSignInClient: GoogleSignInClient
   lateinit var userImage: Uri
@@ -47,8 +47,16 @@ class MainApp : Application(), AnkoLogger {
   override fun onCreate() {
     super.onCreate()
     mAppExecutors = AppExecutors()
-    duns = DunFireStore(applicationContext, DunDatabase.getInstance(this, mAppExecutors!!)!!)
-    liveduns = duns
+    duns = DunFireStore(applicationContext)
     info("Dun started")
+  }
+
+  // helpers for livedata repository
+  private fun getDatabase(): DunDatabase? {
+    return DunDatabase.getInstance(this, mAppExecutors!!)
+  }
+
+  open fun getRepository(): LiveDataRepository? {
+    return LiveDataRepository.getInstance(getDatabase()!!)
   }
 }

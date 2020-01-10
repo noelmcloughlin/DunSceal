@@ -3,7 +3,6 @@ package ie.noel.dunsceal.views.home
 import android.os.Bundle
 import android.view.*
 import android.widget.Toast
-import androidx.fragment.app.FragmentManager
 import ie.noel.dunsceal.R
 import ie.noel.dunsceal.utils.Loader.createLoader
 import ie.noel.dunsceal.views.BaseFragment
@@ -60,6 +59,8 @@ open class HomeFragment(val presenter: HomePresenter, private val user: String)
   }
 
   fun onClick() {
+    // anko toast is not working inside fragment
+    // using Toast instead
     Toast.makeText(context, "button clicked", Toast.LENGTH_LONG).show()
   }
 

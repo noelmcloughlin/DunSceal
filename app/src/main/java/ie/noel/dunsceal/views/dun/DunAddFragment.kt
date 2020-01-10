@@ -148,7 +148,8 @@ class DunAddFragment(val presenter: DunPresenter, private val user: String)
       }
       R.id.menu_dun_item_save -> {
         if (name.text.toString().isEmpty()) {
-          // anko toast is not working inside fragment, using Toast instead.
+          // anko toast is not working inside fragment!!!
+          // use Toast instead!!!!
           Toast.makeText(
               context, R.string.enter_dun_title,
               Toast.LENGTH_SHORT

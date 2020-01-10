@@ -9,33 +9,31 @@ import ie.noel.dunsceal.persistence.db.room.DunDatabase
 /**
  * Repository handling the work with duns and investigations.
  */
-class DataRepository private constructor(private val mDatabase: DunDatabase) {
+class LiveDataRepository private constructor(private val mDatabase: DunDatabase) {
   private val mObservableDuns: MediatorLiveData<List<DunEntity?>?> = MediatorLiveData()
   /**
    * Get the list of duns from the database and get notified when the data changes.
    */
-  val ldDuns: LiveData<List<DunEntity?>?>
+  val duns: LiveData<List<DunEntity?>?>
     get() = mObservableDuns
 
   fun ldLoadDun(dunId: Long): LiveData<DunEntity?>? {
-    return mDatabase.dunDao()!!.ldLoadDun(dunId.toInt())
+    return mDatabase.dunDao().ldLoadDun(dunId.toInt())
   }
-
   fun ldLoadInvestigations(dunId: Long): LiveData<InvestigationEntity> {
-    return mDatabase.investigationDao()!!.ldLoadInvestigations(dunId.toInt())
+    return mDatabase.investigationDao().ldLoadInvestigations(dunId.toInt())
   }
-
   fun ldSearchDuns(query: String?): LiveData<List<DunEntity?>?>? {
-    return mDatabase.dunDao()!!.ldSearchDuns(query)
+    return mDatabase.dunDao().ldSearchDuns(query)
   }
 
   companion object {
-    private var sInstance: DataRepository? = null
-    fun getInstance(database: DunDatabase): DataRepository? {
+    private var sInstance: LiveDataRepository? = null
+    fun getInstance(database: DunDatabase): LiveDataRepository? {
       if (sInstance == null) {
-        synchronized(DataRepository::class.java) {
+        synchronized(LiveDataRepository::class.java) {
           if (sInstance == null) {
-            sInstance = DataRepository(database)
+            sInstance = LiveDataRepository(database)
           }
         }
       }
@@ -44,7 +42,7 @@ class DataRepository private constructor(private val mDatabase: DunDatabase) {
   }
 
   init {
-    mObservableDuns.addSource(mDatabase.dunDao()!!.ldLoadAll()!!
+    mObservableDuns.addSource(mDatabase.dunDao().ldLoadAll()!!
     ) { dunEntityEntities: List<DunEntity?>? ->
       if (mDatabase.databaseCreated.value != null) {
         mObservableDuns.postValue(dunEntityEntities)

@@ -24,18 +24,18 @@ import androidx.lifecycle.ViewModelProvider.NewInstanceFactory
 import ie.noel.dunsceal.main.MainApp
 import ie.noel.dunsceal.models.entity.DunEntity
 import ie.noel.dunsceal.models.entity.InvestigationEntity
-import ie.noel.dunsceal.persistence.db.DataRepository
+import ie.noel.dunsceal.persistence.db.LiveDataRepository
 
 class DunViewModel(application: Application,
-                   repository: DataRepository?,
+                   liveDuns: LiveDataRepository?,
                    private val mDunId: Long) : AndroidViewModel(application) {
 
-  val observableDunEntity: LiveData<DunEntity?>? = repository!!.ldLoadDun(mDunId)
+  val observableDunEntity: LiveData<DunEntity?>? = liveDuns!!.ldLoadDun(mDunId)
   var dun = ObservableField<DunEntity>()
   /**
    * Expose the LiveData Investigations query so the UI can observe it.
    */
-  val investigations: LiveData<InvestigationEntity> = repository!!.ldLoadInvestigations(mDunId)
+  val investigations: LiveData<InvestigationEntity> = liveDuns!!.ldLoadInvestigations(mDunId)
 
   fun setDun(dun: DunEntity) {
     this.dun.set(dun)
@@ -49,9 +49,9 @@ class DunViewModel(application: Application,
    * actually necessary in this case, as the dun ID can be passed in a public method.
    */
   class Factory(private val mApplication: Application, private val mDunId: Int) : NewInstanceFactory() {
-    private val mRepository: DataRepository? = (mApplication as MainApp).repository
+    private val mRepositoryLive: LiveDataRepository? = (mApplication as MainApp).liveduns
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-      return DunViewModel(mApplication, mRepository, mDunId.toLong()) as T
+      return DunViewModel(mApplication, mRepositoryLive, mDunId.toLong()) as T
     }
 
   }
