@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package ie.noel.dunsceal.persistence.db.mock
+package ie.noel.dunsceal.persistence.db.room
 
 import android.content.Context
 import androidx.annotation.VisibleForTesting
@@ -25,31 +25,36 @@ import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import androidx.room.migration.Migration
 import androidx.sqlite.db.SupportSQLiteDatabase
-import ie.noel.dunsceal.models.entity.DunFtsEntity
-import ie.noel.dunsceal.models.entity.InvestigationEntity
 import ie.noel.dunsceal.main.AppExecutors
 import ie.noel.dunsceal.models.entity.DunEntity
-import ie.noel.dunsceal.persistence.db.room.DunTypeConverters
-import ie.noel.dunsceal.persistence.db.mock.MockDataGenerator.generateDuns
-import ie.noel.dunsceal.persistence.db.mock.MockDataGenerator.generateInvestigationsForDuns
+import ie.noel.dunsceal.models.entity.DunFtsEntity
+import ie.noel.dunsceal.models.entity.InvestigationEntity
 import ie.noel.dunsceal.persistence.db.dao.DunDao
 import ie.noel.dunsceal.persistence.db.dao.InvestigationDao
+import ie.noel.dunsceal.persistence.db.mock.MockDataGenerator
 
-@Database(entities = [DunEntity::class, DunFtsEntity::class, InvestigationEntity::class], version = 2,  exportSchema = false)
+
+@Database(entities = [DunEntity::class, DunFtsEntity::class, InvestigationEntity::class], version = 2)
 @TypeConverters(DunTypeConverters::class)
-abstract class MockDatabase : RoomDatabase() {
+abstract class DunDatabase : RoomDatabase() {
 
   abstract fun dunDao(): DunDao
-
   abstract fun investigationDao(): InvestigationDao
 
-  private val mIsDatabaseCreated = MutableLiveData<Boolean>()
 
+
+
+
+  /********** TESTING ONLY **************/
+  /********** TESTING ONLY **************/
+  /********** TESTING ONLY **************/
+
+  private val mIsDatabaseCreated = MutableLiveData<Boolean>()
   /**
    * Check whether the database already exists and expose it via [.getDatabaseCreated]
    */
   private fun updateDatabaseCreated(context: Context) {
-    if (context.getDatabasePath(MOCK_DUN_DATABASE_NAME).exists()) {
+    if (context.getDatabasePath(DUN_DATABASE_NAME).exists()) {
       setDatabaseCreated()
     }
   }
@@ -62,13 +67,13 @@ abstract class MockDatabase : RoomDatabase() {
     get() = mIsDatabaseCreated
 
   companion object {
-    private var sInstance: MockDatabase? = null
+    private var sInstance: DunDatabase? = null
     @VisibleForTesting
-    val MOCK_DUN_DATABASE_NAME = "basic-sample-db"
+    val DUN_DATABASE_NAME = "dunsceal-db"
 
-    fun getInstance(context: Context, executors: AppExecutors): MockDatabase? {
+    fun getInstance(context: Context, executors: AppExecutors): DunDatabase? {
       if (sInstance == null) {
-        synchronized(MockDatabase::class.java) {
+        synchronized(DunDatabase::class.java) {
           if (sInstance == null) {
             sInstance = buildDatabase(context.applicationContext, executors)
             sInstance!!.updateDatabaseCreated(context.applicationContext)
@@ -84,8 +89,8 @@ abstract class MockDatabase : RoomDatabase() {
      * The SQLite database is only created when it's accessed for the first time.
      */
     private fun buildDatabase(appContext: Context,
-                              executors: AppExecutors): MockDatabase {
-      return Room.databaseBuilder(appContext, MockDatabase::class.java, MOCK_DUN_DATABASE_NAME)
+                              executors: AppExecutors): DunDatabase {
+      return Room.databaseBuilder(appContext, DunDatabase::class.java, DUN_DATABASE_NAME)
           .addCallback(object : Callback() {
             override fun onCreate(db: SupportSQLiteDatabase) {
               super.onCreate(db)
@@ -94,10 +99,8 @@ abstract class MockDatabase : RoomDatabase() {
                 addDelay()
                 // Generate the data for pre-population
                 val database = getInstance(appContext, executors)
-                val duns: List<DunEntity> = generateDuns()
-
-                val investigationEntities: List<InvestigationEntity?> = generateInvestigationsForDuns(duns)
-
+                val duns: List<DunEntity> = MockDataGenerator.generateDuns()
+                val investigationEntities: List<InvestigationEntity> = MockDataGenerator.generateInvestigationsForDuns(duns)
                 insertData(database, duns, investigationEntities)
                 // notify that the database was created and it's ready to be used
                 database!!.setDatabaseCreated()
@@ -108,12 +111,12 @@ abstract class MockDatabase : RoomDatabase() {
           .build()
     }
 
-    private fun insertData(database: MockDatabase?,
-                           duns: List<DunEntity>,
-                           investigationEntities: List<InvestigationEntity?>) {
+
+    private fun insertData(database: DunDatabase?, duns: List<DunEntity>,
+                           investigations: List<InvestigationEntity>) {
       database!!.runInTransaction {
         database.dunDao().insertAll(duns)
-        database.investigationDao().insertAll(investigationEntities)
+        database.investigationDao().insertAll(investigations)
       }
     }
 
@@ -125,7 +128,7 @@ abstract class MockDatabase : RoomDatabase() {
     }
 
     private val MIGRATION_1_2: Migration = object : Migration(1, 2) {
-      override fun migrate(database: SupportSQLiteDatabase) { // IDE warning about 'TEXT,' can be ignored in Java
+      override fun migrate(database: SupportSQLiteDatabase) {
         database.execSQL("CREATE VIRTUAL TABLE IF NOT EXISTS `dunsFts` USING FTS4("
             + "`name` TEXT, `description` TEXT, content=`duns`)")
         database.execSQL("INSERT INTO dunsFts (`rowid`, `name`, `description`) "

@@ -22,37 +22,35 @@ import ie.noel.dunsceal.models.entity.DunEntity
 
 @Dao
 interface DunDao {
+
+  // LiveData list
   @Query("SELECT * FROM duns")
-  fun loadAll(): LiveData<List<DunEntity?>?>?
-
-  @Insert(onConflict = OnConflictStrategy.REPLACE)
-  fun insertAll(duns: List<DunEntity?>?)
+  fun ldLoadAll(): LiveData<List<DunEntity?>?>?
 
   @Query("select * from duns where id = :dunId")
-  fun loadDun(dunId: Int): LiveData<DunEntity?>?
-
-  @Query("select * from duns where id = :dunId")
-  fun loadSync(dunId: Int): ie.noel.dunsceal.models.entity.DunEntity?
+  fun ldLoadDun(dunId: Int): LiveData<DunEntity?>?
 
   @Query("SELECT duns.* FROM duns JOIN dunsFts ON (duns.id = dunsFts.rowid) "
       + "WHERE dunsFts MATCH :query")
-  fun searchAllDuns(query: String?): LiveData<List<DunEntity?>?>?
+  fun ldSearchDuns(query: String?): LiveData<List<DunEntity?>?>?
 
 
-  // Room DB integration without liveData
+  // Standard list
+  @Insert(onConflict = OnConflictStrategy.REPLACE)
+  fun insertAll(duns: List<DunEntity?>?)
 
   @Insert(onConflict = OnConflictStrategy.REPLACE)
-  fun create(dunEntity: ie.noel.dunsceal.models.entity.DunEntity?)
+  fun create(dunEntity: DunEntity?)
 
   @Query("SELECT * FROM duns")
   fun findAll(): List<DunEntity?>?
 
-  @Query("select * from duns where id = :id")
-  fun findById(id: Long): ie.noel.dunsceal.models.entity.DunEntity?
+  @Query("select * from duns where id = :dunId")
+  fun findById(dunId: Long): DunEntity?
 
   @Update
-  fun updateDun(dunEntity: ie.noel.dunsceal.models.entity.DunEntity?)
+  fun updateDun(dunEntity: DunEntity?)
 
   @Delete
-  fun deleteDun(dunEntity: ie.noel.dunsceal.models.entity.DunEntity?)
+  fun deleteDun(dunEntity: DunEntity?)
 }

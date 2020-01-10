@@ -15,6 +15,8 @@
  */
 package ie.noel.dunsceal.adapters
 
+import android.os.Parcel
+import android.os.Parcelable
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.net.toUri
@@ -30,12 +32,17 @@ import ie.noel.dunsceal.views.dun.DunClickCallback
 import jp.wasabeef.picasso.transformations.CropCircleTransformation
 import kotlinx.android.synthetic.main.dun_item.view.*
 
+interface DunListener {
+  fun onDunClick(dun: DunEntity)
+}
+
 class DunAdapter constructor(private val mDunClickCallback: DunClickCallback?,
                              private val reportAll: Boolean
 
 ) : RecyclerView.Adapter<DunAdapter.DunViewHolder>() {
 
   var mDunList: MutableList<DunEntity>? = null
+
 
   fun setDunList(dunList: MutableList<DunEntity>) {
     if (mDunList == null) {

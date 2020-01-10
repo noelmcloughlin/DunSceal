@@ -24,16 +24,18 @@ import androidx.lifecycle.ViewModelProvider.NewInstanceFactory
 import ie.noel.dunsceal.main.MainApp
 import ie.noel.dunsceal.models.entity.DunEntity
 import ie.noel.dunsceal.models.entity.InvestigationEntity
-import ie.noel.dunsceal.persistence.DataRepository
+import ie.noel.dunsceal.persistence.db.DataRepository
 
-class DunViewModel(application: Application, repository: DataRepository?,
+class DunViewModel(application: Application,
+                   repository: DataRepository?,
                    private val mDunId: Long) : AndroidViewModel(application) {
-  val observableDunEntity: LiveData<DunEntity?>? = repository!!.loadDun(mDunId)
+
+  val observableDunEntity: LiveData<DunEntity?>? = repository!!.ldLoadDun(mDunId)
   var dun = ObservableField<DunEntity>()
   /**
    * Expose the LiveData Investigations query so the UI can observe it.
    */
-  val investigations: LiveData<InvestigationEntity> = repository!!.loadInvestigations(mDunId)
+  val investigations: LiveData<InvestigationEntity> = repository!!.ldLoadInvestigations(mDunId)
 
   fun setDun(dun: DunEntity) {
     this.dun.set(dun)

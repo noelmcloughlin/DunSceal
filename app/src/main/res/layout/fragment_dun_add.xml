@@ -6,7 +6,6 @@
     tools:context=".views.dun.DunFragment">
 
   <data>
-
     <variable
         name="isLoading"
         type="boolean" />

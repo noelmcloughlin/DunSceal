@@ -1,34 +1,81 @@
-package ie.noel.dunsceal.persistence
+package ie.noel.dunsceal.persistence.db
 
 import android.content.Context
 import android.graphics.Bitmap
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MediatorLiveData
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import ie.noel.dunsceal.models.entity.DunEntity
-import ie.noel.dunsceal.models.entity.DunStoreEntity
+import ie.noel.dunsceal.models.DunStore
 import ie.noel.dunsceal.models.entity.InvestigationEntity
+import ie.noel.dunsceal.persistence.db.room.DunDatabase
 import ie.noel.dunsceal.utils.Image.readImageFromPath
 import org.jetbrains.anko.AnkoLogger
 import java.io.ByteArrayOutputStream
 import java.io.File
 
-class DunFireStoreEntity(val context: Context) : DunStoreEntity, AnkoLogger {
+class DunFireStore(private val context: Context, private val mDatabase: DunDatabase) : DunStore, AnkoLogger {
 
-  val duns = ArrayList<DunEntity>()
-  val investigations = ArrayList<InvestigationEntity>()
-
+  private val mObservableDuns: MediatorLiveData<List<DunEntity?>?> = MediatorLiveData()
   private lateinit var userId: String
   lateinit var db: DatabaseReference
   private lateinit var st: StorageReference
 
-  override fun findAll(): List<DunEntity> {
-    return duns
+  val duns = ArrayList<DunEntity>()
+  val liveduns: LiveData<List<DunEntity>>
+    get() = mObservableDuns
+
+  /**
+   * Livedata: Get  list of duns from  database and get notified of data change.
+   */
+
+  companion object {
+    private var sInstance: DunFireStore? = null
+    fun getInstance(context: Context, mDatabase: DunDatabase): DunFireStore? {
+      if (sInstance == null) {
+        synchronized(DunFireStore::class.java) {
+          if (sInstance == null) {
+            sInstance = DunFireStore(context, mDatabase)
+          }
+        }
+      }
+      return sInstance
+    }
   }
 
-  override fun findById(id: Long): DunEntity? {
-    return duns.find { p -> p.id == id }
+  init {
+    mObservableDuns.addSource(mDatabase.dunDao().ldLoadAll()!!
+    ) { dunEntityEntities: List<DunEntity?>? ->
+      if (mDatabase.databaseCreated.value != null) {
+        mObservableDuns.postValue(dunEntityEntities)
+      }
+    }
+  }
+
+  // implement interfaces
+  override fun ldLoadDun(dunId: Long): LiveData<DunEntity?>? {
+    return ldLoadDun(dunId)
+  }
+  override fun ldLoadInvestigations(dunId: Long): LiveData<InvestigationEntity> {
+    return ldLoadInvestigations(dunId)
+  }
+  override fun ldSearchDuns(query: String?): LiveData<List<DunEntity?>?>? {
+    return ldSearchDuns(query)
+  }
+
+
+  /**
+   * List: Get list of duns from database.
+   */
+  override fun findAll(): List<DunEntity> {
+    return LiveData.duns
+  }
+
+  override fun findById(dunId: Long): DunEntity? {
+    return duns.find { p -> p.id == dunId }
   }
 
   override fun create(dun: DunEntity) {
@@ -48,6 +95,8 @@ class DunFireStoreEntity(val context: Context) : DunStoreEntity, AnkoLogger {
       foundDun.description = dun.description
       foundDun.image = dun.image
       foundDun.location = dun.location
+      foundDun.votes = dun.votes
+      foundDun.visited = dun.visited
     }
 
     db.child("users").child(userId).child("duns").child(dun.fbId).setValue(dun)
@@ -100,7 +149,6 @@ class DunFireStoreEntity(val context: Context) : DunStoreEntity, AnkoLogger {
         dunsReady()
       }
     }
-
     fun fetchInvestigations(investigationsReady: () -> Unit) {
       val investigationValueEventListener = object : ValueEventListener {
         override fun onCancelled(dataSnapshot: DatabaseError) {
@@ -120,5 +168,4 @@ class DunFireStoreEntity(val context: Context) : DunStoreEntity, AnkoLogger {
           .addListenerForSingleValueEvent(investigationValueEventListener)
       duns.clear()
     }
-  }
 }

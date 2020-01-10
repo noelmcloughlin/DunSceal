@@ -11,7 +11,7 @@ class NoteEntity : Note {
   override var dunId = 0L
   override var image: String = ""
   override var text: String? = null
-  //@ColumnInfo(defaultValue = "('Created at' || CURRENT_TIMESTAMP)")
+  @ColumnInfo(defaultValue = "('Created at' || CURRENT_TIMESTAMP)")
   override var postedAt: Date? = null
 
   constructor() {} // needed

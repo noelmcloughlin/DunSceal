@@ -3,7 +3,7 @@ package ie.noel.dunsceal.views.login
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.storage.FirebaseStorage
-import ie.noel.dunsceal.models.storage.DunFireStoreEntity
+import ie.noel.dunsceal.persistence.db.DunFireStore
 import ie.noel.dunsceal.views.BasePresenter
 import org.jetbrains.anko.toast
 import ie.noel.dunsceal.views.BaseView
@@ -11,12 +11,12 @@ import ie.noel.dunsceal.views.VIEW
 
 open class LoginPresenter(view: BaseView) : BasePresenter(view) {
 
-  var dunDataStore: DunFireStoreEntity? = null
+  var dunDataStore: DunFireStore? = null
 
 
   init {
-    if (app.duns is DunFireStoreEntity) {
-      dunDataStore = app.duns as DunFireStoreEntity
+    if (app.duns is DunFireStore) {
+      dunDataStore = app.duns as DunFireStore
     }
   }
 

@@ -9,9 +9,6 @@ interface NoteDao {
   @Query("SELECT * FROM notes where dunId = :dunId")
   fun load(dunId: Int): LiveData<List<NoteEntity>?>?
 
-  @Query("SELECT * FROM notes where dunId = :dunId")
-  fun loadSync(dunId: Int): List<NoteEntity?>?
-
   @Insert(onConflict = OnConflictStrategy.REPLACE)
   fun insertAll(noteEntities: List<NoteEntity?>?)
 

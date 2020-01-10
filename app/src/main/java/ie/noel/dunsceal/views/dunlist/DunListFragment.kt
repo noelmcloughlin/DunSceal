@@ -41,6 +41,7 @@ import ie.noel.dunsceal.views.home.HomePresenter
 import ie.noel.dunsceal.views.dun.DunClickCallback
 import ie.noel.dunsceal.views.dun.DunView
 import ie.noel.dunsceal.views.home.HomeView
+import kotlinx.android.synthetic.main.fragment_dun_list.*
 import kotlinx.android.synthetic.main.fragment_dun_list.view.*
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.info
@@ -134,7 +135,9 @@ class DunListFragment(val presenter: HomePresenter) : BaseFragment(), AnkoLogger
     loader = Loader.createLoader(activity!!)
     Loader.showLoader(loader, "Downloading Duns from Firebase")
     val duns = ArrayList<DunEntity>()
-    // myRecyclerView.adapter = OldDunAdapter(duns, this, false)
+
+    // val mDunClickCallback: mDunClickCallback
+    // myRecyclerView.adapter = DunAdapter(mDunClickCallback, this, false)
 
     presenter.app.db.child("users").child(userId!!).child("duns").child(userId)
         .addValueEventListener(object : ValueEventListener {
@@ -149,8 +152,8 @@ class DunListFragment(val presenter: HomePresenter) : BaseFragment(), AnkoLogger
               val dun = it.getValue<DunEntity>(DunEntity::class.java)
 
               duns.add(dun!!)
-              //     mBinding!!.root.myRecyclerView.adapter =
-              //       DunAdapter(duns, this@DunListFragment, false)
+              mBinding!!.root.myRecyclerView.adapter =
+                  DunAdapter(this@DunListFragment.mDunClickCallback, false)
               mBinding!!.root.myRecyclerView.adapter?.notifyDataSetChanged()
               checkSwipeRefresh()
 
@@ -209,7 +212,7 @@ class DunListFragment(val presenter: HomePresenter) : BaseFragment(), AnkoLogger
       if (query == null || query.toString().isEmpty()) {
         subscribeUi(viewModel.duns as LiveData<List<DunEntity>>)
       } else {
-        subscribeUi(viewModel.searchDuns("*$query*") as LiveData<List<DunEntity>>)
+        subscribeUi(viewModel.ldSearchDuns("*$query*") as LiveData<List<DunEntity>>)
       }
     }
     subscribeUi(viewModel.duns as LiveData<List<DunEntity>>)
@@ -229,7 +232,7 @@ class DunListFragment(val presenter: HomePresenter) : BaseFragment(), AnkoLogger
     })
   }
 
-  private val mDunClickCallback = object : DunClickCallback {
+  val mDunClickCallback = object : DunClickCallback {
     override fun onClick(dun: DunEntity?) {
       if (lifecycle.currentState.isAtLeast(Lifecycle.State.STARTED)) {
         (activity as HomeView?)!!.showDunFragment(dun!!)

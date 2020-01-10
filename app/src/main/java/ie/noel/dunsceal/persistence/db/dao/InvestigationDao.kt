@@ -17,10 +17,7 @@ interface InvestigationDao {
   fun insertAll(investigations: List<InvestigationEntity?>?)
 
   @Query("select * from investigations where id = :investigationId")
-  fun loadInvestigations(investigationId: Int): LiveData<InvestigationEntity>
-
-  @Query("select * from investigations where id = :investigationId")
-  fun loadSync(investigationId: Int): InvestigationEntity?
+  fun ldLoadInvestigations(investigationId: Int): LiveData<InvestigationEntity>
 
   // Room DB integration
 
@@ -30,8 +27,8 @@ interface InvestigationDao {
   @Query("SELECT * FROM investigations")
   fun findAll(): List<InvestigationEntity?>?
 
-  @Query("select * from investigations where id = :id")
-  fun findById(id: Long): InvestigationEntity?
+  @Query("select * from investigations where id = :investigationId")
+  fun findById(investigationId: Long): InvestigationEntity?
 
   @Update
   fun updateInvestigation(investigationEntity: InvestigationEntity?)

@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package ie.noel.dunsceal.persistence.db
+package ie.noel.dunsceal.persistence.db.room
 
 import androidx.room.TypeConverter
 import java.util.*

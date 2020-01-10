@@ -27,9 +27,9 @@ import java.util.concurrent.TimeUnit
 
 object MockDataGenerator {
   private val FIRST = arrayOf(
-      "Dun", "Killy", "Knock", "Bally", "Derry")
+      "Dun") //, "Killy", "Knock", "Bally", "Derry")
   private val SECOND = arrayOf(
-      "Bollog", "Farnham", "More", "Hoo", "Cairn")
+      "More") //, "Farnham", "More", "Hoo", "Cairn")
   private val DESCRIPTION = arrayOf(
       "is a very large dun", "is recommended by Stan S. Stanman",
       "is the best  dun in Ireland", "is \uD83D\uDCAF", "is ❤️", "is fine")
