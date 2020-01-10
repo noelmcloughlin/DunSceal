@@ -10,17 +10,22 @@ import com.google.android.material.navigation.NavigationView
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
 import ie.noel.dunsceal.R
+import ie.noel.dunsceal.models.entity.DunEntity
 import ie.noel.dunsceal.views.dunlist.DunListAllFragment
 import ie.noel.dunsceal.utils.Image.readImageUri
 import ie.noel.dunsceal.utils.Image.showImagePicker
 import ie.noel.dunsceal.views.BaseFragment
+import ie.noel.dunsceal.views.BasePresenter
 import ie.noel.dunsceal.views.BaseView
 import ie.noel.dunsceal.views.VIEW
 import ie.noel.dunsceal.views.about.AboutUsFragment
 import ie.noel.dunsceal.views.dun.DunAddFragment
 import ie.noel.dunsceal.views.dun.DunPresenter
+import ie.noel.dunsceal.views.dun.InvestigationViewFragment
 import ie.noel.dunsceal.views.dunlist.DunListFragment
 import ie.noel.dunsceal.views.dunlist.DunListPresenter
+import ie.noel.dunsceal.views.location.LocationEditFragment
+import ie.noel.dunsceal.views.location.LocationEditPresenter
 import ie.noel.dunsceal.views.login.LoginView
 import jp.wasabeef.picasso.transformations.CropCircleTransformation
 import kotlinx.android.synthetic.main.appbar_fab_home.*
@@ -35,7 +40,7 @@ open class HomeView : BaseView(), NavigationView.OnNavigationItemSelectedListene
   private var userName: String = "User"
 
   companion object {
-    private const val TAG = "HomeView"
+    const val TAG = "HomeView"
   }
 
   override fun onCreate(savedInstanceState: Bundle?) {
@@ -76,16 +81,12 @@ open class HomeView : BaseView(), NavigationView.OnNavigationItemSelectedListene
     when (item.itemId) {
       R.id.nav_home -> {
         presenter.dunDataStore!!.fetchDuns {
-          presenter.investigationDataStore!!.fetchInvestigations {
             navigateTo(VIEW.HOME)
-          }
         }
       }
       R.id.nav_report -> {
         presenter.dunDataStore!!.fetchDuns {
-          presenter.investigationDataStore!!.fetchInvestigations {
             fragmentTo(DunListFragment.newInstance(presenter))
-          }
         }
       }
       R.id.nav_report_all -> {
@@ -161,6 +162,16 @@ open class HomeView : BaseView(), NavigationView.OnNavigationItemSelectedListene
         .commit()
   }
 
+  /** Shows dun detail fragment  */
+  fun showDunFragment(dun: DunEntity) {
+    val dunFragment = InvestigationViewFragment.forDun(DunPresenter(this), dun.id)
+    fragManager
+        .beginTransaction()
+        .addToBackStack("dun")
+        .replace(R.id.content_home_frame,
+            dunFragment, null).commit()
+  }
+
   // Options Menu
   override fun onCreateOptionsMenu(menu: Menu?): Boolean {
     menuInflater.inflate(R.menu.menu_main, menu)
@@ -171,18 +182,15 @@ open class HomeView : BaseView(), NavigationView.OnNavigationItemSelectedListene
     when (item?.itemId) {
       R.id.menu_main_item_add ->
       {
-        fragManager.beginTransaction()
-            .replace(R.id.content_home_frame, DunAddFragment.newInstance(DunPresenter(this), userName), DunAddFragment.TAG).commit()
+        fragmentTo(DunAddFragment.newInstance(DunPresenter(this), userName))
       }
       R.id.menu_main_item_map ->
       {
-        fragManager.beginTransaction()
-            .replace(R.id.content_home_frame, DunAddFragment.newInstance(DunPresenter(this), userName), DunAddFragment.TAG).commit()
+        fragmentTo(LocationEditFragment.newInstance(LocationEditPresenter(this)))
       }
       R.id.menu_main_item_logout ->
       {
-        fragManager.beginTransaction()
-            .replace(R.id.content_home_frame, DunAddFragment.newInstance(DunPresenter(this), userName), DunAddFragment.TAG).commit()
+        presenter.doLogout()
       }
     }
     return super.onOptionsItemSelected(item!!)

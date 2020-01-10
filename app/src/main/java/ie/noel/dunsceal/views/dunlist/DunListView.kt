@@ -15,7 +15,7 @@ open class DunListView : BaseView(), AnkoLogger, DunListener {
   open lateinit var presenter: DunListPresenter
 
   companion object {
-    private const val TAG = "DunListView"
+    const val TAG = "DunListView"
   }
 
   override fun onCreate(savedInstanceState: Bundle?) {

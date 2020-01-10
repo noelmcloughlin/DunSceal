@@ -27,7 +27,7 @@
     android:layout_height="127dp"
     android:layout_marginStart="8dp"
     android:layout_marginEnd="8dp"
-    android:layout_marginBottom="16dp"
+    android:layout_marginBottom="48dp"
     app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintHorizontal_bias="0.533"
@@ -40,7 +40,7 @@
       <ImageView
           android:id="@+id/currentImage"
           android:layout_width="121dp"
-          android:layout_height="98dp"
+          android:layout_height="92dp"
           android:layout_marginEnd="16dp"
           app:layout_constraintBottom_toBottomOf="parent"
           app:layout_constraintEnd_toEndOf="parent"

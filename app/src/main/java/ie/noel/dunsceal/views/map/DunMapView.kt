@@ -8,7 +8,7 @@ import ie.noel.dunsceal.R
 import ie.noel.dunsceal.models.entity.DunEntity
 import ie.noel.dunsceal.views.home.HomeView
 import kotlinx.android.synthetic.main.appbar_fab_home.*
-import kotlinx.android.synthetic.main.fragment_dun_maps.*
+import kotlinx.android.synthetic.main.fragment_dun_map.*
 
 class DunMapView : HomeView(), GoogleMap.OnMarkerClickListener {
 
@@ -16,12 +16,12 @@ class DunMapView : HomeView(), GoogleMap.OnMarkerClickListener {
   lateinit var map : GoogleMap
 
   companion object {
-    private const val TAG = "DunMapView"
+    const val TAG = "DunMapView"
   }
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
-    setContentView(R.layout.activity_dun_map)
+    setContentView(R.layout.fragment_dun_map)
     super.init(toolbar, true, TAG)
 
     if (supportActionBar != null) {

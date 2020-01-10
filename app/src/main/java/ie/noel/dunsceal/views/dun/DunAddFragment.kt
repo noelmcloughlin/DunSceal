@@ -12,6 +12,7 @@ import ie.noel.dunsceal.models.entity.DunEntity
 import ie.noel.dunsceal.models.entity.LocationEntity
 import ie.noel.dunsceal.utils.Loader
 import ie.noel.dunsceal.views.BaseFragment
+import ie.noel.dunsceal.views.BaseView
 import ie.noel.dunsceal.views.home.HomeView
 import kotlinx.android.synthetic.main.fragment_dun_add.chooseImage
 import kotlinx.android.synthetic.main.fragment_dun_add.description
@@ -123,6 +124,16 @@ class DunAddFragment(val presenter: DunPresenter, private val user: String)
     mBinding!!.mapView.onSaveInstanceState(outState)
   }
 
+  /** Shows dun detail fragment  */
+  fun showDunFragment(dun: DunEntity) {
+    val dunFragment = InvestigationViewFragment.forDun(presenter, dun.id)
+    (activity as BaseView).fragManager
+        .beginTransaction()
+        .addToBackStack("dun")
+        .replace(R.id.content_home_frame,
+            dunFragment, null).commit()
+  }
+
   // OPTIONS MENU
   override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
     inflater.inflate(R.menu.menu_dun, menu)
@@ -148,9 +159,7 @@ class DunAddFragment(val presenter: DunPresenter, private val user: String)
       }
     }
     presenter.dunDataStore!!.fetchDuns {
-      presenter.investigationDataStore!!.fetchInvestigations {
         (activity as HomeView).fragManager.popBackStackImmediate()
-      }
     }
     return true
   }

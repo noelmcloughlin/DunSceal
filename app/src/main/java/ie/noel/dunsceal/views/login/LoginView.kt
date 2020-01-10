@@ -32,7 +32,7 @@ open class LoginView : BaseView(), View.OnClickListener {
   private lateinit var presenter: LoginPresenter
 
   companion object {
-    private const val TAG = "EmailPassword"
+    const val TAG = "EmailPassword"
     private const val RC_SIGN_IN = 9001
   }
 
@@ -230,10 +230,8 @@ open class LoginView : BaseView(), View.OnClickListener {
 
       // get firebase references Now!!!!
       presenter.dunDataStore!!.fetchDuns {
-        presenter.investigationDataStore!!.fetchInvestigations {
           // need to startActivity for new fragment managment
           startActivity<HomeView>()
-        }
       }
 
     } else {

@@ -136,9 +136,7 @@ class LocationEditFragment(val presenter: LocationEditPresenter)
       }
     }
     presenter.dunDataStore!!.fetchDuns {
-      presenter.investigationDataStore!!.fetchInvestigations {
         (activity as HomeView).fragManager.popBackStackImmediate()
-      }
     }
     return true
   }

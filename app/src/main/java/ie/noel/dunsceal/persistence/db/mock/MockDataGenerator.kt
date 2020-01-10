@@ -36,8 +36,8 @@ object MockDataGenerator {
   private val INVESTIGATIONS = arrayOf(
       "Investigation 1", "Investigation 2", "Investigation 3", "Investigation 4", "Investigation 5", "Investigation 6")
   private val VISITED = arrayOf(1, 0, 1, 0, 1)
-  //private const val IMAGE = "https://firebasestorage.googleapis.com/v0/b/dunsceal.appspot.com/o/hillfort-default.bmp?alt=media&token=d9c756f3-0cc9-4c5a-b6dc-9f13bd1d53d9"
-  private const val IMAGE = ""
+  private const val IMAGE = "https://firebasestorage.googleapis.com/v0/b/dunsceal.appspot.com/o/hillfort-default.bmp?alt=media&token=d9c756f3-0cc9-4c5a-b6dc-9f13bd1d53d9"
+  //private const val IMAGE = ""
 
   private val LATITUDES = arrayOf(52.245696, 52.245696, 52.245696, 52.245696, 52.245696, 52.245696)
   private val LONGITUDES = arrayOf(-7.139102, -7.139102, -7.139102, -7.139102, -7.139102, -7.139102)
@@ -52,6 +52,10 @@ object MockDataGenerator {
         dun.description = dun.name + " " + DESCRIPTION[j]
         dun.votes = rnd.nextInt(240)
         dun.visited = VISITED[i]
+        dun.image = IMAGE[i].toString()
+        dun.location.latitude = LATITUDES[i]
+        dun.location.longitude = LONGITUDES[i]
+        dun.location.zoom = 0f
         dun.id = (FIRST.size * i + j + 1).toLong()
         dun.image = IMAGE
         duns.add(dun)
@@ -70,29 +74,12 @@ object MockDataGenerator {
         val investigation = InvestigationEntity()
         investigation.dunId = id
         investigation.text = INVESTIGATIONS[i] + " for " + name
+        investigation.image = IMAGE[i].toString()
         investigation.postedAt = Date(System.currentTimeMillis()
             - TimeUnit.DAYS.toMillis(investigationsNumber - i.toLong()) + TimeUnit.HOURS.toMillis(i.toLong()))
         investigationEntities.add(investigation)
       }
     }
     return investigationEntities
-  }
-
-  fun generateLocationsForDuns(
-      duns: List<DunEntity>): List<LocationEntity> {
-    val locationEntities: MutableList<LocationEntity> = ArrayList()
-    val rnd = Random()
-    for ((id, name) in duns) {
-      val locationsNumber = rnd.nextInt(5) + 1
-      for (i in 0 until locationsNumber) {
-        val location = LocationEntity()
-        location.dunId = id
-        location.latitude = LATITUDES[i]
-        location.longitude = LONGITUDES[i]
-        location.zoom = 0F
-        locationEntities.add(location)
-      }
-    }
-    return locationEntities
   }
 }

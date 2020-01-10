@@ -7,66 +7,33 @@
     android:textAlignment="center"
     tools:context=".views.about.AboutUsFragment">
 
-    <TextView
-        android:id="@+id/homeTitle"
-        android:layout_width="263dp"
-        android:layout_height="69dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="48dp"
-        android:layout_marginTop="32dp"
-        android:fontFamily="cursive"
-        android:text="About"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        android:textColor="@color/colorWhite"
-        android:textSize="36sp"
-        android:typeface="normal"
-        app:layout_constraintBottom_toTopOf="@+id/imageView3"
-        app:layout_constraintStart_toStartOf="@+id/imageView3"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <ImageView
-        android:id="@+id/imageView3"
-        android:layout_width="322dp"
-        android:layout_height="48dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="100dp"
-        app:layout_constraintBottom_toTopOf="@+id/splashPicture"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/homeTitle"
-        app:srcCompat="@drawable/logo_contrasted" />
-
     <ImageView
         android:id="@+id/splashPicture"
-        android:layout_width="316dp"
-        android:layout_height="110dp"
-        android:layout_marginTop="24dp"
+        android:layout_width="307dp"
+        android:layout_height="161dp"
+        android:layout_marginTop="8dp"
         app:layout_constraintBottom_toTopOf="@+id/aboutUsText"
         app:layout_constraintDimensionRatio=""
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_chainStyle="packed"
-        app:srcCompat="@mipmap/ic_launcher_foreground" />
+        app:srcCompat="@drawable/hillfort_landscape_image" />
 
     <TextView
         android:id="@+id/aboutUsText"
-        android:layout_width="240dp"
-        android:layout_height="215dp"
+        android:layout_width="381dp"
+        android:layout_height="407dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
+        android:fontFamily="sans-serif-light"
         android:text="@string/AboutUsText"
         android:textAlignment="center"
-        android:textColor="@color/blue_700"
-        android:textSize="16sp"
-        android:textStyle="bold"
+        android:textColor="#010312"
+        android:textSize="30sp"
+        android:textStyle="normal|italic"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.329"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/splashPicture" />
 

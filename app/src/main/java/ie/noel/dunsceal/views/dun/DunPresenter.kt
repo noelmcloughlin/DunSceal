@@ -19,6 +19,7 @@ import ie.noel.dunsceal.utils.Permissions.createDefaultLocationRequest
 import ie.noel.dunsceal.utils.Permissions.isPermissionGranted
 import ie.noel.dunsceal.utils.Image.showImagePicker
 import ie.noel.dunsceal.views.*
+import ie.noel.dunsceal.views.dunlist.DunListView
 import ie.noel.dunsceal.views.home.HomePresenter
 
 open class DunPresenter(view: BaseView) : HomePresenter(view) {
@@ -110,9 +111,9 @@ open class DunPresenter(view: BaseView) : HomePresenter(view) {
                 app.duns.create(dun)
             }
             uiThread {
-                //view?.finish()
             }
         }
+        view?.fragManager!!.popBackStackImmediate(DunListView.TAG, 0)
     }
 
     fun doCancel() {

@@ -21,18 +21,18 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import ie.noel.dunsceal.R
-import ie.noel.dunsceal.databinding.FragmentDunViewBinding
+import ie.noel.dunsceal.databinding.FragmentDunAddBinding
 import ie.noel.dunsceal.models.entity.DunEntity
 import ie.noel.dunsceal.utils.Loader
 import ie.noel.dunsceal.views.BaseFragment
-import kotlinx.android.synthetic.main.fragment_dun_maps.view.mapView
+import kotlinx.android.synthetic.main.fragment_dun_map.view.mapView
 import kotlinx.android.synthetic.main.fragment_dun_add.view.*
 import org.jetbrains.anko.AnkoLogger
 import java.util.*
 
 class InvestigationViewFragment(val presenter: DunPresenter) : BaseFragment(), AnkoLogger {
 
-  private var mBinding: FragmentDunViewBinding? = null
+  private var mBinding: FragmentDunAddBinding? = null
   //private var mInvestigationAdapter: InvestigationAdapter? = null
 
   companion object {
@@ -56,7 +56,7 @@ class InvestigationViewFragment(val presenter: DunPresenter) : BaseFragment(), A
       savedInstanceState: Bundle?
   ): View? {
     // Inflate this data binding layout
-    mBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_dun_view, container, false)
+    mBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_dun_add, container, false)
     loader = Loader.createLoader(activity!!)
     activity?.title = getString(R.string.action_dun)
 

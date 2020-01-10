@@ -22,7 +22,6 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.storage.StorageReference
 import ie.noel.dunsceal.models.entity.DunStoreEntity
-import ie.noel.dunsceal.models.entity.InvestigationStoreEntity
 import ie.noel.dunsceal.models.storage.DunFireStoreEntity
 import ie.noel.dunsceal.persistence.DataRepository
 import ie.noel.dunsceal.persistence.db.mock.MockDatabase
@@ -37,7 +36,6 @@ class MainApp : Application(), AnkoLogger {
   private var mAppExecutors: AppExecutors? = null
 
   lateinit var duns: DunStoreEntity
-  lateinit var investigations: InvestigationStoreEntity
 
   lateinit var auth: FirebaseAuth
   lateinit var googleSignInClient: GoogleSignInClient

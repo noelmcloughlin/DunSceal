@@ -13,7 +13,7 @@ import ie.noel.dunsceal.models.entity.LocationEntity
 import ie.noel.dunsceal.views.BaseFragment
 import ie.noel.dunsceal.views.BaseView
 import kotlinx.android.synthetic.main.appbar_fab_home.*
-import kotlinx.android.synthetic.main.fragment_dun_view.*
+import kotlinx.android.synthetic.main.fragment_dun_add.*
 import org.jetbrains.anko.toast
 
 open class DunView : BaseView(), AnkoLogger {

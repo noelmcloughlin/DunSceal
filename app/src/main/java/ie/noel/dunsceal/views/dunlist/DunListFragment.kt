@@ -40,6 +40,7 @@ import ie.noel.dunsceal.views.BaseView
 import ie.noel.dunsceal.views.home.HomePresenter
 import ie.noel.dunsceal.views.dun.DunClickCallback
 import ie.noel.dunsceal.views.dun.DunView
+import ie.noel.dunsceal.views.home.HomeView
 import kotlinx.android.synthetic.main.fragment_dun_list.view.*
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.info
@@ -231,7 +232,7 @@ class DunListFragment(val presenter: HomePresenter) : BaseFragment(), AnkoLogger
   private val mDunClickCallback = object : DunClickCallback {
     override fun onClick(dun: DunEntity?) {
       if (lifecycle.currentState.isAtLeast(Lifecycle.State.STARTED)) {
-        (activity as DunView?)!!.showDunFragment(dun!!)
+        (activity as HomeView?)!!.showDunFragment(dun!!)
       }
     }
   }
