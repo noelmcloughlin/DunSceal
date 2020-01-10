@@ -1,4 +1,4 @@
-package ie.noel.dunsceal.persistence.db.dao
+package ie.noel.dunsceal.persistence.dao
 
 import androidx.lifecycle.LiveData
 import androidx.room.*

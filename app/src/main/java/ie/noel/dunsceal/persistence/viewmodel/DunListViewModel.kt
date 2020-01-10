@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package ie.noel.dunsceal.models.viewmodel
+package ie.noel.dunsceal.persistence.viewmodel
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
@@ -21,7 +21,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import ie.noel.dunsceal.main.MainApp
 import ie.noel.dunsceal.models.entity.DunEntity
-import ie.noel.dunsceal.persistence.db.LiveDataRepository
+import ie.noel.dunsceal.persistence.LiveDataRepository
 
 open class DunListViewModel(application: Application) : AndroidViewModel(application) {
   private val mRepositoryLive: LiveDataRepository?
@@ -43,8 +43,8 @@ open class DunListViewModel(application: Application) : AndroidViewModel(applica
     // set by default null, until we get data from the database.
     mObservableDuns.value = null
     mRepositoryLive = (application as MainApp).getRepository()!!
-    val duns = mRepositoryLive.duns
+    val liveduns = mRepositoryLive.liveduns
     // observe the changes of the duns from the database and forward them
-    mObservableDuns.addSource(duns) { value: List<DunEntity?>? -> mObservableDuns.setValue(value) }
+    mObservableDuns.addSource(liveduns) { value: List<DunEntity?>? -> mObservableDuns.setValue(value) }
   }
 }

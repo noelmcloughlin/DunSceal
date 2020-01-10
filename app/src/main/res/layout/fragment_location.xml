@@ -6,8 +6,8 @@
     android:id="@+id/title_constraint"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="ie.noel.dunsceal.views.home.HomeView"
-    tools:layout_editor_absoluteY="81dp">
+    tools:layout_editor_absoluteY="81dp"
+    tools:context="ie.noel.dunsceal.views.location.LocationView">
 
     <TextView
         android:id="@+id/dunLatitude"
@@ -33,7 +33,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.gms.maps.MapView
-        android:id="@+id/mapView"
+        android:id="@+id/mapViewLocation"
         android:layout_width="382dp"
         android:layout_height="533dp"
         android:layout_marginStart="16dp"

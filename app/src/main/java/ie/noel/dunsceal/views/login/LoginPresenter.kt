@@ -3,7 +3,7 @@ package ie.noel.dunsceal.views.login
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.storage.FirebaseStorage
-import ie.noel.dunsceal.persistence.db.DunFireStore
+import ie.noel.dunsceal.persistence.DunFireStore
 import ie.noel.dunsceal.views.BasePresenter
 import org.jetbrains.anko.toast
 import ie.noel.dunsceal.views.BaseView

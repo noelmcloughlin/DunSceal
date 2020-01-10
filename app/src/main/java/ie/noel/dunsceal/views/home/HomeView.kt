@@ -14,18 +14,14 @@ import ie.noel.dunsceal.models.entity.DunEntity
 import ie.noel.dunsceal.views.dunlist.DunListAllFragment
 import ie.noel.dunsceal.utils.Image.readImageUri
 import ie.noel.dunsceal.utils.Image.showImagePicker
-import ie.noel.dunsceal.views.BaseFragment
-import ie.noel.dunsceal.views.BasePresenter
 import ie.noel.dunsceal.views.BaseView
 import ie.noel.dunsceal.views.VIEW
-import ie.noel.dunsceal.views.about.AboutUsFragment
-import ie.noel.dunsceal.views.dun.DunAddFragment
 import ie.noel.dunsceal.views.dun.DunPresenter
-import ie.noel.dunsceal.views.dun.InvestigationViewFragment
+import ie.noel.dunsceal.views.dun.DunFragment
 import ie.noel.dunsceal.views.dunlist.DunListFragment
 import ie.noel.dunsceal.views.dunlist.DunListPresenter
-import ie.noel.dunsceal.views.location.LocationEditFragment
-import ie.noel.dunsceal.views.location.LocationEditPresenter
+import ie.noel.dunsceal.views.location.LocationFragment
+import ie.noel.dunsceal.views.location.LocationPresenter
 import ie.noel.dunsceal.views.login.LoginView
 import jp.wasabeef.picasso.transformations.CropCircleTransformation
 import kotlinx.android.synthetic.main.appbar_fab_home.*
@@ -64,7 +60,7 @@ open class HomeView : BaseView(), NavigationView.OnNavigationItemSelectedListene
     navView.getHeaderView(0).nav_header_email.text = userName
 
     //Checking if Google User, upload google profile pic
-    // TODO presenter.checkExistingPhoto(this)
+    presenter.checkExistingPhoto(this)
     navView.getHeaderView(0).imageView
         .setOnClickListener { showImagePicker(this, 1) }
 
@@ -95,7 +91,7 @@ open class HomeView : BaseView(), NavigationView.OnNavigationItemSelectedListene
       }
       R.id.nav_aboutus -> {
         toast("You Selected about us")
-        fragmentTo(AboutUsFragment.newInstance())
+        fragmentTo(AboutFragment.newInstance())
       }
       R.id.nav_sign_out -> {
         toast("You Selected Sign out")
@@ -164,7 +160,7 @@ open class HomeView : BaseView(), NavigationView.OnNavigationItemSelectedListene
 
   /** Shows dun detail fragment  */
   fun showDunFragment(dun: DunEntity) {
-    val dunFragment = InvestigationViewFragment.forDun(DunPresenter(this), dun.id)
+    val dunFragment = DunFragment.forDun(DunPresenter(this), dun)
     fragManager
         .beginTransaction()
         .addToBackStack("dun")
@@ -179,14 +175,15 @@ open class HomeView : BaseView(), NavigationView.OnNavigationItemSelectedListene
   }
 
   override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+    val dun = DunEntity()
     when (item?.itemId) {
       R.id.menu_main_item_add ->
       {
-        fragmentTo(DunAddFragment.newInstance(DunPresenter(this), userName))
+        fragmentTo(DunFragment.newInstance(DunPresenter(this), dun, "", ""))
       }
       R.id.menu_main_item_map ->
       {
-        fragmentTo(LocationEditFragment.newInstance(LocationEditPresenter(this)))
+        fragmentTo(LocationFragment.newInstance(LocationPresenter(this)))
       }
       R.id.menu_main_item_logout ->
       {

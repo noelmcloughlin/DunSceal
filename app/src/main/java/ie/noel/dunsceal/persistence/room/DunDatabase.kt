@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package ie.noel.dunsceal.persistence.db.room
+package ie.noel.dunsceal.persistence.room
 
 import android.content.Context
 import androidx.annotation.VisibleForTesting
@@ -29,9 +29,9 @@ import ie.noel.dunsceal.main.AppExecutors
 import ie.noel.dunsceal.models.entity.DunEntity
 import ie.noel.dunsceal.models.entity.DunFtsEntity
 import ie.noel.dunsceal.models.entity.InvestigationEntity
-import ie.noel.dunsceal.persistence.db.dao.DunDao
-import ie.noel.dunsceal.persistence.db.dao.InvestigationDao
-import ie.noel.dunsceal.persistence.db.mock.MockDataGenerator
+import ie.noel.dunsceal.persistence.dao.DunDao
+import ie.noel.dunsceal.persistence.dao.InvestigationDao
+import ie.noel.dunsceal.persistence.mock.MockDataGenerator
 
 
 @Database(entities = [DunEntity::class, DunFtsEntity::class, InvestigationEntity::class], version = 2)

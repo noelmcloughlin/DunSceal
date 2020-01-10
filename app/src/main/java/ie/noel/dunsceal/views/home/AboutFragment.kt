@@ -1,4 +1,4 @@
-package ie.noel.dunsceal.views.about
+package ie.noel.dunsceal.views.home
 
 import android.os.Bundle
 import android.view.*
@@ -6,14 +6,14 @@ import androidx.fragment.app.Fragment
 import ie.noel.dunsceal.R
 
 
-class AboutUsFragment : Fragment() {
+class AboutFragment : Fragment() {
 
   companion object {
     const val TAG = "AboutUsFragment"
 
     @JvmStatic
     fun newInstance() =
-        AboutUsFragment().apply {
+        AboutFragment().apply {
           arguments = Bundle().apply { }
         }
   }
@@ -25,7 +25,7 @@ class AboutUsFragment : Fragment() {
   ): View? {
     // Inflate the layout for this fragment
     activity?.title = getString(R.string.about_us_title)
-    return inflater.inflate(R.layout.fragment_about_us, container, false)
+    return inflater.inflate(R.layout.fragment_about, container, false)
   }
 
   // HIDE THE OPTIONS MENU

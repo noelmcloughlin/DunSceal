@@ -1,10 +1,10 @@
-package ie.noel.dunsceal.persistence.db
+package ie.noel.dunsceal.persistence
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import ie.noel.dunsceal.models.entity.DunEntity
 import ie.noel.dunsceal.models.entity.InvestigationEntity
-import ie.noel.dunsceal.persistence.db.room.DunDatabase
+import ie.noel.dunsceal.persistence.room.DunDatabase
 
 /**
  * Repository handling the work with duns and investigations.
@@ -14,7 +14,7 @@ class LiveDataRepository private constructor(private val mDatabase: DunDatabase)
   /**
    * Get the list of duns from the database and get notified when the data changes.
    */
-  val duns: LiveData<List<DunEntity?>?>
+  val liveduns: LiveData<List<DunEntity?>?>
     get() = mObservableDuns
 
   fun ldLoadDun(dunId: Long): LiveData<DunEntity?>? {
@@ -31,7 +31,7 @@ class LiveDataRepository private constructor(private val mDatabase: DunDatabase)
     private var sInstance: LiveDataRepository? = null
     fun getInstance(database: DunDatabase): LiveDataRepository? {
       if (sInstance == null) {
-        synchronized(LiveDataRepository::class.java) {
+        synchronized(DunDatabase::class.java) {
           if (sInstance == null) {
             sInstance = LiveDataRepository(database)
           }

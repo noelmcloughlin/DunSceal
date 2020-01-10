@@ -21,9 +21,9 @@ import androidx.room.Room
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.runner.AndroidJUnit4
 import ie.noel.dunsceal.persistence.db.TestData.INVESTIGATIONS
-import ie.noel.dunsceal.persistence.db.dao.DunDao
-import ie.noel.dunsceal.persistence.db.dao.InvestigationDao
-import ie.noel.dunsceal.persistence.db.mock.MockDatabase
+import ie.noel.dunsceal.persistence.dao.DunDao
+import ie.noel.dunsceal.persistence.dao.InvestigationDao
+import ie.noel.dunsceal.persistence.mock.MockDatabase
 import junit.framework.TestCase.fail
 import org.junit.After
 import org.junit.Before

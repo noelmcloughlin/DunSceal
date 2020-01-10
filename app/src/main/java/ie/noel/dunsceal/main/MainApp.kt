@@ -22,9 +22,9 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.storage.StorageReference
 import ie.noel.dunsceal.models.DunStore
-import ie.noel.dunsceal.persistence.db.DunFireStore
-import ie.noel.dunsceal.persistence.db.LiveDataRepository
-import ie.noel.dunsceal.persistence.db.room.DunDatabase
+import ie.noel.dunsceal.persistence.DunFireStore
+import ie.noel.dunsceal.persistence.LiveDataRepository
+import ie.noel.dunsceal.persistence.room.DunDatabase
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.info
 

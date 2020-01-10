@@ -18,8 +18,8 @@ package ie.noel.dunsceal.persistence.db
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.room.Room
 import androidx.test.core.app.ApplicationProvider
-import ie.noel.dunsceal.persistence.db.dao.DunDao
-import ie.noel.dunsceal.persistence.db.mock.MockDatabase
+import ie.noel.dunsceal.persistence.dao.DunDao
+import ie.noel.dunsceal.persistence.mock.MockDatabase
 import org.junit.*
 
 /**

@@ -1,7 +1,8 @@
-package ie.noel.dunsceal.persistence.db
+package ie.noel.dunsceal.persistence
 
 import android.content.Context
 import android.graphics.Bitmap
+import androidx.lifecycle.LiveData
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import com.google.firebase.storage.FirebaseStorage
@@ -20,6 +21,7 @@ class DunFireStore(private val context: Context) : DunStore, AnkoLogger {
   lateinit var db: DatabaseReference
   private lateinit var st: StorageReference
   val duns = ArrayList<DunEntity>()
+  lateinit var liveduns: LiveData<List<DunEntity?>?>
   val investigations = ArrayList<InvestigationEntity>()
 
   /**
@@ -94,6 +96,18 @@ class DunFireStore(private val context: Context) : DunStore, AnkoLogger {
     }
   }
 
+  fun fetchInvestigations(investigationsReady: () -> Unit) {
+    val investigationValueEventListener = object : ValueEventListener {
+      override fun onCancelled(dataSnapshot: DatabaseError) {
+      }
+
+      override fun onDataChange(dataSnapshot: DataSnapshot) {
+        dataSnapshot.children.mapNotNullTo(investigations) { it.getValue<InvestigationEntity>(InvestigationEntity::class.java) }
+        investigationsReady()
+      }
+    }
+  }
+
   fun fetchDuns(dunsReady: () -> Unit) {
     val dunValueEventListener = object : ValueEventListener {
       override fun onCancelled(dataSnapshot: DatabaseError) {
@@ -104,26 +118,15 @@ class DunFireStore(private val context: Context) : DunStore, AnkoLogger {
         dunsReady()
       }
     }
-
-    fun fetchInvestigations(investigationsReady: () -> Unit) {
-      val investigationValueEventListener = object : ValueEventListener {
-        override fun onCancelled(dataSnapshot: DatabaseError) {
-        }
-
-        override fun onDataChange(dataSnapshot: DataSnapshot) {
-          dataSnapshot.children.mapNotNullTo(investigations) { it.getValue<InvestigationEntity>(InvestigationEntity::class.java) }
-          investigationsReady()
-        }
-      }
-      userId = FirebaseAuth.getInstance().currentUser!!.uid
-      db = FirebaseDatabase.getInstance().reference
-      st = FirebaseStorage.getInstance().reference
-      db.child("users").child(userId).child("duns")
-          .addListenerForSingleValueEvent(dunValueEventListener)
-      db.child("users").child(userId).child("investigations")
-          .addListenerForSingleValueEvent(investigationValueEventListener)
-      duns.clear()
-      investigations.clear()
-    }
+    fetchInvestigations{}
+    userId = FirebaseAuth.getInstance().currentUser!!.uid
+    db = FirebaseDatabase.getInstance().reference
+    st = FirebaseStorage.getInstance().reference
+    db.child("users").child(userId).child("duns")
+        .addListenerForSingleValueEvent(dunValueEventListener)
+    db.child("users").child(userId).child("investigations")
+        .addListenerForSingleValueEvent(dunValueEventListener)
+    duns.clear()
+    investigations.clear()
   }
 }

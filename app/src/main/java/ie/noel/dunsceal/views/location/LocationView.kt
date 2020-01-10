@@ -11,29 +11,32 @@ import ie.noel.dunsceal.views.dun.DunView
 import kotlinx.android.synthetic.main.appbar_fab_home.*
 import org.jetbrains.anko.AnkoLogger
 
-open class LocationEditView : BaseView(), AnkoLogger {
+open class LocationView : BaseView(), AnkoLogger {
 
-  lateinit var presenter: LocationEditPresenter
+  lateinit var presenter: LocationPresenter
   var location = LocationEntity()
 
   companion object {
-    const val TAG = "LocationEditView"
+    const val TAG = "LocationView"
   }
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     setContentView(R.layout.nav_drawer_home)
-    super.init(toolbar, true, TAG)
+    if (toolbar == null) {
+      super.init(toolbar, true, TAG)
+    }
 
-    presenter = initPresenter(LocationEditPresenter(this)) as LocationEditPresenter
+    presenter = initPresenter(LocationPresenter(this)) as LocationPresenter
 
     // Add fragment if this is first creation
     if (savedInstanceState == null) {
-      val fragment : BaseFragment = LocationEditFragment.newInstance(presenter)
+      val fragment : BaseFragment = LocationFragment.newInstance(presenter)
       fragManager.beginTransaction()
           .addToBackStack(DunView.TAG)
-          .replace(R.id.home, fragment, LocationEditFragment.TAG).commit()
+          .replace(R.id.home, fragment, LocationFragment.TAG).commit()
     }
+
   }
 
   override fun onCreateOptionsMenu(menu: Menu): Boolean {

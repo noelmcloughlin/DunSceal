@@ -10,12 +10,14 @@ import ie.noel.dunsceal.models.entity.LocationEntity
 import ie.noel.dunsceal.views.BaseView
 import ie.noel.dunsceal.views.home.HomePresenter
 
-open class LocationEditPresenter(view: BaseView) : HomePresenter(view) {
+open class LocationPresenter(view: BaseView) : HomePresenter(view) {
 
   var location = LocationEntity()
 
   init {
-    location = view.intent.extras?.getParcelable("location")!!
+    if (view.intent.extras != null) {
+      location = view.intent.extras?.getParcelable("location")!!
+    }
   }
 
   fun doConfigureMapLocation(map: GoogleMap) {

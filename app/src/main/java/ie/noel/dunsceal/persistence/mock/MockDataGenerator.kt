@@ -13,11 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package ie.noel.dunsceal.persistence.db.mock
+package ie.noel.dunsceal.persistence.mock
 
 import ie.noel.dunsceal.models.entity.DunEntity
 import ie.noel.dunsceal.models.entity.InvestigationEntity
-import ie.noel.dunsceal.models.entity.LocationEntity
 import java.util.*
 import java.util.concurrent.TimeUnit
 

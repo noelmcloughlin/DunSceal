@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package ie.noel.dunsceal.persistence.db.dao
+package ie.noel.dunsceal.persistence.dao
 
 import androidx.lifecycle.LiveData
 import androidx.room.*

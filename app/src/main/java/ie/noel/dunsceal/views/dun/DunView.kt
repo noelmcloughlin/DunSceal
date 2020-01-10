@@ -13,7 +13,7 @@ import ie.noel.dunsceal.models.entity.LocationEntity
 import ie.noel.dunsceal.views.BaseFragment
 import ie.noel.dunsceal.views.BaseView
 import kotlinx.android.synthetic.main.appbar_fab_home.*
-import kotlinx.android.synthetic.main.fragment_dun_add.*
+import kotlinx.android.synthetic.main.fragment_dun.*
 import org.jetbrains.anko.toast
 
 open class DunView : BaseView(), AnkoLogger {
@@ -28,15 +28,17 @@ open class DunView : BaseView(), AnkoLogger {
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     setContentView(R.layout.nav_drawer_home)
-    super.init(toolbar, true, TAG)
+    if (toolbar == null) {
+      super.init(toolbar, true, TAG)
+    }
 
     presenter = initPresenter(DunPresenter(this)) as DunPresenter
 
     // Add fragment if this is first creation
     if (savedInstanceState == null) {
-      val fragment : BaseFragment = InvestigationViewFragment.forDun(presenter, dun.id)
+      val fragment : BaseFragment = DunFragment.forDun(presenter, dun)
       fragManager.beginTransaction()
-          .replace(R.id.home, fragment, InvestigationViewFragment.TAG).commit()
+          .replace(R.id.home, fragment, TAG).commit()
     }
     presenter.loadDuns()
   }
@@ -119,7 +121,7 @@ open class DunView : BaseView(), AnkoLogger {
 
   /** Shows dun detail fragment  */
   fun showDunFragment(dun: DunEntity) {
-    val dunFragment = InvestigationViewFragment.forDun(presenter, dun.id)
+    val dunFragment = DunFragment.forDun(presenter, dun)
     fragManager
         .beginTransaction()
         .addToBackStack("dun")

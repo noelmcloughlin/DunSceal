@@ -27,7 +27,7 @@ import androidx.test.rule.ActivityTestRule;
 import ie.noel.dunsceal.main.AppExecutors;
 import ie.noel.dunsceal.persistence.EspressoTestUtil;
 import ie.noel.dunsceal.R;
-import ie.noel.dunsceal.persistence.db.mock.MockDatabase;
+import ie.noel.dunsceal.persistence.mock.MockDatabase;
 import ie.noel.dunsceal.views.dunlist.DunListView;
 
 import org.hamcrest.CoreMatchers;

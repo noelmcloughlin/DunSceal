@@ -7,20 +7,18 @@ import androidx.databinding.DataBindingUtil
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.Marker
 import ie.noel.dunsceal.R
-import ie.noel.dunsceal.databinding.FragmentDunAddBinding
 import ie.noel.dunsceal.models.entity.LocationEntity
 import ie.noel.dunsceal.utils.Loader
 import ie.noel.dunsceal.views.BaseFragment
 import ie.noel.dunsceal.views.home.HomeView
-import kotlinx.android.synthetic.main.fragment_dun_add.dunLatitude
-import kotlinx.android.synthetic.main.fragment_dun_add.dunLongitude
+import kotlinx.android.synthetic.main.fragment_location.*
 import org.jetbrains.anko.AnkoLogger
 
-class LocationEditFragment(val presenter: LocationEditPresenter)
+class LocationFragment(val presenter: LocationPresenter)
   : BaseFragment(), AnkoLogger, GoogleMap.OnMarkerDragListener, GoogleMap.OnMarkerClickListener {
 
   var location = LocationEntity()
-  private var mBinding: FragmentDunAddBinding? = null
+  private var mBinding: FragmentLocationBinding? = null
 
   companion object {
     private const val KEY_LOCATION_ID = "location_id"
@@ -28,16 +26,16 @@ class LocationEditFragment(val presenter: LocationEditPresenter)
 
     /** Creates blank location dun fragment  */
     @JvmStatic
-    fun newInstance(presenter: LocationEditPresenter): LocationEditFragment {
-      return LocationEditFragment(presenter).apply {
+    fun newInstance(presenter: LocationPresenter): LocationFragment {
+      return LocationFragment(presenter).apply {
         arguments = Bundle().apply {}
       }
     }
 
     /** Creates location fragment for specific location ID  */
     @JvmStatic
-    fun forLocation(presenter: LocationEditPresenter, locationId: Long): LocationEditFragment {
-      val fragment = LocationEditFragment(presenter)
+    fun forLocation(presenter: LocationPresenter, locationId: Long): LocationFragment {
+      val fragment = LocationFragment(presenter)
       val args = Bundle()
       args.putInt(KEY_LOCATION_ID, locationId.toInt())
       fragment.arguments = args
@@ -65,9 +63,9 @@ class LocationEditFragment(val presenter: LocationEditPresenter)
     activity?.title = getString(R.string.action_location_edit)
 
     // Setup the map view
-    if (mBinding!!.mapView != null) {
-      mBinding!!.mapView.onCreate(savedInstanceState)
-      mBinding!!.mapView.getMapAsync {
+    if (mBinding!!.mapViewLocationLocation != null) {
+      mBinding!!.mapViewLocation.onCreate(savedInstanceState)
+      mBinding!!.mapViewLocation.getMapAsync {
         it.setOnMarkerDragListener(this)
         it.setOnMarkerClickListener(this)
         presenter.doConfigureMapLocation(it)
@@ -95,31 +93,31 @@ class LocationEditFragment(val presenter: LocationEditPresenter)
 
   override fun onDestroy() {
     super.onDestroy()
-    mBinding!!.mapView.onDestroy()
+    mBinding!!.mapViewLocation.onDestroy()
   }
 
   override fun onLowMemory() {
     super.onLowMemory()
-    mBinding!!.mapView.onLowMemory()
+    mBinding!!.mapViewLocation.onLowMemory()
   }
 
   override fun onPause() {
     super.onPause()
-    mBinding!!.mapView.onPause()
+    mBinding!!.mapViewLocation.onPause()
   }
 
   override fun onResume() {
     super.onResume()
-    mBinding!!.mapView.onResume()
+    mBinding!!.mapViewLocation.onResume()
   }
 
-  fun onBackPressed() {
+  /*fun onBackPressed() {
     (activity as HomeView).fragManager.popBackStackImmediate()
-  }
+  }*/
 
   override fun onSaveInstanceState(outState: Bundle) {
     super.onSaveInstanceState(outState)
-    mBinding!!.mapView.onSaveInstanceState(outState)
+    mBinding!!.mapViewLocation.onSaveInstanceState(outState)
   }
 
   // OPTIONS MENU

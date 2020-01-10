@@ -2,7 +2,7 @@ package ie.noel.dunsceal.models.entity
 
 import androidx.room.*
 import ie.noel.dunsceal.models.Investigation
-import ie.noel.dunsceal.persistence.db.room.DunTypeConverters
+import ie.noel.dunsceal.persistence.room.DunTypeConverters
 import java.util.*
 
 @Entity(tableName = "investigations", foreignKeys = [ForeignKey(entity = DunEntity::class, parentColumns = ["id"], childColumns = ["dunId"], onDelete = ForeignKey.CASCADE)], indices = [Index(value = ["dunId"])])
