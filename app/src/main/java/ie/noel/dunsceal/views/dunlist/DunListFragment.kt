@@ -128,7 +128,7 @@ class DunListFragment(val presenter: HomePresenter) : BaseFragment(), AnkoLogger
       root.swipeRefresh.isRefreshing = false
   }
 
-  private fun getAllDuns(userId: String?) {
+  private fun getAllDuns(userId: String? = presenter.app.userId) {
     loader = Loader.createLoader(activity!!)
     Loader.showLoader(loader, "Downloading Duns from Firebase")
     val duns = ArrayList<DunEntity>()
@@ -162,11 +162,11 @@ class DunListFragment(val presenter: HomePresenter) : BaseFragment(), AnkoLogger
   }
 
   fun onClick(dun: DunEntity) {
-    presenter.doEdit(dun)
+    presenter.doEdit(dun, presenter.app.userId)
   }
 
 
-  fun deleteUserDun(userId: String, uid: String?) {
+  fun deleteUserDun(userId: String = presenter.app.userId, uid: String?) {
     presenter.app.db.child("users").child(userId).child("duns").child(userId).child(uid!!)
         .addListenerForSingleValueEvent(
             object : ValueEventListener {

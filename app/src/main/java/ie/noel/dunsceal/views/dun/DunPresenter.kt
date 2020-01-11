@@ -10,6 +10,7 @@ import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
+import ie.noel.dunsceal.R
 import ie.noel.dunsceal.models.entity.DunEntity
 import ie.noel.dunsceal.models.entity.LocationEntity
 import org.jetbrains.anko.doAsync
@@ -21,6 +22,8 @@ import ie.noel.dunsceal.utils.Image.showImagePicker
 import ie.noel.dunsceal.views.*
 import ie.noel.dunsceal.views.dunlist.DunListView
 import ie.noel.dunsceal.views.home.HomePresenter
+import ie.noel.dunsceal.views.location.LocationFragment
+import ie.noel.dunsceal.views.location.LocationPresenter
 
 open class DunPresenter(view: BaseView) : HomePresenter(view) {
 
@@ -136,12 +139,18 @@ open class DunPresenter(view: BaseView) : HomePresenter(view) {
     }
 
     fun doSetLocation() {
-        view?.navigateTo(
+        view?.supportFragmentManager!!.beginTransaction()
+            .replace(R.id.content_home_frame,
+                LocationFragment.newInstance(LocationPresenter(view!!))
+            )
+            .addToBackStack(null)
+            .commit()
+       /* view?.navigateTo(
             VIEW.LOCATION,
             LOCATION_REQUEST,
             "location",
             LocationEntity(dun.location.latitude, dun.location.longitude, dun.location.zoom)
-        )
+        )*/
     }
 
     override fun doActivityResult(requestCode: Int, resultCode: Int, data: Intent) {

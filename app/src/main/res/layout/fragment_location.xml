@@ -1,48 +1,66 @@
-
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/title_constraint"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:layout_editor_absoluteY="81dp"
-    tools:context="ie.noel.dunsceal.views.location.LocationView">
+    android:theme="@style/AppTheme.NoActionBar"
+    tools:context=".views.location.LocationView">
 
-    <TextView
-        android:id="@+id/dunLatitude"
-        android:layout_width="wrap_content"
+  <data>
+    <variable
+        name="isLoading"
+        type="boolean" />
+    <variable name="dun"
+        type="ie.noel.dunsceal.models.entity.DunEntity"/>
+  </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/title_constraint"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="96dp"
-        android:layout_marginTop="68dp"
-        android:text="00.000000"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        tools:layout_editor_absoluteY="81dp">
 
-    <TextView
-        android:id="@+id/dunLongitude"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="106dp"
-        android:layout_marginTop="68dp"
-        android:layout_marginEnd="113dp"
-        android:text="00.000000"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.47"
-        app:layout_constraintStart_toEndOf="@+id/dunLatitude"
-        app:layout_constraintTop_toTopOf="parent" />
+      <TextView
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          android:id="@+id/loading_comments_tv"
+          android:text="@string/loading_map"
+          app:visibleGone="@{isLoading}"/>
 
-    <com.google.android.gms.maps.MapView
-        android:id="@+id/mapViewLocation"
-        android:layout_width="382dp"
-        android:layout_height="533dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="4dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="16dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dunLatitude"
-        app:layout_constraintVertical_bias="1.0" />
-  </androidx.constraintlayout.widget.ConstraintLayout>
+      <TextView
+          android:id="@+id/dunLatitude"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginStart="96dp"
+          android:layout_marginTop="68dp"
+          android:text="@{Double.toString(dun.location.latitude)}"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toTopOf="parent" />
+
+      <TextView
+          android:id="@+id/dunLongitude"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginStart="106dp"
+          android:layout_marginTop="68dp"
+          android:layout_marginEnd="113dp"
+          android:text="@{Double.toString(dun.location.longitude)}"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintHorizontal_bias="0.47"
+          app:layout_constraintStart_toEndOf="@+id/dunLatitude"
+          app:layout_constraintTop_toTopOf="parent" />
+
+      <com.google.android.gms.maps.MapView
+          android:id="@+id/mapViewLocation"
+          android:layout_width="382dp"
+          android:layout_height="533dp"
+          android:layout_marginStart="16dp"
+          android:layout_marginTop="4dp"
+          android:layout_marginEnd="16dp"
+          android:layout_marginBottom="16dp"
+          app:layout_constraintBottom_toBottomOf="parent"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toBottomOf="@+id/dunLatitude"
+          app:layout_constraintVertical_bias="1.0" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

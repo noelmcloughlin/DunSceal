@@ -18,6 +18,10 @@ import ie.noel.dunsceal.models.UserPhoto
 import ie.noel.dunsceal.models.entity.DunEntity
 import ie.noel.dunsceal.utils.Image.convertImageToBytes
 import ie.noel.dunsceal.views.BaseView
+import ie.noel.dunsceal.views.dun.DunFragment
+import ie.noel.dunsceal.views.dun.DunPresenter
+import ie.noel.dunsceal.views.location.LocationFragment
+import ie.noel.dunsceal.views.location.LocationPresenter
 import ie.noel.dunsceal.views.login.LoginPresenter
 import jp.wasabeef.picasso.transformations.CropCircleTransformation
 import kotlinx.android.synthetic.main.nav_drawer_home.*
@@ -170,11 +174,23 @@ open class HomePresenter(view: BaseView) : LoginPresenter(view) {
     fun doAdd() {
     }
 
-    fun doEdit(dun: DunEntity) {
+    fun doEdit(dun: DunEntity, userId: String) {
+        view?.supportFragmentManager!!.beginTransaction()
+            .replace(R.id.content_home_frame,
+                DunFragment.newInstance(DunPresenter(view!!), dun, "dun_edit")
+            )
+            .addToBackStack(null)
+            .commit()
         //view?.navigateTo(VIEW.DUN, 0, "dun_edit", dun)
     }
 
     fun doShowMap() {
+        view?.supportFragmentManager!!.beginTransaction()
+            .replace(R.id.content_home_frame,
+                LocationFragment.newInstance(LocationPresenter(view!!))
+            )
+            .addToBackStack(null)
+            .commit()
         //view?.navigateTo(VIEW.MAPS)
     }
 

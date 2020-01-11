@@ -40,7 +40,7 @@ open class DunListView : BaseView(), AnkoLogger, DunListener {
 } */
 
   override fun onDunClick(dun: DunEntity) {
-    presenter.doEdit(dun)
+    presenter.doEdit(dun, presenter.app.userId)
   }
 
   override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

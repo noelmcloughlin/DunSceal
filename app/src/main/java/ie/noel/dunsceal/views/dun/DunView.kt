@@ -96,6 +96,17 @@ open class DunView : BaseView(), AnkoLogger {
     mapView.onSaveInstanceState(outState)
   }
 
+  /** Shows dun detail fragment  */
+  // TODO use this method
+  fun showDunFragment(dun: DunEntity) {
+    val dunFragment = DunFragment.forDun(presenter, dun)
+    fragManager
+        .beginTransaction()
+        .addToBackStack("dun")
+        .replace(R.id.content_home_frame,
+            dunFragment, null).commit()
+  }
+
   // Options Menu
 
   override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -118,16 +129,4 @@ open class DunView : BaseView(), AnkoLogger {
     }
     return super.onOptionsItemSelected(item)
   }
-
-  /** Shows dun detail fragment  */
-  fun showDunFragment(dun: DunEntity) {
-    val dunFragment = DunFragment.forDun(presenter, dun)
-    fragManager
-        .beginTransaction()
-        .addToBackStack("dun")
-        .replace(R.id.content_home_frame,
-            dunFragment, null).commit()
-  }
 }
-
-

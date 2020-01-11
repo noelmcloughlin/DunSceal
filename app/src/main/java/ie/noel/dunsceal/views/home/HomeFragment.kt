@@ -72,7 +72,6 @@ open class HomeFragment(val presenter: HomePresenter, private val user: String)
 
   override fun onPause() {
     super.onPause()
-    val userId = presenter.app.auth.uid
     /* if (presenter.app.auth.uid != null)
     presenter.app.db.child("users").child(userId!!).child("duns")
             .child(presenter.app.auth.currentUser!!.uid)

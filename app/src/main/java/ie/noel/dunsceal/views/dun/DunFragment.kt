@@ -1,5 +1,6 @@
 package ie.noel.dunsceal.views.dun
 
+import android.app.DatePickerDialog
 import android.content.Intent
 import android.os.Bundle
 import android.view.*
@@ -19,24 +20,22 @@ import ie.noel.dunsceal.views.BaseFragment
 import ie.noel.dunsceal.views.BaseView
 import ie.noel.dunsceal.views.dunlist.DunListFragment
 import ie.noel.dunsceal.views.home.HomeView
-import kotlinx.android.synthetic.main.fragment_dun.chooseImage
-import kotlinx.android.synthetic.main.fragment_dun.description
-import kotlinx.android.synthetic.main.fragment_dun.dunImage
-import kotlinx.android.synthetic.main.fragment_dun.dunLatitude
-import kotlinx.android.synthetic.main.fragment_dun.dunLongitude
-import kotlinx.android.synthetic.main.fragment_dun.name
+import kotlinx.android.synthetic.main.fragment_dun.*
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.info
+import java.text.SimpleDateFormat
+import java.util.*
 
 class DunFragment(val presenter: DunPresenter,
                   private val dun: DunEntity,
-                  private val mode: String,
-                  private val user: String)
+                  private val mode: String)
   : BaseFragment(), AnkoLogger {
 
   private var mBinding: FragmentDunBinding? = null
   private var mInvestigationAdapter: InvestigationAdapter? = null
   private var editDun: DunEntity? = null
+  val cal = Calendar.getInstance()
+  val sdf = SimpleDateFormat("MM/dd/yyyy", Locale.US)
 
   companion object {
     const val TAG = "DunViewFragment"
@@ -44,7 +43,7 @@ class DunFragment(val presenter: DunPresenter,
 
     /** Creates dun fragment for specific dun ID  */
     fun forDun(presenter: DunPresenter, dun: DunEntity): DunFragment {
-      val fragment = DunFragment(presenter, dun, "", "")
+      val fragment = DunFragment(presenter, dun, "")
       val args = Bundle().also {
         it.putInt(KEY_DUN_ID, dun.id.toInt())
       }
@@ -54,8 +53,8 @@ class DunFragment(val presenter: DunPresenter,
 
     /** Creates empty dun fragment  */
     @JvmStatic
-    fun newInstance(presenter: DunPresenter, dun: DunEntity, mode: String, user: String): DunFragment {
-      return DunFragment(presenter, dun, mode, user).apply {
+    fun newInstance(presenter: DunPresenter, dun: DunEntity, mode: String): DunFragment {
+      return DunFragment(presenter, dun, mode).apply {
         arguments = Bundle().apply {
           putParcelable(mode, dun)
         }
@@ -66,7 +65,7 @@ class DunFragment(val presenter: DunPresenter,
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     arguments?.let {
-      editDun = it.getParcelable("editdun")
+      editDun = it.getParcelable("edit_dun")
     }
     // We need new options menu
     setHasOptionsMenu(true)
@@ -97,6 +96,30 @@ class DunFragment(val presenter: DunPresenter,
       }
     }
 
+    // and date picker
+    mBinding!!.buttonDatePicker.text = this.button_date_picker?.text.toString()
+
+    // create an OnDateSetListener
+    val dateSetListener =
+        DatePickerDialog.OnDateSetListener { _, year, monthOfYear, dayOfMonth ->
+          cal.set(Calendar.YEAR, year)
+          cal.set(Calendar.MONTH, monthOfYear)
+          cal.set(Calendar.DAY_OF_MONTH, dayOfMonth)
+          mBinding!!.buttonDatePicker.text = sdf.format(cal.time)
+        }
+
+      // onclick, show DatePickerDialog for OnDateSetListener
+    mBinding!!.buttonDatePicker.setOnClickListener {
+      DatePickerDialog(
+          context,
+          dateSetListener,
+          // set DatePickerDialog to point to today's date when it loads up
+          cal.get(Calendar.YEAR),
+          cal.get(Calendar.MONTH),
+          cal.get(Calendar.DAY_OF_MONTH)
+      ).show()
+    }
+
     // setup the image chooser
     if (mBinding!!.chooseImage != null) {
       mBinding!!.chooseImage.setOnClickListener { presenter.doSelectImage() }
@@ -122,8 +145,8 @@ class DunFragment(val presenter: DunPresenter,
     this.showLocation(dun.location)
   }
 
-  private fun updateUserDun(userId: String, uid: String?, dun: DunEntity) {
-    presenter.app.db.child("users").child(userId).child("duns").child(userId).child(uid!!)
+  private fun updateUserDun(uid: String?, dun: DunEntity) {
+    presenter.app.db.child("users").child(presenter.app.userId).child("duns").child(presenter.app.userId).child(uid!!)
         .addListenerForSingleValueEvent(
             object : ValueEventListener {
               override fun onDataChange(snapshot: DataSnapshot) {
@@ -143,8 +166,8 @@ class DunFragment(val presenter: DunPresenter,
             })
   }
 
-  private fun updateDun(uid: String?, dun: DunEntity) {
-    presenter.app.db.child("duns").child(uid!!)
+  private fun updateDun(dun: DunEntity) {
+    presenter.app.db.child("duns").child(presenter.app.userId)
         .addListenerForSingleValueEvent(
             object : ValueEventListener {
               override fun onDataChange(snapshot: DataSnapshot) {
@@ -201,6 +224,7 @@ class DunFragment(val presenter: DunPresenter,
   }
 
   /** Shows dun detail fragment  */
+  // TODO utilise this method of showing a fragment
   fun showDunFragment(dun: DunEntity) {
     val dunFragment = forDun(presenter, dun)
     (activity as BaseView).fragManager
@@ -209,6 +233,7 @@ class DunFragment(val presenter: DunPresenter,
         .replace(R.id.content_home_frame,
             dunFragment, null).commit()
   }
+
 
   // OPTIONS MENU
   override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {

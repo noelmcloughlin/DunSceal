@@ -26,9 +26,9 @@ import java.util.concurrent.TimeUnit
 
 object MockDataGenerator {
   private val FIRST = arrayOf(
-      "Dun") //, "Killy", "Knock", "Bally", "Derry")
+      "Dun", "Killy", "Knock", "Bally", "Derry")
   private val SECOND = arrayOf(
-      "More") //, "Farnham", "More", "Hoo", "Cairn")
+      "More", "Farnham", "More", "Hoo", "Cairn")
   private val DESCRIPTION = arrayOf(
       "is a very large dun", "is recommended by Stan S. Stanman",
       "is the best  dun in Ireland", "is \uD83D\uDCAF", "is ❤️", "is fine")
@@ -38,7 +38,7 @@ object MockDataGenerator {
   private const val IMAGE = "https://firebasestorage.googleapis.com/v0/b/dunsceal.appspot.com/o/hillfort-default.bmp?alt=media&token=d9c756f3-0cc9-4c5a-b6dc-9f13bd1d53d9"
   //private const val IMAGE = ""
 
-  private val LATITUDES = arrayOf(52.245696, 52.245696, 52.245696, 52.245696, 52.245696, 52.245696)
+  private val LATITUDES = arrayOf(52.245696, 51.245696, 50.245696, 49.245696, 48.245696, 47.245696)
   private val LONGITUDES = arrayOf(-7.139102, -7.139102, -7.139102, -7.139102, -7.139102, -7.139102)
 
   fun generateDuns(): List<DunEntity> {

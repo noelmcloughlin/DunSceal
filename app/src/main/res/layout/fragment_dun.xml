@@ -6,14 +6,13 @@
     tools:context=".views.dun.DunFragment">
 
   <data>
-    <import type="android.view.View"/>
     <variable
         name="isLoading"
         type="boolean" />
-
-    <variable
-        name="dunViewModel"
-        type="ie.noel.dunsceal.persistence.viewmodel.DunViewModel"/>
+    <variable name="dun"
+        type="ie.noel.dunsceal.models.entity.DunEntity"/>
+    <variable name="callback"
+        type="ie.noel.dunsceal.views.dun.DunClickCallback"/>
   </data>
 
   <ScrollView
@@ -23,7 +22,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="0dp"
+        android:layout_marginTop="16dp"
         android:layout_marginBottom="0dp">
 
       <EditText
@@ -34,6 +33,7 @@
           android:layout_marginTop="16dp"
           android:autofillHints=""
           android:hint="@string/hint_name"
+          android:text="@{dun.name.toString()}"
           android:inputType="text"
           android:maxLength="30"
           android:maxLines="1"
@@ -41,7 +41,7 @@
           android:textColor="@color/colorPrimaryDark"
           android:textSize="14sp"
           app:layout_constraintStart_toStartOf="parent"
-          app:layout_constraintTop_toBottomOf="@+id/appBarLayout"/>
+          app:layout_constraintTop_toTopOf="parent"/>
 
       <EditText
           android:id="@+id/description"
@@ -54,6 +54,7 @@
           android:padding="8dp"
           android:textColor="@color/colorPrimaryDark"
           android:textSize="14sp"
+          android:text="@{dun.description.toString()}"
           app:layout_constraintEnd_toEndOf="@+id/name"
           app:layout_constraintHorizontal_bias="0.0"
           app:layout_constraintStart_toStartOf="@+id/name"
@@ -82,13 +83,14 @@
           app:layout_constraintBottom_toTopOf="@+id/mapView"
           app:layout_constraintStart_toStartOf="@+id/ratingBar"
           app:layout_constraintTop_toBottomOf="@+id/ratingBar"
+          android:src="@{dun.image.toString()}"
           app:srcCompat="@mipmap/img_hillfort_default_foreground" />
 
       <TextView
           android:id="@+id/dunLatitude"
           android:layout_width="116dp"
           android:layout_height="24dp"
-          android:text="00.000000"
+          android:text="@{Double.toString(dun.location.latitude)}"
           android:textAlignment="textEnd"
           app:layout_constraintBottom_toTopOf="@+id/mapView"
           app:layout_constraintEnd_toStartOf="@+id/dunLongitude"
@@ -99,7 +101,7 @@
           android:id="@+id/dunLongitude"
           android:layout_width="93dp"
           android:layout_height="24dp"
-          android:text="00.000000"
+          android:text="@{Double.toString(dun.location.longitude)}"
           android:textAlignment="textEnd"
           app:layout_constraintBottom_toTopOf="@+id/mapView"
           app:layout_constraintEnd_toEndOf="@+id/mapView"
@@ -123,7 +125,7 @@
           android:layout_width="163dp"
           android:layout_height="49dp"
           android:layout_marginTop="16dp"
-          android:text="Visited on date"
+          android:text="@{String.valueOf(dun.visited)}"
           app:layout_constraintStart_toStartOf="@+id/description"
           app:layout_constraintTop_toBottomOf="@+id/description" />
 
@@ -132,7 +134,7 @@
           android:layout_width="190dp"
           android:layout_height="50dp"
           android:background="@color/green_300"
-          android:text="@string/default_date"
+          android:text="@{dun.visitDate.toString()}"
           app:layout_constraintBottom_toBottomOf="@+id/checkBox"
           app:layout_constraintEnd_toEndOf="@+id/description"
           app:layout_constraintTop_toTopOf="@+id/checkBox" />
@@ -142,6 +144,7 @@
           android:layout_width="372dp"
           android:layout_height="50dp"
           android:layout_marginTop="16dp"
+          android:text=""
           app:layout_constraintEnd_toEndOf="@+id/description"
           app:layout_constraintHorizontal_bias="0.0"
           app:layout_constraintStart_toStartOf="@+id/description"
@@ -153,7 +156,7 @@
           android:layout_height="18dp"
           android:layout_marginTop="28dp"
           android:layout_marginBottom="8dp"
-          android:text="Investigations"
+          android:text="@string/investigations"
           android:textAlignment="center"
           app:layout_constraintBottom_toTopOf="@+id/investigations_list_wrapper"
           app:layout_constraintEnd_toEndOf="@+id/mapView"

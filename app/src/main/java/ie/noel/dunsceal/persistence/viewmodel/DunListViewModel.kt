@@ -41,6 +41,8 @@ open class DunListViewModel(application: Application) : AndroidViewModel(applica
 
   init {
     // set by default null, until we get data from the database.
+    // TODO fix this so only one data source is used
+    // TODO how to get standard DataStore and LiveData repository synced up!
     mObservableDuns.value = null
     mRepositoryLive = (application as MainApp).getRepository()!!
     val liveduns = mRepositoryLive.liveduns

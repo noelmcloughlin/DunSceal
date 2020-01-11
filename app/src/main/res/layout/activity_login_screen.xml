@@ -15,16 +15,16 @@
 
         <ImageView
             android:id="@+id/icon"
-            android:layout_width="386dp"
-            android:layout_height="324dp"
-            android:contentDescription="@string/play"
+            android:layout_width="wrap_content"
+            android:layout_height="245dp"
+            android:contentDescription="@string/play_btn_login"
             android:src="@drawable/logo_contrasted" />
 
         <ProgressBar
             android:id="@+id/progressBar"
             style="@style/Widget.AppCompat.ProgressBar"
-            android:layout_width="196dp"
-            android:layout_height="96dp"
+            android:layout_width="197dp"
+            android:layout_height="100dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"

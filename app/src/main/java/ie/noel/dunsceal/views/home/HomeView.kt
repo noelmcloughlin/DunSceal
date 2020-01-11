@@ -60,6 +60,7 @@ open class HomeView : BaseView(), NavigationView.OnNavigationItemSelectedListene
     navView.getHeaderView(0).nav_header_email.text = userName
 
     //Checking if Google User, upload google profile pic
+    presenter.fetchData()
     presenter.checkExistingPhoto(this)
     navView.getHeaderView(0).imageView
         .setOnClickListener { showImagePicker(this, 1) }
@@ -179,7 +180,7 @@ open class HomeView : BaseView(), NavigationView.OnNavigationItemSelectedListene
     when (item?.itemId) {
       R.id.menu_main_item_add ->
       {
-        fragmentTo(DunFragment.newInstance(DunPresenter(this), dun, "", ""))
+        fragmentTo(DunFragment.newInstance(DunPresenter(this), dun, ""))
       }
       R.id.menu_main_item_map ->
       {

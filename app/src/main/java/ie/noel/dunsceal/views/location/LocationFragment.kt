@@ -7,6 +7,7 @@ import androidx.databinding.DataBindingUtil
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.Marker
 import ie.noel.dunsceal.R
+import ie.noel.dunsceal.databinding.FragmentLocationBinding
 import ie.noel.dunsceal.models.entity.LocationEntity
 import ie.noel.dunsceal.utils.Loader
 import ie.noel.dunsceal.views.BaseFragment
@@ -21,7 +22,7 @@ class LocationFragment(val presenter: LocationPresenter)
   private var mBinding: FragmentLocationBinding? = null
 
   companion object {
-    private const val KEY_LOCATION_ID = "location_id"
+    private const val KEY_LOCATION_ID = "location_id"  // not used
     const val TAG = "LocationEditFragment"
 
     /** Creates blank location dun fragment  */
@@ -63,7 +64,7 @@ class LocationFragment(val presenter: LocationPresenter)
     activity?.title = getString(R.string.action_location_edit)
 
     // Setup the map view
-    if (mBinding!!.mapViewLocationLocation != null) {
+    if (mBinding!!.mapViewLocation != null) {
       mBinding!!.mapViewLocation.onCreate(savedInstanceState)
       mBinding!!.mapViewLocation.getMapAsync {
         it.setOnMarkerDragListener(this)
@@ -134,6 +135,7 @@ class LocationFragment(val presenter: LocationPresenter)
       }
     }
     presenter.dunDataStore!!.fetchDuns {
+      if (activity != null)
         (activity as HomeView).fragManager.popBackStackImmediate()
     }
     return true

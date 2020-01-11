@@ -24,8 +24,6 @@
     tools:context="ie.noel.dunsceal.views.login.SplashView"
     tools:layout_editor_absoluteY="81dp">
 
-  <!-- TODO: Update blank fragment layout -->
-
   <ImageView
       android:id="@+id/splashPicture"
       android:layout_width="363dp"
