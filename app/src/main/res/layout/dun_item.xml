@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+  <data>
+
+    <variable
+        name="dun"
+        type="ie.noel.dunsceal.models.entity.DunEntity" />
+
+    <variable
+        name="callback"
+        type="ie.noel.dunsceal.views.dun.DunClickCallback" />
+  </data>
+
+  <androidx.cardview.widget.CardView
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginEnd="@dimen/item_horizontal_margin"
+      android:layout_marginBottom="8dp"
+      android:elevation="24dp"
+      android:onClick="@{() ->  callback.onClick(dun)}"
+      android:orientation="horizontal"
+      app:cardUseCompatPadding="true">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp">
+
+      <ImageView
+          android:id="@+id/imageIcon"
+          android:layout_width="64dp"
+          android:layout_height="64dp"
+          android:layout_alignParentStart="true"
+          android:layout_alignParentTop="true"
+          android:layout_marginEnd="16dp"
+          android:contentDescription="@string/cd_dun_image_icon"
+          android:src="@{dun.image.toString()}"
+          app:srcCompat="@mipmap/ic_launcher_round" />
+
+      <TextView
+          android:id="@+id/name"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_alignParentTop="true"
+          android:layout_toEndOf="@+id/imageIcon"
+          android:contentDescription="@string/cd_dun_name"
+          android:text="@{dun.name.toString()}"
+          android:textSize="30sp" />
+
+      <TextView
+          android:id="@+id/votes"
+          android:layout_width="135dp"
+          android:layout_height="wrap_content"
+          android:layout_alignParentTop="true"
+          android:layout_marginStart="29dp"
+          android:layout_marginTop="14dp"
+          android:layout_toEndOf="@+id/imageIcon"
+          android:contentDescription="@string/cd_dun_votes"
+          android:text="@{String.valueOf(dun.votes)}"
+          android:textAlignment="viewStart"
+          android:textColor="#000000"
+          android:textSize="24sp"
+          tools:text="2" />
+
+      <TextView
+          android:id="@+id/visited"
+          android:layout_width="51dp"
+          android:layout_height="wrap_content"
+          android:layout_alignParentTop="true"
+          android:layout_marginStart="58dp"
+          android:layout_marginTop="15dp"
+          android:layout_toEndOf="@+id/votes"
+          android:text="@{String.valueOf(dun.visited)}"
+          android:textAlignment="viewStart"
+          android:textColor="#000000"
+          android:textSize="24sp" />
+
+      <ImageView
+          android:id="@+id/imagefavourite"
+          android:layout_width="64dp"
+          android:layout_height="64dp"
+          android:layout_alignParentTop="true"
+          android:layout_marginStart="21dp"
+          android:layout_toEndOf="@id/visited"
+          android:text=""
+          app:srcCompat="@android:drawable/star_big_off" />
+
+      <TextView
+          android:id="@+id/description"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_below="@id/name"
+          android:layout_toEndOf="@+id/imageIcon"
+          android:text="@{dun.description.toString()}" />
+
+    </RelativeLayout>
+  </androidx.cardview.widget.CardView>
+</layout>

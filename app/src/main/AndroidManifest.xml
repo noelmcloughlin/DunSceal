@@ -1,55 +1,114 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright 2017, The Android Open Source Project
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~      http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="org.noel.dunsceal">
+    package="ie.noel.dunsceal">
 
-  <!--
-         The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
-         Google Maps Android API v2, but you must specify either coarse or fine
-         location permissions for the 'MyLocation' functionality.
-    -->
-  <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
 
-  <application
-    android:name="org.noel.dunsceal.main.DunScealApp"
-    android:allowBackup="true"
-    android:icon="@mipmap/ic_launcher"
-    android:label="@string/app_name"
-    android:roundIcon="@mipmap/ic_launcher_round"
-    android:supportsRtl="true"
-    android:theme="@style/AppTheme"
-      tools:ignore="GoogleAppIndexingWarning">
+    <uses-feature android:name="android.hardware.location.gps"/>
 
-    <meta-data
-      android:name="com.google.android.geo.API_KEY"
-      android:value="@string/google_maps_key" />
+    <application
+        android:name="ie.noel.dunsceal.main.MainApp"
+        android:allowBackup="false"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme"
+        tools:ignore="GoogleAppIndexingWarning">
 
-    <activity android:name="org.noel.dunsceal.activity.DunListActivity">
-    </activity>
-    <activity
-      android:name="org.noel.dunsceal.activity.MapActivity"
-      android:label="@string/title_activity_map" />
-      <activity
-          android:name=".activity.DunActivity"
-          android:windowSoftInputMode="adjustResize">
-      </activity>
-      <activity android:name=".activity.SplashActivity">
-          <intent-filter>
-              <action android:name="android.intent.action.MAIN" />
-              <category android:name="android.intent.category.LAUNCHER" />
-          </intent-filter>
-      </activity>
-      <activity
-          android:name=".activity.LoginActivity"
-          android:screenOrientation="portrait" />
-      <activity
-          android:name=".activity.RegisterActivity"
-          android:screenOrientation="portrait" />
-      <activity
-          android:name=".activity.DunUserActivity"
-          android:screenOrientation="portrait"/>
-  </application>
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/google_maps_key" />
+
+        <activity android:name=".main.MainApp">
+            <intent-filter>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+
+        <!-- start here -->
+
+        <activity android:name="ie.noel.dunsceal.views.login.SplashView">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+            <!-- This is added to handle a deep link -->
+            <!-- nav-graph android:value="@navigation/navigation" -->
+        </activity>
 
 
+        <!-- Login Screen -->
+
+        <activity android:name=".views.BaseView"/>
+        <activity android:name="ie.noel.dunsceal.views.dun.DunView"/>
+
+        <activity
+            android:name=".views.login.LoginView"
+            android:label="@string/app_name"
+            android:launchMode="singleTop">
+        </activity>
+
+        <!-- main authenticated activity -->
+
+        <activity
+            android:name=".views.home.HomeView"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+            </intent-filter>
+            <!-- This is added to handle a deep link -->
+            <nav-graph android:value="@navigation/navigation" />
+        </activity>
+
+        <activity
+            android:name="ie.noel.dunsceal.views.dunlist.DunListView"
+            android:label="@string/title_activity_dun_list"
+            android:launchMode="singleTop">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".views.home.HomeView" />
+        </activity>
+
+        <activity
+            android:name="ie.noel.dunsceal.views.dun.DunAddFragment"
+            android:label="@string/title_activity_dun">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="ie.noel.dunsceal.views.dunlist.DunListView" />
+        </activity>
+
+
+        <activity
+            android:name="ie.noel.dunsceal.views.map.DunMapView"
+            android:label="@string/title_activity_dun_maps"
+            android:launchMode="singleTop">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="ie.noel.dunsceal.views.dunlist.DunListView" />
+        </activity>
+    </application>
 
 </manifest>

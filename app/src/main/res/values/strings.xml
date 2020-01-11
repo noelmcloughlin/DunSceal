@@ -1,74 +1,138 @@
+<!--
+  ~ Copyright 2017, The Android Open Source Project
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~      http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
 <resources>
 
-  <string name="google_maps_key">AIzaSyBfzAxqao47IorVL4lIIySt1_cDQawLbTw</string>
+  <!-- keys -->
 
-  <string name="app_name">DunSceal</string>
-  <string name="hint_dunTitle">Dun Title</string>
+  <string name="app_name">DunSceal2</string>
+  <string name="loading_investigations">Loading investigations...</string>
+  <string name="loading_duns">Loading duns...</string>
+  <string name="loading_map">Loading map...</string>
+  <string name="search_duns_hint">Search Duns...</string>
+  <string name="cd_duns_list">Duns list</string>
+  <string name="cd_investigations_list">Investigations list</string>
+  <string name="cd_dun_name">Name of the dun</string>
+  <string name="cd_search_duns">Search duns</string>
+  <string name="cd_dun_image_icon">Image of the dun</string>
+  <string name="cd_dun_votes">Votes for the dun</string>
+  <string name="messageLoading">Please wait while we Connect to the Server . . .</string>
+
+  <!-- Dun -->
+
+  <string name="hint_name">Dun Title</string>
   <string name="hint_dunDescription">Description </string>
-  <string name="button_addDun">Add Dun</string>
-  <string name="menu_addDun">Add/Edit</string>
+
+  <!-- feature menu -->
+  <string name="button_navigateTo">Navigate to</string>
+  <!-- END feature menu -->
+
+  <!-- ui -->
   <string name="menu_cancelDun">Cancel</string>
   <string name="enter_dun_title"> Please enter a Dun Title </string>
   <string name="save_dun"> Save Dun </string>
-  <string name="button_addImage"> Add Image </string>
+  <string name="button_addImage"> Image </string>
   <string name="select_dun_image">Select dun image</string>
   <string name="change_dun_image">Change dun image</string>
   <string name="button_location">Set Location</string>
   <string name="title_activity_map">Map</string>
-  <string name="TextView">TextView</string>
-  <string name="ImageView">ImageView</string>
-  <string name="CheckBox">CheckBox</string>
-  <string name="Completed">Completed</string>
+  <string name="menu_deleteDun">Delete</string>
+  <string name="title_activity_dun_maps">Map of All Duns </string>
+  <string name="dun_image_placeholder">Dun Image</string>
+  <string name="dun_title_placeholder">Dun Title</string>
+  <string name="dun_description_placeholder">Dun Description</string>
+  <string name="menu_saveDun">Save</string>
+  <string name="title_activity_dun_list">Duns</string>
+  <string name="title_activity_dun">Dun</string>
+  <string name="menu_logout">Logout</string>
+
+  <string name="play_btn_splash">skip splash</string>
+  <string name="play_btn_home">go to Duns</string>
+  <string name="play_btn_signup">Sign In</string>
+  <string name="play_btn_login">Login</string>
 
 
-  <!-- Tabbed view pagers -->
-  <string name="tab1_title">Duns</string>
-  <string name="tab1_url">https://koenig-media.raywenderlich.com/uploads/2019/01/android_rw_flag_2.png</string>
-  <string name="tab1_desc">Android is a mobile operating system by Google. Development for android platform is even
-        more fun with Kotlin. We have an awesome lineup of Android DUNs that too based on Kotlin. Enjoy.. :]
-    </string>
+  <!-- START Firebase Resources-->
 
-  <string name="tab2_title">Report</string>
-  <string name="tab2_url">https://koenig-media.raywenderlich.com/uploads/2019/01/RxSwift.png</string>
-  <string name="tab2_desc">The RxKotlin is an implementation of a Reactive Stream specification. Kotlin adds more
-        fun to reactive programming as it adds convenient extension functions to RxJava. Go ahead and have a look to our
-        Rx tabModel. :]
-    </string>
+  <string name="sign_out">Sign Out</string>
+  <string name="verify_email">Verify Email</string>
+  <string name="signed_out">Signed Out!</string>
+  <string name="hint_email">Email</string>
+  <string name="hint_password">Password</string>
+  <string name="auth_failed">Authentication failed</string>
+  <string name="firebase_status_fmt">Firebase User: %s</string>
+  <string name="emailpassword_status_fmt">Email User: %1$s (verified: %2$b)</string>
+  <string name="emailpassword_title_text">Please Login Below</string>
+  <string name="select_profile_image">Select Profile Image</string>
+  <!--END Firebase Resources-->
 
-  <string name="tab3_title">Account</string>
-  <string name="tab3_url">https://koenig-media.raywenderlich.com/uploads/2019/01/kitura.png</string>
-  <string name="tab3_desc">Kitura is a server-side Swift framework for building iOS backends and web applications.
-        This framework creates REST APIs that can be invoked from the iOS applications. We have Kitura tabModel too :]
-    </string>
+  <!-- NAVIGATION MENU -->
+  <!-- Navigation Drawer -->
+  <string name="title_activity_home">Home</string>
+  <string name="navigation_drawer_open">Open navigation drawer</string>
+  <string name="navigation_drawer_close">Close navigation drawer</string>
+  <string name="nav_header_title">DunSceal2</string>
+  <string name="nav_header_subtitle">john@doe.com</string>
+  <string name="nav_header_desc">Navigation header</string>
 
-  <string name="error_message">Error while loading image.</string>
+  <string name="nav_menu_main">Home</string>
+  <string name="nav_menu_report">Report</string>
+  <string name="nav_menu_report_all">All Duns</string>
+  <string name="nav_menu_favourites">Favourites</string>
+  <string name="nav_menu_about">About Us</string>
+  <string name="nav_menu_share">Share</string>
+  <string name="nav_menu_send">Send</string>
+  <!-- END Navigation Drawer -->
 
-  <!-- Login/Signup activities -->
-  <string name="text_accounts">All Accounts</string>
-  <string name="hint_user_name">Name</string>
-  <string name="hint_user_email">Email</string>
-  <string name="hint_user_password">Password</string>
-  <string name="hint_confirm_password">Confirm Password</string>
-  <string name="text_login">Login</string>
-  <string name="text_register">Register</string>
-  <string name="error_message_name">Enter Full Name</string>
-  <string name="error_message_email">Enter Valid Email</string>
-  <string name="error_message_password">Enter Password</string>
-  <string name="success_message">Registration Successful</string>
-  <string name="text_not_member">No account yet? Create one</string>
-  <string name="error_email_exists">Email Already Exists</string>
-  <string name="error_password_match">Password Does Not Matches</string>
-  <string name="error_valid_email_password">Wrong Email or Password</string>
-  <string name="text_hello">Hello,</string>
-  <string name="text_title">dun</string>
+  <!-- NAV MENUS -->
 
-  <!-- dun -->
-  <string name="select_dunsceal_image">Select dunsceal image</string>
+  <string name="home_menu_add">Add Dun</string>
+  <string name="home_menu_list">List Duns</string>
+  <string name="home_menu_map">Map</string>
 
-  <!-- Generic -->
-  <string name="app_started">App Started</string>
+  <!-- nav_drawer_home -->
+  <string name="home_title">Search </string>
+  <string name="home_total_visited_text">Number of Duns visited</string>
+  <string name="home_total_visited_amount">0</string>
 
-  <!-- Date & Report Handling -->
+  <!-- duns -->
+  <string name="action_report">Report Duns</string>
+  <string name="action_report_all">Report All Duns</string>
+  <string name="yes">yes</string>
+  <string name="no">yes</string>
+  <string name="action_settings">Settings</string>
+  <string name="action_location_edit">Edit Location</string>
+  <string name="about_us_title">About DunSceal2</string>
+
+  <string name="visited">no</string>
+  <string name="vote">Amount</string>
+  ]
+  <string name="action_edit">Edit Dun</string>
+  <string name="action_update">Update</string>
+  <string name="message_edit">Please Update your Details Below</string>
+  <string name="next">Next</string>
+  <string name="action_home">Home</string>
+  <string name="action_dun">Dun</string>
+  <string name="menu_routeDun">Route</string>
+  <string name="default_date">"--/--/----"</string>
+  <string name="AboutUsText">Exploration of HillForts (Duns) by archaeological students. Registered users are assigned a list of sites to visit. Users can visit sites and updated existing records with new details and photos, and rate sites, and add new sites.</string>
+  <string name="splash_picture_description">Logo</string>
+  <string name="investigations">Investigations</string>
+
+  <!-- Date & Report Handling (from dunsceal v1) -->
   <string name="action_user_list">Settings</string>
   <string name="action_dun_list">Report</string>
   <string name="completeButton">Complete</string>
@@ -81,6 +145,5 @@
   <string name="isVisited">Visited</string>
   <string name="notVisited">Not visited</string>
   <string name="date_picker">Date Picker</string>
-  <string name="default_date">"--/--/----"</string>
 
 </resources>

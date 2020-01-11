@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+  <item
+    android:id="@+id/menu_dun_item_save"
+    android:title="@string/menu_saveDun"
+    app:showAsAction="always"/>
+  <item
+    android:id="@+id/menu_dun_item_delete"
+    android:title="@string/menu_deleteDun"
+    app:showAsAction="ifRoom"/>
+</menu>
