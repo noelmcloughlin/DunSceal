@@ -1,11 +1,51 @@
-Android Architecture Components Basic Sample
+Hillfort Stories: DunSceal
 =============================================
 
-This sample showcases the following Architecture Components:
+Incorporating features of::
+
+Architecture Components:
 
 * [Room](https://developer.android.com/topic/libraries/architecture/room.html)
 * [ViewModels](https://developer.android.com/reference/android/arch/lifecycle/ViewModel.html)
 * [LiveData](https://developer.android.com/reference/android/arch/lifecycle/LiveData.html)
+
+Navigation component:
+
+ * Navigating via actions
+ * Transitions
+ * Popping destinations from the back stack
+ * Deep links (`www.example.com/user/{user name}` opens the profile screen)
+
+Screenshots
+-----------
+
+Splash
+![Splash Screen](docs/images/splash.png?raw=true "DunSceal Splash")
+
+Login
+![Login Screen](docs/images/login.png?raw=true "DunSceal Login")
+
+Authentication
+![Auth Screen](docs/images/auth.png?raw=true "DunSceal Authentication")
+
+Home
+![Home Screen](docs/images/home.png?raw=true "DunSceal Home")
+
+Navigation
+![Navigation Screen](docs/images/navmenu.png?raw=true "DunSceal Navigation")
+
+Action menu
+![Action menu](docs/images/action_bar1.png?raw=true "DunSceal Action Bar")
+
+Date Picker
+![Date Dialog](docs/images/datepicker.png?raw=true "DunSceal Date Picker")
+
+List View
+![ViewModel](docs/images/list.png?raw=true "DunSceal List")
+
+Map
+![Map Screen](docs/images/map.png?raw=true "DunSceal Map")
+
 
 Introduction
 -------------
@@ -73,7 +113,7 @@ observes the changes of the list of duns and only forwards it when the database 
 License
 --------
 
-Copyright 2015 The Android Open Source Project, Inc.
+Copyright 2020 Noel MacLoughlin, The Android Open Source Project, Inc.
 
 Licensed to the Apache Software Foundation (ASF) under one or more contributor
 license agreements.  See the NOTICE file distributed with this work for
