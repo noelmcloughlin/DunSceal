@@ -61,7 +61,7 @@ open class HomeView : BaseView(), NavigationView.OnNavigationItemSelectedListene
 
     //Checking if Google User, upload google profile pic
     presenter.fetchData()
-    presenter.checkExistingPhoto(this)
+//    presenter.checkExistingPhoto(this)
     navView.getHeaderView(0).imageView
         .setOnClickListener { showImagePicker(this, 1) }
 
